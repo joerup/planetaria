@@ -45,6 +45,7 @@ export default function Asteroids({ asteroids }) {
             />
           )
         })}
+        
         <Footer/>
       </Flex>
     </Box>
