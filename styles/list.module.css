@@ -31,7 +31,7 @@
 
 @media only screen and (max-width: 500px) {
     .headline {
-        width: 100%;
+        width: 90%;
         min-width: 100px;
         padding-top: 20px;
         padding-bottom: 20px;
@@ -54,6 +54,11 @@
 .tophorizontal {
     width: 100%;
     display: flex;
+}
+@media only screen and (max-width: 500px) {
+    .toptext {
+        width: 50%;
+    }
 }
 
 .row {
@@ -163,6 +168,7 @@
     }
     .objectimage {
         width: 30%;
+        height: unset;
         min-width: 30px;
     }
 }
