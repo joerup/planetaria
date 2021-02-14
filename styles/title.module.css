@@ -87,6 +87,13 @@
   padding: 25px;
 }
 
+@media only screen and (max-width: 500px) {
+  .linkBox {
+    width: 90%;
+    min-width: 100px;
+  }
+}
+
 .linkRect {
   background-color: #000001;
   border-radius: 5%;
@@ -106,6 +113,12 @@
 }
 .searchBar:hover {
   background-color: #222222;
+}
+@media only screen and (max-width: 500px) {
+  .searchBar {
+    width: 90%;
+    min-width: 100px;
+  }
 }
 
 .searchTitle {

@@ -26,7 +26,7 @@
     }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1100px) and (min-width: 551px) {
     .columns {
         padding: 25px;
     }
@@ -106,7 +106,6 @@
     padding-right: 50px;
     padding-top: 20px;
 }
- 
 .paragraph {
     margin: 0;
     min-width: 550px;
@@ -117,9 +116,7 @@
     font-family: 'Helvetica';
     font-size: 1.5rem;
     color: #ddd;
-    width: 100%;
 }
-
 .paragraph2 {
     margin: 0;
     min-width: 550px;
@@ -130,6 +127,21 @@
     font-size: 1.5rem;
     color: #999;
     width: 100%;
+}
+
+@media only screen and (max-width: 550px) {
+    .objectimage {
+        min-width: 100px;
+        width: 90%;
+    }
+    .paragraph {
+        min-width: 100px;
+        width: 100%;
+    }
+    .paragraph2 {
+        min-width: 100px;
+        width: 90%;
+    }
 }
 
 .helpButton {
@@ -169,6 +181,13 @@
   min-width: 520px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+}
+
+@media only screen and (max-width: 550px) {
+    .dropdowncontent {
+        min-width: 100px;
+        width: 90%;
+    }
 }
 
 .dropdowncontent h1 {
@@ -244,6 +263,21 @@
     text-align: right;
 }
 
+@media only screen and (max-width: 550px) {
+    .propertyRow {
+        width: 90%;
+        min-width: 100px;
+    }
+    .propertyName {
+        width: 50%;
+        min-width: 50px;
+    }
+    .property {
+        width: 40%;
+        min-width: 50px;
+    }
+}
+
 .listobjectpadding {
     width: 550px;
     padding-left: 20px;
@@ -296,6 +330,29 @@
     color: #58c;
     width: 550px;
     text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+    .listobjectrow {
+        width: 90%;
+        min-width: 100px;
+    }
+    .listobjecttitle {
+        width: 60%;
+        min-width: 70px;
+    }
+    .listobjectdesc {
+        width: 60%;
+        min-width: 70px;
+    }
+    .listobjectimage {
+        width: 30%;
+        min-width: 30px;
+    }
+    .allmoonlink {
+        width: 90%;
+        min-width: 100px;
+    }
 }
 
 .nextDesc {
