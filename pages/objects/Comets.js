@@ -52,7 +52,7 @@ export default function Comets({ comets }) {
 }
 
 export async function getStaticProps({ params }) {
-  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects.json");
+  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects1.json");
   const bodies = await json.json();
   const { other } = bodies;
 
