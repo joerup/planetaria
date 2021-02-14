@@ -51,17 +51,6 @@ export default function DwarfMoonList({ moons }) {
   )
 }
 
-export async function getStaticPaths() {
-  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects.json");
-  const bodies = await json.json();
-  const paths = ["/moons/moonlist/Dwarf"]
-
-  return {
-    paths,
-    fallback: false
-  };
-}
-
 export async function getStaticProps({ params }) {
   const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects.json");
   const bodies = await json.json();
