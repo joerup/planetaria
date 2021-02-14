@@ -1,0 +1,274 @@
+.background {
+    min-height: 100vh;
+    background-image: url("https://github.com/joerup2004/planetaria/blob/main/Images/StarrySky.png?raw=true");
+    background-color: #000000;
+    background-attachment: fixed;
+}
+
+@media only screen and (min-width: 1101px) {
+    .columns {
+        display: flex;
+        padding: 25px;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .columns {
+        padding: 25px;
+    }
+}
+
+.column1 {
+    width: 550px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background-color: #000001;
+    border-radius: 5%;
+}
+.column2 {
+    width: 550px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background-color: #000001;
+    border-radius: 5%;
+}
+
+.objectbackground {
+    background-color: #000001;
+    border-radius: 5%;
+}
+
+.headline {
+    justify-content: left;
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.headlinetext {
+    justify-content: left;
+}
+
+.objecttitle {
+    margin: 0;
+    max-width: 450px;
+    font-size: 5rem;
+    font-family: 'Helvetica';
+    color: #eeeeee;
+    justify-content: center;
+}
+
+.objectdesc {
+    margin: 0;
+    max-width: 450px;
+    font-size: 1.6rem;
+    font-family: 'Helvetica';
+    color: #999;
+    justify-content: center;
+}
+
+.objectimage {
+    min-width: 550px;
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+}
+ 
+.paragraph {
+    margin: 0;
+    min-width: 550px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-family: 'Helvetica';
+    font-size: 1.5rem;
+    color: #ddd;
+    width: 100%;
+}
+
+.paragraph2 {
+    margin: 0;
+    min-width: 550px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    font-family: 'Helvetica';
+    font-size: 1.5rem;
+    color: #999;
+    width: 100%;
+}
+
+.helpButton {
+    display: flex;
+    padding-top: 10px;
+}
+.helpButton p {
+    background-color: #666;
+    margin: 0;
+    opacity: 0.5;
+    font-size: 20px;
+    color: #111;
+    width: 25px;
+    height: 25px;
+    border-radius: 20%;
+    text-align: center;
+}
+.helpButton p:hover {
+    background-color: #aaa;
+}
+
+.dropdown {
+  float: right;
+  display: flex;
+  position: relative;
+  margin: 0;
+  height: 100%;
+}
+
+.dropdowncontent {
+  display: none;
+  right: 0;
+  position: absolute;
+  font: 'Helvetica';
+  background-color: #111111;
+  border-radius: 5%;
+  min-width: 520px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdowncontent h1 {
+  color: #ffffff;
+  font-size: 2.3rem;
+  font-weight: normal;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.dropdowncontent h2 {
+  color: #dddddd;
+  font-size: 24px;
+  font-weight: normal;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+.dropdowncontent p {
+  color: #aaaaaa;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.dropdowncontent a:hover {background-color: #777;}
+
+.dropdown:hover .dropdowncontent {display: block;}
+
+
+.propertySectionName {
+    font-size: 2.3rem;
+    font-family: 'Helvetica';
+    color: #fff;
+    width: 100%;
+}
+.propertySection {
+    display: flex;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.propertyRow {
+    width: 550px;
+    font-family: 'Helvetica';
+    display: flex;
+    text-align: center;
+}
+
+.propertyName {
+    width: 300px;
+    padding-left: 20px;
+    padding-bottom: 8px;
+    color: #999;
+    font-size: 27px;
+    text-align: left;
+}
+.property {
+    width: 250px;
+    padding-right: 20px;
+    color: #ddd;
+    font-size: 27px;
+    text-align: right;
+}
+
+.listobjectpadding {
+    width: 550px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.listobjectrow {
+    display: flex;
+    width: 510px;
+    height: 150px;
+    background-color: #000001;
+    border-radius: 5%;
+}
+.listobjectrow:hover {
+    background-color: #111112
+}
+
+.listobjecttitle {
+    height: 50px;
+    width: 350px;
+    margin: 0;
+    font-size: 40px;
+    padding-top: 30px;
+    font-family: 'Helvetica';
+    color: #eeeeee;
+    justify-content: left;
+}
+
+.listobjectdesc {
+    height: 50px;
+    width: 350px;
+    margin: 0;
+    font-size: 20px;
+    padding-top: 40px;
+    font-family: 'Helvetica';
+    font-weight: normal;
+    color: #999;
+    justify-content: left;
+}
+
+.listobjectimage {
+    height: 150px;
+    width: 150px;
+    padding: 25px;
+}
+
+.allmoonlink {
+    font-size: 2rem;
+    font-family: 'Helvetica';
+    color: #58c;
+    width: 550px;
+    text-align: center;
+}
+
+.nextDesc {
+    text-align: center;
+    font-size: 30px;
+    padding-top: 10px;
+    color: #aaa;
+    margin: 0;
+}

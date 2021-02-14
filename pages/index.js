@@ -1,65 +1,63 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import NextLink from "next/link";
+import { Link, Flex, Box, Heading } from "@chakra-ui/core";
+import { NextPage } from "next";
+import styles from '../styles/title.module.css';
+import Header from '../components/Header.js';
+import Footer from '../components/Footer.js';
 
-export default function Home() {
+export default function Home(props) {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Box className={styles.background}>
+      <Flex flexDirection="column" alignItems="center">
+        <Header/>
+        <br/><br/><br/><br/><br/><br/>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <img className={styles.image} src="https://github.com/joerup2004/planetaria/blob/main/Images/PlanetariaClear.png?raw=true"/>
+        <h1 className={styles.title}>Welcome to Planetaria</h1>
+        <h1 className={styles.title3}>Explore Space</h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <br/><br/>
+            
+        <div className={styles.searchBar}>
+          <NextLink href="../search">
+            <Link>
+              <p className={styles.searchTitle}>Search</p>
+            </Link>
+          </NextLink>
         </div>
-      </main>
+        
+        <br/>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+        <div class={styles.linkDiv}>
+            
+          <NextLink href="../solarsystem">
+            <Link>
+              <div className={styles.linkBox}>
+                <div className={styles.linkRect}>
+                  <img class={styles.linkImage} src="https://github.com/joerup2004/planetaria/blob/main/Images/Objects/Sun.png?raw=true"/>
+                  <p className={styles.linkTitle}>Explore the Solar System</p>
+                </div>
+              </div>
+            </Link>
+          </NextLink>
+
+          <NextLink href="../galaxy">
+            <Link>
+              <div className={styles.linkBox}>
+                <div className={styles.linkRect}>
+                  <img class={styles.linkImage} src="https://github.com/joerup2004/planetaria/blob/main/Images/Objects/MilkyWay.png?raw=true"/>
+                  <p className={styles.linkTitle}>Explore the Galaxy</p>
+                </div>
+              </div>
+            </Link>
+          </NextLink>
+
+        </div>
+
+        <br/><br/><br/><br/><br/>
+        
+        <Footer/>
+      </Flex>
+    </Box>
   )
 }

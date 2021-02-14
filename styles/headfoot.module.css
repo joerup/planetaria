@@ -1,0 +1,146 @@
+/* Header */
+
+.navbar {
+  display: flex;
+  position: fixed;
+  background-color: #000001;
+  width: 100%;
+  height: 70px;
+  top: 0px;
+  z-index: 1;
+}
+
+.navleft {
+  display: flex;
+  width: 100%;
+  justify-content: left;
+}
+
+.navright {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  padding-right: 30px;
+}
+
+.logo {
+  height: 70px;
+  width: 70px;
+  padding: 10px;
+}
+
+.title {
+  color: #fff;
+  height: 70px;
+  font-size: 30px;
+  font-weight: bold;
+  font: 'Helvetica';
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0;
+}
+.title:hover {
+  color: #bbb;
+}
+
+.rowItem {
+  color: #fff;
+  height: 70px;
+  font-size: 25px;
+  font: 'Helvetica';
+  padding-top: 22.5px;
+  padding-bottom: 22.5px;
+  margin: 0;
+  padding-left: 30px;
+}
+.rowItem:hover {
+  color: #bbb;
+}
+
+.dropbutton {
+  display: none;
+}
+
+@media only screen and (max-width: 1100px) {
+  .rowItem {
+    display: none;
+  }
+  .rowItem:hover {
+    display: none;
+  }
+
+  .dropbutton {
+    display: flex;
+    width: 40px;
+    height: 70px;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.dropdown {
+  position: relative;
+  float: right;
+}
+
+.dropdowncontent {
+  display: none;
+  right: 0;
+  position: absolute;
+  font: 'Helvetica';
+  background-color: #111111;
+  min-width: 250px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.dropdowncontent a {
+  color: #cccccc;
+  padding: 12px 16px;
+  text-decoration: none;
+  font-size: 24px;
+  display: block;
+}
+
+.dropdowncontent a:hover {background-color: #777;}
+
+.dropdown:hover .dropdowncontent {display: block;}
+
+.search {
+  height: 70px;
+  width: 100%;
+  vertical-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+.searchBar {
+  width: 100%;
+  height: 50px;
+  background-color: #020202;
+  border-radius: 5%;
+  text-align: center;
+}
+.searchBar:hover {
+  background-color: #222222;
+}
+
+
+.searchTitle {
+  color: #777777;
+  font-size: 20px;
+  padding: 15px;
+  margin: 0;
+}
+
+/* Footer */
+
+.finePrint {
+  font-size: 0.7rem;
+  font-family: 'Helvetica';
+  color: #444;
+  max-width: 600px;
+}

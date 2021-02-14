@@ -1,0 +1,171 @@
+.background {
+    min-height: 100vh;
+    background-image: url("https://github.com/joerup2004/planetaria/blob/main/Images/StarrySky.png?raw=true");
+    background-color: #222222;
+    background-attachment: fixed;
+}
+
+@media only screen and (min-width: 1101px) {
+    .headline {
+        width: 900px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        align-items: center;
+        background-color: #000001;
+        border-radius: 5%;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .headline {
+        width: 550px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        align-items: center;
+        background-color: #000001;
+        border-radius: 5%;
+        align-items: center;
+    }
+}
+
+.top {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+}
+.toptext {
+    width: 100%;
+    text-align: left;
+}
+.tophorizontal {
+    width: 100%;
+    display: flex;
+}
+
+.row {
+    padding-top: 15px;
+}
+
+.bigobjecttitle {
+    margin: 0;
+    font-size: 4rem;
+    display: flex;
+    font-family: 'Helvetica';
+    color: #eeeeee;
+}
+.bigobjecttitle img:hover {
+    opacity: 0.5;
+}
+
+.bigobjectdesc {
+    margin: 0;
+    font-size: 1.6rem;
+    font-family: 'Helvetica';
+    color: #999;
+}
+
+.bigobjectimage {
+    width: 140px;
+    height: 120px;
+    padding-right: 20px;
+}
+
+.paragraph {
+    font-family: 'Helvetica';
+    font-size: 1.5rem;
+    color: #ddd;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+  
+.title {
+    font-size: 3rem;
+    color: #ffffff;
+    font-family: 'Helvetica';
+}
+  
+.section {
+    font-size: 2.5rem;
+    margin: 0;
+    padding-top: 35px;
+    color: #ffffff;
+    font-family: 'Helvetica';
+    justify-content: left;
+}
+
+.objectrow {
+    display: flex;
+    width: 550px;
+    height: 150px;
+    background-color: #000001;
+    border-radius: 5%;
+}
+.objectrow:hover {
+    background-color: #111112
+}
+
+.objecttitle {
+    height: 50px;
+    width: 350px;
+    margin: 0;
+    font-size: 40px;
+    padding-top: 30px;
+    font-family: 'Helvetica';
+    color: #eeeeee;
+    justify-content: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.objectdesc {
+    height: 50px;
+    width: 350px;
+    margin: 0;
+    font-size: 20px;
+    padding-top: 40px;
+    font-family: 'Helvetica';
+    color: #999;
+    justify-content: left;
+}
+
+.objectimage {
+    height: 150px;
+    width: 150px;
+    padding: 25px;
+}
+
+@media only screen and (min-width: 1101px) {
+    .searchBar {
+        height: 60px;
+        width: 750px;
+        background-color: #020202;
+        border-radius: 10%;
+        text-align: left;
+        border: 0px;
+        color: #777777;
+        font-size: 20px;
+        padding: 15px;
+        margin: 0;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    .searchBar {
+        height: 60px;
+        width: 400px;
+        background-color: #020202;
+        border-radius: 5%;
+        text-align: left;
+        border: 0px;
+        color: #777777;
+        font-size: 20px;
+        padding: 15px;
+        margin: 0;
+    }
+}
+
+.searchDesc {
+    color: #777777;
+    font-size: 18px;
+}
+

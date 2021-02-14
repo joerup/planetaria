@@ -14,3 +14,26 @@ a {
 * {
   box-sizing: border-box;
 }
+
+p {
+  color: #ddd
+}
+
+.navbar {
+  background: #111112
+}
+
+.nav-link,
+.navbar-brand {
+  color: #fff;
+  font-family: 'Geneva';
+  cursor: pointer;
+}
+
+.nav-link {
+  margin-right: 1em !important;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
