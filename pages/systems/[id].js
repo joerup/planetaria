@@ -69,7 +69,7 @@ export default function StarSystem({ system }) {
 }
 
 export async function getStaticPaths() {
-  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects.json");
+  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects1.json");
   const bodies = await json.json();
   const paths = getStarSystems(bodies.stars, bodies.planets).map(system => ({
     params: { id: system.name.toString() }
@@ -82,7 +82,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects.json");
+  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects1.json");
   const bodies = await json.json();
   const { stars, planets } = bodies;
 

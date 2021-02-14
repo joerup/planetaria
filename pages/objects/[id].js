@@ -120,7 +120,7 @@ function getNext(current, other) {
 
 
 export async function getStaticPaths() {
-  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects.json");
+  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects1.json");
   const bodies = await json.json();
   const paths = bodies.other.map(object => ({
     params: { id: object.name.toString() }
@@ -133,11 +133,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects.json");
+  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects1.json");
   const bodies = await json.json();
   const { other } = bodies;
 
-  const json2 = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/properties.json");
+  const json2 = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/properties1.json");
   const properties = await json2.json();
 
   return {
