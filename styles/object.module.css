@@ -10,27 +10,60 @@
         display: flex;
         padding: 25px;
     }
+    .column1 {
+        width: 550px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        background-color: #000001;
+        border-radius: 5%;
+    }
+    .column2 {
+        width: 550px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        background-color: #000001;
+        border-radius: 5%;
+    }
 }
 
 @media only screen and (max-width: 1100px) {
     .columns {
         padding: 25px;
     }
+    .column1 {
+        width: 550px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        background-color: #000001;
+        border-radius: 5%;
+    }
+    .column2 {
+        width: 550px;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        background-color: #000001;
+        border-radius: 5%;
+    }
 }
 
-.column1 {
-    width: 550px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    background-color: #000001;
-    border-radius: 5%;
-}
-.column2 {
-    width: 550px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    background-color: #000001;
-    border-radius: 5%;
+@media only screen and (max-width: 550px) {
+    .columns {
+        padding: 25px;
+    }
+    .column1 {
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        background-color: #000001;
+        border-radius: 5%;
+    }
+    .column2 {
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        background-color: #000001;
+        border-radius: 5%;
+    }
 }
 
 .objectbackground {
