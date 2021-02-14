@@ -5,6 +5,7 @@ import styles from '../styles/headfoot.module.css'
 
 export default function Header({ props }) {
   return(
+    
     <header className={styles.navbar}>
       <NextLink href="../">
         <Link>
