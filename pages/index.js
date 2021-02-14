@@ -25,7 +25,6 @@ export default function Home(props) {
             </Link>
           </NextLink>
         </div>
-        
         <br/>
 
         <div class={styles.linkDiv}>
