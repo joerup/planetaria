@@ -132,6 +132,9 @@
     .objecttitle {
         width: 35vw - 200px;
     }
+    .objecttitle h1 {
+        width: 35vw - 200px;
+    }
 }
 
 @media only screen and (max-width: 1250px) and (min-width: 1001px) {
@@ -139,6 +142,9 @@
         width: 40vw;
     }
     .objecttitle {
+        width: 40vw - 200px;
+    }
+    .objecttitle h1 {
         width: 40vw - 200px;
     }
 }
@@ -150,6 +156,9 @@
     .objecttitle {
         width: 80vw - 200px;
     }
+    .objecttitle h1 {
+        width: 80vw - 200px;
+    }
 }
 
 @media only screen and (max-width: 500px) {
@@ -159,23 +168,47 @@
     .objecttitle {
         width: 94vw - 200px;
     }
+    .objecttitle h1 {
+        width: 94vw - 200px;
+    }
 }
 
 .objecttitle {
-    height: 100px;
+    height: 150px;
     padding-right: 15px;
-    font-family: 'Helvetica';
 }
 
 .objecttitle h1 {
     margin: 0;
-    width: 100%;
     font-size: 40px;
     font-weight: normal;
     padding-top: 35px;
     color: #eeeeee;
+    font-family: 'Helvetica';
     white-space: nowrap;
-    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.objecttitle h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: normal;
+    padding-top: 40px;
+    padding-bottom: 5px;
+    color: #eeeeee;
+    font-family: 'Helvetica';
+    white-space: nowrap;
+    overflow: hidden;
+}
+.objecttitle h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: normal;
+    padding-top: 50px;
+    padding-bottom: 5px;
+    color: #eeeeee;
+    font-family: 'Helvetica';
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .objecttitle p {
