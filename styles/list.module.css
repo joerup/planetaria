@@ -271,10 +271,10 @@
     background-color: #020202;
     height: 60px;
     width: 98%;
-    border-radius: 10%;
     text-align: left;
-    border: 0px;
     color: #777777;
+    border-color: #444;
+    border-style:double;
     font-size: 20px;
     padding: 15px;
     margin: 0;

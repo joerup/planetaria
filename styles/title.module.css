@@ -94,7 +94,7 @@
     padding-right: 0;
   }
   .linkBox {
-    width: 90vh;
+    width: 50vh;
     min-width: 100px;
   }
 }
@@ -121,7 +121,7 @@
 }
 @media only screen and (max-width: 500px) {
   .searchBar {
-    width: 90vh;
+    width: 50vh;
     min-width: 100px;
   }
 }
