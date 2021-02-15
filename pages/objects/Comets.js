@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { Link, Flex, Box, Heading } from "@chakra-ui/core";
 import { NextPage } from "next";
+import Head from 'next/head';
 import styles from '../../styles/list.module.css'
 import Header from '../../components/Header.js';
 import Footer from '../../components/Footer.js';
@@ -13,6 +14,10 @@ export default function Comets({ comets }) {
 
   return (
     <Box className={styles.background}>
+      <Head>
+        <title>Comets | Planetaria</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Flex flexDirection="column" alignItems="center">
         <Header/>
         <br/><br/><br/><br/>

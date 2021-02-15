@@ -89,10 +89,16 @@
 }
 
 @media only screen and (max-width: 500px) {
+  .linkRect {
+    display: flex;
+  }
   .linkImage {
-    width: 150px;
+    width: 110px;
+    height: 100px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 20px;
   }
   .linkBox {
     width: 50vh;

@@ -19,6 +19,10 @@ export default function Moon({ moon, moons, planet, properties }) {
   return (
     <>
     <Box className={styles.background}>
+      <Head>
+        <title>{moon.name} | Planetaria</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Flex flexDirection="column" alignItems="center">
         <Header/>
         <br/><br/><br/><br/>

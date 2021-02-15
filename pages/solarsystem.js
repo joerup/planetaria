@@ -1,4 +1,5 @@
 import NextLink from "next/link";
+import Head from 'next/head';
 import { Link, Flex, Box, Heading } from "@chakra-ui/core";
 import { NextPage } from "next";
 import styles from '../styles/list.module.css';
@@ -9,6 +10,10 @@ import ObjectRow from '../components/ObjectRow.js';
 export default function SolarSystem(props) {
   return (
     <Box className={styles.background}>
+      <Head>
+        <title>Solar System | Planetaria</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Flex flexDirection="column" alignItems="center">
         <Header/>
         <br/><br/><br/><br/>
