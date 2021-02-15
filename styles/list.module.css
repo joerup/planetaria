@@ -5,27 +5,30 @@
     background-attachment: fixed;
 }
 
-@media only screen and (min-width: 1101px) {
+.headline {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+    background-color: #000001;
+    border-radius: 5%;
+    align-items: center;
+}
+
+@media only screen and (min-width: 1251px) {
     .headline {
-        width: 900px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        align-items: center;
-        background-color: #000001;
-        border-radius: 5%;
-        align-items: center;
+        width: 55vw;
     }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (min-width: 1001px) and (max-width: 1250px) {
     .headline {
-        width: 550px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        align-items: center;
-        background-color: #000001;
-        border-radius: 5%;
-        align-items: center;
+        width: 75vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .headline {
+        width: 90vw;
     }
 }
 
@@ -45,6 +48,7 @@
 
 .row {
     padding-top: 15px;
+    margin: 0;
 }
 
 .bigobjecttitle {
@@ -96,7 +100,6 @@
 
 .objectrow {
     display: flex;
-    width: 550px;
     height: 150px;
     background-color: #000001;
     border-radius: 5%;
@@ -105,28 +108,74 @@
     background-color: #111112
 }
 
+.objectrow2 {
+    display: flex;
+    height: 150px;
+    background-color: #000001;
+    border-radius: 5%;
+    width: 100%;
+}
+.objectrow2:hover {
+    background-color: #111112
+}
+
+@media only screen and (min-width: 1251px) {
+    .objectrow {
+        width: 35vw;
+    }
+    .objecttitle {
+        width: 35vw - 200px;
+    }
+}
+
+@media only screen and (max-width: 1250px) and (min-width: 1001px) {
+    .objectrow {
+        width: 40vw;
+    }
+    .objecttitle {
+        width: 40vw - 200px;
+    }
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 501px) {
+    .objectrow {
+        width: 80vw;
+    }
+    .objecttitle {
+        width: 80vw - 200px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .objectrow {
+        width: 94vw;
+    }
+    .objecttitle {
+        width: 94vw - 200px;
+    }
+}
+
 .objecttitle {
-    height: 50px;
-    width: 350px;
+    height: 100px;
+    padding-right: 15px;
+    font-family: 'Helvetica';
+}
+
+.objecttitle h1 {
     margin: 0;
     font-size: 40px;
-    padding-top: 30px;
-    font-family: 'Helvetica';
+    font-weight: normal;
+    padding-top: 35px;
     color: #eeeeee;
-    justify-content: left;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.objectdesc {
-    height: 50px;
-    width: 350px;
+.objecttitle p {
     margin: 0;
     font-size: 20px;
-    padding-top: 40px;
-    font-family: 'Helvetica';
+    padding-top: 10px;
     color: #999;
-    justify-content: left;
 }
 
 .objectimage {
@@ -135,36 +184,24 @@
     padding: 25px;
 }
 
-@media only screen and (min-width: 1101px) {
-    .searchBar {
-        height: 60px;
-        width: 750px;
-        background-color: #020202;
-        border-radius: 10%;
-        text-align: left;
-        border: 0px;
-        color: #777777;
-        font-size: 20px;
-        padding: 15px;
-        margin: 0;
-    }
-}
-@media only screen and (max-width: 1100px) {
-    .searchBar {
-        height: 60px;
-        width: 400px;
-        background-color: #020202;
-        border-radius: 5%;
-        text-align: left;
-        border: 0px;
-        color: #777777;
-        font-size: 20px;
-        padding: 15px;
-        margin: 0;
-    }
+.searchBar {
+    width: 90%;
 }
 
-.searchDesc {
+.searchBar input {
+    background-color: #020202;
+    height: 60px;
+    width: 98%;
+    border-radius: 10%;
+    text-align: left;
+    border: 0px;
+    color: #777777;
+    font-size: 20px;
+    padding: 15px;
+    margin: 0;
+}
+
+.searchBar p {
     color: #777777;
     font-size: 18px;
 }

@@ -91,6 +91,7 @@ export default function Planet({ planet, planets, moons, system, properties }) {
                   image={moon.image} 
                   name={moon.name} 
                   desc={moon.altName3 != null ? `${moon.orbiting} ${moon.altName3}` : ''}
+                  object="true"
                 />
               )
             })}
@@ -142,9 +143,11 @@ function getPrev(current, planets) {
       image={prev.image} 
       name={prev.name} 
       desc={prev.desc}
+      object="true"
     />
   )
 }
+
 function getNext(current, planets) {
   let id = current.id;
   if(id >= planets.length) return(
@@ -159,12 +162,13 @@ function getNext(current, planets) {
       image={next.image} 
       name={next.name} 
       desc={next.desc}
+      object="true"
     />
   )
 }
 
 export async function getStaticPaths() {
-  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects.json");
+  const json = await fetch("https://raw.githubusercontent.com/joerup2004/planetaria/main/objects1.json");
   const bodies = await json.json();
   const paths = bodies.planets.map(planet => ({
     params: { id: planet.name.toString() }

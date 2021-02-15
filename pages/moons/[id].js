@@ -118,6 +118,7 @@ function getPrev(current, moons) {
       image={prev.image} 
       name={prev.name} 
       desc={prev.altName3 != null ? `${prev.orbiting} ${prev.altName3}` : ''}
+      object="true"
     />
   )
 }
@@ -135,6 +136,7 @@ function getNext(current, moons) {
       image={next.image} 
       name={next.name} 
       desc={next.altName3 != null ? `${next.orbiting} ${next.altName3}` : ''}
+      object="true"
     />
   )
 }
