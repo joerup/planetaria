@@ -19,6 +19,10 @@ export default function Star({ star, stars, system, properties }) {
   return (
     <>
     <Box className={styles.background}>
+      <Head>
+        <title>{star.name} | Planetaria</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Flex flexDirection="column" alignItems="center">
         <Header/>
         <br/><br/><br/><br/>

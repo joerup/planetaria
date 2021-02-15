@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import Head from 'next/head';
 import { Link, Flex, Box, Heading } from "@chakra-ui/core";
 import { NextPage } from "next";
 import styles from '../../../styles/list.module.css'
@@ -13,6 +14,10 @@ export default function DwarfMoonList({ moons }) {
 
   return (
     <Box className={styles.background}>
+      <Head>
+        <title>Dwarf Moons | Planetaria</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Flex flexDirection="column" alignItems="center">
         <Header/>
         <br/><br/><br/><br/>

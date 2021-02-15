@@ -1,5 +1,6 @@
 .background {
   min-height: 100vh;
+  overflow: auto;
   background-image: url("https://github.com/joerup2004/planetaria/blob/main/Images/StarrySky.png?raw=true");
   background-color: #222222;
   background-attachment: fixed;
@@ -89,13 +90,14 @@
 
 @media only screen and (max-width: 500px) {
   .linkImage {
-    width: 150px;
-    padding-left: 0;
-    padding-right: 0;
+    display: none;
   }
   .linkBox {
-    width: 90vh;
+    width: 50vh;
     min-width: 100px;
+  }
+  .linkRect {
+    min-height: 150px;
   }
 }
 
@@ -121,7 +123,7 @@
 }
 @media only screen and (max-width: 500px) {
   .searchBar {
-    width: 90vh;
+    width: 50vh;
     min-width: 100px;
   }
 }

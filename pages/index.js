@@ -1,5 +1,6 @@
 import NextLink from "next/link";
 import { Link, Flex, Box, Heading } from "@chakra-ui/core";
+import Head from 'next/head';
 import { NextPage } from "next";
 import styles from '../styles/title.module.css';
 import Header from '../components/Header.js';
@@ -8,6 +9,10 @@ import Footer from '../components/Footer.js';
 export default function Home(props) {
   return (
     <Box className={styles.background}>
+      <Head>
+        <title>Planetaria</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Flex flexDirection="column" alignItems="center">
         <Header/>
         <br/><br/><br/><br/><br/><br/>

@@ -1,5 +1,6 @@
 import NextLink from "next/link";
 import { Link, Flex, Box, Heading } from "@chakra-ui/core";
+import Head from 'next/head';
 import { NextPage } from "next";
 import styles from '../styles/list.module.css';
 import Header from '../components/Header.js';
@@ -10,6 +11,10 @@ import { getStarSystems } from "../components/helpers.js";
 export default function Galaxy(props) {
   return (
     <Box className={styles.background}>
+      <Head>
+        <title>Milky Way Galaxy | Planetaria</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Flex flexDirection="column" alignItems="center">
         <Header/>
         <br/><br/><br/><br/>

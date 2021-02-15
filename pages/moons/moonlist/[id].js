@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import Head from 'next/head';
 import { Link, Flex, Box, Heading } from "@chakra-ui/core";
 import { NextPage } from "next";
 import styles from '../../../styles/list.module.css'
@@ -14,6 +15,10 @@ export default function MoonList({ planet, moons }) {
 
   return (
     <Box className={styles.background}>
+      <Head>
+        <title>{planet.adjective != null ? planet.adjective : planet.name} Moons | Planetaria</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <Flex flexDirection="column" alignItems="center">
         <Header/>
         <br/><br/><br/><br/>
@@ -25,7 +30,7 @@ export default function MoonList({ planet, moons }) {
                 <img src="https://github.com/joerup2004/planetaria/blob/main/Images/whitechevron.png?raw=true" width="100" height="100"/>
               </Link>
               <div className={styles.toptext}>
-                <div class={styles.bigobjecttitle}>{planet.adjective} Moons</div>
+                <div class={styles.bigobjecttitle}>{planet.adjective != null ? planet.adjective : planet.name} Moons</div>
                 <p class={styles.bigobjectdesc}>{planet.name}'s {planet.moons} Moons</p>
               </div>
               <img className={styles.bigobjectimage} src={`https://github.com/joerup2004/planetaria/blob/main/Images/Objects/${planet.image != null ? planet.image : "Unknown"}.png?raw=true`}/>
