@@ -135,6 +135,15 @@
     .objecttitle h1 {
         width: 35vw - 200px;
     }
+    .objecttitle h2 {
+        width: 35vw - 200px;
+    }
+    .objecttitle h3 {
+        width: 35vw - 200px;
+    }
+    .objecttitle p {
+        width: 35vw - 200px;
+    }
 }
 
 @media only screen and (max-width: 1250px) and (min-width: 1001px) {
@@ -145,6 +154,15 @@
         width: 40vw - 200px;
     }
     .objecttitle h1 {
+        width: 40vw - 200px;
+    }
+    .objecttitle h2 {
+        width: 40vw - 200px;
+    }
+    .objecttitle h3 {
+        width: 40vw - 200px;
+    }
+    .objecttitle p {
         width: 40vw - 200px;
     }
 }
@@ -159,6 +177,15 @@
     .objecttitle h1 {
         width: 80vw - 200px;
     }
+    .objecttitle h2 {
+        width: 80vw - 200px;
+    }
+    .objecttitle h3 {
+        width: 80vw - 200px;
+    }
+    .objecttitle p {
+        width: 80vw - 200px;
+    }
 }
 
 @media only screen and (max-width: 500px) {
@@ -169,6 +196,15 @@
         width: 94vw - 200px;
     }
     .objecttitle h1 {
+        width: 94vw - 200px;
+    }
+    .objecttitle h2 {
+        width: 94vw - 200px;
+    }
+    .objecttitle h3 {
+        width: 94vw - 200px;
+    }
+    .objecttitle p {
         width: 94vw - 200px;
     }
 }
