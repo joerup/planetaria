@@ -130,19 +130,19 @@
         width: 35vw;
     }
     .objecttitle {
-        width: 35vw - 200px;
+        max-width: 35vw - 200px;
     }
     .objecttitle h1 {
-        width: 35vw - 200px;
+        max-width: 35vw - 200px;
     }
     .objecttitle h2 {
-        width: 35vw - 200px;
+        max-width: 35vw - 200px;
     }
     .objecttitle h3 {
-        width: 35vw - 200px;
+        max-width: 35vw - 200px;
     }
     .objecttitle p {
-        width: 35vw - 200px;
+        max-width: 35vw - 200px;
     }
 }
 
@@ -151,19 +151,19 @@
         width: 40vw;
     }
     .objecttitle {
-        width: 40vw - 200px;
+        max-width: 40vw - 200px;
     }
     .objecttitle h1 {
-        width: 40vw - 200px;
+        max-width: 40vw - 200px;
     }
     .objecttitle h2 {
-        width: 40vw - 200px;
+        max-width: 40vw - 200px;
     }
     .objecttitle h3 {
-        width: 40vw - 200px;
+        max-width: 40vw - 200px;
     }
     .objecttitle p {
-        width: 40vw - 200px;
+        max-width: 40vw - 200px;
     }
 }
 
@@ -172,19 +172,19 @@
         width: 80vw;
     }
     .objecttitle {
-        width: 80vw - 200px;
+        max-width: 80vw - 200px;
     }
     .objecttitle h1 {
-        width: 80vw - 200px;
+        max-width: 80vw - 200px;
     }
     .objecttitle h2 {
-        width: 80vw - 200px;
+        max-width: 80vw - 200px;
     }
     .objecttitle h3 {
-        width: 80vw - 200px;
+        max-width: 80vw - 200px;
     }
     .objecttitle p {
-        width: 80vw - 200px;
+        max-width: 80vw - 200px;
     }
 }
 
@@ -193,19 +193,19 @@
         width: 94vw;
     }
     .objecttitle {
-        width: 94vw - 200px;
+        max-width: 94vw - 200px;
     }
     .objecttitle h1 {
-        width: 94vw - 200px;
+        max-width: 94vw - 200px;
     }
     .objecttitle h2 {
-        width: 94vw - 200px;
+        max-width: 94vw - 200px;
     }
     .objecttitle h3 {
-        width: 94vw - 200px;
+        max-width: 94vw - 200px;
     }
     .objecttitle p {
-        width: 94vw - 200px;
+        max-width: 94vw - 200px;
     }
 }
 
