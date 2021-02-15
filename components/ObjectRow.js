@@ -17,7 +17,7 @@ export default function ObjectRow(props) {
             <div className={styles.objectrow}>
               <img className={styles.objectimage} src={`https://github.com/joerup2004/planetaria/blob/main/Images/Objects/${props.image != null ? props.image : "Unknown"}.png?raw=true`}/>  
               <div className={styles.objecttitle}>
-                <h1>{props.name}</h1>
+                { props.name.length > 16 ? <h3>{props.name}</h3> : props.name.length > 12 ? <h2>{props.name}</h2> : <h1>{props.name}</h1> }
                 <p>{props.desc}</p>
               </div>
             </div>
@@ -38,7 +38,7 @@ export default function ObjectRow(props) {
           <div className={styles.objectrow2}>
             <img className={styles.objectimage} src={`https://github.com/joerup2004/planetaria/blob/main/Images/Objects/${props.image != null ? props.image : "Unknown"}.png?raw=true`}/>  
             <div className={styles.objecttitle}>
-              <h1>{props.name}</h1>
+              { props.name.length > 16 ? <h3>{props.name}</h3> : props.name.length > 14 ? <h2>{props.name}</h2> : <h1>{props.name}</h1> }        
               <p>{props.desc}</p>
             </div>
           </div>
