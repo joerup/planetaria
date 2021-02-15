@@ -1,6 +1,5 @@
 .background {
     min-height: 100vh;
-    min-width: 100vh;
     overflow: auto;
     background-image: url("https://github.com/joerup2004/planetaria/blob/main/Images/StarrySky.png?raw=true");
     background-color: #222222;
@@ -134,7 +133,6 @@
     }
     .objecttitle {
         max-width: 35vw - 200px;
-        font-family: 'Helvetica';
         white-space: nowrap;
         overflow: hidden;
     }
@@ -146,7 +144,6 @@
     }
     .objecttitle {
         max-width: 40vw - 200px;
-        font-family: 'Helvetica';
         white-space: nowrap;
         overflow: hidden;
     }
@@ -158,7 +155,6 @@
     }
     .objecttitle {
         max-width: 80vw - 200px;
-        font-family: 'Helvetica';
         white-space: nowrap;
         overflow: hidden;
     }
@@ -170,7 +166,6 @@
     }
     .objecttitle {
         max-width: 90vw - 200px;
-        font-family: 'Helvetica';
         white-space: nowrap;
         overflow: hidden;
     }
@@ -184,6 +179,7 @@
 .objecttitle h1 {
     margin: 0;
     font-size: 40px;
+    font-family: 'Helvetica';
     font-weight: normal;
     padding-top: 35px;
     color: #eeeeee;
@@ -191,6 +187,7 @@
 .objecttitle h2 {
     margin: 0;
     font-size: 30px;
+    font-family: 'Helvetica';
     font-weight: normal;
     padding-top: 40px;
     padding-bottom: 5px;
@@ -199,6 +196,7 @@
 .objecttitle h3 {
     margin: 0;
     font-size: 20px;
+    font-family: 'Helvetica';
     font-weight: normal;
     padding-top: 50px;
     padding-bottom: 5px;
@@ -209,8 +207,10 @@
     margin: 0;
     width: 100%;
     font-size: 20px;
+    font-family: 'Helvetica';
     padding-top: 10px;
     color: #999;
+    white-space: normal;
 }
 
 .objectimage {
