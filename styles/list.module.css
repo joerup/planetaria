@@ -1,5 +1,7 @@
 .background {
     min-height: 100vh;
+    min-width: 100vh;
+    overflow: auto;
     background-image: url("https://github.com/joerup2004/planetaria/blob/main/Images/StarrySky.png?raw=true");
     background-color: #222222;
     background-attachment: fixed;
@@ -132,18 +134,9 @@
     }
     .objecttitle {
         max-width: 35vw - 200px;
-    }
-    .objecttitle h1 {
-        max-width: 35vw - 200px;
-    }
-    .objecttitle h2 {
-        max-width: 35vw - 200px;
-    }
-    .objecttitle h3 {
-        max-width: 35vw - 200px;
-    }
-    .objecttitle p {
-        max-width: 35vw - 200px;
+        font-family: 'Helvetica';
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
 
@@ -153,18 +146,9 @@
     }
     .objecttitle {
         max-width: 40vw - 200px;
-    }
-    .objecttitle h1 {
-        max-width: 40vw - 200px;
-    }
-    .objecttitle h2 {
-        max-width: 40vw - 200px;
-    }
-    .objecttitle h3 {
-        max-width: 40vw - 200px;
-    }
-    .objecttitle p {
-        max-width: 40vw - 200px;
+        font-family: 'Helvetica';
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
 
@@ -174,18 +158,9 @@
     }
     .objecttitle {
         max-width: 80vw - 200px;
-    }
-    .objecttitle h1 {
-        max-width: 80vw - 200px;
-    }
-    .objecttitle h2 {
-        max-width: 80vw - 200px;
-    }
-    .objecttitle h3 {
-        max-width: 80vw - 200px;
-    }
-    .objecttitle p {
-        max-width: 80vw - 200px;
+        font-family: 'Helvetica';
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
 
@@ -195,18 +170,9 @@
     }
     .objecttitle {
         max-width: 90vw - 200px;
-    }
-    .objecttitle h1 {
-        max-width: 90vw - 200px;
-    }
-    .objecttitle h2 {
-        max-width: 90vw - 200px;
-    }
-    .objecttitle h3 {
-        max-width: 90vw - 200px;
-    }
-    .objecttitle p {
-        max-width: 90vw - 200px;
+        font-family: 'Helvetica';
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
 
@@ -221,9 +187,6 @@
     font-weight: normal;
     padding-top: 35px;
     color: #eeeeee;
-    font-family: 'Helvetica';
-    white-space: nowrap;
-    overflow: hidden;
 }
 .objecttitle h2 {
     margin: 0;
@@ -232,9 +195,6 @@
     padding-top: 40px;
     padding-bottom: 5px;
     color: #eeeeee;
-    font-family: 'Helvetica';
-    white-space: nowrap;
-    overflow: hidden;
 }
 .objecttitle h3 {
     margin: 0;
@@ -243,9 +203,6 @@
     padding-top: 50px;
     padding-bottom: 5px;
     color: #eeeeee;
-    font-family: 'Helvetica';
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 .objecttitle p {
