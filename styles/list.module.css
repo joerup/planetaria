@@ -140,10 +140,10 @@
 
 @media only screen and (max-width: 1250px) and (min-width: 1001px) {
     .objectrow {
-        width: 40vw;
+        width: 48vw;
     }
     .objecttitle {
-        max-width: 40vw - 200px;
+        max-width: 48vw - 200px;
         white-space: nowrap;
         overflow: hidden;
     }
