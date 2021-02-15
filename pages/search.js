@@ -79,12 +79,10 @@ class SearchBar extends React.Component {
                 <Link href="javascript:history.back()">
                   <img src="https://github.com/joerup2004/planetaria/blob/main/Images/whitechevron.png?raw=true" width="100" height="100"/>
                 </Link>
-                <label>
-                  <input type="text" className={styles.searchBar} value={this.state.value} onChange={this.handleChange}/>
-                  <p className={styles.searchDesc}> 
-                    Search for names or keywords for stars, planets, moons, or other objects
-                  </p>
-                </label>
+                <div className={styles.searchBar}>
+                  <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                  <p>Search for names or keywords for stars, planets, moons, or other objects</p>
+                </div>
               </div>
             </div>
           </div>

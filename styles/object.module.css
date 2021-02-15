@@ -5,64 +5,76 @@
     background-attachment: fixed;
 }
 
-@media only screen and (min-width: 1101px) {
+.columns {
+    padding-top: 25px;
+    width: 100vw;
+}
+
+.column1 {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background-color: #000001;
+    border-radius: 5%;
+}
+
+.column2 {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    background-color: #000001;
+    border-radius: 5%;
+}
+
+@media only screen and (min-width: 1251px) {
     .columns {
         display: flex;
-        padding: 25px;
+        padding-left: 15vw;
+        padding-right: 15vw;
     }
     .column1 {
-        width: 550px;
-        padding-top: 10px;
-        padding-bottom: 20px;
-        background-color: #000001;
-        border-radius: 5%;
+        width: 35vw;
     }
     .column2 {
-        width: 550px;
-        padding-top: 10px;
-        padding-bottom: 20px;
-        background-color: #000001;
-        border-radius: 5%;
+        width: 35vw;
     }
 }
 
-@media only screen and (max-width: 1100px) and (min-width: 551px) {
+@media only screen and (max-width: 1250px) and (min-width: 1001px) {
     .columns {
-        padding: 25px;
+        display: flex;
+        padding-left: 10vw;
+        padding-right: 10vw;
     }
     .column1 {
-        width: 550px;
-        padding-top: 10px;
-        padding-bottom: 20px;
-        background-color: #000001;
-        border-radius: 5%;
+        width: 40vw;
     }
     .column2 {
-        width: 550px;
-        padding-top: 10px;
-        padding-bottom: 20px;
-        background-color: #000001;
-        border-radius: 5%;
+        width: 40vw;
     }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 1000px) and (min-width: 501px) {
     .columns {
-        padding: 25px;
+        padding-left: 10vw;
+        padding-right: 10vw;
     }
     .column1 {
-        width: 100%;
-        padding-top: 10px;
-        padding-bottom: 20px;
-        background-color: #000001;
-        border-radius: 5%;
+        width: 80vw;
     }
     .column2 {
-        width: 100%;
-        padding-top: 10px;
-        padding-bottom: 20px;
-        background-color: #000001;
-        border-radius: 5%;
+        width: 80vw;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .columns {
+        padding-left: 3vw;
+        padding-right: 3vw;
+    }
+    .column1 {
+        width: 94vw;
+    }
+    .column2 {
+        width: 94vw;
     }
 }
 
@@ -83,7 +95,7 @@
 
 .objecttitle {
     margin: 0;
-    max-width: 450px;
+    width: 100% - 100px;
     font-size: 5rem;
     font-family: 'Helvetica';
     color: #eeeeee;
@@ -92,7 +104,7 @@
 
 .objectdesc {
     margin: 0;
-    max-width: 450px;
+    width: 100% - 100px;
     font-size: 1.6rem;
     font-family: 'Helvetica';
     color: #999;
@@ -100,48 +112,33 @@
 }
 
 .objectimage {
-    min-width: 550px;
     width: 100%;
-    padding-left: 50px;
-    padding-right: 50px;
     padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
+
 .paragraph {
     margin: 0;
-    min-width: 550px;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 100%;
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-family: 'Helvetica';
     font-size: 1.5rem;
     color: #ddd;
 }
+
 .paragraph2 {
     margin: 0;
-    min-width: 550px;
+    width: 100%;
+    padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-bottom: 10px;
     font-family: 'Helvetica';
     font-size: 1.5rem;
     color: #999;
-    width: 100%;
-}
-
-@media only screen and (max-width: 550px) {
-    .objectimage {
-        min-width: 100px;
-        width: 90%;
-    }
-    .paragraph {
-        min-width: 100px;
-        width: 100%;
-    }
-    .paragraph2 {
-        min-width: 100px;
-        width: 90%;
-    }
 }
 
 .helpButton {
@@ -178,15 +175,31 @@
   font: 'Helvetica';
   background-color: #111111;
   border-radius: 5%;
-  min-width: 520px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (min-width: 1251px) {
     .dropdowncontent {
-        min-width: 100px;
-        width: 90%;
+        width: 33vw;
+    }
+}
+
+@media only screen and (max-width: 1250px) and (min-width: 1001px) {
+    .dropdowncontent {
+        width: 37vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 501px) {
+    .dropdowncontent {
+        width: 75vw;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .dropdowncontent {
+        width: 85vw;
     }
 }
 
@@ -225,12 +238,11 @@
 
 .dropdown:hover .dropdowncontent {display: block;}
 
-
 .propertySectionName {
+    width: 100%;
     font-size: 2.3rem;
     font-family: 'Helvetica';
     color: #fff;
-    width: 100%;
 }
 .propertySection {
     display: flex;
@@ -241,14 +253,13 @@
 }
 
 .propertyRow {
-    width: 550px;
     font-family: 'Helvetica';
     display: flex;
     text-align: center;
 }
 
 .propertyName {
-    width: 300px;
+    width: 60%;
     padding-left: 20px;
     padding-bottom: 8px;
     color: #999;
@@ -256,103 +267,19 @@
     text-align: left;
 }
 .property {
-    width: 250px;
+    width: 40%;
     padding-right: 20px;
     color: #ddd;
     font-size: 27px;
     text-align: right;
 }
 
-@media only screen and (max-width: 550px) {
-    .propertyRow {
-        width: 90%;
-        min-width: 100px;
-    }
-    .propertyName {
-        width: 50%;
-        min-width: 50px;
-    }
-    .property {
-        width: 40%;
-        min-width: 50px;
-    }
-}
-
-.listobjectpadding {
-    width: 550px;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.listobjectrow {
-    display: flex;
-    width: 510px;
-    height: 150px;
-    background-color: #000001;
-    border-radius: 5%;
-}
-.listobjectrow:hover {
-    background-color: #111112
-}
-
-.listobjecttitle {
-    height: 50px;
-    width: 350px;
-    margin: 0;
-    font-size: 40px;
-    padding-top: 30px;
-    font-family: 'Helvetica';
-    color: #eeeeee;
-    justify-content: left;
-}
-
-.listobjectdesc {
-    height: 50px;
-    width: 350px;
-    margin: 0;
-    font-size: 20px;
-    padding-top: 40px;
-    font-family: 'Helvetica';
-    font-weight: normal;
-    color: #999;
-    justify-content: left;
-}
-
-.listobjectimage {
-    height: 150px;
-    width: 150px;
-    padding: 25px;
-}
-
 .allmoonlink {
     font-size: 2rem;
     font-family: 'Helvetica';
     color: #58c;
-    width: 550px;
+    width: 100%;
     text-align: center;
-}
-
-@media only screen and (max-width: 500px) {
-    .listobjectrow {
-        width: 90%;
-        min-width: 100px;
-    }
-    .listobjecttitle {
-        width: 60%;
-        min-width: 70px;
-    }
-    .listobjectdesc {
-        width: 60%;
-        min-width: 70px;
-    }
-    .listobjectimage {
-        width: 30%;
-        min-width: 30px;
-    }
-    .allmoonlink {
-        width: 90%;
-        min-width: 100px;
-    }
 }
 
 .nextDesc {

@@ -140,7 +140,19 @@
 
 .finePrint {
   font-size: 0.7rem;
+  max-width: 800px;
   font-family: 'Helvetica';
   color: #444;
-  max-width: 600px;
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 501px) {
+  .finePrint {
+      width: 80vw;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .finePrint {
+      width: 94vw;
+  }
 }

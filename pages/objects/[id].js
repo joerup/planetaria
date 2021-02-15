@@ -97,6 +97,7 @@ function getPrev(current, other) {
       image={prev.image} 
       name={prev.name} 
       desc={prev.asteroidNumber != null ? `Asteroid #${prev.asteroidNumber}` : prev.cometNumber != null ? `Comet ${prev.cometNumber}` : prev.desc} 
+      object="true"
     />
   )
 }
@@ -114,6 +115,7 @@ function getNext(current, other) {
       image={next.image} 
       name={next.name} 
       desc={next.asteroidNumber != null ? `Asteroid #${next.asteroidNumber}` : next.cometNumber != null ? `Comet ${next.cometNumber}` : next.desc} 
+      object="true"
     />
   )
 }

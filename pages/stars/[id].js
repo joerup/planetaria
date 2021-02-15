@@ -126,6 +126,7 @@ function getPrev(current, stars) {
       image={prev.image} 
       name={prev.name} 
       desc={prev.desc != null ? prev.desc : starDesc(prev)}
+      object="true"
     />
   )
 }
@@ -143,6 +144,7 @@ function getNext(current, stars) {
       image={next.image} 
       name={next.name} 
       desc={next.desc != null ? next.desc : starDesc(next)}
+      object="true"
     />
   )
 }
