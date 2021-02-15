@@ -3,6 +3,7 @@
     overflow: auto;
     background-image: url("https://github.com/joerup2004/planetaria/blob/main/Images/StarrySky.png?raw=true");
     background-color: #222222;
+    background-size: cover;
     background-attachment: fixed;
 }
 
