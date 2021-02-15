@@ -88,8 +88,11 @@
 }
 
 @media only screen and (max-width: 500px) {
+  .linkImage {
+    width: 150px;
+  }
   .linkBox {
-    width: 90%;
+    width: 90vh;
     min-width: 100px;
   }
 }
@@ -116,7 +119,7 @@
 }
 @media only screen and (max-width: 500px) {
   .searchBar {
-    width: 90%;
+    width: 90vh;
     min-width: 100px;
   }
 }
