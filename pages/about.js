@@ -28,9 +28,6 @@ export default function About(props) {
           <p className={styles.desc2}>
             <a href="https://apps.apple.com/is/app/planetaria/id1546887479"><u>Planetaria App</u></a>
           </p>
-          
-          <p className={styles.title2}>Contact</p>
-          <p className={styles.desc2}>rupertusapps@gmail.com</p>
         </div>
         
         <br/><br/><br/><br/><br/><br/>

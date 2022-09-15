@@ -58,6 +58,12 @@ export default function Home(props) {
 
         </div>
 
+        <br/><br/>
+
+        <Link href="https://apps.apple.com/is/app/planetaria/id1546887479">
+          <h1>Download on the App Store</h1>
+        </Link>
+
         <br/><br/><br/><br/><br/>
         
         <Footer/>

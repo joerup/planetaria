@@ -9,6 +9,8 @@
 
 .column {
   text-align: center;
+  max-width: 1000px;
+  padding: 30px;
 }
 
 .image {
@@ -104,7 +106,7 @@
 
 .linkRect {
   background-color: #000001;
-  border-radius: 5%;
+  border-radius: 25px;
   align-content: center;
   padding: 25px;
 }
@@ -116,7 +118,7 @@
   width: 500px;
   height: 50px;
   background-color: #020202;
-  border-radius: 5%;
+  border-radius: 25px;
   text-align: center;
 }
 .searchBar:hover {
@@ -134,4 +136,27 @@
   font-size: 20px;
   padding: 15px;
   margin: 0;
+}
+
+.description h1 {
+    color: #ccc;
+}
+
+.description h5 {
+    color: #ccc;
+}
+
+.description h3 {
+    color: #eee;
+}
+
+.description p {
+    color: #aaa;
+    font-size: 1.3rem;
+    line-height: 1.5;
+}
+.description li {
+    color: #aaa;
+    font-size: 1.3rem;
+    line-height: 1.5;
 }

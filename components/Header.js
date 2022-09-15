@@ -34,6 +34,8 @@ export default function Header({ props }) {
             <a href="https://planetaria.app/solarsystem">System</a>
             <a href="https://planetaria.app/galaxy">Galaxy</a>
             <a href="https://planetaria.app/about">About</a>
+            <a href="https://planetaria.app/support">Support</a>
+            <a href="https://planetaria.app/privacy">Privacy</a>
             <a href="https://apps.apple.com/is/app/planetaria/id1546887479">App</a>
           </div>
         </div>
@@ -46,6 +48,12 @@ export default function Header({ props }) {
         </NextLink>
         <NextLink href="https://planetaria.app/about">
           <Link><p className={styles.rowItem}>About</p></Link>
+        </NextLink>
+        <NextLink href="https://planetaria.app/support">
+          <Link><p className={styles.rowItem}>Support</p></Link>
+        </NextLink>
+        <NextLink href="https://planetaria.app/privacy">
+          <Link><p className={styles.rowItem}>Privacy</p></Link>
         </NextLink>
         <a href="https://apps.apple.com/is/app/planetaria/id1546887479"><p className={styles.rowItem}>App</p></a>
         

@@ -16,14 +16,14 @@
     padding-top: 10px;
     padding-bottom: 20px;
     background-color: #000001;
-    border-radius: 5%;
+    border-radius: 25px;
 }
 
 .column2 {
     padding-top: 10px;
     padding-bottom: 20px;
     background-color: #000001;
-    border-radius: 5%;
+    border-radius: 25px;
 }
 
 @media only screen and (min-width: 1251px) {
@@ -82,7 +82,7 @@
 
 .objectbackground {
     background-color: #000001;
-    border-radius: 5%;
+    border-radius: 25px;
 }
 
 .headline {
@@ -155,7 +155,7 @@
     color: #111;
     width: 25px;
     height: 25px;
-    border-radius: 20%;
+    border-radius: 5px;
     text-align: center;
 }
 .helpButton p:hover {
@@ -176,7 +176,7 @@
   position: absolute;
   font: 'Helvetica';
   background-color: #111111;
-  border-radius: 5%;
+  border-radius: 25px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
