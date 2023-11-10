@@ -32,10 +32,10 @@ public struct Header: View {
             Spacer()
             
             VStack {
-                Text(spacetime.currentDate.string)
-                    .foregroundColor(.white)
-                    .font(.system(.body, design: .monospaced, weight: .bold))
-                    .padding(.top)
+//                Text(spacetime.currentDate.string)
+//                    .foregroundColor(.white)
+//                    .font(.system(.body, design: .monospaced, weight: .bold))
+//                    .padding(.top)
                 
 //                HStack {
 //                    Button {

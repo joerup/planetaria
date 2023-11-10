@@ -15,7 +15,6 @@ struct ObjectRow: View {
     var object: ObjectNode
     
     var body: some View {
-        #if os(iOS)
         HStack {
             Group {
                 if object.rank == .primary {
@@ -39,8 +38,6 @@ struct ObjectRow: View {
         }
         .padding()
         .background(Color.gray.opacity(0.1).cornerRadius(15))
-        #elseif os(macOS)
-        #endif
     }
     
     private var circle: some View {

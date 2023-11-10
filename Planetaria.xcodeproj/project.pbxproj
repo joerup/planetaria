@@ -978,7 +978,7 @@
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Planetaria/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -987,11 +987,12 @@
 				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rupertusapps.Planetaria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,3";
+				TARGETED_DEVICE_FAMILY = "1,2,3,7";
 				TVOS_DEPLOYMENT_TARGET = 16.4;
 			};
 			name = Debug;
@@ -1009,7 +1010,7 @@
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Planetaria/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1018,11 +1019,12 @@
 				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rupertusapps.Planetaria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,3";
+				TARGETED_DEVICE_FAMILY = "1,2,3,7";
 				TVOS_DEPLOYMENT_TARGET = 16.4;
 			};
 			name = Release;

@@ -61,7 +61,7 @@ struct LaunchScreenView: View {
                 logoScale = 1.0
             }
         }
-        .onChange(of: visible) { visible in
+        .onChange(of: visible) { _, visible in
             if !visible {
                 withAnimation(.easeInOut(duration: 1)) {
                     logoScale = 1E-6

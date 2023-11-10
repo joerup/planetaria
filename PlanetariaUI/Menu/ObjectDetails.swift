@@ -104,9 +104,9 @@ public struct ObjectDetails: View {
             .frame(maxWidth: .infinity)
             
             header()
-                .background(Color.init(white: 0.1).opacity(0.97))
+//                .background(Color.init(white: 0.1).opacity(0.97))
         }
-        .background(Color.init(white: 0.1))
+//        .background(Color.init(white: 0.1))
         .tint(object.color)
     }
     
@@ -133,6 +133,7 @@ public struct ObjectDetails: View {
                     .fontWidth(.condensed)
                     .foregroundStyle(.gray)
             }
+            .padding(.leading, 5)
             Spacer(minLength: 0)
         }
         .padding(.top, 5)

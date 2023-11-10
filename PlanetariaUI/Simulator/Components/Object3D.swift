@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PlanetariaData
+import RealityKit
 
 struct Object3D: View {
     
@@ -33,6 +34,10 @@ struct Object3D: View {
     }
     
     var body: some View {
+        #if os(visionOS)
+        Model3D(named: "\(object.name).usdz")
+        #elseif os(iOS) || os(macOS) || os(tvOS)
         ObjectBody(object: object, pitch: pitch, rotation: rotation, simulation: simulation)
+        #endif
     }
 }

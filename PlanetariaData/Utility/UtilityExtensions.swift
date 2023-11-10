@@ -190,3 +190,11 @@ public extension PresentationDetent {
         }
     }
 }
+
+#if os(visionOS)
+public extension Size3D {
+    var reduced: CGSize {
+        return CGSize(width: width, height: height)
+    }
+}
+#endif

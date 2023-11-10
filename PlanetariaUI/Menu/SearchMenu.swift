@@ -67,9 +67,9 @@ public struct SearchMenu: View {
         .onAppear {
             isFocused = true
         }
-        .onChange(of: searchText) { text in
-            findMatches(to: text)
-        }
+//        .onChange(of: searchText) { _, text in
+//            findMatches(to: text)
+//        }
     }
     
     private func findMatches(to text: String) {

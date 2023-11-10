@@ -10,7 +10,7 @@ import PlanetariaData
 
 public struct SystemDetails: View {
     
-    @EnvironmentObject var spacetime: Spacetime
+    @EnvironmentObject var simulation: Simulation
     
     private var system: SystemNode
     
@@ -70,7 +70,7 @@ public struct SystemDetails: View {
                     if subsystems, node.category == .system {
                         Button {
                             withAnimation {
-                                spacetime.system = system
+//                                spacetime.system = system
                             }
                         } label: {
                             ObjectRow(object: object)
@@ -78,7 +78,7 @@ public struct SystemDetails: View {
                     } else {
                         Button {
                             withAnimation {
-                                spacetime.object = object
+//                                simulation.object = object
                             }
                         } label: {
                             ObjectRow(object: object)

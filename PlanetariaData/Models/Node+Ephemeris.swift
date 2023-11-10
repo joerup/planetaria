@@ -13,7 +13,7 @@ extension Node {
         await object?.loadEphemeris()
         var children = children.filter { $0 != object }
         if let major {
-            children = children.filter { major ? $0.category == .system || $0.category == .star : $0.category != .system && $0.category != .star }
+            children = children.filter { major ? $0.category == .system || $0.category == .star || $0.category == .tno : $0.category != .system && $0.category != .star }
         }
         for child in children {
             await child.loadEphemeris()

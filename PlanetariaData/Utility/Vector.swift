@@ -32,6 +32,11 @@ public extension Array where Element == Double {
     init(_ x: Double, _ y: Double, _ z: Double) {
         self = [x,y,z]
     }
+    init(ra: Double, dec: Double) {
+        let raRad = ra * .pi/180; let decRad = dec * .pi/180
+        let relativeDirection = [cos(raRad) * cos(decRad), sin(raRad) * cos(decRad), sin(decRad)]
+        self = relativeDirection.rotated(by: -23.44 * .pi/180, about: [1,0,0])
+    }
     
     var magnitude: Double {
         return sqrt( map({ pow($0, 2) }).reduce(0, +) )
@@ -100,11 +105,6 @@ public extension Array where Element == Double {
         let y = [vector.y * vector.x * (1-cos(angle)) + vector.z * sin(angle),  cos(angle) + (1-cos(angle)) * pow(vector.y, 2),                vector.y * vector.z * (1-cos(angle)) - vector.x * sin(angle)]
         let z = [vector.z * vector.x * (1-cos(angle)) - vector.y * sin(angle),  vector.z * vector.y * (1-cos(angle)) + vector.x * sin(angle),  cos(angle) + (1-cos(angle)) * pow(vector.z, 2)              ]
         return [dot(x), dot(y), dot(z)]
-    }
-    init(ra: Double, dec: Double) {
-        let raRad = ra * .pi/180; let decRad = dec * .pi/180
-        let relativeDirection = [cos(raRad) * cos(decRad), sin(raRad) * cos(decRad), sin(decRad)]
-        self = relativeDirection.rotated(by: -23.44 * .pi/180, about: [1,0,0])
     }
     
     func angle(with vector: [Double]) -> Double {

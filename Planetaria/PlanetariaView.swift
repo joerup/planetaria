@@ -11,7 +11,7 @@ import PlanetariaUI
 
 struct PlanetariaView: View {
     
-    @EnvironmentObject var spacetime: Spacetime
+    @EnvironmentObject var simulation: Simulation
     
     private let detents: Set<PresentationDetent> = [.preview, .small, .large]
     
@@ -24,7 +24,8 @@ struct PlanetariaView: View {
     @State private var showSettings: Bool = false
     
     var body: some View {
-        Planetarium(root: spacetime.root, reference: $spacetime.reference, system: $spacetime.system, object: $spacetime.object, focusTrigger: $spacetime.focusTrigger, backTrigger: $spacetime.backTrigger)
+        EmptyView()
+        Simulator2D(from: simulation)
             .ignoresSafeArea(.keyboard)
             .overlay(alignment: .top) {
                 #if os(iOS)
@@ -33,33 +34,26 @@ struct PlanetariaView: View {
             }
             .details(detents: detents, selectedDetent: $selectedDetent) {
                 ZStack {
-                    if let system = spacetime.system {
+                    if let system = simulation.selectedSystem {
                         SystemDetails(system: system, searching: $searching)
-                            .environmentObject(spacetime)
                     }
                     if searching {
                         SearchMenu(searching: $searching, searchText: $searchText)
-                            .environmentObject(spacetime)
                     }
-                    if let object = spacetime.object {
+                    if let object = simulation.selectedObject {
                         ObjectDetails(object: object)
-                            .environmentObject(spacetime)
                     }
                 }
                 .overlay(alignment: .topTrailing) {
-                    if spacetime.object != nil || spacetime.system != spacetime.root {
+                    if !simulation.noSelection {
                         XButton {
-                            if spacetime.object != nil {
-                                spacetime.object = nil
-                            } else {
-                                spacetime.backTrigger = true
-                            }
+                            
                         }
                         .padding(5)
                     }
                 }
             } toolbar: {
-                if let object = spacetime.object {
+                if let object = simulation.selectedObject {
                     ObjectToolbar(object: object)
                 }
             }
@@ -67,7 +61,9 @@ struct PlanetariaView: View {
                 SettingsView()
             }
             .tint(.mint)
-            .onChange(of: spacetime.object, perform: updateDetailModals)
+            .onChange(of: simulation.selectedObject) { _, object in
+                updateDetailModals(object: object)
+            }
     }
     
     private func updateDetailModals(object: ObjectNode?) {
