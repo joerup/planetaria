@@ -17,6 +17,8 @@ struct PlanetariaView: View {
     
     @State private var savedDetent: PresentationDetent = .small
     @State private var selectedDetent: PresentationDetent = .small
+    @State private var showSidebar: Bool = true
+    @State private var showObject: Bool = false
     
     @State private var searching: Bool = false
     @State private var searchText: String = ""
@@ -24,49 +26,47 @@ struct PlanetariaView: View {
     @State private var showSettings: Bool = false
     
     var body: some View {
-        EmptyView()
         Simulator2D(from: simulation)
             .ignoresSafeArea(.keyboard)
             .overlay(alignment: .top) {
                 #if os(iOS)
-                Header()
+                Header(showSidebar: $showSidebar)
                 #endif
             }
-            .details(detents: detents, selectedDetent: $selectedDetent) {
-                ZStack {
-                    if let system = simulation.selectedSystem {
-                        SystemDetails(system: system, searching: $searching)
-                    }
-                    if searching {
-                        SearchMenu(searching: $searching, searchText: $searchText)
-                    }
-                    if let object = simulation.selectedObject {
-                        ObjectDetails(object: object)
-                    }
+            .details(detents: detents, selectedDetent: $selectedDetent, showSidebar: showSidebar, showObject: showObject, systemDetails: {
+                if let system = simulation.selectedSystem {
+                    SystemDetails(system: system)
+                        .id(system.id)
                 }
-                .overlay(alignment: .topTrailing) {
-                    if !simulation.noSelection {
-                        XButton {
-                            
-                        }
-                        .padding(5)
-                    }
-                }
-            } toolbar: {
+            }, objectDetails: {
                 if let object = simulation.selectedObject {
-                    ObjectToolbar(object: object)
+                    ObjectDetails(object: object)
+                        .id(object.id)
+                        .overlay(alignment: .topTrailing) {
+                            XButton {
+                                withAnimation {
+                                    simulation.select(nil)
+                                }
+                            }
+                            .padding(5)
+                        }
                 }
-            }
+            }, toolbar: {
+                Toolbar()
+            })
             .sheet(isPresented: self.$showSettings) {
                 SettingsView()
             }
             .tint(.mint)
             .onChange(of: simulation.selectedObject) { _, object in
                 updateDetailModals(object: object)
+                withAnimation {
+                    showObject = object != nil
+                }
             }
     }
     
-    private func updateDetailModals(object: ObjectNode?) {
+    private func updateDetailModals(object: Object?) {
         if object == nil {
             selectedDetent = savedDetent
         } else {

@@ -9,7 +9,7 @@ import SwiftUI
 import PlanetariaData
 import PlanetariaUI
 
-struct DetailView<Details: View, Toolbar: View>: ViewModifier {
+struct DetailView<SystemDetail: View, ObjectDetail: View, Toolbar: View>: ViewModifier {
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -19,15 +19,17 @@ struct DetailView<Details: View, Toolbar: View>: ViewModifier {
     var detents: Set<PresentationDetent>
     @Binding var selectedDetent: PresentationDetent
     
-    @State private var showSidebar: Bool = true
+    var showSidebar: Bool
+    var showObject: Bool
     
-    @ViewBuilder var details: () -> Details
+    @ViewBuilder var systemDetails: () -> SystemDetail
+    @ViewBuilder var objectDetails: () -> ObjectDetail
     @ViewBuilder var toolbar: () -> Toolbar
     
     func body(content: Content) -> some View {
         GeometryReader { geometry in
             #if os(iOS)
-            if horizontalSizeClass == .compact {
+            if horizontalSizeClass == .compact && verticalSizeClass == .regular {
                 content
                     .padding(.bottom, selectedDetent.height(size: geometry.size))
                     .overlay(alignment: .bottom) {
@@ -36,23 +38,44 @@ struct DetailView<Details: View, Toolbar: View>: ViewModifier {
                     }
                     .animation(.default, value: selectedDetent)
                     .sheet(isPresented: .constant(true)) {
-                        details()
+                        systemDetails()
+                            .overlay {
+                                if showObject {
+                                    objectDetails()
+                                        .background(.regularMaterial)
+                                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                                        .ignoresSafeArea(edges: .bottom)
+                                }
+                            }
                             .presentationDetents(detents, selection: $selectedDetent)
                             .presentationBackgroundInteraction(.enabled)
+                            .presentationBackground(.ultraThinMaterial)
                             .presentationCornerRadius(20)
                             .interactiveDismissDisabled()
                             .preferredColorScheme(.dark)
                     }
             } else {
                 content
-                    .padding(.leading, showSidebar ? min(geometry.size.width*0.4, 400) : 0)
+                    .padding(.leading, (showSidebar ? min(geometry.size.width*0.4, 375) : 0) + 10)
                     .overlay {
                         if showSidebar {
-                            HStack(alignment: .bottom) {
-                                details()
-                                    .frame(width: min(geometry.size.width*0.4, 400))
-                                    .background(Color(uiColor: .systemFill).cornerRadius(20))
-                                Spacer()
+                            HStack(alignment: .bottom, spacing: 0) {
+                                systemDetails()
+                                    .background(.ultraThinMaterial)
+                                    .transition(.move(edge: .bottom))
+                                    .overlay {
+                                        if showObject {
+                                            objectDetails()
+                                                .background(.regularMaterial)
+                                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
+                                                .transition(.move(edge: .bottom))
+                                        }
+                                    }
+                                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
+                                    .frame(width: min(geometry.size.width*0.4, 375))
+                                    .padding([.leading, .top], 10)
+                                    .ignoresSafeArea(edges: .bottom)
+                                
                                 toolbar()
                             }
                         }
@@ -60,11 +83,17 @@ struct DetailView<Details: View, Toolbar: View>: ViewModifier {
             }
             #elseif os(macOS)
             NavigationSplitView {
-                details()
+                systemDetails()
+                    .overlay {
+                        if showObject {
+                            objectDetails()
+                                .background(.background)
+                        }
+                    }
             } detail: {
                 content
-                    .toolbar {
-                        Header()
+                    .overlay(alignment: .bottom) {
+                        toolbar()
                     }
             }
             #endif
@@ -73,12 +102,15 @@ struct DetailView<Details: View, Toolbar: View>: ViewModifier {
 }
 
 extension View {
-    func details<Details: View, Toolbar: View>(
+    func details<SystemDetail: View, ObjectDetail: View, Toolbar: View>(
         detents: Set<PresentationDetent>,
         selectedDetent: Binding<PresentationDetent>,
-        @ViewBuilder details: @escaping () -> Details,
+        showSidebar: Bool,
+        showObject: Bool,
+        @ViewBuilder systemDetails: @escaping () -> SystemDetail,
+        @ViewBuilder objectDetails: @escaping () -> ObjectDetail,
         @ViewBuilder toolbar: @escaping () -> Toolbar = { EmptyView() }
     ) -> some View {
-        return modifier(DetailView(detents: detents, selectedDetent: selectedDetent, details: details, toolbar: toolbar))
+        return modifier(DetailView(detents: detents, selectedDetent: selectedDetent, showSidebar: showSidebar, showObject: showObject, systemDetails: systemDetails, objectDetails: objectDetails, toolbar: toolbar))
     }
 }

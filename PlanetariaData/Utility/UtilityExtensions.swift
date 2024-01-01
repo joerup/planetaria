@@ -91,6 +91,24 @@ public extension SCNVector3 {
     }
 }
 
+extension CGAffineTransform {
+    public init(quaternion: simd_quatd) {
+        let w = quaternion.vector.w
+        let x = quaternion.vector.x
+        let y = quaternion.vector.y
+        let z = quaternion.vector.z
+        
+        self.init(
+            a: 1 - 2*y*y - 2*z*z,
+            b: 2*x*y - 2*w*z,
+            c: 2*x*y + 2*w*z,
+            d: 1 - 2*x*x - 2*z*z,
+            tx: 2*x*z - 2*w*y,
+            ty: 2*y*z + 2*w*x
+        )
+    }
+}
+
 
 // MARK: - Miscellaneous
 

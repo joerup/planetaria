@@ -11,12 +11,12 @@ import PlanetariaData
 @main
 struct PlanetariaWatchApp: App {
     
-    @StateObject var spacetime = Spacetime()
+    @StateObject private var simulation = Simulation(from: "planetaria")
     
     var body: some Scene {
         WindowGroup {
             PlanetariaWatchView()
-                .environmentObject(spacetime)
+                .environmentObject(simulation)
         }
     }
 }

@@ -20,8 +20,7 @@ let package = Package(
     targets: [
         .target(
             name: "PlanetariaData",
-            path: ".",
-            resources: [.process("Planetaria.json")]
+            path: "."
         )
     ]
 )

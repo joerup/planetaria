@@ -11,9 +11,9 @@ import PlanetariaData
 
 struct PlanetariaWatchView: View {
     
-    @EnvironmentObject var spacetime: Spacetime
+    @EnvironmentObject var simulation: Simulation
     
     var body: some View {
-        Planetarium(root: spacetime.root, reference: $spacetime.reference, system: $spacetime.system, object: $spacetime.object, focusTrigger: $spacetime.focusTrigger, backTrigger: $spacetime.backTrigger)
+        Simulator2D(from: simulation)
     }
 }

@@ -33,11 +33,11 @@ public struct FormattedText: View {
         HStack(alignment: unit?.string == "º" ? .top : .firstTextBaseline, spacing: 0) {
             HStack(alignment: .top, spacing: 0) {
                 Text(mainValue)
-                    .font(.system(valueFont, design: .rounded, weight: .semibold))
+                    .font(.system(valueFont, weight: .semibold))
                     .foregroundColor(.white)
                 if let superscriptedValue {
                     Text(superscriptedValue)
-                        .font(.system(valueFont, design: .rounded, weight: .semibold))
+                        .font(.system(valueFont, weight: .semibold))
                         .foregroundColor(.white)
                 }
             }

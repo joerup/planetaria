@@ -8,77 +8,90 @@
 import SwiftUI
 import PlanetariaData
 
-public struct Header: View {
+struct Header: View {
     
-    @EnvironmentObject var spacetime: Spacetime
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    #endif
     
-    public init() { }
+    @EnvironmentObject var simulation: Simulation
     
-    public var body: some View {
+    @Binding var showSidebar: Bool
+    
+    var body: some View {
         
         HStack(alignment: .top) {
             
-//            Button {
-//                withAnimation {
-//
+//            HStack {
+//                #if os(iOS)
+//                if horizontalSizeClass == .regular || verticalSizeClass == .compact {
+//                    Button {
+//                        withAnimation {
+//                            showSidebar.toggle()
+//                        }
+//                    } label: {
+//                        Image(systemName: "sidebar.leading")
+//                            .bold()
+//                            .foregroundColor(.white)
+//                            .padding()
+//                    }
 //                }
-//            } label: {
-//                Image(systemName: "gearshape.fill")
-//                    .bold()
-//                    .foregroundColor(.white)
-//                    .padding()
+//                #endif
+//                Spacer()
 //            }
-            
             Spacer()
             
             VStack {
-//                Text(spacetime.currentDate.string)
-//                    .foregroundColor(.white)
-//                    .font(.system(.body, design: .monospaced, weight: .bold))
-//                    .padding(.top)
+                Text(simulation.timestamp.string)
+                    .foregroundColor(.white)
+                    .font(.system(.body, design: .monospaced, weight: .bold))
+                    .padding(.top)
                 
-//                HStack {
-//                    Button {
-//                        if let prev = spacetime.timeRatio.prev {
-//                            spacetime.timeRatio = prev
-//                        }
-//                    } label: {
-//                        Image(systemName: "backward\(spacetime.timeRatio.rawValue < 0 ? ".fill" : "")")
-//                    }
-//                    Button {
-//                        if spacetime.timeRatio == .stationary {
-//                            spacetime.timeRatio = .realtime
-//                        } else {
-//                            spacetime.timeRatio = .stationary
-//                        }
-//                    } label: {
-//                        Image(systemName: spacetime.timeRatio == .stationary ? "play" : "pause")
-//                            .fontWeight(.bold)
-//                            .padding(5)
-//                    }
-//    //                                Text(spacetime.timeRatio.text)
-//    //                                    .font(.system(.title, design: .monospaced, weight: .bold))
-//    //                                    .padding(5)
-//                    Button {
-//                        if let next = spacetime.timeRatio.next {
-//                            spacetime.timeRatio = next
-//                        }
-//                    } label: {
-//                        Image(systemName: "forward\(spacetime.timeRatio.rawValue > 0 ? ".fill" : "")")
-//                    }
-//                }
+                //                HStack {
+                //                    Button {
+                //                        if let prev = spacetime.timeRatio.prev {
+                //                            spacetime.timeRatio = prev
+                //                        }
+                //                    } label: {
+                //                        Image(systemName: "backward\(spacetime.timeRatio.rawValue < 0 ? ".fill" : "")")
+                //                    }
+                //                    Button {
+                //                        if spacetime.timeRatio == .stationary {
+                //                            spacetime.timeRatio = .realtime
+                //                        } else {
+                //                            spacetime.timeRatio = .stationary
+                //                        }
+                //                    } label: {
+                //                        Image(systemName: spacetime.timeRatio == .stationary ? "play" : "pause")
+                //                            .fontWeight(.bold)
+                //                            .padding(5)
+                //                    }
+                //    //                                Text(spacetime.timeRatio.text)
+                //    //                                    .font(.system(.title, design: .monospaced, weight: .bold))
+                //    //                                    .padding(5)
+                //                    Button {
+                //                        if let next = spacetime.timeRatio.next {
+                //                            spacetime.timeRatio = next
+                //                        }
+                //                    } label: {
+                //                        Image(systemName: "forward\(spacetime.timeRatio.rawValue > 0 ? ".fill" : "")")
+                //                    }
+                //                }
             }
             
-            Spacer()
-            
-//            Button {
-//
-//            } label: {
-//                Image(systemName: "magnifyingglass")
-//                    .bold()
-//                    .foregroundColor(.white)
-//                    .padding()
+//            HStack {
+//                Spacer()
+//                    Button {
+//        
+//                    } label: {
+//                        Image(systemName: "magnifyingglass")
+//                            .bold()
+//                            .foregroundColor(.white)
+//                            .padding()
+//                    }
 //            }
+            Spacer()
         }
     }
 }

@@ -10,39 +10,39 @@ import PlanetariaData
 
 struct ObjectRow: View {
     
-    @EnvironmentObject var spacetime: Spacetime
-    
-    var object: ObjectNode
+    var object: Object
     
     var body: some View {
+        #if os(macOS)
         HStack {
-            Group {
-                if object.rank == .primary {
-                    Object3D(object: object)
-                } else {
-                    Circle().fill(.white).opacity(0.4).padding(5)
-                }
-            }
-            .frame(width: 30, height: 30)
-            .padding(.vertical, -10)
-            .padding(.trailing, 5)
+            ObjectIcon(object: object, size: 30)
+                .scaleEffect(1.2)
             Text(object.name)
-                .font(.system(.title2, design: .rounded, weight: .semibold))
+                .font(.title3)
                 .foregroundColor(.white)
             Spacer()
-            Image(systemName: "arrow.forward")
-                .font(.system(.title3, design: .rounded))
-                .dynamicTypeSize(.medium)
+            Image(systemName: "chevron.forward")
+                .foregroundColor(.gray)
+        }
+        #else
+        HStack {
+            ObjectIcon(object: object, size: 30)
+                .scaleEffect(1.2)
+                .padding(.vertical, -10)
+                .padding(.trailing, 5)
+                .offset(y: 1)
+            Text(object.name)
+                .font(.system(.title2, weight: .semibold))
+                .foregroundColor(.white)
+            Spacer()
+            Image(systemName: "chevron.forward")
+                .font(.title3)
+                .imageScale(.small)
                 .foregroundColor(.init(white: 0.6))
                 .padding(.trailing, 5)
         }
         .padding()
         .background(Color.gray.opacity(0.1).cornerRadius(15))
-    }
-    
-    private var circle: some View {
-        Circle()
-            .fill(object.color)
-            .opacity(0.8)
+        #endif
     }
 }

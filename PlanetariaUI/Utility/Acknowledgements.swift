@@ -14,9 +14,11 @@ public struct Acknowledgements: View {
     let string = """
     Planetaria uses a variety of sources to access data needed to provide an accurate Solar System simulation.
     
-    The current positions and velocities of objects, used to calculate their orbits, are obtained in real-time from the [NASA Horizons System](https://ssd.jpl.nasa.gov/horizons/). Rotational orientations are calculated based on the [Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2009](https://link.springer.com/article/10.1007/s10569-010-9320-4). Orbital and rotational properties are calculated based on these values in real-time.
+    The current positions and velocities of objects, used as the initial parameters for the orbit simulation, are obtained from the [NASA Horizons System](https://ssd.jpl.nasa.gov/horizons/).
     
-    Data about objects' physical characteristics (mass, size, temperature, etc.) are sourced from [NASA Planetary Fact Sheets](https://nssdc.gsfc.nasa.gov/planetary/planetfact.html), along with the [IAU Minor Planet Center](https://www.minorplanetcenter.net/), and [Scott S. Sheppard](https://sites.google.com/carnegiescience.edu/sheppard/home?authuser=0).
+    Rotational orientations are calculated based on the [Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements](https://link.springer.com/article/10.1007/s10569-017-9805-5).
+    
+    Properties of objects (mass, size, period, etc.) are compiled from the following sources: [NASA JPL Solar System Dynamics](https://ssd.jpl.nasa.gov/), [NASA Planetary Fact Sheets](https://nssdc.gsfc.nasa.gov/planetary/planetfact.html), [IAU Minor Planet Center](https://www.minorplanetcenter.net/), and [Scott S. Sheppard](https://sites.google.com/carnegiescience.edu/sheppard/home?authuser=0).
     
     3D models of Solar System objects are provided by [NASA Solar System Resources](https://solarsystem.nasa.gov/resources/all/?order=pub_date+desc&per_page=50&page=0&search=&condition_1=1%3Ais_in_resource_list&fs=&fc=&ft=&dp=&category=).
     
@@ -38,6 +40,7 @@ public struct Acknowledgements: View {
                 .padding()
             }
             .navigationTitle("Acknowledgements")
+            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -46,6 +49,7 @@ public struct Acknowledgements: View {
                     }
                 }
             }
+            #endif
         }
         .tint(.blue)
     }

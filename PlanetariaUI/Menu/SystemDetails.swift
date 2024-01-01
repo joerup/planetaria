@@ -12,81 +12,108 @@ public struct SystemDetails: View {
     
     @EnvironmentObject var simulation: Simulation
     
-    private var system: SystemNode
+    private var system: System
     
-    @Binding private var searching: Bool
+    private var categories: [String] = []
+    private var predicates: [String : (Node) -> Bool] = [:]
     
-    public init(system: SystemNode, searching: Binding<Bool>) {
+    public init(system: System) {
         self.system = system
-        self._searching = searching
+        
+        if system.children.contains(where: { $0.category == .star }) {
+            categories = ["Main","Planets","Dwarf Planets","Other"]
+            predicates = [
+                "Main" : { $0.category == .star },
+                "Planets" : { $0.category == .planet },
+                "Dwarf Planets" : { ($0.rank == .primary || $0.rank == .secondary) && ($0.category == .tno || $0.category == .asteroid) },
+                "Other" : { $0.category != .star && $0.category != .planet && !(($0.rank == .primary || $0.rank == .secondary) && ($0.category == .tno || $0.category == .asteroid)) }
+            ]
+        } else {
+            categories = ["Main"]
+            predicates = [
+                "Main" : { $0.category != .moon },
+                "Moons" : { $0.category == .moon }
+            ]
+//           let groups = system.children.compactMap(\.properties?.group).uniqued()
+//           for group in groups {
+//                categories += [group]
+//               predicates[group] = { $0.properties?.group == group }
+//            }
+            categories += ["Moons"]
+        }
     }
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Text("\(system.name) System")
-                    .font(.system(.title, design: .default, weight: .semibold))
-                    .padding(.vertical, 10)
-                    .padding(.top, 5)
-                    .padding(.horizontal)
-                Spacer()
+            if let parent = system.parent {
                 Button {
-                    withAnimation {
-                        searching = true
-                    }
+                    simulation.selectSystemParent()
                 } label: {
-                    Image(systemName: "magnifyingglass")
-                        .fontWeight(.bold)
-                        .padding()
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        Text("\(parent.name) System")
+                    }
                 }
+                .padding(.horizontal)
+                .padding(.top)
+                .padding(.bottom, -5)
             }
+            
+            #if os(macOS)
+            Text("\(system.name) System")
+                .font(.system(.largeTitle, design: .default, weight: .bold))
+                .padding(.top, 10)
+                .padding(.horizontal)
+                .padding(.bottom)
+            #else
+            Text("\(system.name) System")
+                .font(.system(.title, design: .default, weight: .semibold))
+                .padding()
+            #endif
+            
             ScrollView {
-                VStack {
-                    // Stars
-                    objectRows(nodes: system.children(category: .star))
-                    
-                    // Planets
-                    objectRows("Planets", nodes: system.children(category: .planet))
-                    
-                    // Moons
-                    objectRows("Moons", nodes: system.children(category: .moon))
-                    objectRows("Moons", nodes: system.grandchildGroups(category: .moon), subsystems: true)
-                }
+                list
             }
         }
-        .background(Color.init(white: 0.1))
+        .navigationTitle("\(system.name) System")
     }
     
-    @ViewBuilder
-    private func objectRows(_ title: String? = nil, nodes: [Node], subsystems: Bool = false) -> some View {
+    private var list: some View {
         VStack(alignment: .leading) {
-            if let title, !nodes.isEmpty {
-                Text(title)
-                    .font(.system(.title3, design: .rounded, weight: .semibold))
-                    .padding([.horizontal, .top])
-            }
-            ForEach(nodes) { node in
-                if let object = node.object {
-                    if subsystems, node.category == .system {
-                        Button {
-                            withAnimation {
-//                                spacetime.system = system
-                            }
-                        } label: {
-                            ObjectRow(object: object)
+            ForEach(categories, id: \.self) { category in
+                if let predicate = predicates[category] {
+                    let nodes = system.children.compactMap(\.object).filter({ predicate($0) })
+                    if !nodes.isEmpty {
+                        if category != "Main" {
+                            Spacer().frame(height: 20)
+                            Text(category)
+                                .textCase(.uppercase)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.gray)
+                                #if os(macOS)
+                                .font(.headline)
+                                .padding(.bottom, 5)
+                                #else
+                                .font(.subheadline)
+                                .padding(.horizontal, 5)
+                                #endif
+                                .padding(.horizontal)
                         }
-                    } else {
-                        Button {
-                            withAnimation {
-//                                simulation.object = object
+                        ForEach(category == "Planets" ? nodes.sorted(by: { $0.id < $1.id }) : nodes, id: \.self) { object in
+                            Button {
+                                withAnimation {
+                                    simulation.select(object)
+                                }
+                            } label: {
+                                ObjectRow(object: object)
                             }
-                        } label: {
-                            ObjectRow(object: object)
+                            .buttonStyle(.plain)
                         }
+                        .padding(.horizontal)
                     }
                 }
             }
         }
-        .padding(.horizontal)
+        .padding(.bottom)
     }
 }

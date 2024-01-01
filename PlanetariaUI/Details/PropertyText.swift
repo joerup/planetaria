@@ -40,15 +40,15 @@ public struct PropertyText<ValueType: Equatable, UnitType: PlanetariaData.Unit>:
                 }
             }
         }
-        .onTapGesture {
-            if let selectedUnit, let units, let index = units.map({$0.name}).firstIndex(of: selectedUnit.name) {
-                if index+1 < units.count {
-                    self.selectedUnit = units[index+1]
-                } else {
-                    self.selectedUnit = units[0]
-                }
-            }
-        }
+//        .onTapGesture {
+//            if let selectedUnit, let units, let index = units.map({$0.name}).firstIndex(of: selectedUnit.name) {
+//                if index+1 < units.count {
+//                    self.selectedUnit = units[index+1]
+//                } else {
+//                    self.selectedUnit = units[0]
+//                }
+//            }
+//        }
     }
     
     @ViewBuilder
@@ -56,7 +56,7 @@ public struct PropertyText<ValueType: Equatable, UnitType: PlanetariaData.Unit>:
         if let name {
             AStack {
                 Text(name)
-                    .font(.system(.body, design: .rounded, weight: .semibold))
+                    .font(.system(.body, weight: .semibold))
                     .foregroundColor(.white)
                 Spacer()
                 HStack {
@@ -91,7 +91,7 @@ public struct PropertyText<ValueType: Equatable, UnitType: PlanetariaData.Unit>:
 
     private func valueText(for property: CurrentProperty, valueFont: Font.TextStyle, unitFont: Font.TextStyle) -> some View {
         FormattedText(value: string(for: property), unit: selectedUnit, valueFont: valueFont, unitFont: unitFont)
-            #if os(iOS) 
+            #if os(iOS)
             .contextMenu {
                 Button {
                     let pasteboard = UIPasteboard.general

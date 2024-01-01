@@ -10,8 +10,6 @@ import PlanetariaData
 
 struct SettingsView: View {
     
-    @EnvironmentObject var spacetime: Spacetime
-    
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     
     var body: some View {

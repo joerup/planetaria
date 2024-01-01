@@ -10,8 +10,6 @@ import PlanetariaData
 
 public struct SearchMenu: View {
     
-    @EnvironmentObject var spacetime: Spacetime
-    
     @Binding var searching: Bool
     @Binding var searchText: String
     
@@ -48,11 +46,11 @@ public struct SearchMenu: View {
                 
             ScrollView {
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-                    ForEach(nodes) { node in
+                    ForEach(nodes, id: \.id) { node in
                         if let object = node.object {
                             Button {
                                 withAnimation {
-                                    spacetime.object = object
+//                                    spacetime.object = object
                                 }
                             } label: {
                                 ObjectCard(object: object)
@@ -73,19 +71,19 @@ public struct SearchMenu: View {
     }
     
     private func findMatches(to text: String) {
-        if let node = spacetime.root {
-            self.nodes = findMatchingNodes(to: text, at: node)
-        }
+//        if let node = spacetime.root {
+//            self.nodes = findMatchingNodes(to: text, at: node)
+//        }
     }
     
     private func findMatchingNodes(to text: String, at node: Node) -> [Node] {
-        var matchingNodes: [Node] = []
+        let matchingNodes: [Node] = []
         node.children.forEach { child in
-            if child.isObject && child.name.starts(with: text) {
-                matchingNodes += [child]
-            } else if child.isSystem {
-                matchingNodes += findMatchingNodes(to: text, at: child)
-            }
+//            if child.isObject && child.name.starts(with: text) {
+//                matchingNodes += [child]
+//            } else if child.isSystem {
+//                matchingNodes += findMatchingNodes(to: text, at: child)
+//            }
         }
         return matchingNodes
     }

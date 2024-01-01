@@ -10,11 +10,12 @@ import PlanetariaData
 
 struct ObjectCard: View {
     
-    var object: ObjectNode
+    var object: Object
     
     var body: some View {
         VStack {
-            Object3D(object: object)
+            ObjectIcon(object: object, size: 75)
+                .scaleEffect(1/1.2)
             Text(object.name)
                 .font(.system(.body, design: .rounded, weight: .bold))
                 .foregroundStyle(.white)

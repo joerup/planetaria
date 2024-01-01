@@ -35,7 +35,7 @@ public extension Array where Element == Double {
     init(ra: Double, dec: Double) {
         let raRad = ra * .pi/180; let decRad = dec * .pi/180
         let relativeDirection = [cos(raRad) * cos(decRad), sin(raRad) * cos(decRad), sin(decRad)]
-        self = relativeDirection.rotated(by: -23.44 * .pi/180, about: [1,0,0])
+        self = relativeDirection.rotated(by: -23.44 * .pi/180, about: .e1)
     }
     
     var magnitude: Double {
@@ -115,13 +115,17 @@ public extension Array where Element == Double {
     }
     var angle: Double {
         if self.y >= 0 {
-            return angle(with: [1,0,0])
+            return angle(with: .e1)
         } else {
-            return 2 * .pi - angle(with: [1,0,0])
+            return 2 * .pi - angle(with: .e1)
         }
     }
-    var angle2: Double {
-        .pi + atan2(self.x, -self.y)
+    
+    var ra: Double {
+        return proj(plane: .celestialPole).angle(with: .vernalEquinox)
+    }
+    var dec: Double {
+        return .pi/2 - angle(with: .celestialPole)
     }
     
     func scnVector(scaledBy scalingFactor: Double = 1) -> SCNVector3 {
@@ -151,6 +155,9 @@ public extension Array where Element == Double {
     }
     var floatArray: (x: CGFloat, y: CGFloat, z: CGFloat) {
         return (x: CGFloat(x), y: CGFloat(-y), z: CGFloat(z))
+    }
+    var simd: simd_double3 {
+        return simd_double3(x,-y,z)
     }
     
     var mean: Double {
