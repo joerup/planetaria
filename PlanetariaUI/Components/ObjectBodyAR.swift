@@ -1,5 +1,5 @@
 //
-//  ObjectARBody.swift
+//  ObjectBodyAR.swift
 //  
 //
 //  Created by Joe Rupertus on 8/16/23.
@@ -12,15 +12,11 @@ import RealityKit
 import PlanetariaData
 
 #if os(iOS)
-public struct ObjectARBody: UIViewRepresentable {
+struct ObjectBodyAR: UIViewRepresentable {
     
-    public var object: Object
+    var object: Object
     
-    public init(object: Object) {
-        self.object = object
-    }
-    
-    public func makeUIView(context: Context) -> ARView {
+    func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .init(x: 1, y: 1, width: 1, height: 1))
         
         arView.environment.background = .color(.clear)
@@ -48,7 +44,7 @@ public struct ObjectARBody: UIViewRepresentable {
         return arView
     }
     
-    public func updateUIView(_ uiView: ARView, context: Context) {
+    func updateUIView(_ uiView: ARView, context: Context) {
         
         print("hey guys were updating the model")
     }

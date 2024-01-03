@@ -62,7 +62,7 @@ struct LaunchScreenView: View {
             }
         }
         #if !os(macOS)
-        .onChange(of: visible) { _, visible in
+        .onChange(of: visible) { visible in
             if !visible {
                 withAnimation(.easeInOut(duration: 1)) {
                     logoScale = 1E-6

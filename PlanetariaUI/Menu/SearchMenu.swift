@@ -40,7 +40,7 @@ public struct SearchMenu: View {
             }
             .padding(.leading, 5)
             .padding(5)
-            .background(.regularMaterial)
+//            .background(.regularMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .padding()
                 

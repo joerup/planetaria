@@ -15,9 +15,7 @@ struct Header: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     #endif
     
-    @EnvironmentObject var simulation: Simulation
-    
-    @Binding var showSidebar: Bool
+    @ObservedObject var simulation: Simulation
     
     var body: some View {
         

@@ -56,7 +56,10 @@ extension Node {
         return siblings.max(by: { $0.mass < $1.mass })
     }
     public var tree: [Node] {
-        return children + children.map(\.tree).reduce([], +)
+        return [self] + subtree
+    }
+    private var subtree: [Node] {
+        return children + children.map(\.subtree).reduce([], +)
     }
     
     public var globalPosition: Vector {

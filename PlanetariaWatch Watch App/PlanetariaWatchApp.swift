@@ -7,16 +7,20 @@
 
 import SwiftUI
 import PlanetariaData
+import PlanetariaUI
 
 @main
 struct PlanetariaWatchApp: App {
     
-    @StateObject private var simulation = Simulation(from: "planetaria")
+    @StateObject private var simulation = Simulation(from: "Planetaria")
     
     var body: some Scene {
         WindowGroup {
-            PlanetariaWatchView()
-                .environmentObject(simulation)
+            if simulation.isLoaded {
+                Simulator2D(from: simulation)
+            } else {
+                ProgressView()
+            }
         }
     }
 }

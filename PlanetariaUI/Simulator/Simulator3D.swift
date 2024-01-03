@@ -11,9 +11,6 @@ import simd
 
 #if os(visionOS)
 public struct Simulator3D: View {
-        
-    @Environment(\.openWindow) var openWindow
-    @Environment(\.dismissWindow) var dismissWindow
 
     @ObservedObject private var simulation: Simulation
 
@@ -23,17 +20,14 @@ public struct Simulator3D: View {
     
     public var body: some View {
         GeometryReader3D { geometry in
-            ForEach(simulation.allNodes) { node in
-                ZStack {
+            ForEach(simulation.nodes, id: \.id) { node in
+                Group {
                     trail(for: node, size: geometry.size)
                     visual(for: node, size: geometry.size)
-                    text(for: node, size: geometry.size)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .onTapGesture {
                     withAnimation {
-                        dismissWindow(id: "details")
-                        openWindow(id: "details")
                         simulation.select(node)
                     }
                 }
@@ -42,100 +36,65 @@ public struct Simulator3D: View {
             .simultaneousGesture(simulation.zoomGesture)
             .onTapGesture {
                 withAnimation {
-                    dismissWindow(id: "details")
                     simulation.select(nil)
                 }
             }
-            .onAppear {
-                simulation.size = min(geometry.size.width, geometry.size.height)
-                simulation.defaultScaleRatio = 2E+10 / min(geometry.size.width, geometry.size.height)
-                simulation.runIntro()
+            Circle().opacity(0).onAppear {
+                simulation.startDisplay(size: min(geometry.size.width, geometry.size.height))
             }
         }
-//        .overlay {
-//            VStack {
-//                ForEach(simulation.allNodes, id: \.self) { node in
-//                    Text("\(node.name) \(simulation.applyHalfTransformations(node.globalPosition).text)")
-//                }
-//                Text(simulation.offset.text)
-//                Text(simulation.unapplyScale(Vector(2000, 2000, 2000)).text)
-//            }
-//        }
     }
     
     // MARK: - Components
     
     @ViewBuilder
     private func visual(for node: Node, size: Size3D) -> some View {
-        if simulation.showVisual(node) {
-            //        let modelSize: CGFloat = 2 * simulation.applyScale(node.size)
-            let dotSize: CGFloat = simulation.isSelected(node) ? 8 : node.rank == .primary ? 7 : 6
-            let offset = simulation.applyHalfTransformations(node.globalPosition)
-            
-            ZStack {
-                // Dot
-                Circle()
-                    .fill(node.color)
-                    .frame(width: dotSize)
-                    .offset(x: offset.x, y: -offset.z)
-                    .offset(z: -offset.y)
-                
-                //            // 3D Model
-                //            if let object = node as? ObjectNode, object.name != "Sun", simulation.showModel(node, size: size, modelSize: modelSize) {
-                //                Object3D(object: object, pitch: simulation.pitch, rotation: simulation.rotation)
-                //                    .frame(width: 1.2 * modelSize, height: 1.2 * modelSize)
-                //                    .offset(x: offset.x, y: -offset.z)
-                //                    .offset(z: -offset.y)
-                //            }
+        let position = position(for: node, size: size)
+        Group {
+            let modelSize: CGFloat = 2 * simulation.applySafeScale(node.totalSize)
+            NodePoint(node: node, modelSize: modelSize, isSelected: simulation.isSelected(node), noSelection: simulation.noSelection, isSystem: simulation.isSystem(node), isReference: simulation.isReference(node))
+            if let object = node.object, simulation.showBody(object) {
+                ObjectBody(object: object, pitch: simulation.pitch, rotation: simulation.rotation)
+                    .frame(width: 1.2 * modelSize, height: 1.2 * modelSize)
             }
+            NodeText(node: node, isSelected: simulation.isSelected(node), noSelection: simulation.noSelection)
+                .offset(y: 12 + simulation.applyScale(node.size))
+                .opacity(simulation.textVisibility(node))
         }
-    }
-    
-    @ViewBuilder
-    private func text(for node: Node, size: Size3D) -> some View {
-        if simulation.showText(node) {
-            let offset = simulation.applyHalfTransformations(node.globalPosition)
-            Text(node.object?.name ?? node.name)
-                .font(.system(node.rank == .primary || simulation.isSelected(node) ? .caption : .caption2, design: .rounded))
-                .foregroundColor(.white)
-                .opacity(node.rank == .primary || simulation.isSelected(node) ? 0.7 : node.rank == .secondary ? 0.5 : 0)
-                .opacity(simulation.isSelected(node) || simulation.noSelection ? 1.0 : 0.6)
-//                .rotation3DEffect(.degrees(90), axis: .x)
-                .offset(x: offset.x, y: -offset.z - 12)
-                .offset(z: -offset.y + 12)
-        }
+        .offset(position.xy)
+        .offset(z: position.z)
+        .transition(.opacity)
     }
     
     @ViewBuilder
     private func trail(for node: Node, size: Size3D) -> some View {
-        if simulation.showTrail(node) {
+        if simulation.showOrbit(node), let orbit = node.orbit {
             let width: CGFloat = size.width
-            let height: CGFloat = size.width * sqrt(1 - pow(node.eccentricity, 2))
-            let offset: CGFloat = size.width * -node.eccentricity/2
-            let trailScale: CGFloat = simulation.applyBaseScale(2 * node.semimajorAxis)/width
-            let lineWidth: CGFloat = 4/(trailScale * simulation.scale)
+            let height: CGFloat = size.width * orbit.ratio
+            let scale: CGFloat = simulation.applyBaseScale(orbit.width)/width
+            let lineWidth: CGFloat = 2.5/(scale * simulation.scale)
             let totalWidth: CGFloat = width + lineWidth
             let totalHeight: CGFloat = height + lineWidth
-            let transformation = orbitTransformation(for: node)
+            let transformation = orbitTransformation(orbit)
             
-            if totalWidth > 0, totalWidth.isFinite, totalHeight > 0, totalHeight.isFinite {
-                ObjectTrail(node: node, isSelected: simulation.isSelected(node), noSelection: simulation.noSelection, centerOffset: offset/width, lineWidth: lineWidth, totalWidth: totalWidth, totalHeight: totalHeight)
-                    .offset(x: offset)
-                    .scaleEffect(trailScale * simulation.scale)
-                    .rotation3DEffect(.radians(Double(transformation.angle)),
-                      axis: RotationAxis3D(
-                        x: transformation.axis.x,
-                        y: transformation.axis.y,
-                        z: transformation.axis.z
-                    ))
-                    .rotation3DEffect(.degrees(90), axis: .x)
-            }
+            OrbitTrail(orbit: orbit, isSelected: simulation.isSelected(node), noSelection: simulation.noSelection,
+                       color: node.color ?? .gray, full: node.rank == .primary || simulation.isSelected(node),
+                       lineWidth: lineWidth, totalWidth: totalWidth, totalHeight: totalHeight)
+                .scaleEffect(scale * simulation.scale)
+                .rotation3DEffect(.radians(Double(transformation.angle)), axis: RotationAxis3D(x: transformation.axis.x, y: transformation.axis.y, z: transformation.axis.z))
+                .rotation3DEffect(.degrees(90), axis: .x)
+                .opacity(simulation.trailVisibility(node))
         }
     }
     
-    private func orbitTransformation(for node: Node) -> simd_quatd {
-        let q1 = simd_quatd(angle: -node.longitudeOfPeriapsis, axis: Vector.e3.simd)
-        let q2 = simd_quatd(angle: -node.orbitalInclination, axis: node.lineOfNodes.simd)
+    private func position(for node: Node, size: Size3D) -> (xy: CGSize, z: CGFloat) {
+        let position = simulation.applyAllTransformations(node.globalPosition)
+        return (xy: CGSize(width: position.x, height: -position.z), z: -position.y)
+    }
+    
+    private func orbitTransformation(_ orbit: Orbit) -> simd_quatd {
+        let q1 = simd_quatd(angle: -orbit.longitudeOfPeriapsis, axis: Vector.e3.simd)
+        let q2 = simd_quatd(angle: -orbit.orbitalInclination, axis: orbit.lineOfNodes.simd)
         let q3 = simd_quatd(angle: simulation.rotation.radians, axis: Vector.e3.simd)
         let q4 = simd_quatd(angle: simulation.pitch.radians, axis: Vector.e1.simd)
         return q4 * q3 * q2 * q1

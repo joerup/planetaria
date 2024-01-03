@@ -40,7 +40,7 @@ public struct Acknowledgements: View {
                 .padding()
             }
             .navigationTitle("Acknowledgements")
-            #if !os(macOS)
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

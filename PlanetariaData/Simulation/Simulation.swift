@@ -43,7 +43,7 @@ final public class Simulation: ObservableObject {
             self.root = root
             self.reference = root
             self.system = root
-            self.allNodes = [root] + root.tree
+            self.allNodes = root.tree
         }
         
         // Load the ephemerides
@@ -55,23 +55,15 @@ final public class Simulation: ObservableObject {
     }
     
     // Start displaying the scene
-    public func startDisplay(size: CGFloat, ratio: CGFloat) {
+    public func startDisplay(size: CGFloat) {
+        let distance = allNodes.filter({ $0.rank == .primary }).map(\.position.magnitude).max() ?? 1
         
         // Set the view's parameters
         self.size = size
-        self.defaultScaleRatio = ratio
+        self.defaultScaleRatio = 2.5 * distance / size
         
         // Initial setup of navigation
         self.navigate()
-        
-        // Run the intro
-        #if os(iOS)
-//        withAnimation(.easeInOut(duration: 3.0)) {
-            introScale = 1.0
-//        }
-        #else
-        introScale = 1.0
-        #endif
     }
     
     
@@ -129,29 +121,36 @@ final public class Simulation: ObservableObject {
     public func isReference(_ node: Node) -> Bool {
         return node.matches(reference)
     }
+    public var hasSelection: Bool {
+        return object != nil
+    }
     public var noSelection: Bool {
         return object == nil
     }
     
-    public func showModel(_ node: Node) -> Bool {
-        return isSelected(node) || 0.1...max(0.2, size) ~= 2 * applyScale(node.size)
+    @Published private var inTransition: Bool = false
+    
+    private func showNode(_ node: Node, scale: CGFloat, offset: Vector) -> Bool {
+        guard node.isSet, node.parent == system || node.matches(system) else { return false }
+        let location = scale/self.scale * applyAllTransformations(node.globalPosition - (offset-self.offset))
+        return node.system == system || (-size...size ~= location.x && -size...size ~= location.y && applyScale(node.position.magnitude + node.size) * scale/self.scale * 500 > size)
     }
-    public func showText(_ node: Node) -> Bool {
-        return node.parent == system && ((node.system == system || 2 * applyScale(node.position.magnitude) > max(0.1 * size, 50)) && (applyScale(node.size) * 10 < size))
-    }
-    public func showOrbit(_ node: Node) -> Bool {
-        return showTrails && node.orbit != nil && node.parent == system && node.system != system && applyScale(node.size) * 10 < size
-    }
-    public func showTrail(_ node: Node) -> Bool {
-        return applyScale(node.position.magnitude) < 2 * size && (applyScale(node.size) * 50 < size)
+    private func showBody(_ node: Node, scale: CGFloat, offset: Vector) -> Bool {
+        return isSelected(node) || 6...max(7, size) ~= 2 * applyScale(node.size) * scale/self.scale
     }
     
-    private func visibleNodes(scale: CGFloat, offset: Vector) -> [Node] {
-        return allNodes.filter { node in
-            guard node.isSet, node.parent == system || node.matches(system) else { return false }
-            let location = scale/self.scale * applyAllTransformations(node.globalPosition - (offset-self.offset))
-            return node.system == system || (-size...size ~= location.x && -size...size ~= location.y && applyScale(node.position.magnitude + node.size) * scale/self.scale * 500 > size)
-        }
+    public func showBody(_ object: Object) -> Bool {
+        return isSelected(object) || 6...max(7, size) ~= 2 * applyScale(object.size)
+    }
+    public func showOrbit(_ node: Node) -> Bool {
+        return !inTransition && node.orbit != nil && node.parent == system && node.system != system
+    }
+    
+    public func trailVisibility(_ node: Node) -> CGFloat {
+        return !inTransition && applyScale(node.position.magnitude) < 2 * size && (applyScale(node.size) * 50 < size) ? 1 : 0
+    }
+    public func textVisibility(_ node: Node) -> CGFloat {
+        return !inTransition && node.parent == system && ((node.system == system || 2 * applyScale(node.position.magnitude) > max(0.1 * size, 50)) && (applyScale(node.size) * 10 < size)) ? 1 : 0
     }
     
 
@@ -185,24 +184,21 @@ final public class Simulation: ObservableObject {
         steadyPitch + gesturePitch
     }
     
-    // Other
-    @Published public private(set) var introScale: Double = 1E-3
-    @Published private var showTrails: Bool = true
-    
     
     // MARK: - Transformations
     
     // Coordinates in Virtual Space -> Position on Actual Screen
     
-    public func applyBaseScale(_ value: CGFloat) -> CGFloat {
-        return value / defaultScaleRatio
-    }
-    public func applyBaseScale(_ value: Vector) -> Vector {
-        return value / defaultScaleRatio
-    }
     public func applyScale(_ value: CGFloat) -> CGFloat {
         return value * scale / defaultScaleRatio
     }
+    public func applyBaseScale(_ value: CGFloat) -> CGFloat {
+        return value / defaultScaleRatio
+    }
+    public func applySafeScale(_ value: CGFloat) -> CGFloat {
+        return min(size, applyScale(value))
+    }
+    
     public func applyScale(_ value: Vector) -> Vector {
         return value * scale / defaultScaleRatio
     }
@@ -215,21 +211,12 @@ final public class Simulation: ObservableObject {
     public func applyPitch(_ value: Vector) -> Vector {
         return value.rotated(by: pitch.radians, about: .e1)
     }
-    public func applyHalfTransformations(_ value: Vector) -> Vector {
-        return applyScale(applyOffset(value))
-    }
     public func applyAllTransformations(_ value: Vector) -> Vector {
         return applyPitch(applyRotation(applyScale(applyOffset(value))))
     }
     
     // Position on Actual Screen -> Coordinates in Virtual Space
     
-    public func unapplyBaseScale(_ value: CGFloat) -> CGFloat {
-        return value * defaultScaleRatio
-    }
-    public func unapplyBaseScale(_ value: Vector) -> Vector {
-        return value * defaultScaleRatio
-    }
     public func unapplyScale(_ value: CGFloat) -> CGFloat {
         return value / scale * defaultScaleRatio
     }
@@ -245,9 +232,6 @@ final public class Simulation: ObservableObject {
     public func unapplyPitch(_ value: Vector) -> Vector {
         return value.rotated(by: -pitch.radians, about: [1,0,0])
     }
-    public func unapplyHalfTransformations(_ value: Vector) -> Vector {
-        return unapplyOffset(unapplyScale(value))
-    }
     public func unapplyAllTransformations(_ value: Vector) -> Vector {
         return unapplyOffset(unapplyScale(unapplyRotation(unapplyPitch(value))))
     }
@@ -255,27 +239,7 @@ final public class Simulation: ObservableObject {
     
     // MARK: - Gestures
     
-    public var zoomGesture: some Gesture {
-        MagnificationGesture()
-            .onChanged { value in
-                self.gestureScale = value
-                self.navigate()
-                
-                if let reference = self.reference, 2.2 * self.applyScale(reference.size) > self.size {
-                    self.gestureScale *= self.size / (2.2 * self.applyScale(reference.size))
-                }
-            }
-            .onEnded { value in
-                self.steadyScale *= value
-                self.gestureScale = 1.0
-                self.navigate()
-                
-                if let reference = self.reference, 2.2 * self.applyScale(reference.size) > self.size {
-                    self.steadyScale *= self.size / (2.2 * self.applyScale(reference.size))
-                }
-            }
-    }
-    
+    #if os(macOS) || os(iOS) || os(visionOS) || os(watchOS)
     public var panGesture: some Gesture {
         DragGesture()
             .onChanged { value in
@@ -315,6 +279,37 @@ final public class Simulation: ObservableObject {
             }
     }
     
+    public var zoomGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged { value in
+                self.gestureScale = value
+                self.navigate()
+                
+                if let reference = self.reference, 2.2 * self.applyScale(reference.size) > self.size {
+                    self.gestureScale *= self.size / (2.2 * self.applyScale(reference.size))
+                }
+            }
+            .onEnded { value in
+                self.steadyScale *= value
+                self.gestureScale = 1.0
+                self.navigate()
+                
+                if let reference = self.reference, 2.2 * self.applyScale(reference.size) > self.size {
+                    self.steadyScale *= self.size / (2.2 * self.applyScale(reference.size))
+                }
+            }
+    }
+    
+    public var zoomGestureScale: Binding<CGFloat> {
+        Binding(get: {
+            log2(self.steadyScale)
+        }, set: { newValue in
+            self.steadyScale = pow(2, newValue)
+            self.navigate()
+        })
+    }
+    #endif
+    
     
     // MARK: - Intent Functions
     
@@ -335,25 +330,25 @@ final public class Simulation: ObservableObject {
     }
     
     // Zoom to object surface
-    public func selectObjectSurface() {
+    public func selectSurface() {
         guard let object else { return }
         zoomToSurface(node: object)
     }
     
     // Zoom to object orbit
-    public func selectObjectOrbit() {
+    public func selectOrbit() {
         guard let object else { return }
         zoomToOrbit(node: object)
     }
     
-    // Zoom to local system
-    public func selectLocalSystem() {
+    // Zoom to object system
+    public func selectSystem() {
         guard let system = object?.system else { return }
         zoomToSystem(node: system)
     }
     
-    // Zoom to system parent
-    public func selectSystemParent() {
+    // Leave the current system
+    public func leaveSystem() {
         guard let object = system?.object else { return }
         zoomToOrbit(node: object)
     }
@@ -369,17 +364,20 @@ final public class Simulation: ObservableObject {
     
     // Intent Configurations
     
-    public var hasLocalSystem: Bool {
+    public var hasOrbit: Bool {
+        return object != root?.object
+    }
+    public var hasSystem: Bool {
         return object?.system != nil
     }
-    public var stateInOrbit: Bool {
-        return system != object?.system && !stateOnSurface
+    public var stateOrbit: Bool {
+        return system != object?.system && !stateSurface
     }
-    public var stateInSystem: Bool {
-        return system == object?.system && !stateOnSurface
+    public var stateSystem: Bool {
+        return system == object?.system && !stateSurface
     }
-    public var stateOnSurface: Bool {
-        return size <= applyScale(4 * (object?.size ?? 0))
+    public var stateSurface: Bool {
+        return size <= applyScale(4 * (object?.totalSize ?? 0))
     }
 
     
@@ -409,9 +407,13 @@ final public class Simulation: ObservableObject {
     private func setObject(_ object: Object?) {
         self.object = object
         // Zoom to the object when selected
-        if let object, object != reference?.object {
+        if let object, object == system?.object, let reference, !reference.matches(system), !reference.matches(object) {
+            zoomToOrbit(node: reference)
+        } 
+        else if let object, object != reference?.object {
             zoomToOrbit(node: object)
-        } else if let reference, 0...0.1 ~= offsetAmount {
+        } 
+        else if let reference, 0...0.1 ~= offsetAmount {
             zoomToOrbit(node: reference)
         }
     }
@@ -448,21 +450,31 @@ final public class Simulation: ObservableObject {
     private func transition(reference: Node?, size: CGFloat) {
         let scale = defaultScaleRatio / (size / self.size)
         guard let reference, scale.isFinite else { return }
+        let system = reference.system
         let offset = reference.globalPosition
         
-        // Fade the trails if the offset will change
-        if offset != self.offset {
-            self.showTrails = false
+        // Some elements fade during transitions to prevent awkward animations
+        
+        // if the selected system will change
+        // all trails will be changed
+        if system != self.system {
+            self.inTransition = true
+        }
+        // or there is a reference to a child whose trail is not visible
+        // this means the camera is zoomed/offset at least partially toward the surface of the child
+        // new trails will need to be loaded on whichever endpoint is being transitioned to
+        if let reference = self.reference, !reference.matches(system), !reference.matches(system?.object), trailVisibility(reference) == 0 {
+            self.inTransition = true
         }
         
         // Set the reference and system nodes
         setReference(reference)
-        if let system = (reference as? System) ?? reference.system {
+        if let system {
             setSystem(system)
         }
         
         // Include all nodes involved in the transition
-        let nodesAfter = visibleNodes(scale: scale, offset: offset)
+        let nodesAfter = allNodes.filter { showNode($0, scale: scale, offset: offset) }
         for node in nodesAfter {
             if !nodes.contains(where: { $0.matches(node) }) {
                 nodes.append(node)
@@ -479,7 +491,7 @@ final public class Simulation: ObservableObject {
         // Set the remaining nodes when the transition completes
         DispatchQueue.main.asyncAfter(deadline: .now() + animationTime) {
             withAnimation(.easeInOut(duration: self.animationTime)) {
-                self.showTrails = true
+                self.inTransition = false
             }
             self.nodes = nodesAfter
         }
@@ -509,7 +521,7 @@ final public class Simulation: ObservableObject {
         self.offset = (reference.parent?.globalPosition ?? .zero) + reference.position * offsetAmount
         
         // Set the visible nodes
-        self.nodes = visibleNodes(scale: scale, offset: offset)
+        self.nodes = allNodes.filter { showNode($0, scale: scale, offset: offset) }
         
         // Reference the child node if zoomed in enough (offset is beginning)
         if let object = object ?? reference.object, let childNode = reference.children.first(where: { $0.object == object }) {

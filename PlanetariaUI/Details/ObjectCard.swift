@@ -22,7 +22,7 @@ struct ObjectCard: View {
         }
         .padding()
         .aspectRatio(1.0, contentMode: .fit)
-        .background(.regularMaterial)
+//        .background(.regularMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }

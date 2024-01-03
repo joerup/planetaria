@@ -20,6 +20,16 @@ public class Orbit {
     public var eccentricityVector: Vector
     public var lineOfNodes: Vector
     
+    public var width: Double {
+        2 * semimajorAxis
+    }
+    public var ratio: Double {
+        sqrt(1 - pow(eccentricity, 2))
+    }
+    public var center: Double {
+        -eccentricity/2
+    }
+    
     public init?(position: Vector, velocity: Vector, mass: Double, size: Double, hostNode: Node?) {
         guard let hostNode, hostNode.mass > 0 else { return nil }
         

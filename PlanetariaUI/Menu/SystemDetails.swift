@@ -47,7 +47,7 @@ public struct SystemDetails: View {
         VStack(alignment: .leading, spacing: 0) {
             if let parent = system.parent {
                 Button {
-                    simulation.selectSystemParent()
+                    simulation.leaveSystem()
                 } label: {
                     HStack {
                         Image(systemName: "chevron.backward")

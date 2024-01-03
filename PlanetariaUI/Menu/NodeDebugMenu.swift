@@ -45,11 +45,10 @@ public struct NodeDebugMenu: View {
                         
                         Text("\(node.rank.amount)")
                         
-//                        indicator(simulation.nodes.contains(node), color: .yellow)
-//                        indicator(simulation.nodes.contains(node) && simulation.showModel(node, modelSize: 2 * simulation.applyScale(node.size)), color: .red)
-//                        indicator(simulation.nodes.contains(node) && simulation.showOrbit(node), color: .blue)
-//                        indicator(simulation.nodes.contains(node) && simulation.showTrail(node), color: .purple)
-//                        indicator(simulation.nodes.contains(node) && simulation.showText(node), color: .green)
+                        if let object = node.object {
+                            indicator(simulation.showBody(object), color: .red)
+                        }
+                        indicator(simulation.showOrbit(node), color: .blue)
                     }
                 }
                 .buttonStyle(.plain)

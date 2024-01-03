@@ -1,14 +1,13 @@
 //
-//  SettingsView.swift
+//  Settings.swift
 //  Planetaria
 //
 //  Created by Joe Rupertus on 5/25/23.
 //
 
 import SwiftUI
-import PlanetariaData
 
-struct SettingsView: View {
+struct Settings: View {
     
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     

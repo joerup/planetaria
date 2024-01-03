@@ -10,7 +10,7 @@ import PlanetariaData
 
 struct Toolbar: View {
     
-    @EnvironmentObject var simulation: Simulation
+    @ObservedObject var simulation: Simulation
     
     var body: some View {
         HStack {
@@ -18,16 +18,18 @@ struct Toolbar: View {
                 .frame(maxWidth: .infinity)
             HStack(spacing: 5) {
                 if simulation.selectedObject != nil {
-                    largeButton(label: "Orbit", isActive: simulation.stateInOrbit) {
-                        simulation.selectObjectOrbit()
-                    }
-                    if simulation.hasLocalSystem {
-                        largeButton(label: "System", isActive: simulation.stateInSystem) {
-                            simulation.selectLocalSystem()
+                    if simulation.hasOrbit {
+                        largeButton(label: "Orbit", isActive: simulation.stateOrbit) {
+                            simulation.selectOrbit()
                         }
                     }
-                    largeButton(label: "Surface", isActive: simulation.stateOnSurface) {
-                        simulation.selectObjectSurface()
+                    if simulation.hasSystem {
+                        largeButton(label: "System", isActive: simulation.stateSystem) {
+                            simulation.selectSystem()
+                        }
+                    }
+                    largeButton(label: "Surface", isActive: simulation.stateSurface) {
+                        simulation.selectSurface()
                     }
                 }
             }
