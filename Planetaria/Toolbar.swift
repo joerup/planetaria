@@ -14,41 +14,22 @@ struct Toolbar: View {
     
     var body: some View {
         HStack {
-            Spacer()
-                .frame(maxWidth: .infinity)
-            HStack(spacing: 5) {
-                if simulation.selectedObject != nil {
-                    if simulation.hasOrbit {
-                        largeButton(label: "Orbit", isActive: simulation.stateOrbit) {
-                            simulation.selectOrbit()
-                        }
-                    }
-                    if simulation.hasSystem {
-                        largeButton(label: "System", isActive: simulation.stateSystem) {
-                            simulation.selectSystem()
-                        }
-                    }
-                    largeButton(label: "Surface", isActive: simulation.stateSurface) {
-                        simulation.selectSurface()
+            if simulation.selectedObject != nil {
+                if simulation.hasOrbit {
+                    largeButton(label: "Orbit", isActive: simulation.stateOrbit) {
+                        simulation.selectOrbit()
                     }
                 }
+                if simulation.hasSystem {
+                    largeButton(label: "System", isActive: simulation.stateSystem) {
+                        simulation.selectSystem()
+                    }
+                }
+                largeButton(label: "Surface", isActive: simulation.stateSurface) {
+                    simulation.selectSurface()
+                }
             }
-            .frame(maxWidth: .infinity)
-            HStack(spacing: 5) {
-                Spacer()
-//                smallButton(icon: "minus") {
-//                    simulation.zoomOut()
-//                }
-//                smallButton(icon: "plus") {
-//                    simulation.zoomIn()
-//                }
-            }
-            .frame(maxWidth: .infinity)
         }
-        #if os(macOS)
-        .padding()
-        #endif
-        .padding(5)
     }
     
     private func largeButton(label: String, isActive: Bool, action: @escaping () -> Void) -> some View {

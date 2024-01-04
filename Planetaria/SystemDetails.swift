@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import PlanetariaUI
 import PlanetariaData
 
-public struct SystemDetails: View {
+struct SystemDetails: View {
     
     @EnvironmentObject var simulation: Simulation
     
@@ -17,7 +18,7 @@ public struct SystemDetails: View {
     private var categories: [String] = []
     private var predicates: [String : (Node) -> Bool] = [:]
     
-    public init(system: System) {
+    init(system: System) {
         self.system = system
         
         if system.children.contains(where: { $0.category == .star }) {
@@ -43,7 +44,7 @@ public struct SystemDetails: View {
         }
     }
     
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if let parent = system.parent {
                 Button {

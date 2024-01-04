@@ -12,12 +12,10 @@ struct NodePoint: View {
     
     var node: Node
     
-    var modelSize: CGFloat
-    
     var isSelected: Bool
     var noSelection: Bool
     var isSystem: Bool
-    var isReference: Bool
+    var isFocus: Bool
     
     var body: some View {
         if !isSystem {
@@ -36,7 +34,7 @@ struct NodePoint: View {
         else {
             Circle()
                 .fill(Color.init(white: 0.2))
-                .opacity(isReference ? 0.5 : 0)
+                .opacity(isFocus ? 0.5 : 0)
                 .frame(width: 5)
         }
     }

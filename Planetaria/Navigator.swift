@@ -39,6 +39,7 @@ struct Navigator<Content: View, Menu: View, Detail: View, Header: View, Toolbar:
                     }
                     .overlay(alignment: .bottom) {
                         toolbar()
+                            .padding(5)
                             .padding(.bottom, selectedDetent.height(size: geometry.size))
                     }
                     .animation(.default, value: selectedDetent)
@@ -59,6 +60,7 @@ struct Navigator<Content: View, Menu: View, Detail: View, Header: View, Toolbar:
                             .interactiveDismissDisabled()
                             .preferredColorScheme(.dark)
                     }
+                    .preferredColorScheme(.dark)
                     .onChange(of: showDetail) { _, showDetail in
                         if !showDetail {
                             selectedDetent = savedDetent
@@ -77,10 +79,11 @@ struct Navigator<Content: View, Menu: View, Detail: View, Header: View, Toolbar:
                             menu()
                                 .background(.ultraThinMaterial)
                                 .transition(.move(edge: .bottom))
+                                .opacity(showDetail ? 0 : 1)
                                 .overlay {
                                     if showDetail {
                                         detail()
-                                            .background(.regularMaterial)
+                                            .background(.ultraThinMaterial)
                                             .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
                                             .transition(.move(edge: .bottom))
                                     }
@@ -89,10 +92,13 @@ struct Navigator<Content: View, Menu: View, Detail: View, Header: View, Toolbar:
                                 .frame(width: min(geometry.size.width*0.5, 375))
                                 .padding([.leading, .top], 10)
                                 .ignoresSafeArea(edges: .bottom)
+                                .preferredColorScheme(.dark)
+                                .animation(.default, value: showDetail)
                             VStack {
                                 header()
                                 Spacer()
                                 toolbar()
+                                    .padding()
                             }
                         }
                     }
@@ -114,9 +120,12 @@ struct Navigator<Content: View, Menu: View, Detail: View, Header: View, Toolbar:
                     header()
                 }
                 .overlay(alignment: .bottom) {
-                    toolbar()
+                    HStack {
+                        toolbar()
+                    }
                 }
         }
+        .preferredColorScheme(.dark)
         
         #elseif os(tvOS)
         content()

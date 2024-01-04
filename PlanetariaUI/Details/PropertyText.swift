@@ -54,7 +54,7 @@ public struct PropertyText<ValueType: Equatable, UnitType: PlanetariaData.Unit>:
     @ViewBuilder
     private func row(for property: CurrentProperty) -> some View {
         if let name {
-            AStack {
+            HStack {
                 Text(name)
                     .font(.system(.body, weight: .semibold))
                     .foregroundColor(.white)

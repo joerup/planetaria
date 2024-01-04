@@ -121,6 +121,10 @@ public extension Array where Element == Double {
         }
     }
     
+    func isWithin(_ distance: CGFloat) -> Bool {
+        return allSatisfy { abs($0) < distance }
+    }
+    
     var ra: Double {
         return proj(plane: .celestialPole).angle(with: .vernalEquinox)
     }

@@ -14,6 +14,8 @@ struct PlanetariaApp: App {
     
     @StateObject private var simulation = Simulation(from: "Planetaria")
     
+    private let debug: Bool = false
+    
     var body: some Scene {
         
         #if os(iOS) || os(macOS) || os(tvOS)
@@ -34,7 +36,7 @@ struct PlanetariaApp: App {
         WindowGroup(id: "navigator") {
             Navigator(showDetail: showDetail, menu: menu, detail: detail, header: header, toolbar: toolbar) { }
         }
-        .defaultSize(width: 0.4, height: 0.7, depth: 0, in: .meters)
+        .defaultSize(width: 0.7, height: 0.7, depth: 0, in: .meters)
         
         ImmersiveSpace(id: "simulator") {
             Simulator3D(from: simulation)
@@ -46,7 +48,7 @@ struct PlanetariaApp: App {
     
     private var showDetail: Binding<Bool> {
         Binding {
-            simulation.hasSelection
+            simulation.hasSelection && !debug
         } set: { _ in
             simulation.select(nil)
         }
@@ -54,10 +56,12 @@ struct PlanetariaApp: App {
     
     @ViewBuilder
     private func menu() -> some View {
-        if let system = simulation.selectedSystem {
+        if let system = simulation.selectedSystem, !debug {
             SystemDetails(system: system)
                 .id(system.id)
                 .environmentObject(simulation)
+        } else {
+            DebugMenu(simulation: simulation)
         }
     }
     

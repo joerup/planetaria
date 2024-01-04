@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct Acknowledgements: View {
+struct Acknowledgements: View {
     
     @Environment(\.dismiss) var dismiss
     
@@ -25,7 +25,7 @@ public struct Acknowledgements: View {
     The above sources are not affiliated with Planetaria and they do not endorse it.
     """
     
-    public var body: some View {
+    var body: some View {
         NavigationStack {
             ScrollView {
                 HStack {
@@ -58,6 +58,8 @@ public struct Acknowledgements: View {
 public struct Footnote: View {
     
     @State private var showAcknowledgements: Bool = false
+    
+    public init() { }
     
     public var body: some View {
         Text("Acknowledgements")

@@ -20,40 +20,62 @@ public struct Simulator3D: View {
     
     public var body: some View {
         GeometryReader3D { geometry in
-            ForEach(simulation.nodes, id: \.id) { node in
-                Group {
-                    trail(for: node, size: geometry.size)
-                    visual(for: node, size: geometry.size)
+            Group {
+                ForEach(simulation.currentNodes, id: \.id) { node in
+                    component(node) {
+                        trail(for: node, size: geometry.size)
+                        point(for: node, size: geometry.size)
+                    }
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .onTapGesture {
-                    withAnimation {
-                        simulation.select(node)
+                ForEach(simulation.currentBodies, id: \.id) { body in
+                    component(body) {
+                        model(for: body, size: geometry.size)
                     }
                 }
             }
-            .simultaneousGesture(simulation.panGesture)
-            .simultaneousGesture(simulation.zoomGesture)
+            .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
+            .simultaneousGesture(panGesture)
+            .simultaneousGesture(zoomGesture)
             .onTapGesture {
                 withAnimation {
                     simulation.select(nil)
                 }
             }
             Circle().opacity(0).onAppear {
-                simulation.startDisplay(size: min(geometry.size.width, geometry.size.height))
+                simulation.setupDisplay(size: min(geometry.size.width, geometry.size.height))
             }
         }
     }
     
+    private func component<Content: View>(_ node: Node, @ViewBuilder content: () -> Content) -> some View {
+        content()
+            .onTapGesture {
+                withAnimation {
+                    simulation.select(node)
+                }
+            }
+    }
+    
+    
     // MARK: - Components
     
     @ViewBuilder
-    private func visual(for node: Node, size: Size3D) -> some View {
+    private func model(for object: Object, size: Size3D) -> some View {
+        let position = position(for: object, size: size)
+        let modelSize: CGFloat = 2 * simulation.applySafeScale(object.totalSize)
+        ObjectBody(object: object, pitch: simulation.pitch, rotation: simulation.rotation)
+            .frame(width: 1.2 * modelSize, height: 1.2 * modelSize)
+            .offset(position.xy)
+            .offset(z: position.z)
+    }
+    
+    @ViewBuilder
+    private func point(for node: Node, size: Size3D) -> some View {
         let position = position(for: node, size: size)
         Group {
             let modelSize: CGFloat = 2 * simulation.applySafeScale(node.totalSize)
-            NodePoint(node: node, modelSize: modelSize, isSelected: simulation.isSelected(node), noSelection: simulation.noSelection, isSystem: simulation.isSystem(node), isReference: simulation.isReference(node))
-            if let object = node.object, simulation.showBody(object) {
+            NodePoint(node: node, isSelected: simulation.isSelected(node), noSelection: simulation.noSelection, isSystem: simulation.isSystem(node), isFocus: simulation.isFocus(node))
+            if let object = node.object {
                 ObjectBody(object: object, pitch: simulation.pitch, rotation: simulation.rotation)
                     .frame(width: 1.2 * modelSize, height: 1.2 * modelSize)
             }
@@ -87,8 +109,11 @@ public struct Simulator3D: View {
         }
     }
     
+    
+    // MARK: - Positioning
+    
     private func position(for node: Node, size: Size3D) -> (xy: CGSize, z: CGFloat) {
-        let position = simulation.applyAllTransformations(node.globalPosition)
+        let position = simulation.transform(node.globalPosition)
         return (xy: CGSize(width: position.x, height: -position.z), z: -position.y)
     }
     
@@ -96,8 +121,31 @@ public struct Simulator3D: View {
         let q1 = simd_quatd(angle: -orbit.longitudeOfPeriapsis, axis: Vector.e3.simd)
         let q2 = simd_quatd(angle: -orbit.orbitalInclination, axis: orbit.lineOfNodes.simd)
         let q3 = simd_quatd(angle: simulation.rotation.radians, axis: Vector.e3.simd)
-        let q4 = simd_quatd(angle: simulation.pitch.radians, axis: Vector.e1.simd)
+        let q4 = simd_quatd(angle: -simulation.pitch.radians, axis: Vector.e1.simd)
         return q4 * q3 * q2 * q1
+    }
+    
+    
+    // MARK: - Gestures
+    
+    private var panGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                simulation.updateRotationGesture(with: value.translation3D.x)
+            }
+            .onEnded { value in
+                simulation.completeRotationGesture(with: value.translation3D.x)
+            }
+    }
+    
+    private var zoomGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged { value in
+                simulation.updateScaleGesture(to: value)
+            }
+            .onEnded { value in
+                simulation.completeScaleGesture(to: value)
+            }
     }
 }
 #endif

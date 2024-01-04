@@ -110,7 +110,7 @@ struct ObjectBody3D: UIViewRepresentable {
 extension SCNScene {
     
     static func scene(for object: Object) -> SCNScene {
-        print("\nnew scene for \(object.name)\n")
+        print("\(object.name) has entered the chat")
         if let scene = SCNScene(named: "\(object.name).usdz") {
             scene.rootNode.childNodes.forEach { node in
                 node.name = "body"

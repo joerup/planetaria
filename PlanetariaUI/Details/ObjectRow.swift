@@ -8,11 +8,15 @@
 import SwiftUI
 import PlanetariaData
 
-struct ObjectRow: View {
+public struct ObjectRow: View {
     
     var object: Object
     
-    var body: some View {
+    public init(object: Object) {
+        self.object = object
+    }
+    
+    public var body: some View {
         #if os(macOS)
         HStack {
             ObjectIcon(object: object, size: 30)

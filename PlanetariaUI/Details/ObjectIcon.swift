@@ -8,12 +8,17 @@
 import SwiftUI
 import PlanetariaData
 
-struct ObjectIcon: View {
+public struct ObjectIcon: View {
     
     var object: Object
     var size: CGFloat
     
-    var body: some View {
+    public init(object: Object, size: CGFloat) {
+        self.object = object
+        self.size = size
+    }
+    
+    public var body: some View {
         Group {
             #if os(macOS)
             if let image = NSImage.init(named: object.name) {

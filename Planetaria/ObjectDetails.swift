@@ -6,17 +6,14 @@
 //
 
 import SwiftUI
+import PlanetariaUI
 import PlanetariaData
 
-public struct ObjectDetails: View {
+struct ObjectDetails: View {
     
     var object: Object
     
-    public init(object: Object) {
-        self.object = object
-    }
-    
-    public var body: some View {
+    var body: some View {
         #if os(macOS)
         ScrollView {
             VStack(alignment: .leading) {
@@ -72,7 +69,7 @@ public struct ObjectDetails: View {
             VStack(alignment: .leading, spacing: 10) {
                 
                 if object.rank == .primary || object.rank == .secondary {
-                    Text(LocalizedStringKey(stringLiteral: "\(object.name) Description"), bundle: .module)
+                    Text(LocalizedStringKey(stringLiteral: "\(object.name) Description"))
                         .font(.body)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom, 10)

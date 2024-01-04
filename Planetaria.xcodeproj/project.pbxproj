@@ -99,7 +99,12 @@
 		0168673E2548F1BD007D1553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0168673D2548F1BD007D1553 /* Assets.xcassets */; };
 		01698A78296FD40C00B42A81 /* Simulator2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01698A77296FD40C00B42A81 /* Simulator2DView.swift */; };
 		0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169A5A22B3D3E3A00080E6A /* Toolbar.swift */; };
+		016DCD262B45CD310030B614 /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DCD252B45CD310030B614 /* DebugMenu.swift */; };
+		016DCD282B4666650030B614 /* SearchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DCD272B4666650030B614 /* SearchMenu.swift */; };
+		016DCD2B2B467C6F0030B614 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 016DCD2A2B467C6F0030B614 /* Localizable.strings */; };
 		017166882B45263000A955D2 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166872B45263000A955D2 /* Launcher.swift */; };
+		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
+		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
 		018182D6296BD41000262A70 /* Simulator3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018182D5296BD41000262A70 /* Simulator3DView.swift */; };
 		018182DC296D254900262A70 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018182DB296D254900262A70 /* Object.swift */; };
 		0199E8CE2B425FBD00DD9194 /* Uranus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0199E8CD2B425FBD00DD9194 /* Uranus.usdz */; };
@@ -216,7 +221,12 @@
 		016867522548F1BD007D1553 /* PlanetariaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanetariaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01698A77296FD40C00B42A81 /* Simulator2DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator2DView.swift; sourceTree = "<group>"; };
 		0169A5A22B3D3E3A00080E6A /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		016DCD252B45CD310030B614 /* DebugMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenu.swift; sourceTree = "<group>"; };
+		016DCD272B4666650030B614 /* SearchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenu.swift; sourceTree = "<group>"; };
+		016DCD2A2B467C6F0030B614 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		017166872B45263000A955D2 /* Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
+		017166892B45B1A600A955D2 /* ObjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetails.swift; sourceTree = "<group>"; };
+		0171668B2B45B1AB00A955D2 /* SystemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemDetails.swift; sourceTree = "<group>"; };
 		018182D5296BD41000262A70 /* Simulator3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator3DView.swift; sourceTree = "<group>"; };
 		018182DB296D254900262A70 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		0199E8CD2B425FBD00DD9194 /* Uranus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Uranus.usdz; sourceTree = "<group>"; };
@@ -420,13 +430,18 @@
 				017166872B45263000A955D2 /* Launcher.swift */,
 				011CB3892A9C2FAE00749E31 /* Navigator.swift */,
 				01E8402F2A1FB2C000B2153E /* Settings.swift */,
+				0171668B2B45B1AB00A955D2 /* SystemDetails.swift */,
+				017166892B45B1A600A955D2 /* ObjectDetails.swift */,
 				01D5069B2AA5616200699FE9 /* Header.swift */,
 				0169A5A22B3D3E3A00080E6A /* Toolbar.swift */,
+				016DCD252B45CD310030B614 /* DebugMenu.swift */,
+				016DCD272B4666650030B614 /* SearchMenu.swift */,
 				01106BD32A81A74E00054D22 /* Old */,
 				0168673D2548F1BD007D1553 /* Assets.xcassets */,
 				014767A82A8DB43000B1D07B /* 3D Models */,
 				016867422548F1BD007D1553 /* Info.plist */,
 				01489ED32B41F5C300E74447 /* Planetaria.json */,
+				016DCD2A2B467C6F0030B614 /* Localizable.strings */,
 				01DE2B2E2A9C385900D4CF31 /* Preview Content 22-04-13-235 */,
 			);
 			path = Planetaria;
@@ -657,6 +672,7 @@
 				014767FC2A8DB43000B1D07B /* Deimos.usdz in Resources */,
 				01E8DDF12B413B460095149C /* Saturn.usdz in Resources */,
 				01489EF62B423B0E00E74447 /* Moon.usdz in Resources */,
+				016DCD2B2B467C6F0030B614 /* Localizable.strings in Resources */,
 				014767F62A8DB43000B1D07B /* Bennu.usdz in Resources */,
 				014767EA2A8DB43000B1D07B /* Mimas.usdz in Resources */,
 				014768222A8DB43000B1D07B /* Makemake.usdz in Resources */,
@@ -752,6 +768,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				01D5069C2AA5616200699FE9 /* Header.swift in Sources */,
+				0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */,
+				016DCD282B4666650030B614 /* SearchMenu.swift in Sources */,
 				011E0EF5297471AA00151CD8 /* ObjectListView.swift in Sources */,
 				013E10C52977CC1B00871BBA /* MinorPlanet.swift in Sources */,
 				0133669C2A16DC9200E8824D /* ObjectPreview.swift in Sources */,
@@ -772,10 +790,12 @@
 				01FA8B84297DD13000BA1D7B /* SystemListView.swift in Sources */,
 				0156E28F2982469E003B592E /* PropertyList.swift in Sources */,
 				01F927832A1C36FE00392CB5 /* OrbitDrawing.swift in Sources */,
+				016DCD262B45CD310030B614 /* DebugMenu.swift in Sources */,
 				016223C8298300AE0006E579 /* PropertyComparer.swift in Sources */,
 				0156E291298246CB003B592E /* PropertyBlock.swift in Sources */,
 				011E0ED929730EE400151CD8 /* LaunchScreenView.swift in Sources */,
 				0168673A2548F1BB007D1553 /* PlanetariaApp.swift in Sources */,
+				0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */,
 				018182DC296D254900262A70 /* Object.swift in Sources */,
 				011E0EF329746F4600151CD8 /* DetailSection.swift in Sources */,
 				016223CC2983641C0006E579 /* Object+Properties.swift in Sources */,
@@ -957,7 +977,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
@@ -989,7 +1009,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;

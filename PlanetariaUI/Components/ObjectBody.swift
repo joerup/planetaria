@@ -42,8 +42,14 @@ struct ObjectBody: View {
         //            context.add(entity)
         //        }
 #elseif os(iOS) || os(macOS) || os(tvOS)
-//        ObjectBody3D(object: object, pitch: pitch, rotation: rotation, simulation: simulation)
+        ObjectBody3D(object: object, pitch: pitch, rotation: rotation, simulation: simulation)
 #endif
-        Circle().fill(object.color ?? .gray)
+//        Circle().fill(object.color ?? .gray)
+//            .onAppear {
+//                print("\(object.name) has entered the chat")
+//            }
+//            .onDisappear {
+//                print("\(object.name) has left the chat")
+//            }
     }
 }

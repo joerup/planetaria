@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PlanetariaUI
 import PlanetariaData
 
 public struct SearchMenu: View {

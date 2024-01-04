@@ -1,5 +1,5 @@
 //
-//  NodeDebugMenu.swift
+//  DebugMenu.swift
 //
 //
 //  Created by Joe Rupertus on 12/26/23.
@@ -7,26 +7,25 @@
 
 import SwiftUI
 import PlanetariaData
-
-public struct NodeDebugMenu: View {
+ 
+struct DebugMenu: View {
     
     @ObservedObject var simulation: Simulation
     
-    public init(from simulation: Simulation) {
-        self.simulation = simulation
-    }
-    
     @State private var showAll: Bool = false
     
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading) {
             
             Text("Root: \(simulation.rootNode?.name ?? "N/A")")
-            Text("Reference: \(simulation.referenceNode?.name ?? "N/A")")
+            Text("Reference: \(simulation.focusNode?.name ?? "N/A")")
             Text("System: \(simulation.selectedSystem?.name ?? "N/A")")
             Text("Object: \(simulation.selectedObject?.name ?? "N/A")")
             Text("Screen Size: \(simulation.unapplyScale(simulation.size)) km")
-            Text("\(simulation.nodes.count)/\(simulation.allNodes.count) visible")
+            
+            Text("\(simulation.currentNodes.count)/\(simulation.allNodes.count) nodes visible")
+            Text("\(simulation.currentBodies.count) bodies")
+            Text("\(simulation.currentNodes.filter({ simulation.showOrbit($0) }).count) orbits")
             
             Button {
                 showAll.toggle()
@@ -34,21 +33,19 @@ public struct NodeDebugMenu: View {
                 Text("Show \(showAll ? "Visible" : "All")")
             }
             
-            List(showAll ? simulation.allNodes : simulation.nodes, id: \.id) { node in
+            List(showAll ? simulation.allNodes : simulation.currentNodes, id: \.id) { node in
                 Button {
                     simulation.select(node)
                 } label: {
                     HStack {
+                        indicator(simulation.currentNodes.contains(where: { $0.matches(node) }), color: .green)
+                        
                         Text(node.name)
                             .foregroundStyle(color(for: node))
                         Spacer()
                         
-                        Text("\(node.rank.amount)")
-                        
-                        if let object = node.object {
-                            indicator(simulation.showBody(object), color: .red)
-                        }
-                        indicator(simulation.showOrbit(node), color: .blue)
+                        indicator(simulation.currentBodies.contains(where: { $0.matches(node) }), color: .red)
+                        indicator(simulation.showOrbit(node) && simulation.currentNodes.contains(where: { $0.matches(node) }), color: .blue)
                     }
                 }
                 .buttonStyle(.plain)
@@ -65,15 +62,9 @@ public struct NodeDebugMenu: View {
     }
     
     private func color(for node: Node) -> Color {
-//        if simulation.isSelected(node) {
-//            return .pink
-//        }
-//        else if simulation.nodes.contains(node) {
-//            return .mint
-//        }
-//        else {
-//            return .gray
-//        }
+        if simulation.isSelected(node) {
+            return .pink
+        }
         return .gray
     }
 }

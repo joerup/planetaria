@@ -30,6 +30,7 @@ struct Launcher: View {
                 .padding()
             ProgressView()
         }
+        .preferredColorScheme(.dark)
         
         #elseif os(visionOS)
         VStack {
