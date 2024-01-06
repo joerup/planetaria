@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import RealityKit
 
 final public class Simulation: ObservableObject {
     
@@ -32,12 +33,21 @@ final public class Simulation: ObservableObject {
                 self.system = root
                 self.allNodes = root.tree
             }
+            print("Finished decoding nodes")
             
             // Load the ephemerides
             await root.loadEphemerides()
+            print("Finished loading ephemerides")
+            
+            // Load the entities
+            for i in self.allNodes.indices {
+                let entity = await SimulationEntity(node: self.allNodes[i])
+                await MainActor.run { self.allNodes[i].entity = entity }
+            }
+            print("Finished creating entities")
+            
             await MainActor.run {
                 self.isLoaded = true
-                print("Finished loading")
             }
         }
     }
@@ -81,14 +91,14 @@ final public class Simulation: ObservableObject {
         return object
     }
     
-    public func isSelected(_ node: Node) -> Bool {
-        return node.object == object
+    public func isSelected(_ node: Node?) -> Bool {
+        return node?.object == object
     }
-    public func isSystem(_ node: Node) -> Bool {
-        return node.matches(system)
+    public func isSystem(_ node: Node?) -> Bool {
+        return node?.matches(system) ?? false
     }
-    public func isFocus(_ node: Node) -> Bool {
-        return node.matches(focus)
+    public func isFocus(_ node: Node?) -> Bool {
+        return node?.matches(focus) ?? false
     }
     
     public var hasSelection: Bool {
@@ -138,7 +148,7 @@ final public class Simulation: ObservableObject {
     
     private let timeStep: Double = 1.0
     private let timeRatio: Double = 86400*10
-    private let animationTime: Double = 0.35
+    public let animationTime: Double = 0.35
     
     private func run() {
         Timer.scheduledTimer(withTimeInterval: timeStep, repeats: true) { _ in
@@ -155,16 +165,67 @@ final public class Simulation: ObservableObject {
     }
     
     
+    // MARK: - RealityKit Stuff
+    
+    public var entities: [SimulationEntity] {
+        return currentNodes.compactMap(\.entity)
+    }
+    
+    private func syncNodesAndEntities(animated: Bool = false) {
+        for i in allNodes.indices {
+            if currentBodies.contains(where: { allNodes[i].matches($0) }) {
+                allNodes[i].entity?.showBody()
+            } else {
+                allNodes[i].entity?.hideBody()
+            }
+            updateEntity(node: allNodes[i], animated: animated)
+        }
+    }
+    
+    private func updateEntity(node: Node, animated: Bool) {
+        guard let entity = node.entity else { return }
+        
+        let position = applyScale(applyOffset(node.globalPosition)) / size
+        let transform = Transform(translation: position.simdf - entity.position)
+        
+        if currentNodes.contains(where: { node.matches($0) }) {
+            if animated {
+                entity.move(to: transform, relativeTo: entity, duration: animationTime, timingFunction: .easeInOut)
+            } else {
+                entity.move(to: transform, relativeTo: entity)
+            }
+        } else {
+            entity.position = position.simdf
+        }
+        
+        if let body = entity.body {
+            
+            let scale = Float(applyScale(2 * node.totalSize) / size)
+            let transform = Transform(scale: [scale,scale,scale] / body.scale.max())
+            
+            if currentNodes.contains(where: { node.matches($0) }) {
+                if animated {
+                    body.move(to: transform, relativeTo: body, duration: animationTime, timingFunction: .easeInOut)
+                } else {
+                    body.move(to: transform, relativeTo: body)
+                }
+            } else {
+                body.scale = [scale,scale,scale]
+            }
+        }
+    }
+    
+    
     // MARK: - Validation
     
     public func showNode(_ node: Node, scale: CGFloat, offset: Vector) -> Bool {
-        guard node.isSet, node.parent == system || node.matches(system) else { return false }
+        guard node.isSet, node.parent == system /*|| node.matches(system)*/ else { return false }
         let location = scale/self.scale * transform(node.globalPosition - (offset-self.offset))
-        return node.system == system || (location.isWithin(size) && applyScale(node.position.magnitude + node.size) * scale/self.scale * 500 > size)
+        return node.system == system || (location.isWithin(10*size) && applyScale(node.position.magnitude + node.size) * scale/self.scale * 500 > size)
     }
     public func showBody(_ node: Node, scale: CGFloat, offset: Vector) -> Bool {
         let location = scale/self.scale * transform(node.globalPosition - (offset-self.offset))
-        return location.isWithin(size) && 3...max(4, size) ~= applyScale(node.size) * scale/self.scale
+        return location.isWithin(10*size) && 3...max(4, size) ~= applyScale(node.size) * scale/self.scale
     }
     public func showOrbit(_ node: Node) -> Bool {
         return !inTransition && node.orbit != nil && node.parent == system && node.system != system
@@ -434,6 +495,19 @@ final public class Simulation: ObservableObject {
         let nodesAfter = allNodes.filter { showNode($0, scale: scale, offset: offset) }
         let bodiesAfter = nodesAfter.compactMap({ $0 as? Object }).filter { showBody($0, scale: scale, offset: offset) }
         
+        #if os(visionOS)
+        
+        self.inTransition = false
+        
+        self.currentNodes = nodesAfter
+        self.currentBodies = bodiesAfter
+        
+        self.offsetAmount = 1.0
+        self.steadyScale = scale
+        self.offset = offset
+        
+        #else
+        
         // Display all nodes that will be involved in the transition (visible either before or after)
         for node in nodesAfter {
             if !currentNodes.contains(where: { $0.matches(node) }) {
@@ -460,7 +534,9 @@ final public class Simulation: ObservableObject {
             }
             self.currentNodes = nodesAfter
             self.currentBodies = bodiesAfter
+            self.syncNodesAndEntities(animated: true)
         }
+        #endif
     }
     
     // Navigation changes when gestures occur
@@ -489,6 +565,8 @@ final public class Simulation: ObservableObject {
         // Set the current nodes and bodies
         self.currentNodes = allNodes.filter { showNode($0, scale: scale, offset: offset) }
         self.currentBodies = currentNodes.compactMap({ $0 as? Object }).filter { showBody($0, scale: scale, offset: offset) }
+        
+        self.syncNodesAndEntities()
         
         // Focus to the child node if zoomed in enough (offset is beginning)
         if let object = object ?? focus.object, let childNode = focus.children.first(where: { $0.object == object }) {

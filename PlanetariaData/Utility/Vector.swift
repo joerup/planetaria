@@ -160,8 +160,11 @@ public extension Array where Element == Double {
     var floatArray: (x: CGFloat, y: CGFloat, z: CGFloat) {
         return (x: CGFloat(x), y: CGFloat(-y), z: CGFloat(z))
     }
-    var simd: simd_double3 {
+    var simd: SIMD3<Double> {
         return simd_double3(x,-y,z)
+    }
+    var simdf: SIMD3<Float> {
+        return simd_float3(Float(x),Float(z),Float(-y))
     }
     
     var mean: Double {

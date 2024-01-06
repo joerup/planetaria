@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import RealityKit
 
 public class Object: Node, Equatable, Identifiable, Hashable {
     
@@ -42,6 +43,8 @@ public class Object: Node, Equatable, Identifiable, Hashable {
     public var object: Object? {
         return self
     }
+    
+    public var entity: SimulationEntity?
     
     public var isSet: Bool = false
     

@@ -8,7 +8,6 @@
 import SwiftUI
 import PlanetariaData
 import PlanetariaUI
-
 @main
 struct PlanetariaApp: App {
     
@@ -30,6 +29,7 @@ struct PlanetariaApp: App {
         }
         
         #elseif os(visionOS)
+        
         WindowGroup(id: "launcher") {
             Launcher(isLoaded: simulation.isLoaded)
         }
@@ -40,7 +40,7 @@ struct PlanetariaApp: App {
         
         ImmersiveSpace(id: "simulator") {
             Simulator3D(from: simulation)
-                .offset(y: -1200).offset(z: -1000)
+                .offset(y: -1500).offset(z: -1500)
         }
         
         #endif

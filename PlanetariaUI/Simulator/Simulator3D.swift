@@ -5,11 +5,12 @@
 //  Created by Joe Rupertus on 11/8/23.
 //
 
+#if os(visionOS)
 import SwiftUI
 import PlanetariaData
 import simd
+import RealityKit
 
-#if os(visionOS)
 public struct Simulator3D: View {
 
     @ObservedObject private var simulation: Simulation
@@ -21,21 +22,29 @@ public struct Simulator3D: View {
     public var body: some View {
         GeometryReader3D { geometry in
             Group {
-                ForEach(simulation.currentNodes, id: \.id) { node in
-                    component(node) {
-                        trail(for: node, size: geometry.size)
-                        point(for: node, size: geometry.size)
+//                ForEach(simulation.currentNodes, id: \.id) { node in
+//                    trail(for: node, size: geometry.size)
+//                }
+                RealityView { content in
+                    for entity in simulation.entities {
+                        content.add(entity)
+                    }
+                } update: { content in
+                    var lastEntities = Set(content.entities)
+                    for entity in simulation.entities {
+                        content.add(entity)
+                        lastEntities.remove(entity)
+                    }
+                    for entity in lastEntities {
+                        content.remove(entity)
                     }
                 }
-                ForEach(simulation.currentBodies, id: \.id) { body in
-                    component(body) {
-                        model(for: body, size: geometry.size)
-                    }
-                }
+                .rotation3DEffect(Rotation3D(angle: .radians(-simulation.rotation.radians), axis: .y))
+                .gesture(tapGesture)
+                .simultaneousGesture(panGesture)
+                .simultaneousGesture(zoomGesture)
             }
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
-            .simultaneousGesture(panGesture)
-            .simultaneousGesture(zoomGesture)
             .onTapGesture {
                 withAnimation {
                     simulation.select(nil)
@@ -47,46 +56,8 @@ public struct Simulator3D: View {
         }
     }
     
-    private func component<Content: View>(_ node: Node, @ViewBuilder content: () -> Content) -> some View {
-        content()
-            .onTapGesture {
-                withAnimation {
-                    simulation.select(node)
-                }
-            }
-    }
-    
     
     // MARK: - Components
-    
-    @ViewBuilder
-    private func model(for object: Object, size: Size3D) -> some View {
-        let position = position(for: object, size: size)
-        let modelSize: CGFloat = 2 * simulation.applySafeScale(object.totalSize)
-        ObjectBody(object: object, pitch: simulation.pitch, rotation: simulation.rotation)
-            .frame(width: 1.2 * modelSize, height: 1.2 * modelSize)
-            .offset(position.xy)
-            .offset(z: position.z)
-    }
-    
-    @ViewBuilder
-    private func point(for node: Node, size: Size3D) -> some View {
-        let position = position(for: node, size: size)
-        Group {
-            let modelSize: CGFloat = 2 * simulation.applySafeScale(node.totalSize)
-            NodePoint(node: node, isSelected: simulation.isSelected(node), noSelection: simulation.noSelection, isSystem: simulation.isSystem(node), isFocus: simulation.isFocus(node))
-            if let object = node.object {
-                ObjectBody(object: object, pitch: simulation.pitch, rotation: simulation.rotation)
-                    .frame(width: 1.2 * modelSize, height: 1.2 * modelSize)
-            }
-            NodeText(node: node, isSelected: simulation.isSelected(node), noSelection: simulation.noSelection)
-                .offset(y: 12 + simulation.applyScale(node.size))
-                .opacity(simulation.textVisibility(node))
-        }
-        .offset(position.xy)
-        .offset(z: position.z)
-        .transition(.opacity)
-    }
     
     @ViewBuilder
     private func trail(for node: Node, size: Size3D) -> some View {
@@ -112,21 +83,29 @@ public struct Simulator3D: View {
     
     // MARK: - Positioning
     
-    private func position(for node: Node, size: Size3D) -> (xy: CGSize, z: CGFloat) {
-        let position = simulation.transform(node.globalPosition)
-        return (xy: CGSize(width: position.x, height: -position.z), z: -position.y)
-    }
-    
     private func orbitTransformation(_ orbit: Orbit) -> simd_quatd {
-        let q1 = simd_quatd(angle: -orbit.longitudeOfPeriapsis, axis: Vector.e3.simd)
+        let q1 = simd_quatd(angle: -orbit.longitudeOfPeriapsis, axis: Vector.referencePlane.simd)
         let q2 = simd_quatd(angle: -orbit.orbitalInclination, axis: orbit.lineOfNodes.simd)
-        let q3 = simd_quatd(angle: simulation.rotation.radians, axis: Vector.e3.simd)
-        let q4 = simd_quatd(angle: -simulation.pitch.radians, axis: Vector.e1.simd)
+        let q3 = simd_quatd(angle: simulation.rotation.radians, axis: Vector.referencePlane.simd)
+        let q4 = simd_quatd(angle: -simulation.pitch.radians, axis: Vector.vernalEquinox.simd)
         return q4 * q3 * q2 * q1
     }
     
     
     // MARK: - Gestures
+    
+    private var tapGesture: some Gesture {
+        SpatialTapGesture()
+            .targetedToAnyEntity()
+            .onEnded { value in
+                print("tapped at \(value.location3D)")
+                if let node = simulation.currentNodes.first(where: { $0.name == value.entity.name || $0.id == Int(value.entity.name) ?? -1 }) {
+                    withAnimation {
+                        simulation.select(node)
+                    }
+                }
+            }
+    }
     
     private var panGesture: some Gesture {
         DragGesture()

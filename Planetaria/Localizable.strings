@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Planetaria
 
@@ -13,17 +13,11 @@
 
 // MARK: Sun
 
-"Solar System Subtitle" =
-"Explore the Sun and the Planets";
-
 "Solar System Description" =
 "The Solar System is a massive conglomeration of planets, moons, asteroids, comets, and other objects gravitationally bound to the Sun.";
 
-"Sun Subtitle" =
-"The Star of the Solar System";
-
 "Sun Description" =
-"The Sun is a middle-sized yellow main-sequence star in the center of the Solar System. It is composed of plasma and incandescent gas at unimaginably hot temperatures. The Sun produces nuclear energy by fusing hydrogen into helium in its core, and it radiates light and heat to all of the planets and moons of the Solar System.";
+"The Sun is a yellow main-sequence star in the center of the Solar System. It's composed of plasma and incandescent gas at unimaginably hot temperatures. The Sun produces nuclear energy by fusing hydrogen into helium in its core, and it radiates light and heat to all of the planets and moons of the Solar System.";
 
 
 // MARK: Planets
@@ -32,40 +26,40 @@
 // Mercury
 
 "Mercury Description" =
-"Though it may be small, Mercury is the fastest planet in the Solar System, zooming around the Sun in only three months along its wobbly, eccentric orbit. Its surface is heavily cratered, and it has no atmosphere, causing temperatures to range from very hot on the side facing the Sun to very cold on the dark side.";
+"Though it may be small, Mercury is the fastest planet in the Solar System, zooming around the Sun in only three months along its wobbly, eccentric orbit. Its surface is heavily cratered, and it has no atmosphere, causing temperatures to range from really hot on the light side to really cold on the dark side.";
 
 
 // Venus
 
 "Venus Description" =
-"Venus holds the title of the hottest and most hellish planet in the Solar System. Its extremely hot and dense atmosphere, filled with thick clouds of carbon dioxide and sulfuric acid, means humans wouldn't survive even with protective equipment. It also spins really slowly, in the opposite direction of most planets.";
+"Venus holds the title of the hottest planet in the Solar System. Its extremely hot and dense atmosphere, filled with thick clouds of carbon dioxide and sulfuric acid, would immediately vaporize any living organism. It also spins really slowly, in the opposite direction of most other planets.";
 
 
 // Earth
 
 "Earth Description" =
-"Our home planet, Earth, is the only known world to contain life. It's a terrestrial planet with an active and habitable surface, filled with deep oceans, lush forests, vast deserts, and high mountains. Earth's position in the Solar System allows for liquid water, which, along with its oxygen-rich atmosphere, allows life to thrive.";
+"Earth is the only known world to contain life. It's a terrestrial planet with an active and habitable surface, filled with deep oceans, lush forests, vast deserts, and high mountains. Earth's position in the Solar System allows for liquid water, which, along with an oxygen-rich atmosphere, lets living organisms thrive.";
 
 "Earth-Moon System Description" =
 "Our local system, the only place humanity has ever set foot, is composed of the Earth and the Moon. The Moon's position relative to the Sun causes a cycle of lunar phases to be visible from Earth throughout its monthly orbit. The Moon is tidally locked to the Earth, meaning we always see the same side.";
 
 "Moon Description" =
-"The Moon is Earth's sole natural satellite and one of the largest moons in the Solar System. The Moon is notable for its distinctive lunar phases as viewed from Earth, as well as its tidal effects on Earth's oceans. It's the only object humanity has set foot on so far other than Earth itself.";
+"The Moon is Earth's sole natural satellite, and it's one of the largest in the Solar System. The Moon is notable for its distinctive lunar phases as viewed from Earth, as well as its tidal effects on Earth's oceans. It's tidally locked to Earth, which means we only ever see one side.";
 
 
 // Mars
 
 "Mars Description" =
-"Despite being our greatest prospect for interplanetary travel, Mars is a barren wasteland. It's thought to have once been hospitable for life and maybe even contained large amounts of liquid water, but it has gradually evolved into a desolate landscape of rusting iron, giving it a distinctive red color.";
+"Mars is a rocky planet with a distinctive rust color covering its barren surface. It's thought to have once contained large amounts of liquid water, but it has gradually evolved into a desolate landscape of rusting iron. Olympus Mons, a large volcano on the Martian surface, is the tallest mountain in the Solar System.";
 
 "Martian System Description" =
 "Mars hosts a pair of moons known as Phobos and Deimos. They're small objects which are barely even spherical and span only a few kilometers – they also orbit very closely to Mars. Compared to Earth's moon as well as those of the gas giants, the Martian moons are fairly unimpressive.";
 
 "Phobos Description" =
-"Phobos is the larger of the two Martian moons, and it orbits very closely to the planet's surface. It's eventually going to crash into Mars.";
+"Phobos is the larger of the two Martian moons, and it orbits very closely to the planet's surface, with an orbital period of just a few hours. It has an oblong shape and many impact craters. In the far future, Phobos is expected to either crash into Mars or be torn apart by its gravity.";
 
 "Deimos Description" =
-"Deimos is the smaller of the two moons of Mars. It's not even large enough to have a spherical shape.";
+"Deimos is the smaller and farther of the two moons of Mars. It is irregularly shaped and heavily cratered.";
 
 
 // Jupiter
@@ -74,28 +68,25 @@
 "Behold! The ruler of the Solar System, Jupiter. This enormous planet – the biggest one in the Solar System – is a gas giant known for its swirling bands of colorful clouds. Its distinctive Great Red Spot is actually a huge storm that has been active for centuries. Jupiter spins very quickly, and it has a vast array of moons as companions.";
 
 "Jovian System Description" =
-"Jupiter boasts a ludicrous quantity of natural satellites, and some of the largest in the Solar System. Among them are the Galilean Moons: Io, Europa, Ganymede, and Callisto. These four massive moons were the first moons besides Earth's to be discovered, and they're planets in their own right. Even more moons continue to be discovered today.";
+"Jupiter boasts a large quantity of natural satellites, and some of the largest in the Solar System. Among them are the Galilean Moons: Io, Europa, Ganymede, and Callisto. These four massive moons were the first moons besides Earth's to be discovered, and they're planets in their own right. Even more moons continue to be discovered today.";
 
 "Io Description" =
-"The initial sight of Io may surprise you; this uniquely-patterned moon really does look like a pizza. Io is the densest moon in the Solar System, and it's home to lots of geologic activity, giving its surface a strange mix of colors and varied topology – it has high mountains and lots of volcanoes.";
+"The initial sight of Io may be shocking – this unique moon really does look like a giant pizza. Io is a large and extremely dense moon, and it's home to lots of geologic activity, giving its surface a strange mix of colors and varied topology. It has high mountains and lots of volcanoes.";
 
 "Europa Description" =
-"Europa is a Galilean moon of Jupiter with a thin atmosphere and a smooth surface marked with streaks, like nails on a chalkboard. It contains a deep ocean of liquid water beneath its surface which could potentially be hospitable for some form of extraterrestrial life. NASA's Europa Clipper mission is set to study Europa soon.";
+"Europa is a large moon of Jupiter with a thin atmosphere and a smooth surface marked with streaks, like nails on a chalkboard. It contains a deep ocean of liquid water beneath its surface which could potentially be hospitable for some form of extraterrestrial life.";
 
 "Ganymede Description" =
-"Ganymede is the largest moon in the Solar System, even larger than the planet Mercury. Its surface is made of rock; parts of it contains lots of impact craters, while other parts have ridges. It's the only moon known to have a substantial magnetic field. Ganymede likely has a large supply of internal water.";
+"Ganymede is the largest moon in the Solar System, even larger than the planet Mercury. Parts of its rocky surface contains lots of impact craters, while other parts have ridges. Ganymede is the only moon known to have a substantial magnetic field. It also likely has a large supply of internal water.";
 
 "Callisto Description" =
-"Callisto is a large moon with an extremely old and heavily cratered surface. It is the farthest of the Galilean moons from Jupiter. Like many other moons nearby, it may contain an ocean of water under its surface.";
-
-"Amalthea Description" =
-"Amalthea is an inner moon of Jupiter, and it is irregularly shaped. It contains water ice and has large craters on its surface.";
+"Callisto is a large moon with an extremely old and heavily cratered surface. It is the farthest of the Galilean moons from Jupiter. It has an icy and rocky surface which may contain an ocean underneath.";
 
 
 // Saturn
 
 "Saturn Description" =
-"The majestic giant, Saturn, has the most dazzling display of rings in our Solar System. Its magnificent rings are composed of ice, rocks, and dust particles which likely accumulated from debris after the destruction of a former moon. The planet itself is the second largest in the Solar System, and it has a fast rotation rate.";
+"The majestic giant, Saturn, has the most dazzling display of rings in our Solar System. Its magnificent rings are composed of ice, rocks, and dust particles. The planet itself is the second largest in the Solar System, and it has a fast rotation rate. Saturn also has a very large and diverse set of moons.";
 
 "Saturnian System Description" =
 "Saturn has a variety of moons with very interesting properties that are worth exploring. For instance, Titan is the only world other than Earth known to contain liquid on its surface; Enceladus is known to have enormous geysers that eject material out into space; Mimas looks like a superweapon!";
@@ -104,7 +95,7 @@
 "That's no moon – wait, it is! Mimas is a large moon of Saturn with an absolutely gargantuan impact crater, and its surface is littered with others.";
 
 "Enceladus Description" =
-"Enceladus is a large Saturnian satellite mostly covered in ice. Its surface contains geysers that eject water vapor and hydrogen into space. It has geologic activity and may contain a subsurface ocean.";
+"Enceladus is a large Saturnian moon mostly covered in ice. Its surface contains cryovolcanic geysers that eject plumes of water vapor and hydrogen into space. Enceladus has a lot of geologic activity and may contain a subsurface ocean.";
 
 "Tethys Description" =
 "Tethys is a large moon of Saturn. It has a very low density, and it is primarily made of water ice.";
@@ -116,34 +107,19 @@
 "Rhea is a large Saturnian moon. It contains mostly water ice and has a homogenous interior.";
 
 "Titan Description" =
-"Titan is the largest Saturnian moon, and the only known moon in the Solar System to contain a dense atmosphere. It is also the only place in the Solar System other than Earth to contain liquid on its surface – it is covered in liquid methane. It is an object of great interest for future exploration.";
+"Titan is the largest Saturnian moon, and the only known moon in the Solar System with a dense atmosphere. It's also the only place in the Solar System other than Earth to contain liquid on its surface – it is covered in liquid methane.";
 
 "Hyperion Description" =
-"Hyperion is a moon of Saturn, and one of the largest irregularly-shaped bodies in the Solar System. It is composed of mostly water ice.";
+"Hyperion is a moon of Saturn, and one of the largest irregularly-shaped bodies in the Solar System. It's composed of mostly water ice.";
 
 "Iapetus Description" =
-"Iapetus is a moon of Saturn. It is the largest body in the Solar System not in hydrostatic equilibrium (rounded by gravity).";
-
-"Phobe Description" =
-"Phoebe is a Saturnian moon, likely a captured object from the Kuiper Belt. It has a large irregular shape.";
-
-"Janus Description" =
-"Janus is a moon of Saturn. It occupies the same orbit as Epimetheus; they were once thought to be the same object.";
-
-"Epimetheus Description" =
-"Epimetheus is a moon of Saturn. It occupies the same orbit as Janus; they were once thought to be the same object.";
-
-"Pandora Description" =
-"Pandora is a small inner moon of Saturn. It has a very chaotic orbit and it is made of mostly ice.";
-
-"Pan Description" =
-"Pan is the innermost known moon of Saturn, orbiting within the A ring. It is known for its shape similar to a walnut.";
+"Iapetus is a large moon of Saturn with a strange two-tone coloration – one side is darker and the other is lighter. Its surface is heavily cratered, and it has a high mountain range along the equator.";
 
 
 // Uranus
 
 "Uranus Description" =
-"Perhaps the strangest rotational dynamics in the Solar System are found with Uranus. The planet rotates on its side and experiences extreme seasons that last for two decades at a time. It's considered an ice giant, composed of the coldest atmosphere in the Solar System, filled with icy ammonia and methane.";
+"Uranus exhibits the most unusual rotational dynamics of any planet. Its axial tilt is near 90º, which causes extreme seasonal cycles. Uranus is considered an ice giant, composed of the coldest atmosphere in the Solar System, filled with icy ammonia and methane. It's also home to a large number of moons.";
 
 "Uranian System Description" =
 "Uranus contains a large set of moons, with five notable standouts – Ariel, Umbriel, Titania, Oberon, and Miranda. Interestingly, the majority of the Uranian satellites are named after characters created by William Shakespeare.";
@@ -173,7 +149,7 @@
 "The Neptunian System is interesting in that it was likely hugely disrupted by the capture of the massive moon Triton. The extreme inclination of Triton's orbit indicates it did not originate here.";
 
 "Triton Description" =
-"Triton is the largest moon of Neptune. It orbits retrograde, in the opposite direction of Neptune's rotation; it is the largest moon in the Solar System that does this. This has led to the idea that Triton was once a dwarf planet that was trapped in orbit around Neptune. Triton is mostly made of liquid nitrogen and water ice.";
+"Triton is the largest moon of Neptune. It orbits retrograde, in the opposite direction of Neptune's rotation. It's the largest retrograde moon in the Solar System – it might have originally been a dwarf planet. Triton is mostly made of liquid nitrogen and water ice.";
 
 "Nereid Description" =
 "Nereid is a satellite of Neptune. It has the most eccentric orbit of any moon in the Solar System.";
@@ -185,7 +161,7 @@
 "Proteus is the second largest moon of Neptune. It is mostly made of ice and it has an irregular shape.";
 
 
-// Pluto
+// MARK: Others
 
 "Pluto Description" =
 "Pluto is a large dwarf planet in the Kuiper Belt. Once considered the ninth planet, it was dethroned after its vast array of dwarf planet siblings started being discovered. Pluto has a very elliptical orbit, sometimes crossing over the orbit of Neptune. It has a very large moon, Charon, which has a large gravitational influence on it.";
@@ -193,249 +169,22 @@
 "Charon Description" =
 "Charon is the largest Plutonian moon, and the largest moon among the dwarf planets. It is so large that it is gravitationally locked to Pluto, and the two objects seem to be in a binary system, facing each other at all times.";
 
+"Eris Description" =
+"Eris is the largest dwarf planet in the Solar System. It lives in the far reaches of the Kuiper Belt and the scattered disk, and it has a very elliptical orbit. It was called the tenth planet when it was discovered, causing chaos in the scientific community regarding what actually qualifies as a planet.";
 
-// Others
+"Haumea Description" =
+"Haumea is a dwarf planet in the Kuiper Belt. The object's rotation is so fast that it is actually shaped like an egg. It also has a high orbital inclination.";
+
+"Makemake Description" =
+"Makemake is a dwarf planet in the Kuiper Belt. It has a high orbital inclination and a distinctive red color.";
 
 "Ceres Description" =
-"The first and largest asteroid to ever be discovered, Ceres lies between the orbits of Mars and Jupiter in the Asteroid Belt. It's also considered a dwarf planet, as it makes up over a third of the mass of the Asteroid Belt.";
+"The first and largest asteroid to ever be discovered, Ceres lies between the orbits of Mars and Jupiter in the Asteroid Belt. It's also considered a dwarf planet, as it makes up over a third of the mass of all asteroids.";
 
 "Pallas Description" =
-"Pallas was the second asteroid to be discovered, and it's the third largest asteroid in the Asteroid Belt. With its unusually high orbital inclination, Pallas is often way above or way below the Solar System's plane.";
+"Pallas is a large asteroid in the Asteroid Belt. With its unusually high orbital inclination, Pallas is often way above or way below the Solar System's plane.";
 
 "Vesta Description" =
 "Vesta is the second largest asteroid in the Asteroid Belt. It's also a protoplanet – thought to be the remnants of a planet that never fully formed.";
-
-"Eris Description" =
-"Eris is a large dwarf planet in the far reaches of Kuiper Belt with a very elliptical orbit. It's part of what's known as the scattered disc, home to some of the farthest-away objects in the Solar System. It was called the tenth planet when it was discovered, causing chaos in the scientific community regarding what actually qualifies as a planet.";
-
-"Haumea Description" =
-"Haumea is a small dwarf planet in the Kuiper Belt. The planet's rotation is so fast that it is actually shaped like an egg.";
-
-"Makemake Description" =
-"Makemake is a dwarf planet in the Kuiper Belt. It has a very high orbital inclination and a distinctive red color.";
-
-"Quaoar Description" =
-"Quaoar is a small dwarf planet in the Kuiper Belt, believed to be composed of mostly rock and ice.";
-
-"Sedna Description" =
-"Sedna is a relatively small dwarf planet in the Kuiper Belt and the scattered disc. But Sedna is not like the other dwarf planets – it's on a much longer journey, only passing by the Sun briefly before returning to the outer Solar System for about ten-thousand years! It has one of the most distant orbits of any known object in the Solar System.";
-
-"Orcus Description" =
-"Orcus is an icy and mysterious dwarf planet in the Kuiper Belt.";
-
-"Gonggong Description" =
-"Gonggong is a mysterious dwarf planet in a very elliptical orbit taking it quite far from the Sun.";
-
-"Salacia Description" =
-"Salacia is a small Kuiper Belt object on the boundary of what's considered a \"dwarf planet\".";
-
-
-// MARK: - Properties
-
-
-
-// MARK: Stellar
-
-// Spectral Type
-
-"Spectral Type Description" =
-"The classification of the star based on its luminosity and temperature.";
-
-"Luminosity Description" =
-"The amount of energy radiated from the star per unit time.";
-
-
-// MARK: Orbit
-
-// Orbital Period
-
-"Orbital Period Description" =
-"All objects take a certain period of time to complete an orbit.";
-
-"Sidereal Period Subtitle" =
-"full orbit around %@";
-
-"Synodic Period Subtitle" =
-"between passes with Earth";
-
-"Tropical Period Subtitle" =
-"length of year";
-
-// Orbital Radius
-
-"Orbital Radius Description" =
-"All orbits are ellipses. As the object moves along its orbit, the distance to the host object varies.";
-
-"Semi-Major Axis Subtitle" =
-"average distance to %@";
-
-"Perihelion Subtitle" =
-"closest distance to %@";
-"Perigee Subtitle" =
-"closest distance to %@";
-"Periastron Subtitle" =
-"closest distance to %@";
-"Periapsis Subtitle" =
-"closest distance to %@";
-
-"Aphelion Subtitle" =
-"furthest distance from %@";
-"Apogee Subtitle" =
-"furthest distance from %@";
-"Apastron Subtitle" =
-"furthest distance from %@";
-"Apoapsis Subtitle" =
-"furthest distance from %@";
-
-// Orbital Velocity
-
-"Orbital Velocity Description" =
-"A measure of the object's speed as it orbits.";
-
-"Average Velocity Subtitle" =
-"average over the orbit";
-
-"Maximum Velocity Subtitle" =
-"occurs at perihelion";
-
-"Minimum Velocity Subtitle" =
-"occurs at aphelion";
-
-// Orbital Eccentricity
-
-"Orbital Eccentricity Description" =
-"How much the orbital path deviates from a perfect circle; how elliptical it is.";
-
-// Orbital Inclination
-
-"Orbital Inclination Description" =
-"The tilt of the orbital plane, measured as the angle between it and some reference plane.";
-
-"Inclination Subtitle" =
-"to %@";
-
-// Orbit Direction
-
-"Orbit Direction Description" =
-"Prograde indicates a counterclockwise orbit, while retrograde indicates a clockwise orbit.";
-
-"Orbit Direction Subtitle" =
-"viewed from the north pole of %@";
-
- 
-// MARK: Rotation
-
-// Rotation Period
-
-"Rotational Period Description" =
-"All objects rotate about their axes in a certain period of time.";
-
-"Sidereal Rotation Subtitle" =
-"full rotation about its axis";
-
-"Synodic Rotation Subtitle" =
-"length of day";
-
-// Axial Tilt
-
-"Axial Tilt Description" =
-"The tilt of the object's rotational axis.";
-
-"Axial Tilt Subtitle" =
-"rotational axis to orbital axis";
-
-// Rotational Velocity
-
-"Rotational Velocity Description" =
-"Spin rate substantially decreases as you approach the poles.";
-
-"Rotational Velocity Subtitle" =
-"at the equator";
-
-// Angular Velocity
-
-"Angular Velocity Description" =
-"Angular speed is the same anywhere on the object.";
-
-// Rotation Direction
-
-"Rotation Direction Description" =
-"Prograde indicates it spins in the same direction as its orbit, while retrograde indicates in the opposite direction.";
-
-
-// MARK: Structure
-
-// Mass
-
-"Mass Description" =
-"The total amount of matter contained in the object.";
-
-// Density
-
-"Density Description" =
-"The average ratio of mass to volume.";
-
-// Radius
-
-"Radius Description" =
-"The distance from the object's center to its surface.";
-
-"Mean Radius Subtitle" =
-"average over the whole object";
-
-"Equatorial Radius Subtitle" =
-"radius from center to equator";
-
-"Polar Radius Subtitle" =
-"radius from center to poles";
-
-// Flattening
-
-"Flattening Description" =
-"How much the shape deviates from a perfect sphere; how much has it been \"squished\".";
-
-// Surface Area
-
-"Surface Area Description" =
-"The total area of the surface.";
-
-// Volume
-
-"Volume Description" =
-"The total amount of occupied space.";
-
-
-// MARK: Environment
-
-// Temperature
-
-"Temperature Description" =
-"The temperature at the surface. This is approximate and can vary dramatically in some cases.";
-
-"Temperature Subtitle" =
-"average";
-
-// Pressure
-
-"Pressure Description" =
-"The pressure in the atmosphere. A value of zero means the object does not have an atmosphere.";
-
-"Pressure Subtitle" =
-"average";
-
-// Surface Gravity
-
-"Surface Gravity Description" =
-"The acceleration due to gravity experienced at its surface.";
-
-// Escape Velocity
-
-"Escape Velocity Description" =
-"The velocity required to escape its gravitational pull.";
-
-// Magnetic Field
-
-"Magnetic Field Description" =
-"If the planet generates its own significant magnetic field.";
 
 

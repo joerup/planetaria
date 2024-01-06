@@ -114,10 +114,10 @@ public struct Simulator2D: View {
     }
     
     private func orbitTransformation(_ orbit: Orbit) -> CGAffineTransform {
-        let q1 = simd_quatd(angle: orbit.longitudeOfPeriapsis, axis: Vector.e3.simd)
+        let q1 = simd_quatd(angle: orbit.longitudeOfPeriapsis, axis: Vector.referencePlane.simd)
         let q2 = simd_quatd(angle: -orbit.orbitalInclination, axis: orbit.lineOfNodes.simd)
-        let q3 = simd_quatd(angle: -simulation.rotation.radians, axis: Vector.e3.simd)
-        let q4 = simd_quatd(angle: -simulation.pitch.radians, axis: Vector.e1.simd)
+        let q3 = simd_quatd(angle: -simulation.rotation.radians, axis: Vector.referencePlane.simd)
+        let q4 = simd_quatd(angle: -simulation.pitch.radians, axis: Vector.vernalEquinox.simd)
         return CGAffineTransform(quaternion: q1 * q2 * q3 * q4)
     }
     

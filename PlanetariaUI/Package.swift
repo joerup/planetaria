@@ -26,8 +26,7 @@ let package = Package(
             dependencies: [
                 .product(name: "PlanetariaData", package: "PlanetariaData", condition: nil)
             ],
-            path: ".",
-            resources: [.process("Localizable.strings")]
+            path: "."
         ),
     ],
     swiftLanguageVersions: [.v5]

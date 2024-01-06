@@ -131,13 +131,17 @@ struct Navigator<Content: View, Menu: View, Detail: View, Header: View, Toolbar:
         content()
         
         #elseif os(visionOS)
-        menu()
-            .sheet(isPresented: $showDetail) {
-                detail()
-                    .ornament(attachmentAnchor: .scene(.bottom)) {
-                        toolbar()
-                    }
-            }
+        NavigationSplitView {
+            menu()
+        } detail: {
+            detail()
+        }
+        .ornament(attachmentAnchor: .scene(.bottom)) {
+            toolbar()
+        }
+        .ornament(attachmentAnchor: .scene(.top)) {
+            header()
+        }
         
         #endif
     }

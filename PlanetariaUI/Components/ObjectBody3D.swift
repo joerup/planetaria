@@ -143,7 +143,7 @@ extension SCNScene {
 
             // Align the lat/lon surface origin (0,0) vectors
             let equator = Vector.vernalEquinox.rotated(by: -tilt, about: axis.cross(.referencePlane).unitVector)
-            let primeMeridian = Vector.vernalEquinox.rotated(by: Double.pi/2 + axis.ra, about: Vector.celestialPole)
+            let primeMeridian = Vector.vernalEquinox.rotated(by: .pi/2 + axis.ra, about: .celestialPole)
             node.rotate(by: .radians(primeMeridian.signedAngle(with: equator, around: axis, clockwise: true)), around: vector(coordinates: axis))
 
             // Rotate about the rotational axis by the current rotation angle
@@ -152,6 +152,7 @@ extension SCNScene {
             // Rotate by the view angles
             node.rotate(by: viewRotation, around: vector(coordinates: .referencePlane))
             node.rotate(by: -viewPitch, around: vector(coordinates: .vernalEquinox))
+            
         }
     }
     
