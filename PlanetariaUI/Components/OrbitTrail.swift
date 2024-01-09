@@ -27,20 +27,21 @@ struct OrbitTrail: View {
     }
     
     var body: some View {
-        AngularGradient(
-            colors: full ? [color, .clear] : [color.opacity(0.5), .clear, .clear, .clear, .clear],
-            center: UnitPoint(x: 0.5 - orbit.center, y: 0.5),
-            startAngle: angle,
-            endAngle: angle + .degrees(360)
-        )
-        .allowsHitTesting(false)
-        .opacity(isSelected ? 1 : noSelection ? 0.8 : 0.3)
-        .frame(width: totalWidth, height: totalHeight)
-        .mask {
-            Ellipse()
-                .stroke(lineWidth: lineWidth)
-                .padding(lineWidth/2)
-        }
-        .offset(x: totalWidth * orbit.center)
+        Text(":(")
+//        AngularGradient(
+//            colors: full ? [color, .clear] : [color.opacity(0.5), .clear, .clear, .clear, .clear],
+//            center: UnitPoint(x: 0.5 - orbit.center, y: 0.5),
+//            startAngle: angle,
+//            endAngle: angle + .degrees(360)
+//        )
+//        .allowsHitTesting(false)
+//        .opacity(isSelected ? 1 : noSelection ? 0.8 : 0.3)
+//        .frame(width: totalWidth, height: totalHeight)
+//        .mask {
+//            Ellipse()
+//                .stroke(lineWidth: lineWidth)
+//                .padding(lineWidth/2)
+//        }
+//        .offset(x: totalWidth * orbit.center)
     }
 }

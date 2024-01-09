@@ -20,16 +20,6 @@ public class Orbit {
     public var eccentricityVector: Vector
     public var lineOfNodes: Vector
     
-    public var width: Double {
-        2 * semimajorAxis
-    }
-    public var ratio: Double {
-        sqrt(1 - pow(eccentricity, 2))
-    }
-    public var center: Double {
-        -eccentricity/2
-    }
-    
     public init?(position: Vector, velocity: Vector, mass: Double, size: Double, hostNode: Node?) {
         guard let hostNode, hostNode.mass > 0 else { return nil }
         
@@ -55,5 +45,11 @@ public class Orbit {
     
     public func update(position: Vector) {
         self.trueAnomaly = position.signedAngle(with: eccentricityVector, around: axis, clockwise: false)
+    }
+    
+    public func ellipsePosition(_ theta: Double) -> Vector {
+        let distance = semimajorAxis * (1 - pow(eccentricity, 2)) / (1 + eccentricity * cos(theta))
+        let direction = Vector.e1.rotated(by: theta + longitudeOfPeriapsis, about: .e3).unitVector
+        return distance * direction
     }
 }

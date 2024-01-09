@@ -1,5 +1,5 @@
 //
-//  Node+Simulation.swift
+//  Node+Motion.swift
 //  Planetaria
 //
 //  Created by Joe Rupertus on 3/17/23.

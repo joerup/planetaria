@@ -37,20 +37,10 @@ public protocol Node: Decodable {
     
     var isSet: Bool { get set }
     
-    var entity: SimulationEntity? { get set }
-    
     func set(position: Vector, velocity: Vector)
 }
 
 extension Node {
-    
-    mutating public func appear() {
-//        guard entity == nil else { return }
-//        entity = SimulationEntity(node: self)
-    }
-    mutating public func disappear() {
-//        entity = nil
-    }
     
     public func matches(_ node: Node?) -> Bool {
         return self.id == node?.id

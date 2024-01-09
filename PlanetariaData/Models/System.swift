@@ -27,14 +27,9 @@ public class System: Node, Equatable, Identifiable, Hashable {
     public var position: Vector = .zero
     public var velocity: Vector = .zero
     
-    public var mass: Double {
-        get { return children.map(\.mass).reduce(0, +) }
-        set { }
-    }
-    public var size: Double {
-        get { return 0 }
-        set { }
-    }
+    public var mass: Double
+    public var size: Double 
+    
     public var totalSize: Double {
         return size
     }
@@ -49,8 +44,6 @@ public class System: Node, Equatable, Identifiable, Hashable {
     public var object: Object? {
         return children.first(where: { $0 is Object }) as? Object
     }
-    
-    public var entity: SimulationEntity?
     
     public var isSet: Bool = false
     
@@ -74,6 +67,9 @@ public class System: Node, Equatable, Identifiable, Hashable {
         
         self.children = (try? container.decode([System].self, forKey: .systems)) ?? []
         self.children += (try? container.decode([Object].self, forKey: .objects)) ?? []
+        
+        self.mass = children.map(\.mass).reduce(0, +)
+        self.size = 0
         
         self.category = try container.decode(Category.self, forKey: .category)
         self.rank = try container.decode(Rank.self, forKey: .rank)

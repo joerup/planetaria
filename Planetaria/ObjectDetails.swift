@@ -25,11 +25,8 @@ struct ObjectDetails: View {
                         .font(.system(.headline, design: .default, weight: .semibold))
                         .fontWeight(.semibold)
                         .foregroundStyle(.secondary)
-                    Object3D(object: object)
-                        .frame(maxWidth: 500, maxHeight: 500)
-                        .aspectRatio(1.0, contentMode: .fit)
-                        .frame(maxWidth: .infinity)
-                        .shadow(radius: 10)
+                    ObjectIcon(object: object, size: 75)
+                        .offset(y: 2)
                 }
                 .padding(.horizontal)
                 properties
@@ -75,7 +72,9 @@ struct ObjectDetails: View {
                         .padding(.bottom, 10)
                 }
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
-                    PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
+                    if properties.luminosity?.value != 0 {
+                        PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
+                    }
                     PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod?.dynamic())
                     PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod?.dynamic())
                     PropertyText(type: .large, name: "Orbital Distance", property: properties.semimajorAxis?.dynamicDistance(for: object.category))

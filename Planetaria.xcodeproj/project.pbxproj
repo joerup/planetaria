@@ -69,7 +69,6 @@
 		0168673E2548F1BD007D1553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0168673D2548F1BD007D1553 /* Assets.xcassets */; };
 		01698A78296FD40C00B42A81 /* Simulator2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01698A77296FD40C00B42A81 /* Simulator2DView.swift */; };
 		0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169A5A22B3D3E3A00080E6A /* Toolbar.swift */; };
-		016DCD262B45CD310030B614 /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DCD252B45CD310030B614 /* DebugMenu.swift */; };
 		016DCD282B4666650030B614 /* SearchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DCD272B4666650030B614 /* SearchMenu.swift */; };
 		016DCD2B2B467C6F0030B614 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 016DCD2A2B467C6F0030B614 /* Localizable.strings */; };
 		017166882B45263000A955D2 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166872B45263000A955D2 /* Launcher.swift */; };
@@ -77,6 +76,7 @@
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
 		018182D6296BD41000262A70 /* Simulator3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018182D5296BD41000262A70 /* Simulator3DView.swift */; };
 		018182DC296D254900262A70 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018182DB296D254900262A70 /* Object.swift */; };
+		01A0A5DE2B4B420400D20A9C /* Simulator2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0A5DD2B4B420300D20A9C /* Simulator2D.swift */; };
 		01A5B5A52971F24700626AD5 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B5A42971F24700626AD5 /* Planet.swift */; };
 		01A5B5A72972000200626AD5 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B5A62972000200626AD5 /* Star.swift */; };
 		01A5B5A92972009700626AD5 /* Moon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B5A82972009700626AD5 /* Moon.swift */; };
@@ -185,7 +185,6 @@
 		016867522548F1BD007D1553 /* PlanetariaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanetariaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01698A77296FD40C00B42A81 /* Simulator2DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator2DView.swift; sourceTree = "<group>"; };
 		0169A5A22B3D3E3A00080E6A /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
-		016DCD252B45CD310030B614 /* DebugMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugMenu.swift; sourceTree = "<group>"; };
 		016DCD272B4666650030B614 /* SearchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenu.swift; sourceTree = "<group>"; };
 		016DCD2A2B467C6F0030B614 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		017166872B45263000A955D2 /* Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
@@ -193,6 +192,7 @@
 		0171668B2B45B1AB00A955D2 /* SystemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemDetails.swift; sourceTree = "<group>"; };
 		018182D5296BD41000262A70 /* Simulator3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator3DView.swift; sourceTree = "<group>"; };
 		018182DB296D254900262A70 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
+		01A0A5DD2B4B420300D20A9C /* Simulator2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulator2D.swift; sourceTree = "<group>"; };
 		01A5B5A42971F24700626AD5 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		01A5B5A62972000200626AD5 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
 		01A5B5A82972009700626AD5 /* Moon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moon.swift; sourceTree = "<group>"; };
@@ -253,6 +253,7 @@
 		01106BD32A81A74E00054D22 /* Old */ = {
 			isa = PBXGroup;
 			children = (
+				01A0A5DD2B4B420300D20A9C /* Simulator2D.swift */,
 				01DE2B302A9C394200D4CF31 /* Sheet.swift */,
 				011E0EE82973AAD400151CD8 /* UI */,
 				01698A76296FD3D300B42A81 /* Simulators */,
@@ -386,7 +387,6 @@
 				017166892B45B1A600A955D2 /* ObjectDetails.swift */,
 				01D5069B2AA5616200699FE9 /* Header.swift */,
 				0169A5A22B3D3E3A00080E6A /* Toolbar.swift */,
-				016DCD252B45CD310030B614 /* DebugMenu.swift */,
 				016DCD272B4666650030B614 /* SearchMenu.swift */,
 				01106BD32A81A74E00054D22 /* Old */,
 				0168673D2548F1BD007D1553 /* Assets.xcassets */,
@@ -706,7 +706,6 @@
 				01FA8B84297DD13000BA1D7B /* SystemListView.swift in Sources */,
 				0156E28F2982469E003B592E /* PropertyList.swift in Sources */,
 				01F927832A1C36FE00392CB5 /* OrbitDrawing.swift in Sources */,
-				016DCD262B45CD310030B614 /* DebugMenu.swift in Sources */,
 				016223C8298300AE0006E579 /* PropertyComparer.swift in Sources */,
 				0156E291298246CB003B592E /* PropertyBlock.swift in Sources */,
 				011E0ED929730EE400151CD8 /* LaunchScreenView.swift in Sources */,
@@ -718,6 +717,7 @@
 				0156E2872981FB48003B592E /* PropertyBlockDetails.swift in Sources */,
 				01A5B5A92972009700626AD5 /* Moon.swift in Sources */,
 				01A5B5AB2972283600626AD5 /* System.swift in Sources */,
+				01A0A5DE2B4B420400D20A9C /* Simulator2D.swift in Sources */,
 				017166882B45263000A955D2 /* Launcher.swift in Sources */,
 				011E0EF129746AD700151CD8 /* DetailRow.swift in Sources */,
 				018182D6296BD41000262A70 /* Simulator3DView.swift in Sources */,

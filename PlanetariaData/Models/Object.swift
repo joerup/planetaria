@@ -26,6 +26,11 @@ public class Object: Node, Equatable, Identifiable, Hashable {
     
     public var mass: Double
     public var size: Double
+    public var luminosity: Double
+    
+    public var intensity: Double {
+        return luminosity / (4E6 * .pi * size * size)
+    }
     
     public var ringSize: Double
     public var totalSize: Double {
@@ -43,8 +48,6 @@ public class Object: Node, Equatable, Identifiable, Hashable {
     public var object: Object? {
         return self
     }
-    
-    public var entity: SimulationEntity?
     
     public var isSet: Bool = false
     
@@ -77,6 +80,7 @@ public class Object: Node, Equatable, Identifiable, Hashable {
         
         let mass = (try? container.decode(Double.self, forKey: .mass)) ?? 0
         let size = (try? container.decode(Double.self, forKey: .size)) ?? 0
+        let luminosity = (try? container.decode(Double.self, forKey: .luminosity)) ?? 0
         let ringSize = (try? container.decode(Double.self, forKey: .ringSize)) ?? 0
         
         let semimajorAxis = try? container.decode(Double.self, forKey: .semimajorAxis)
@@ -96,10 +100,10 @@ public class Object: Node, Equatable, Identifiable, Hashable {
         
         let temperature = try? container.decode(Double.self, forKey: .temperature)
         let pressure = try? container.decode(Double.self, forKey: .pressure)
-        let luminosity = try? container.decode(Double.self, forKey: .luminosity)
         
         self.mass = mass
         self.size = size
+        self.luminosity = luminosity
         self.ringSize = ringSize
         
         self.rotation = Rotation(rotationRef: rotationRef, rotationRate: rotationRate, poleRARef: poleRARef, poleRARate: poleRARate, poleDecRef: poleDecRef, poleDecRate: poleDecRate)

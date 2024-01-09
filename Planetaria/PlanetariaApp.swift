@@ -56,12 +56,10 @@ struct PlanetariaApp: App {
     
     @ViewBuilder
     private func menu() -> some View {
-        if let system = simulation.selectedSystem, !debug {
+        if let system = simulation.selectedSystem {
             SystemDetails(system: system)
                 .id(system.id)
                 .environmentObject(simulation)
-        } else {
-            DebugMenu(simulation: simulation)
         }
     }
     
