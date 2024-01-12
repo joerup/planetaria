@@ -52,6 +52,9 @@ struct SystemDetails: View {
                 } label: {
                     HStack {
                         Image(systemName: "chevron.backward")
+                            .imageScale(.large)
+                            .fontWeight(.semibold)
+                            .padding(.leading, -5)
                         Text("\(parent.name) System")
                     }
                 }
@@ -77,6 +80,7 @@ struct SystemDetails: View {
             }
         }
         .navigationTitle("\(system.name) System")
+        .tint(.mint)
     }
     
     private var list: some View {

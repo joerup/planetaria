@@ -12,8 +12,6 @@ import RealityKit
 public struct Simulator2D: View {
     
     @ObservedObject private var simulation: Simulation
-    
-    @State private var ar: Bool = false
 
     public init(from simulation: Simulation) {
         self.simulation = simulation
@@ -21,9 +19,11 @@ public struct Simulator2D: View {
     
     public var body: some View {
         GeometryReader { geometry in
-            RealityView(rootEntity: simulation.rootEntity, size: geometry.size, ar: ar, select: simulation.select(_:))
+            RealityView(root: simulation.rootEntity, size: geometry.size, arMode: simulation.arMode, select: simulation.select(_:))
                 .simultaneousGesture(panGesture)
                 .simultaneousGesture(zoomGesture)
+                .ignoresSafeArea()
+                .id(simulation.arMode)
         }
     }
     
@@ -54,27 +54,25 @@ public struct Simulator2D: View {
 #if os(iOS) || os(tvOS)
 private struct RealityView: UIViewRepresentable {
     
-    var rootEntity: Entity
+    let anchor = AnchorEntity()
+    var root: Entity
+    
     var size: CGSize
-    var ar: Bool
+    var arMode: Bool
     var select: (Node?) -> Void
     
     private var mode: ARView.CameraMode {
-        return ar ? .ar : .nonAR
+        return arMode ? .ar : .nonAR
     }
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: mode, automaticallyConfigureSession: true)
+//        arView.environment.background = .color(.black)
         
-        if let resource = try? EnvironmentResource.load(named: "Starfield") {
-            arView.environment.background = .skybox(resource)
-        }
-        
-        let anchor = AnchorEntity()
-        anchor.addChild(rootEntity)
+        anchor.addChild(root)
         
         anchor.orientation = simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
-        anchor.scale = [2,2,2]
+        anchor.scale = [2,2,2] * Float(min(size.width, size.height) / max(size.width, size.height))
         
         context.coordinator.view = arView
         arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap)))
@@ -84,7 +82,7 @@ private struct RealityView: UIViewRepresentable {
     }
     
     func updateUIView(_ arView: ARView, context: Context) {
-        arView.cameraMode = mode
+        
     }
     
     func makeCoordinator() -> Coordinator {
@@ -117,20 +115,24 @@ private struct RealityView: UIViewRepresentable {
 #elseif os(macOS)
 private struct RealityView: NSViewRepresentable {
     
-    var rootEntity: Entity
-    var ar: Bool
+    let anchor = AnchorEntity()
+    var root: Entity
+    
+    var size: CGSize
+    var arMode: Bool
     var select: (Node?) -> Void
     
     func makeNSView(context: Context) -> ARView {
-        let arView = ARView(frame: .init(x: 1, y: 1, width: 1, height: 1))
+        let arView = ARView(frame: .zero)
+        arView.environment.background = .color(.black)
         
-        let anchor = AnchorEntity()
-        anchor.addChild(rootEntity)
+        anchor.addChild(root)
         
         anchor.orientation = simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
+        anchor.scale = [2,2,2] * Float(min(size.width, size.height) / max(size.width, size.height))
         
-//        context.coordinator.view = arView
-//        arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap)))
+        context.coordinator.view = arView
+        arView.addGestureRecognizer(NSClickGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleClick)))
         
         arView.scene.anchors.append(anchor)
         return arView
@@ -140,31 +142,58 @@ private struct RealityView: NSViewRepresentable {
         
     }
     
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(select: select)
-//    }
-//    
-//    class Coordinator: NSObject {
-//        
-//        weak var view: ARView?
-//        var select: (Node?) -> Void
-//        
-//        init(view: ARView? = nil, select: @escaping (Node?) -> Void) {
-//            self.view = view
-//            self.select = select
-//        }
-//        
-//        @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
-//            guard let view = self.view else { return }
-//            
-//            let tapLocation = recognizer.location(in: view)
-//            
-//            if let entity = view.entity(at: tapLocation), let entity = entity as? SimulationEntity ?? entity.parent as? SimulationEntity, let node = entity.node {
-//                select(node)
-//            } else {
-//                select(nil)
-//            }
-//        }
-//    }
+    func makeCoordinator() -> Coordinator {
+        Coordinator(select: select)
+    }
+    
+    class Coordinator: NSObject {
+        
+        weak var view: ARView?
+        var select: (Node?) -> Void
+        
+        init(view: ARView? = nil, select: @escaping (Node?) -> Void) {
+            self.view = view
+            self.select = select
+        }
+        
+        @objc func handleClick(_ recognizer: NSClickGestureRecognizer) {
+            guard let view = self.view else { return }
+            
+            let tapLocation = recognizer.location(in: view)
+            
+            if let entity = view.entity(at: tapLocation), let entity = entity as? SimulationEntity ?? entity.parent as? SimulationEntity, let node = entity.node {
+                select(node)
+            } else {
+                select(nil)
+            }
+        }
+    }
 }
 #endif
+
+//let camera = PerspectiveCamera()
+//camera.camera.fieldOfViewInDegrees = 60
+//
+//let cameraAnchor = AnchorEntity(world: .zero)
+//cameraAnchor.addChild(camera)
+//
+//arView.scene.addAnchor(cameraAnchor)
+//
+//let cameraDistance: Float = 3
+//var currentCameraRotation: Float = 0
+//let cameraRotationSpeed: Float = 0.01
+//
+//sceneEventsUpdateSubscription = arView.scene.subscribe(to: SceneEvents.Update.self) { _ in
+//    let x = sin(currentCameraRotation) * cameraDistance
+//    let z = cos(currentCameraRotation) * cameraDistance
+//    
+//    let cameraTranslation = SIMD3<Float>(x, 0, z)
+//    let cameraTransform = Transform(scale: .one,
+//                                    rotation: simd_quatf(),
+//                                    translation: cameraTranslation)
+//    
+//    camera.transform = cameraTransform
+//    camera.look(at: .zero, from: cameraTranslation, relativeTo: nil)
+//
+//    currentCameraRotation += cameraRotationSpeed
+//}

@@ -17,6 +17,7 @@ final public class Simulation: ObservableObject {
     
     public init(from fileName: String) {
         self.run()
+        
         Task {
             // Decode the tree from the file
             guard let file = Bundle.main.path(forResource: fileName, ofType: "json"),
@@ -25,7 +26,7 @@ final public class Simulation: ObservableObject {
                   let root = try? JSONDecoder().decode(System.self, from: data)
             else { return }
             
-            // Instantiate the node references
+            // Create the node references
             await MainActor.run {
                 self.root = root
                 self.focus = root
@@ -39,10 +40,14 @@ final public class Simulation: ObservableObject {
             
             // Set the scaling size
             await MainActor.run {
-                let distance = root.tree.filter({ $0.rank == .primary }).map(\.position.magnitude).max() ?? 1
+                let distance = root.children.filter({ $0.rank == .primary }).map(\.position.magnitude).max() ?? 1
                 self.size = 2.5 * distance
             }
-            await createBackground()
+            
+            // Generate the background
+//            if let background = await Entity.generateBackground() {
+//                await rootEntity.addChild(background)
+//            }
             
             // Load the entities
             for node in root.tree {
@@ -55,6 +60,11 @@ final public class Simulation: ObservableObject {
                 self.isLoaded = true
             }
         }
+        
+        // Register the RealityKit components
+        BodyComponent.registerComponent()
+        OrbitComponent.registerComponent()
+        PointComponent.registerComponent()
     }
     
     
@@ -126,19 +136,31 @@ final public class Simulation: ObservableObject {
     }
     
     
-    // MARK: - Timing
+    // MARK: - Settings
     
-    @Published public private(set) var timestamp: Date = .now
+    @Published public var time: Date = .now
+    @Published public var timeStep: Double = 0.1
+    @Published public var timeRatio: Double = 1.0 { didSet { isRealTime = false } }
+    public private(set) var isRealTime: Bool = true
+    public var maxTimeRatio: Double = 1E+9
     
-    private let timeStep: Double = 0.1
-    private let timeRatio: Double = 1.0
-    private let animationTime: Double = 0.5
+    public var arMode: Bool = false
+    public var floodLighting: Bool = false
+    public var showOrbits: Bool = true
+    public var showLabels: Bool = true
+    
+    public var selectEnabled: Bool = true
+    public var zoomEnabled: Bool = true
+    public var rotateEnabled: Bool = true
+    
+    
+    
+    // MARK: - Motion
     
     private func run() {
-        let dt = timeStep * timeRatio
-        
         Timer.scheduledTimer(withTimeInterval: timeStep, repeats: true) { _ in
-            self.timestamp.addTimeInterval(dt)
+            let dt = self.timeStep * self.timeRatio
+            self.time.addTimeInterval(dt)
             self.root?.simulate(dt: dt)
         }
     }
@@ -146,39 +168,51 @@ final public class Simulation: ObservableObject {
     
     // MARK: - Entities
     
-    private func createBackground() async {
-        if let resource = try? await TextureResource.load(named: "Starfield") {
-            await MainActor.run {
-                var material = UnlitMaterial()
-                material.color = .init(texture: .init(resource))
-                let entity = Entity()
-                entity.components.set(ModelComponent(
-                    mesh: .generateSphere(radius: 1E10),
-                    materials: [material]
-                ))
-                entity.scale *= .init(x: -1, y: 1, z: 1)
-                rootEntity.addChild(entity)
-            }
-        }
-    }
-    
     private func updateEntities(animated: Bool) {
-        let duration = animated ? animationTime : 0
-        
         let orientation = simd_quatf(angle: Float(pitch.radians), axis: SIMD3(1,0,0)) * simd_quatf(angle: Float(-rotation.radians), axis: SIMD3(0,1,0))
         rootEntity.orientation = orientation
         
         for entity in entities {
-            entity.update(scale: scale, offset: offset/size, duration: duration)
+            entity.update(scale: scale, offset: offset/size, orientation: orientation, duration: animated ? 0.5 : 0)
         }
     }
     
     
     // MARK: - Inputs
     
+    // Clock Buttons
+    
+    public func increaseSpeed() {
+        switch timeRatio {
+        case 1: timeRatio = 100
+        case -100: timeRatio = 1
+        case ...(-100): timeRatio /= 10
+        case (100)...: timeRatio *= 10
+        default: timeRatio = 1
+        }
+        if abs(timeRatio) >= maxTimeRatio {
+            timeRatio = maxTimeRatio
+        }
+    }
+    
+    public func decreaseSpeed() {
+        switch timeRatio {
+        case 1: timeRatio = -100
+        case 100: timeRatio = 1
+        case ...(-100): timeRatio *= 10
+        case (100)...: timeRatio /= 10
+        default: timeRatio = 1
+        }
+        if abs(timeRatio) >= maxTimeRatio {
+            timeRatio = -maxTimeRatio
+        }
+    }
+    
+    // Select Button
+    
     public func select(_ node: Node?) {
         // Reset object
-        guard let node else {
+        guard let node, selectEnabled else {
             setObject(nil)
             return
         }
@@ -226,7 +260,7 @@ final public class Simulation: ObservableObject {
         return system == object?.system && !stateSurface
     }
     public var stateSurface: Bool {
-        return scale * (object?.totalSize ?? 0) >= 0.25 * size
+        return scale * (object?.totalSize ?? 0) >= (!hasSystem ? 0.05 : 0.25) * size
     }
     
     
@@ -235,6 +269,8 @@ final public class Simulation: ObservableObject {
     // Scale
     
     internal func updateScaleGesture(to value: CGFloat) {
+        guard zoomEnabled else { return }
+        
         self.gestureScale = value
         
         if let focus, 1.1 * scale * focus.size > size {
@@ -243,6 +279,8 @@ final public class Simulation: ObservableObject {
         continuousUpdate()
     }
     internal func completeScaleGesture(to value: CGFloat) {
+        guard zoomEnabled else { return }
+        
         self.steadyScale *= value
         self.gestureScale = 1.0
         
@@ -257,11 +295,15 @@ final public class Simulation: ObservableObject {
     private let translationAngleFactor: CGFloat = .pi / 400
     
     internal func updateRotationGesture(with translation: CGFloat) {
+        guard rotateEnabled else { return }
+        
         self.gestureRotation = .radians(-translation * translationAngleFactor)
         
         continuousUpdate()
     }
     internal func completeRotationGesture(with translation: CGFloat) {
+        guard rotateEnabled else { return }
+        
         self.steadyRotation += .radians(-translation * translationAngleFactor)
         self.gestureRotation = .zero
         
@@ -269,6 +311,8 @@ final public class Simulation: ObservableObject {
     }
     
     internal func updatePitchGesture(with translation: CGFloat) {
+        guard rotateEnabled else { return }
+        
         self.gesturePitch = .radians(translation * translationAngleFactor)
         
         if steadyPitch + gesturePitch > .zero {
@@ -280,6 +324,8 @@ final public class Simulation: ObservableObject {
         continuousUpdate()
     }
     internal func completePitchGesture(with translation: CGFloat) {
+        guard rotateEnabled else { return }
+        
         self.steadyPitch += .radians(translation * translationAngleFactor)
         self.gesturePitch = .zero
         

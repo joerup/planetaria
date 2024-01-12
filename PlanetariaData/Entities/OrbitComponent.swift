@@ -1,24 +1,26 @@
 //
-//  OrbitEntity.swift
+//  OrbitComponent.swift
 //
 //
 //  Created by Joe Rupertus on 1/8/24.
 //
 
-import SwiftUI
 import RealityKit
+import SwiftUI
 
-class OrbitEntity: Entity {
+class OrbitComponent: Component {
     
-    let fullNumberOfPoints: UInt32 = 100
-    let thickness: Float = 0.0005
-
+    private let fullNumberOfPoints: UInt32 = 100
+    private let thickness: Float = 0.0005
+    
+    private var transformation: simd_quatf
+    
+    var model: ModelEntity
+    
     init?(node: Node, size: Double) {
         guard let orbit = node.orbit else { return nil }
         
-        super.init()
-        
-        let transformation = simd_quatf(angle: Float(orbit.orbitalInclination), axis: orbit.lineOfNodes.simdf)
+        self.transformation = simd_quatf(angle: Float(orbit.orbitalInclination), axis: orbit.lineOfNodes.simdf)
         
         let currentPosition = transformation.inverse.act((node.position - node.barycenterPosition).simdf / Float(size))
         
@@ -61,15 +63,31 @@ class OrbitEntity: Entity {
         guard let traceResource = try? TextureResource.load(named: "TrailGradient") else { return nil }
         
         let traceMap = MaterialParameters.Texture(traceResource)
+        
+        #if os(iOS) || os(tvOS) || os(visionOS)
         var material = UnlitMaterial(color: UIColor(node.color ?? .gray))
         material.opacityThreshold = 0
         material.blending = .transparent(opacity: .init(texture: traceMap))
+        #elseif os(macOS)
+        var material = UnlitMaterial(color: NSColor(node.color ?? .gray))
+        material.opacityThreshold = 0
+        #endif
         
-        self.components.set(ModelComponent(mesh: mesh, materials: [material]))
-        
-        self.orientation = transformation
+        self.model = ModelEntity(mesh: mesh, materials: [material])
+        model.orientation = transformation
     }
     
-    @MainActor required init() { }
+    func update(scale: Double, duration: Double) {
+        let scale: SIMD3<Float> = [Float(scale), 1, Float(scale)]
+        
+        if duration == 0 {
+            model.position = .zero
+            model.scale = scale
+            model.orientation = transformation
+        } else {
+            let transform = Transform(scale: scale, rotation: transformation, translation: model.position)
+            model.move(to: transform, relativeTo: model.parent, duration: duration, timingFunction: .easeInOut)
+        }
+    }
 }
 

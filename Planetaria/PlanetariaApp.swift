@@ -8,39 +8,41 @@
 import SwiftUI
 import PlanetariaData
 import PlanetariaUI
+
 @main
 struct PlanetariaApp: App {
     
     @StateObject private var simulation = Simulation(from: "Planetaria")
     
-    private let debug: Bool = false
+    @State private var showSettings: Bool = false
     
     var body: some Scene {
         
         #if os(iOS) || os(macOS) || os(tvOS)
         WindowGroup {
             if simulation.isLoaded {
-                Navigator(showDetail: showDetail, menu: menu, detail: detail, header: header, toolbar: toolbar) {
+                Navigator(showDetail: showDetail, showSettings: $showSettings, menu: menu, detail: detail) {
                     Simulator2D(from: simulation)
                 }
+                .environmentObject(simulation)
             } else {
                 Launcher()
             }
         }
         
         #elseif os(visionOS)
-        
         WindowGroup(id: "launcher") {
             Launcher(isLoaded: simulation.isLoaded)
         }
         WindowGroup(id: "navigator") {
-            Navigator(showDetail: showDetail, menu: menu, detail: detail, header: header, toolbar: toolbar) { }
+            Navigator(showDetail: showDetail, showSettings: $showSettings, menu: menu, detail: detail) { }
+                .environmentObject(simulation)
         }
-        .defaultSize(width: 0.7, height: 0.7, depth: 0, in: .meters)
+        .defaultSize(width: 0.5 , height: 0.38, depth: 0, in: .meters)
         
         ImmersiveSpace(id: "simulator") {
             Simulator3D(from: simulation)
-                .offset(y: -1500).offset(z: -1500)
+                .offset(y: -1200).offset(z: -1500)
         }
         
         #endif
@@ -48,7 +50,7 @@ struct PlanetariaApp: App {
     
     private var showDetail: Binding<Bool> {
         Binding {
-            simulation.hasSelection && !debug
+            simulation.hasSelection
         } set: { _ in
             simulation.select(nil)
         }
@@ -69,22 +71,6 @@ struct PlanetariaApp: App {
             ObjectDetails(object: object)
                 .id(object.id)
                 .environmentObject(simulation)
-                .overlay(alignment: .topTrailing) {
-                    XButton {
-                        withAnimation {
-                            simulation.select(nil)
-                        }
-                    }
-                    .padding(5)
-                }
         }
-    }
-    
-    private func header() -> some View {
-        Header(simulation: simulation)
-    }
-    
-    private func toolbar() -> some View {
-        Toolbar(simulation: simulation)
     }
 }

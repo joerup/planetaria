@@ -71,6 +71,7 @@ struct ObjectDetails: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom, 10)
                 }
+                
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
                     if properties.luminosity?.value != 0 {
                         PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
@@ -80,8 +81,8 @@ struct ObjectDetails: View {
                     PropertyText(type: .large, name: "Orbital Distance", property: properties.semimajorAxis?.dynamicDistance(for: object.category))
                     PropertyText(type: .large, name: "Mass", property: properties.mass)
                     PropertyText(type: .large, name: "Radius", property: properties.radius)
-                    PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt?[.deg])
-//                    PropertyText(type: .large, name: "Temperature", property: properties.temperature)
+//                    PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt?[.deg])
+                    PropertyText(type: .large, name: "Temperature", property: properties.temperature)
 //                    PropertyText(type: .large, name: "Pressure", property: properties.pressure)
                 }
                 .padding(.bottom, 10)
@@ -95,6 +96,30 @@ struct ObjectDetails: View {
                     Text("Named after \(namesake).")
                         .foregroundColor(.gray)
                 }
+                
+//                VStack {
+//                    Image("Mercury3")
+//                        .resizable()
+//                        .clipShape(RoundedRectangle(cornerRadius: 20))
+//                        .aspectRatio(contentMode: .fit)
+//                    
+//                    HStack {
+//                        Image("Mercury1")
+//                            .resizable()
+//                            .clipShape(RoundedRectangle(cornerRadius: 20))
+//                            .aspectRatio(contentMode: .fit)
+//                        Image("Mercury2")
+//                            .resizable()
+//                            .clipShape(RoundedRectangle(cornerRadius: 20))
+//                            .aspectRatio(contentMode: .fit)
+//                    }
+//                    
+//                    Image("Mercury4")
+//                        .resizable()
+//                        .clipShape(RoundedRectangle(cornerRadius: 20))
+//                        .aspectRatio(contentMode: .fit)
+//                }
+//                .padding(.vertical)
                 
                 Footnote()
             }

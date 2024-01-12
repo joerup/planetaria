@@ -34,11 +34,6 @@ public class Properties {
     
     public var rotationPeriod: Value<TimeU>?
     
-    public var axialTilt: Value<AngleU>? {
-        guard let rotationAxis = rotation?.axis, let orbitalAxis = orbit?.axis else { return nil }
-        return Value(rotationAxis.angle(with: orbitalAxis), .rad)
-    }
-    
     public var temperature: Value<TemperatureU>?
     public var pressure: Value<PressureU>?
     

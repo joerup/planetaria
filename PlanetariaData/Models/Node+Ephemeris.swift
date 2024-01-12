@@ -10,19 +10,11 @@ import Foundation
 extension Node {
     
     public func loadEphemerides() async {
-        await self.loadEphemeris()
+        if let ephemerisData = try? await getEphemerisData(date: .now) {
+            set(position: ephemerisData.position, velocity: ephemerisData.velocity)
+        }
         for child in children {
             await child.loadEphemerides()
-        }
-    }
-    
-    fileprivate func loadEphemeris() async {
-        do {
-            if let ephemerisData = try await getEphemerisData(date: .now) {
-                set(position: ephemerisData.position, velocity: ephemerisData.velocity)
-            }
-        } catch {
-            print(error)
         }
     }
 

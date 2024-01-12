@@ -157,7 +157,7 @@ public extension Sequence where Element: Hashable {
 public extension Date {
     var string: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy MMM dd HH:mm:ss"
+        formatter.dateFormat = "yyyy MMM dd HH:mm"
         return formatter.string(from: self)
     }
     
@@ -188,24 +188,6 @@ public extension Color {
         let blue = Double(rgb & 0x0000FF) / 255.0
         
         self.init(red: red, green: green, blue: blue)
-    }
-}
-
-public extension PresentationDetent {
-    
-    static var small: PresentationDetent {
-        .height(95)
-    }
-    static var preview: PresentationDetent {
-        .fraction(0.4)
-    }
-    
-    func height(size: CGSize) -> CGFloat {
-        if self == .small {
-            return 100
-        } else {
-            return size.height*0.4
-        }
     }
 }
 
