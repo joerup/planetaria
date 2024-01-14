@@ -6,19 +6,18 @@
 //
 
 import SwiftUI
-import PlanetariaUI
 import PlanetariaData
 
 struct SystemDetails: View {
     
     @EnvironmentObject var simulation: Simulation
     
-    private var system: System
+    private var system: SystemNode
     
     private var categories: [String] = []
     private var predicates: [String : (Node) -> Bool] = [:]
     
-    init(system: System) {
+    init(system: SystemNode) {
         self.system = system
         
         if system.children.contains(where: { $0.category == .star }) {

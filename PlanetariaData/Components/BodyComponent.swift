@@ -12,12 +12,14 @@ class BodyComponent: Component {
     var model: Entity
     
     private var diameter: Double
+    private var rotation: Node.Rotation?
     
     init?(node: Node, size: Double) {
-        guard let body = node as? Object, let bodyEntity = try? ModelEntity.load(named: node.name) else { return nil }
+        guard let body = node as? ObjectNode, let bodyEntity = try? ModelEntity.load(named: node.name) else { return nil }
         
         self.model = bodyEntity
         self.diameter = 2 * body.totalSize / size
+        self.rotation = body.rotation
             
         let collisionShape = ShapeResource.generateSphere(radius: bodyEntity.visualBounds(relativeTo: bodyEntity).boundingRadius/2)
         bodyEntity.components.set(CollisionComponent(shapes: [collisionShape]))
@@ -25,11 +27,12 @@ class BodyComponent: Component {
         bodyEntity.components.set(InputTargetComponent())
         #endif
         bodyEntity.scale = SIMD3(repeating: Float(size))
-        bodyEntity.orientation = orientation(body.rotation)
+        bodyEntity.orientation = orientation(rotation)
     }
     
-    func update(scale: Double, duration: Double) {
+    func update(scale: Double, duration: Double = 0) {
         let scale = SIMD3(repeating: Float(diameter * scale))
+        model.orientation = orientation(rotation)
         
         if duration == 0 {
             model.position = .zero
@@ -40,7 +43,7 @@ class BodyComponent: Component {
         }
     }
     
-    private func orientation(_ rotation: Rotation?) -> simd_quatf {
+    private func orientation(_ rotation: Node.Rotation?) -> simd_quatf {
         let angle = rotation?.angle ?? .zero
         let axis = rotation?.axis ?? .referencePlane
         let tilt = axis.angle(with: .referencePlane)
@@ -50,7 +53,7 @@ class BodyComponent: Component {
 
         // Align the lat/lon surface origin (0,0) vectors
         let equator = Vector.vernalEquinox.rotated(by: -tilt, about: axis.cross(.referencePlane).unitVector)
-        let primeMeridian = Vector.vernalEquinox.rotated(by: .pi/2 + axis.ra, about: .celestialPole)
+        let primeMeridian = Vector.vernalEquinox.rotated(by: axis.ra, about: .celestialPole)
         let q2 = simd_quatf(angle: Float(primeMeridian.signedAngle(with: equator, around: axis, clockwise: true) + angle), axis: axis.simdf)
 
         return q2 * q1

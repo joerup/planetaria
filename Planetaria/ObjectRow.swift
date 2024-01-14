@@ -10,9 +10,9 @@ import PlanetariaData
 
 public struct ObjectRow: View {
     
-    var object: Object
+    var object: ObjectNode
     
-    public init(object: Object) {
+    public init(object: ObjectNode) {
         self.object = object
     }
     

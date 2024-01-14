@@ -69,7 +69,7 @@ struct Header: View {
     private func clock(_ isCompact: Bool) -> some View {
         HStack {
             Button {
-//                simulation.decreaseSpeed()
+                simulation.decreaseSpeed()
             } label: {
                 Image(systemName: "backward")
                     .foregroundStyle(simulation.timeRatio < -1 ? .mint : .white)
@@ -77,7 +77,6 @@ struct Header: View {
                     .padding(.horizontal)
                     .padding(.vertical, 12)
             }
-            .opacity(0)
             
             Text(simulation.time.string)
                 .lineLimit(0)
@@ -87,7 +86,7 @@ struct Header: View {
                 .opacity(0.5)
             
             Button {
-//                simulation.increaseSpeed()
+                simulation.increaseSpeed()
             } label: {
                 Image(systemName: "forward")
                     .foregroundStyle(simulation.timeRatio > 1 ? .mint : .white)
@@ -95,7 +94,6 @@ struct Header: View {
                     .padding(.horizontal)
                     .padding(.vertical, 12)
             }
-            .opacity(0)
         }
         .dynamicTypeSize(..<DynamicTypeSize.xLarge)
     }

@@ -5,11 +5,11 @@
 //  Created by Joe Rupertus on 1/7/24.
 //
 
-#if os(iOS) || os(macOS) || os(tvOS)
 import SwiftUI
 import RealityKit
 
-public struct Simulator2D: View {
+#if os(iOS) || os(macOS) || os(tvOS)
+public struct Simulator: View {
     
     @ObservedObject private var simulation: Simulation
 
@@ -67,7 +67,7 @@ private struct RealityView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: mode, automaticallyConfigureSession: true)
-//        arView.environment.background = .color(.black)
+        arView.environment.background = .color(.black)
         
         anchor.addChild(root)
         
@@ -104,7 +104,7 @@ private struct RealityView: UIViewRepresentable {
             
             let tapLocation = recognizer.location(in: view)
             
-            if let entity = view.entity(at: tapLocation), let entity = entity as? SimulationEntity ?? entity.parent as? SimulationEntity, let node = entity.node {
+            if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
                 select(node)
             } else {
                 select(nil)
@@ -161,7 +161,7 @@ private struct RealityView: NSViewRepresentable {
             
             let tapLocation = recognizer.location(in: view)
             
-            if let entity = view.entity(at: tapLocation), let entity = entity as? SimulationEntity ?? entity.parent as? SimulationEntity, let node = entity.node {
+            if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
                 select(node)
             } else {
                 select(nil)

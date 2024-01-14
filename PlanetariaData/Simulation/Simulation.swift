@@ -16,14 +16,12 @@ final public class Simulation: ObservableObject {
     @Published public private(set) var isLoaded: Bool = false
     
     public init(from fileName: String) {
-        self.run()
-        
         Task {
             // Decode the tree from the file
             guard let file = Bundle.main.path(forResource: fileName, ofType: "json"),
                   let json = try? String(contentsOfFile: file),
                   let data = json.data(using: .utf8),
-                  let root = try? JSONDecoder().decode(System.self, from: data)
+                  let root = try? JSONDecoder().decode(SystemNode.self, from: data)
             else { return }
             
             // Create the node references
@@ -58,33 +56,35 @@ final public class Simulation: ObservableObject {
             
             await MainActor.run {
                 self.isLoaded = true
+                self.run()
             }
         }
         
-        // Register the RealityKit components
         BodyComponent.registerComponent()
+        LabelComponent.registerComponent()
+        LightComponent.registerComponent()
         OrbitComponent.registerComponent()
         PointComponent.registerComponent()
+        
+        rootEntity.simulation = self
+        SimulationComponent.registerComponent()
+        SimulationSystem.registerSystem()
     }
     
     
     // MARK: - Structure
     
-    internal var rootEntity = Entity()
+    internal var rootEntity = SimulationRootEntity()
     
-    private var entities: [SimulationEntity] {
-        rootEntity.children.compactMap({ $0 as? SimulationEntity })
-    }
-    
-    @Published private var root: Node?
+    @Published private var root: SystemNode?
     @Published private var focus: Node?
-    @Published private var system: System?
-    @Published private var object: Object?
+    @Published private var system: SystemNode?
+    @Published private var object: ObjectNode?
     
-    public var selectedSystem: System? {
+    public var selectedSystem: SystemNode? {
         return system
     }
-    public var selectedObject: Object? {
+    public var selectedObject: ObjectNode? {
         return object
     }
     
@@ -92,10 +92,10 @@ final public class Simulation: ObservableObject {
         return node?.object == object
     }
     internal func isSystem(_ node: Node?) -> Bool {
-        return node?.matches(system) ?? false
+        return node == system
     }
     internal func isFocus(_ node: Node?) -> Bool {
-        return node?.matches(focus) ?? false
+        return node == focus
     }
     
     public var hasSelection: Bool {
@@ -112,7 +112,9 @@ final public class Simulation: ObservableObject {
     
     // Offset
     @Published private(set) var offsetAmount: Double = 1.0
-    @Published private(set) var offset: Vector = .zero
+    internal var offset: Vector {
+        (focus?.parent?.globalPosition ?? .zero) + (focus?.position ?? .zero) * offsetAmount
+    }
     
     // Scale
     @Published private var steadyScale: CGFloat = 1.0
@@ -139,10 +141,10 @@ final public class Simulation: ObservableObject {
     // MARK: - Settings
     
     @Published public var time: Date = .now
-    @Published public var timeStep: Double = 0.1
+    @Published public var timeStep: Double = 0.01
     @Published public var timeRatio: Double = 1.0 { didSet { isRealTime = false } }
     public private(set) var isRealTime: Bool = true
-    public var maxTimeRatio: Double = 1E+9
+    public var maxTimeRatio: Double = 1E+5
     
     public var arMode: Bool = false
     public var floodLighting: Bool = false
@@ -154,26 +156,13 @@ final public class Simulation: ObservableObject {
     public var rotateEnabled: Bool = true
     
     
-    
     // MARK: - Motion
     
     private func run() {
         Timer.scheduledTimer(withTimeInterval: timeStep, repeats: true) { _ in
             let dt = self.timeStep * self.timeRatio
             self.time.addTimeInterval(dt)
-            self.root?.simulate(dt: dt)
-        }
-    }
-    
-    
-    // MARK: - Entities
-    
-    private func updateEntities(animated: Bool) {
-        let orientation = simd_quatf(angle: Float(pitch.radians), axis: SIMD3(1,0,0)) * simd_quatf(angle: Float(-rotation.radians), axis: SIMD3(0,1,0))
-        rootEntity.orientation = orientation
-        
-        for entity in entities {
-            entity.update(scale: scale, offset: offset/size, orientation: orientation, duration: animated ? 0.5 : 0)
+            self.root?.advance(by: dt)
         }
     }
     
@@ -347,7 +336,7 @@ final public class Simulation: ObservableObject {
     }
     
     // Change the system node
-    private func setSystem(_ system: System?) {
+    private func setSystem(_ system: SystemNode?) {
         self.system = system
         if let system, let object, !system.children.map(\.object).contains(object) {
             setObject(nil)
@@ -355,9 +344,9 @@ final public class Simulation: ObservableObject {
     }
     
     // Change the object node
-    private func setObject(_ object: Object?) {
+    private func setObject(_ object: ObjectNode?) {
         self.object = object
-        if let object, object == system?.object, let focus, !focus.matches(system), !focus.matches(object) {
+        if let object, object == system?.object, let focus, focus != system, focus != object {
             zoomToOrbit(node: focus)
         }
         else if let object, object != focus?.object {
@@ -401,8 +390,6 @@ final public class Simulation: ObservableObject {
         let system = focus.system
         let offset = focus.globalPosition
         
-        // Some elements fade during transitions to prevent awkward animations
-        
         // Set the focus and system nodes
         setFocus(focus)
         if let system {
@@ -412,10 +399,9 @@ final public class Simulation: ObservableObject {
         // Set the scale and offset
         self.offsetAmount = 1.0
         self.steadyScale = scale
-        self.offset = offset
         
         // Update the entities
-        self.updateEntities(animated: true)
+        rootEntity.transition(scale: scale, offset: offset, duration: 0.5)
     }
     
     // Navigation changes when gestures occur
@@ -438,14 +424,8 @@ final public class Simulation: ObservableObject {
             offsetAmount *= 1.0
         }
         
-        // Set the offset
-        self.offset = (focus.parent?.globalPosition ?? .zero) + focus.position * offsetAmount
-        
-        // Update the entities
-        self.updateEntities(animated: false)
-        
         // Focus to the child node if zoomed in enough (offset is beginning)
-        if let object = object ?? focus.object, let childNode = focus.children.first(where: { $0.object == object }) {
+        if let object = object ?? focus.object, let focus = focus as? SystemNode, let childNode = focus.children.first(where: { $0.object == object }) {
             if scaleFactor * scale * (childNode.position).magnitude + scale * object.size * 2 > 0.5 * size {
                 setFocus(childNode)
                 continuousUpdate()
@@ -458,7 +438,7 @@ final public class Simulation: ObservableObject {
         }
 
         // Select the child system if zoomed in enough (the reference node/child system is a system that comprises more than 5% of the screen)
-        if !focus.matches(system), let childSystem = focus as? System, let distance = childSystem.scaleDistance, scale * distance > 0.05 * size {
+        if focus != system, let childSystem = focus as? SystemNode, let distance = childSystem.scaleDistance, scale * distance > 0.05 * size {
             setSystem(childSystem)
         }
         // Select the parent system if zoomed out enough (the reference node/child system is a system that comprises less than 5% of the screen)

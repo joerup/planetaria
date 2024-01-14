@@ -65,12 +65,19 @@
 		0165275A2B48C6FA004C0E95 /* Miranda.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527542B48C6F9004C0E95 /* Miranda.usdz */; };
 		0165275B2B48C6FA004C0E95 /* Triton.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527552B48C6FA004C0E95 /* Triton.usdz */; };
 		0165275D2B48CA93004C0E95 /* Haumea.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165275C2B48CA93004C0E95 /* Haumea.usdz */; };
+		01682DB92B51E3000022797E /* PropertyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B92B51E22E00B3744A /* PropertyText.swift */; };
+		01682DBA2B51E3130022797E /* FormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B62B51E22B00B3744A /* FormattedText.swift */; };
+		01682DBB2B51E3140022797E /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B72B51E22B00B3744A /* XButton.swift */; };
+		01682DBC2B51E3160022797E /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B52B51E22B00B3744A /* Acknowledgements.swift */; };
+		01682DBD2B51E31A0022797E /* ObjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BA2B51E22E00B3744A /* ObjectRow.swift */; };
+		01682DBE2B51E31B0022797E /* ObjectIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BB2B51E22E00B3744A /* ObjectIcon.swift */; };
+		01682DBF2B51E31C0022797E /* ObjectCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BC2B51E22E00B3744A /* ObjectCard.swift */; };
 		0168673A2548F1BB007D1553 /* PlanetariaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016867392548F1BB007D1553 /* PlanetariaApp.swift */; };
 		0168673E2548F1BD007D1553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0168673D2548F1BD007D1553 /* Assets.xcassets */; };
 		01698A78296FD40C00B42A81 /* Simulator2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01698A77296FD40C00B42A81 /* Simulator2DView.swift */; };
 		0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169A5A22B3D3E3A00080E6A /* Toolbar.swift */; };
 		016DCD282B4666650030B614 /* SearchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DCD272B4666650030B614 /* SearchMenu.swift */; };
-		016DCD2B2B467C6F0030B614 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 016DCD2A2B467C6F0030B614 /* Localizable.strings */; };
+		016DCD2B2B467C6F0030B614 /* Descriptions.strings in Resources */ = {isa = PBXBuildFile; fileRef = 016DCD2A2B467C6F0030B614 /* Descriptions.strings */; };
 		017166882B45263000A955D2 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166872B45263000A955D2 /* Launcher.swift */; };
 		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
@@ -82,14 +89,11 @@
 		01A5B5A92972009700626AD5 /* Moon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B5A82972009700626AD5 /* Moon.swift */; };
 		01A5B5AB2972283600626AD5 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B5AA2972283600626AD5 /* System.swift */; };
 		01B540E02B43929D00D5AF51 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B540DF2B43929D00D5AF51 /* Planetaria.json */; };
-		01BFBEF02A19C9B500DB7EFF /* ObjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BFBEEF2A19C9B500DB7EFF /* ObjectRow.swift */; };
 		01C7BE7B2A8C64F80021D753 /* PlanetariaData in Frameworks */ = {isa = PBXBuildFile; productRef = 01C7BE7A2A8C64F80021D753 /* PlanetariaData */; };
-		01D4C72A2A8C6FFB000F59B7 /* PlanetariaUI in Frameworks */ = {isa = PBXBuildFile; productRef = 01D4C7292A8C6FFB000F59B7 /* PlanetariaUI */; };
 		01D4C7972A8C8EE5000F59B7 /* PlanetariaWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4C7962A8C8EE5000F59B7 /* PlanetariaWatchApp.swift */; };
 		01D4C79B2A8C8EE6000F59B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C79A2A8C8EE6000F59B7 /* Assets.xcassets */; };
 		01D4C79E2A8C8EE6000F59B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C79D2A8C8EE6000F59B7 /* Preview Assets.xcassets */; };
 		01D4C7A32A8C8F6C000F59B7 /* PlanetariaData in Frameworks */ = {isa = PBXBuildFile; productRef = 01D4C7A22A8C8F6C000F59B7 /* PlanetariaData */; };
-		01D4C7A52A8C8F6C000F59B7 /* PlanetariaUI in Frameworks */ = {isa = PBXBuildFile; productRef = 01D4C7A42A8C8F6C000F59B7 /* PlanetariaUI */; };
 		01D5069C2AA5616200699FE9 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D5069B2AA5616200699FE9 /* Header.swift */; };
 		01E50F35297C6D7300F2365A /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E50F34297C6D7300F2365A /* SearchListView.swift */; };
 		01E62CC4297721F900C424BC /* ARSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E62CC3297721F800C424BC /* ARSimulator.swift */; };
@@ -117,7 +121,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0101D13E2A8C6F3D000AED84 /* PlanetariaUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PlanetariaUI; sourceTree = "<group>"; };
 		011CB3892A9C2FAE00749E31 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		011E0ED829730EE400151CD8 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		011E0EE42973A98300151CD8 /* SystemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemDetailView.swift; sourceTree = "<group>"; };
@@ -186,10 +189,17 @@
 		01698A77296FD40C00B42A81 /* Simulator2DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator2DView.swift; sourceTree = "<group>"; };
 		0169A5A22B3D3E3A00080E6A /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		016DCD272B4666650030B614 /* SearchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenu.swift; sourceTree = "<group>"; };
-		016DCD2A2B467C6F0030B614 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		016DCD2A2B467C6F0030B614 /* Descriptions.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Descriptions.strings; sourceTree = "<group>"; };
 		017166872B45263000A955D2 /* Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
 		017166892B45B1A600A955D2 /* ObjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetails.swift; sourceTree = "<group>"; };
 		0171668B2B45B1AB00A955D2 /* SystemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemDetails.swift; sourceTree = "<group>"; };
+		017200B52B51E22B00B3744A /* Acknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acknowledgements.swift; sourceTree = "<group>"; };
+		017200B62B51E22B00B3744A /* FormattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedText.swift; sourceTree = "<group>"; };
+		017200B72B51E22B00B3744A /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
+		017200B92B51E22E00B3744A /* PropertyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyText.swift; sourceTree = "<group>"; };
+		017200BA2B51E22E00B3744A /* ObjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectRow.swift; sourceTree = "<group>"; };
+		017200BB2B51E22E00B3744A /* ObjectIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectIcon.swift; sourceTree = "<group>"; };
+		017200BC2B51E22E00B3744A /* ObjectCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCard.swift; sourceTree = "<group>"; };
 		018182D5296BD41000262A70 /* Simulator3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator3DView.swift; sourceTree = "<group>"; };
 		018182DB296D254900262A70 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		01A0A5DD2B4B420300D20A9C /* Simulator2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulator2D.swift; sourceTree = "<group>"; };
@@ -199,7 +209,6 @@
 		01A5B5AA2972283600626AD5 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
 		01B540DF2B43929D00D5AF51 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
-		01BFBEEF2A19C9B500DB7EFF /* ObjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectRow.swift; sourceTree = "<group>"; };
 		01D4C7942A8C8EE5000F59B7 /* PlanetariaWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PlanetariaWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D4C7962A8C8EE5000F59B7 /* PlanetariaWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetariaWatchApp.swift; sourceTree = "<group>"; };
 		01D4C79A2A8C8EE6000F59B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -220,7 +229,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C7BE7B2A8C64F80021D753 /* PlanetariaData in Frameworks */,
-				01D4C72A2A8C6FFB000F59B7 /* PlanetariaUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +251,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				01D4C7A32A8C8F6C000F59B7 /* PlanetariaData in Frameworks */,
-				01D4C7A52A8C8F6C000F59B7 /* PlanetariaUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +312,6 @@
 				0133669B2A16DC9100E8824D /* ObjectPreview.swift */,
 				011E0EE42973A98300151CD8 /* SystemDetailView.swift */,
 				011E0EF229746F4600151CD8 /* DetailSection.swift */,
-				01BFBEEF2A19C9B500DB7EFF /* ObjectRow.swift */,
 			);
 			path = "New Stuff";
 			sourceTree = "<group>";
@@ -357,7 +363,6 @@
 			children = (
 				016867382548F1BB007D1553 /* Planetaria */,
 				01D4C7952A8C8EE5000F59B7 /* PlanetariaWatch Watch App */,
-				0101D13E2A8C6F3D000AED84 /* PlanetariaUI */,
 				012BD6CE2A8C6332009907CC /* PlanetariaData */,
 				016867372548F1BB007D1553 /* Products */,
 				01C7BE792A8C64F80021D753 /* Frameworks */,
@@ -388,12 +393,19 @@
 				0171668B2B45B1AB00A955D2 /* SystemDetails.swift */,
 				017166892B45B1A600A955D2 /* ObjectDetails.swift */,
 				016DCD272B4666650030B614 /* SearchMenu.swift */,
+				017200B92B51E22E00B3744A /* PropertyText.swift */,
+				017200B62B51E22B00B3744A /* FormattedText.swift */,
+				017200B72B51E22B00B3744A /* XButton.swift */,
+				017200B52B51E22B00B3744A /* Acknowledgements.swift */,
+				017200BA2B51E22E00B3744A /* ObjectRow.swift */,
+				017200BB2B51E22E00B3744A /* ObjectIcon.swift */,
+				017200BC2B51E22E00B3744A /* ObjectCard.swift */,
 				01106BD32A81A74E00054D22 /* Old */,
 				0168673D2548F1BD007D1553 /* Assets.xcassets */,
 				016527152B48951D004C0E95 /* 3D Models */,
 				016867422548F1BD007D1553 /* Info.plist */,
 				01489ED32B41F5C300E74447 /* Planetaria.json */,
-				016DCD2A2B467C6F0030B614 /* Localizable.strings */,
+				016DCD2A2B467C6F0030B614 /* Descriptions.strings */,
 				01DE2B2E2A9C385900D4CF31 /* Preview Content 22-04-13-235 */,
 			);
 			path = Planetaria;
@@ -497,7 +509,6 @@
 			name = Planetaria;
 			packageProductDependencies = (
 				01C7BE7A2A8C64F80021D753 /* PlanetariaData */,
-				01D4C7292A8C6FFB000F59B7 /* PlanetariaUI */,
 			);
 			productName = Planets;
 			productReference = 016867362548F1BB007D1553 /* Planetaria.app */;
@@ -554,7 +565,6 @@
 			name = "PlanetariaWatch Watch App";
 			packageProductDependencies = (
 				01D4C7A22A8C8F6C000F59B7 /* PlanetariaData */,
-				01D4C7A42A8C8F6C000F59B7 /* PlanetariaUI */,
 			);
 			productName = "PlanetariaWatch Watch App";
 			productReference = 01D4C7942A8C8EE5000F59B7 /* PlanetariaWatch Watch App.app */;
@@ -611,7 +621,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016DCD2B2B467C6F0030B614 /* Localizable.strings in Resources */,
+				016DCD2B2B467C6F0030B614 /* Descriptions.strings in Resources */,
 				016527192B489635004C0E95 /* Mercury.usdz in Resources */,
 				016527302B489D12004C0E95 /* Pluto.usdz in Resources */,
 				016527402B48C6C5004C0E95 /* Europa.usdz in Resources */,
@@ -688,6 +698,7 @@
 				016DCD282B4666650030B614 /* SearchMenu.swift in Sources */,
 				011E0EF5297471AA00151CD8 /* ObjectListView.swift in Sources */,
 				013E10C52977CC1B00871BBA /* MinorPlanet.swift in Sources */,
+				01682DBA2B51E3130022797E /* FormattedText.swift in Sources */,
 				0133669C2A16DC9200E8824D /* ObjectPreview.swift in Sources */,
 				011E0EE52973A98300151CD8 /* SystemDetailView.swift in Sources */,
 				013366A52A1735DD00E8824D /* DetailSheet.swift in Sources */,
@@ -710,19 +721,24 @@
 				0156E291298246CB003B592E /* PropertyBlock.swift in Sources */,
 				011E0ED929730EE400151CD8 /* LaunchScreenView.swift in Sources */,
 				0168673A2548F1BB007D1553 /* PlanetariaApp.swift in Sources */,
+				01682DBC2B51E3160022797E /* Acknowledgements.swift in Sources */,
 				0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */,
 				018182DC296D254900262A70 /* Object.swift in Sources */,
 				011E0EF329746F4600151CD8 /* DetailSection.swift in Sources */,
+				01682DB92B51E3000022797E /* PropertyText.swift in Sources */,
 				016223CC2983641C0006E579 /* Object+Properties.swift in Sources */,
+				01682DBB2B51E3140022797E /* XButton.swift in Sources */,
 				0156E2872981FB48003B592E /* PropertyBlockDetails.swift in Sources */,
 				01A5B5A92972009700626AD5 /* Moon.swift in Sources */,
 				01A5B5AB2972283600626AD5 /* System.swift in Sources */,
 				01A0A5DE2B4B420400D20A9C /* Simulator2D.swift in Sources */,
 				017166882B45263000A955D2 /* Launcher.swift in Sources */,
 				011E0EF129746AD700151CD8 /* DetailRow.swift in Sources */,
+				01682DBE2B51E31B0022797E /* ObjectIcon.swift in Sources */,
 				018182D6296BD41000262A70 /* Simulator3DView.swift in Sources */,
 				01E840302A1FB2C000B2153E /* Settings.swift in Sources */,
-				01BFBEF02A19C9B500DB7EFF /* ObjectRow.swift in Sources */,
+				01682DBF2B51E31C0022797E /* ObjectCard.swift in Sources */,
+				01682DBD2B51E31A0022797E /* ObjectRow.swift in Sources */,
 				013E10CB29784C7900871BBA /* DetailText.swift in Sources */,
 				011CB38A2A9C2FAE00749E31 /* Navigator.swift in Sources */,
 				0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */,
@@ -1164,17 +1180,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = PlanetariaData;
 		};
-		01D4C7292A8C6FFB000F59B7 /* PlanetariaUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PlanetariaUI;
-		};
 		01D4C7A22A8C8F6C000F59B7 /* PlanetariaData */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PlanetariaData;
-		};
-		01D4C7A42A8C8F6C000F59B7 /* PlanetariaUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PlanetariaUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

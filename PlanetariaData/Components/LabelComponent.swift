@@ -6,7 +6,6 @@
 //
 
 import RealityKit
-import UIKit
 
 class LabelComponent: Component {
     
@@ -15,11 +14,11 @@ class LabelComponent: Component {
     private var radius: Double
     
     init?(node: Node, size: Double) {
-        guard node is Object, node.id <= 10 || node.id % 100 == 99 else { return nil }
+        guard node is ObjectNode, node.id <= 10 || node.id % 100 == 99 else { return nil }
         
         self.radius = node.totalSize / size
         
-        let mesh = MeshResource.generateText(node.name, extrusionDepth: 0, font: .systemFont(ofSize: 0.015), containerFrame: CGRect.zero, alignment: .center, lineBreakMode: .byClipping)
+        let mesh = MeshResource.generateText(node.name, extrusionDepth: 0, font: .systemFont(ofSize: 0.015), containerFrame: .zero, alignment: .center, lineBreakMode: .byClipping)
         
         var material = UnlitMaterial(color: .white)
         material.blending = .transparent(opacity: 0.5)
@@ -30,7 +29,7 @@ class LabelComponent: Component {
         model.position = [0, 0.05, 0]
     }
     
-    func update(scale: Double, orientation: simd_quatf, duration: Double) {
+    func update(scale: Double, orientation: simd_quatf, duration: Double = 0) {
         let distance = Float(scale * radius + 0.03)
         
         let orientation = orientation.inverse * simd_quatf(angle: -.pi/2, axis: [1,0,0])

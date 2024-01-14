@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import PlanetariaUI
 import PlanetariaData
 
 struct ObjectDetails: View {
     
-    var object: Object
+    var object: ObjectNode
     
     var body: some View {
         #if os(macOS)
@@ -66,7 +65,8 @@ struct ObjectDetails: View {
             VStack(alignment: .leading, spacing: 10) {
                 
                 if object.rank == .primary || object.rank == .secondary {
-                    Text(LocalizedStringKey(stringLiteral: "\(object.name) Description"))
+                    let localizedString = NSLocalizedString(object.name, tableName: "Descriptions", comment: "")
+                    Text(localizedString)
                         .font(.body)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom, 10)
@@ -121,7 +121,7 @@ struct ObjectDetails: View {
 //                }
 //                .padding(.vertical)
                 
-                Footnote()
+//                Footnote()
             }
             .padding(.horizontal)
         }

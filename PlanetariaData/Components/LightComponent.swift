@@ -15,7 +15,7 @@ class LightComponent: Component {
     private var light: PointLightComponent
     
     init?(node: Node, size: Double) {
-        guard let object = node as? Object, object.luminosity > 0 else { return nil }
+        guard let object = node as? ObjectNode, object.luminosity > 0 else { return nil }
         
         self.intensity = object.intensity * 1000
         self.light = PointLightComponent(intensity: Float(intensity), attenuationRadius: 1E+20)

@@ -5,12 +5,11 @@
 //  Created by Joe Rupertus on 11/8/23.
 //
 
-#if os(visionOS)
 import SwiftUI
-import simd
 import RealityKit
 
-public struct Simulator3D: View {
+#if os(visionOS)
+public struct Simulator: View {
 
     @ObservedObject private var simulation: Simulation
 

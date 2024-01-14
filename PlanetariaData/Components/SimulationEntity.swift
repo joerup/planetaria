@@ -1,6 +1,5 @@
 //
-//  
-// SimulationEntity.swift
+//  SimulationEntity.swift
 //
 //
 //  Created by Joe Rupertus on 1/5/24.
@@ -10,21 +9,14 @@ import RealityKit
 
 class SimulationEntity: Entity {
     
-    private(set) var node: Node?
-    
-    private var coordinates: Vector = .zero
-    
     @MainActor required init() { }
     
     init(node: Node, size: Double) async {
-        self.node = node
-        
-        self.coordinates = node.globalPosition / size
-        
         super.init()
         
         self.name = "\(node.id)"
-        self.position = coordinates.simdf
+        
+        components.set(SimulationComponent(node: node, size: size))
         
         if let point = PointComponent(node: node) {
             components.set(point)
@@ -34,10 +26,10 @@ class SimulationEntity: Entity {
             components.set(body)
             addChild(body.model)
         }
-        if let orbit = OrbitComponent(node: node, size: size) {
-            components.set(orbit)
-            addChild(orbit.model)
-        }
+//        if let orbit = OrbitComponent(node: node, size: size) {
+//            components.set(orbit)
+//            addChild(orbit.model)
+//        }
 //        if let label = LabelComponent(node: node, size: size) {
 //            components.set(label)
 //            addChild(label.model)
@@ -47,34 +39,32 @@ class SimulationEntity: Entity {
 //            addChild(light.model)
 //        }
     }
+}
+
+class SimulationRootEntity: Entity {
     
-    func update(scale: Double, offset: Vector, orientation: simd_quatf, duration: Double) {
-        animate(position: (coordinates - offset) * scale, duration: duration)
-        
-        if let body = component(BodyComponent.self) {
-            body.update(scale: scale, duration: duration)
-        }
-        if let orbit = component(OrbitComponent.self) {
-            orbit.update(scale: scale, duration: duration)
-        }
-        if let label = component(LabelComponent.self) {
-            label.update(scale: scale, orientation: orientation, duration: duration)
-        }
-        if let light = component(LightComponent.self) {
-            light.update(scale: scale)
-        }
-    }
+    var simulation: Simulation?
     
-    private func animate(position: Vector? = nil, scale: Double? = nil, duration: Double) {
-        let newPosition = position?.simdf ?? self.position
-        let newScale = if let scale { Float(scale) } else { self.scale.max() }
-        
-        if duration == 0 {
-            self.position = newPosition
-            self.scale = SIMD3(repeating: newScale)
-        } else {
-            let transform = Transform(scale: SIMD3(repeating: newScale), rotation: orientation, translation: newPosition)
-            move(to: transform, relativeTo: parent, duration: duration, timingFunction: .easeInOut)
+    required init() { }
+    
+    private static let query = EntityQuery(where: .has(SimulationComponent.self))
+    
+    func transition(scale: Double, offset: Vector, duration: Double) {
+        scene?.performQuery(Self.query).forEach { entity in
+            
+            // Move the simulation entity
+            if let component = entity.component(SimulationComponent.self) {
+                let position = component.position(scale: scale, offset: offset)
+                let transform = Transform(scale: entity.scale, rotation: entity.orientation, translation: position)
+                entity.move(to: transform, relativeTo: entity.parent, duration: duration, timingFunction: .easeInOut)
+            }
+            
+            if let body = entity.component(BodyComponent.self) {
+                body.update(scale: scale, duration: duration)
+            }
+            if let orbit = entity.component(OrbitComponent.self) {
+                orbit.update(scale: scale, duration: duration)
+            }
         }
     }
 }

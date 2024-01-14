@@ -97,7 +97,7 @@ public struct Property<ValueType: Equatable, UnitType: Unit>: Equatable {
             return self[.km]
         }
     }
-    public func dynamicDistance(for category: Category) -> Property<ValueType, UnitType> where ValueType == Double, UnitType == DistanceU {
+    public func dynamicDistance(for category: Node.Category) -> Property<ValueType, UnitType> where ValueType == Double, UnitType == DistanceU {
         switch category {
         case .star, .planet, .asteroid, .tno, .system:
             return self[.AU]

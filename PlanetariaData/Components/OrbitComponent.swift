@@ -27,8 +27,8 @@ class OrbitComponent: Component {
         var positions: [SIMD3<Float>] = []
         var uvs: [SIMD2<Float>] = []
         
-        positions.append([0,thickness,0])
-        positions.append([0,thickness,0])
+        positions.append([0,-thickness, 0])
+        positions.append([0, thickness, 0])
         
         uvs.append([0, 0])
         uvs.append([0, 1])
@@ -60,14 +60,13 @@ class OrbitComponent: Component {
         contents.models = [.init(id: "Orbit", parts: [meshPart])]
         
         guard let mesh = try? MeshResource.generate(from: contents) else { return nil }
-        guard let traceResource = try? TextureResource.load(named: "TrailGradient") else { return nil }
-        
-        let traceMap = MaterialParameters.Texture(traceResource)
+//        guard let traceResource = try? TextureResource.load(named: "TrailGradient") else { return nil }
+//        let traceMap = MaterialParameters.Texture(traceResource)
         
         #if os(iOS) || os(tvOS) || os(visionOS)
         var material = UnlitMaterial(color: UIColor(node.color ?? .gray))
-        material.opacityThreshold = 0
-        material.blending = .transparent(opacity: .init(texture: traceMap))
+//        material.opacityThreshold = 0
+//        material.blending = .transparent(opacity: .init(texture: traceMap))
         #elseif os(macOS)
         var material = UnlitMaterial(color: NSColor(node.color ?? .gray))
         material.opacityThreshold = 0
@@ -77,7 +76,7 @@ class OrbitComponent: Component {
         model.orientation = transformation
     }
     
-    func update(scale: Double, duration: Double) {
+    func update(scale: Double, duration: Double = 0) {
         let scale: SIMD3<Float> = [Float(scale), 1, Float(scale)]
         
         if duration == 0 {

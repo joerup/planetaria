@@ -7,7 +7,6 @@
 
 import SwiftUI
 import PlanetariaData
-import PlanetariaUI
 
 @main
 struct PlanetariaApp: App {
@@ -22,7 +21,7 @@ struct PlanetariaApp: App {
         WindowGroup {
             if simulation.isLoaded {
                 Navigator(showDetail: showDetail, showSettings: $showSettings, menu: menu, detail: detail) {
-                    Simulator2D(from: simulation)
+                    Simulator(from: simulation)
                 }
                 .environmentObject(simulation)
             } else {
@@ -41,7 +40,7 @@ struct PlanetariaApp: App {
         .defaultSize(width: 0.5 , height: 0.38, depth: 0, in: .meters)
         
         ImmersiveSpace(id: "simulator") {
-            Simulator3D(from: simulation)
+            Simulator(from: simulation)
                 .offset(y: -1200).offset(z: -1500)
         }
         

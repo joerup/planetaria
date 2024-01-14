@@ -10,10 +10,10 @@ import PlanetariaData
 
 public struct ObjectIcon: View {
     
-    var object: Object
+    var object: ObjectNode
     var size: CGFloat
     
-    public init(object: Object, size: CGFloat) {
+    public init(object: ObjectNode, size: CGFloat) {
         self.object = object
         self.size = size
     }

@@ -13,7 +13,7 @@ class PointComponent: Component {
     var model: ModelEntity
     
     init?(node: Node) {
-        guard node is Object else { return nil }
+        guard node is ObjectNode else { return nil }
         
         let radius: Float = node.system != nil ? 0.004 : 0.003
         let sphere = MeshResource.generateSphere(radius: radius)

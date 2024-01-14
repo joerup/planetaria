@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import PlanetariaUI
 import PlanetariaData
 
 public struct SearchMenu: View {
@@ -54,7 +53,7 @@ public struct SearchMenu: View {
 //                                    spacetime.object = object
                                 }
                             } label: {
-                                ObjectCard(object: object)
+//                                ObjectCard(object: object)
                             }
                         }
                     }
@@ -78,14 +77,14 @@ public struct SearchMenu: View {
     }
     
     private func findMatchingNodes(to text: String, at node: Node) -> [Node] {
-        let matchingNodes: [Node] = []
-        node.children.forEach { child in
+//        let matchingNodes: [Node] = []
+//        node.children.forEach { child in
 //            if child.isObject && child.name.starts(with: text) {
 //                matchingNodes += [child]
 //            } else if child.isSystem {
 //                matchingNodes += findMatchingNodes(to: text, at: child)
 //            }
-        }
-        return matchingNodes
+//        }
+        return []
     }
 }
