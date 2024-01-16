@@ -14,38 +14,39 @@ class SimulationSystem: System {
     
     private static let query = EntityQuery(where: .has(SimulationComponent.self))
     
-    required init(scene: Scene) { 
-        if let root = scene.anchors.first?.children.first as? SimulationRootEntity {
-            self.root = root
-            self.simulation = root.simulation
-        }
-    }
+    required init(scene: Scene) { }
     
     func update(context: SceneUpdateContext) {
-        if let simulation {
+        guard let simulation else {
+            if let root = context.scene.findEntity(named: "root") as? SimulationRootEntity {
+                self.root = root
+                self.simulation = root.simulation
+            }
+            return
+        }
+        
+        // Update orientation
+        root?.orientation = simd_quatf(angle: Float(simulation.pitch.radians), axis: SIMD3(1,0,0)) * simd_quatf(angle: Float(-simulation.rotation.radians), axis: SIMD3(0,1,0))
+        
+        // Update models
+        context.scene.performQuery(Self.query).forEach { entity in
+            guard let configuration = entity.component(SimulationComponent.self) else { return }
             
-            // Update orientation
-            root?.orientation = simd_quatf(angle: Float(simulation.pitch.radians), axis: SIMD3(1,0,0)) * simd_quatf(angle: Float(-simulation.rotation.radians), axis: SIMD3(0,1,0))
+            entity.position = configuration.position(scale: simulation.scale, offset: simulation.offset)
             
-            // Update model entities by position and scale
-            context.scene.performQuery(Self.query).forEach { entity in
-                
-                if let component = entity.component(SimulationComponent.self) {
-                    entity.position = component.position(scale: simulation.scale, offset: simulation.offset)
-                }
-                
-                if let body = entity.component(BodyComponent.self) {
-                    body.update(scale: simulation.scale)
-                }
-                if let orbit = entity.component(OrbitComponent.self) {
-                    orbit.update(scale: simulation.scale)
-                }
-//                if let label = component(LabelComponent.self) {
-//                    label.update(scale: scale, orientation: orientation)
-//                }
-//                if let light = component(LightComponent.self) {
-//                    light.update(scale: scale)
-//                }
+            let isEnabled = simulation.selectedSystem == configuration.node.parent
+            let isSelected = simulation.isSelected(configuration.node)
+            let noSelection = simulation.noSelection
+            let trailVisibile = simulation.trailVisibile(configuration.node)
+            
+            if let body = entity.component(BodyComponent.self) {
+                body.update(scale: simulation.scale)
+            }
+            if let point = entity.component(PointComponent.self) {
+                point.update(isEnabled: isEnabled, isSelected: isSelected, noSelection: noSelection)
+            }
+            if let orbit = entity.component(OrbitComponent.self) {
+                orbit.update(isEnabled: isEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: noSelection, scale: simulation.scale)
             }
         }
     }

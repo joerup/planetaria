@@ -43,7 +43,8 @@ public class Node: Decodable {
         return parent?.children ?? []
     }
     public var hostNode: Node? {
-        return siblings.max(by: { $0.mass < $1.mass })
+        guard let object = parent?.object else { return nil }
+        return object != self ? object : nil
     }
     
     public var globalPosition: Vector {

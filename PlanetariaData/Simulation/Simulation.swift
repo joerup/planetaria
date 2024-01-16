@@ -43,9 +43,9 @@ final public class Simulation: ObservableObject {
             }
             
             // Generate the background
-//            if let background = await Entity.generateBackground() {
-//                await rootEntity.addChild(background)
-//            }
+            if let background = await Entity.generateBackground() {
+                await rootEntity.addChild(background)
+            }
             
             // Load the entities
             for node in root.tree {
@@ -103,6 +103,15 @@ final public class Simulation: ObservableObject {
     }
     public var noSelection: Bool {
         return object == nil
+    }
+    
+    internal var inMajorTransition: Bool = false
+    
+    public func trailVisibile(_ node: Node) -> Bool {
+        return !inMajorTransition && !(node == focus && scale * node.size * 10 > size)
+    }
+    public func labelVisibile(_ node: Node) -> Bool {
+        return !inMajorTransition && ((node.system == system || 2 * scale * node.position.magnitude > max(0.1 * size, 50)) && scale * node.size * 10 < size)
     }
     
 
@@ -361,22 +370,22 @@ final public class Simulation: ObservableObject {
     private func zoomToSurface(node: Node) {
         print("zooming to surface of \(node.name)")
         let node = node.object ?? node
-        update(focus: node, size: 2.5 * node.totalSize)
+        transition(focus: node, size: 2.5 * node.totalSize)
     }
     
     // Zoom to a node's orbital path
     private func zoomToOrbit(node: Node) {
         print("zooming to orbit of \(node.name)")
         let node = node.system ?? node
-        update(focus: node.parent, size: 2.5 * (node.position.magnitude + node.totalSize))
+        transition(focus: node.parent, size: 2.5 * (node.position.magnitude + node.totalSize))
     }
     
     // Zoom to a node's local system
     private func zoomToSystem(node: Node) {
         print("zooming to system of \(node.name)")
         let node = node.object ?? node
-        let distance = node.siblings.filter({ $0.rank == .primary }).map(\.position.magnitude).max() ?? .infinity
-        update(focus: node.parent, size: min(130 * node.size, 2.5 * distance))
+        let distance = node.system?.scaleDistance ?? .infinity
+        transition(focus: node.parent, size: min(130 * node.size, 2.5 * distance))
     }
     
     
@@ -384,11 +393,20 @@ final public class Simulation: ObservableObject {
     
     // Transition animation
     // Move to a new offset, scale, and focus node
-    private func update(focus: Node?, size: CGFloat) {
+    private func transition(focus: Node?, size: CGFloat) {
         let scale = self.size / size
         guard let focus, scale.isFinite else { return }
         let system = focus.system
         let offset = focus.globalPosition
+        let animationTime: Double = 0.5
+        
+        // Major transition conditions
+        if abs(log10(steadyScale/scale)) > 3 || system != self.system || (focus != self.focus && focus.system != self.focus && self.focus?.system != focus && abs(log10(steadyScale/scale)) > 1) {
+            self.inMajorTransition = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime) {
+                self.inMajorTransition = false
+            }
+        }
         
         // Set the focus and system nodes
         setFocus(focus)
@@ -401,7 +419,7 @@ final public class Simulation: ObservableObject {
         self.steadyScale = scale
         
         // Update the entities
-        rootEntity.transition(scale: scale, offset: offset, duration: 0.5)
+        rootEntity.transition(scale: scale, offset: offset, duration: animationTime)
     }
     
     // Navigation changes when gestures occur
@@ -462,10 +480,4 @@ final public class Simulation: ObservableObject {
 //public func showOrbit(_ node: Node) -> Bool {
 //    return !inTransition && node.orbit != nil && node.parent == system && node.system != system
 //}
-//
-//public func trailVisibility(_ node: Node) -> CGFloat {
-//    return !inTransition && applyScale(node.position.magnitude) < 2 * size && (applyScale(node.size) * 50 < size) ? 1 : 0
-//}
-//public func textVisibility(_ node: Node) -> CGFloat {
-//    return !inTransition && node.parent == system && ((node.system == system || 2 * applyScale(node.position.magnitude) > max(0.1 * size, 50)) && (applyScale(node.size) * 10 < size)) ? 1 : 0
-//}
+

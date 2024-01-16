@@ -54,5 +54,11 @@ extension Node {
             let direction = Vector.e1.rotated(by: theta + longitudeOfPeriapsis, about: .e3).unitVector
             return distance * direction
         }
+        
+        public func ellipsePosition3D(_ theta: Double) -> Vector {
+            let distance = semimajorAxis * (1 - pow(eccentricity, 2)) / (1 + eccentricity * cos(theta))
+            let direction = eccentricityVector.rotated(by: theta, about: axis).unitVector
+            return distance * direction
+        }
     }
 }

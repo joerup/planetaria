@@ -18,26 +18,18 @@ class SimulationEntity: Entity {
         
         components.set(SimulationComponent(node: node, size: size))
         
-        if let point = PointComponent(node: node) {
-            components.set(point)
-            addChild(point.model)
-        }
         if let body = BodyComponent(node: node, size: size) {
             components.set(body)
             addChild(body.model)
         }
-//        if let orbit = OrbitComponent(node: node, size: size) {
-//            components.set(orbit)
-//            addChild(orbit.model)
-//        }
-//        if let label = LabelComponent(node: node, size: size) {
-//            components.set(label)
-//            addChild(label.model)
-//        }
-//        if let light = LightComponent(node: node, size: size) {
-//            components.set(light)
-//            addChild(light.model)
-//        }
+        if let point = PointComponent(node: node) {
+            components.set(point)
+            addChild(point.model)
+        }
+        if let orbit = OrbitComponent(node: node, size: size) {
+            components.set(orbit)
+            addChild(orbit.model)
+        }
     }
 }
 
@@ -45,25 +37,34 @@ class SimulationRootEntity: Entity {
     
     var simulation: Simulation?
     
-    required init() { }
+    required init() { 
+        super.init()
+        self.name = "root"
+    }
     
     private static let query = EntityQuery(where: .has(SimulationComponent.self))
     
     func transition(scale: Double, offset: Vector, duration: Double) {
+        guard let simulation else { return }
         scene?.performQuery(Self.query).forEach { entity in
+            guard let configuration = entity.component(SimulationComponent.self) else { return }
             
-            // Move the simulation entity
-            if let component = entity.component(SimulationComponent.self) {
-                let position = component.position(scale: scale, offset: offset)
-                let transform = Transform(scale: entity.scale, rotation: entity.orientation, translation: position)
-                entity.move(to: transform, relativeTo: entity.parent, duration: duration, timingFunction: .easeInOut)
-            }
+            let position = configuration.position(scale: scale, offset: offset)
+            let transform = Transform(scale: entity.scale, rotation: entity.orientation, translation: position)
+            entity.move(to: transform, relativeTo: entity.parent, duration: duration, timingFunction: .easeInOut)
+            
+            let isSelected = simulation.isSelected(configuration.node)
+            let noSelection = simulation.noSelection
+            let trailVisibile = simulation.trailVisibile(configuration.node)
             
             if let body = entity.component(BodyComponent.self) {
                 body.update(scale: scale, duration: duration)
             }
+            if let point = entity.component(PointComponent.self) {
+                point.update(isEnabled: true, isSelected: isSelected, noSelection: noSelection)
+            }
             if let orbit = entity.component(OrbitComponent.self) {
-                orbit.update(scale: scale, duration: duration)
+                orbit.update(isEnabled: !simulation.inMajorTransition, isVisible: trailVisibile, isSelected: isSelected, noSelection: noSelection, scale: scale, duration: duration)
             }
         }
     }

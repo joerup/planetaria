@@ -13,9 +13,7 @@ class PointComponent: Component {
     var model: ModelEntity
     
     init?(node: Node) {
-        guard node is ObjectNode else { return nil }
-        
-        let radius: Float = node.system != nil ? 0.004 : 0.003
+        let radius: Float = 0.003
         let sphere = MeshResource.generateSphere(radius: radius)
         let collisionShape = ShapeResource.generateSphere(radius: 5 * radius)
         #if os(macOS)
@@ -31,5 +29,9 @@ class PointComponent: Component {
         #if os(visionOS)
         model.components.set(InputTargetComponent())
         #endif
+    }
+    
+    func update(isEnabled: Bool, isSelected: Bool, noSelection: Bool) {
+        model.scale = SIMD3(repeating: isEnabled ? (isSelected ? 1.2 : noSelection ? 1 : 0.5) : 0)
     }
 }

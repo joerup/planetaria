@@ -41,10 +41,8 @@ public struct Simulator: View {
         SpatialTapGesture()
             .targetedToAnyEntity()
             .onEnded { value in
-                if let entity = value.entity as? SimulationEntity ?? value.entity.parent as? SimulationEntity, let node = entity.node {
-                    withAnimation {
-                        simulation.select(node)
-                    }
+                if let node = value.entity.parent?.component(SimulationComponent.self)?.node {
+                    simulation.select(node)
                 }
             }
     }

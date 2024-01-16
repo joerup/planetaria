@@ -23,10 +23,10 @@ public struct ObjectRow: View {
                 .scaleEffect(1.2)
             Text(object.name)
                 .font(.title3)
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
             Spacer()
             Image(systemName: "chevron.forward")
-                .foregroundColor(.gray)
+                .foregroundStyle(.secondary)
         }
         #else
         HStack {
@@ -37,7 +37,7 @@ public struct ObjectRow: View {
                 .offset(y: 1)
             Text(object.name)
                 .font(.system(.title2, weight: .semibold))
-                .foregroundColor(.white)
+                .foregroundStyle(.primary)
             Spacer()
             Image(systemName: "chevron.forward")
                 .font(.title3)

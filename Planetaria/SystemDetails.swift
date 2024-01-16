@@ -93,7 +93,7 @@ struct SystemDetails: View {
                             Text(category)
                                 .textCase(.uppercase)
                                 .fontWeight(.semibold)
-                                .foregroundStyle(.gray)
+                                .foregroundStyle(.secondary)
                                 #if os(macOS)
                                 .font(.headline)
                                 .padding(.bottom, 5)
