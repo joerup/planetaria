@@ -17,7 +17,7 @@ extension SystemNode {
         childSystems.forEach { $0.advance(by: dt) }
         
         for child in children {
-            child.orbit?.update(position: child.position)
+            child.orbit?.update(position: child.position, velocity: child.velocity)
             child.rotation?.update(timeStep: dt)
         }
     }

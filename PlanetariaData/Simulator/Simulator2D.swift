@@ -8,7 +8,7 @@
 import SwiftUI
 import RealityKit
 
-#if os(iOS) || os(macOS) || os(tvOS)
+#if os(iOS) || os(macOS)
 public struct Simulator: View {
     
     @ObservedObject private var simulation: Simulation
@@ -19,15 +19,56 @@ public struct Simulator: View {
     
     public var body: some View {
         GeometryReader { geometry in
-            RealityView(root: simulation.rootEntity, size: geometry.size, arMode: simulation.arMode, select: simulation.select(_:))
-                .simultaneousGesture(panGesture)
-                .simultaneousGesture(zoomGesture)
-                .ignoresSafeArea()
-                .id(simulation.arMode)
+            ZStack {
+                if simulation.arMode {
+                    RealityView(root: simulation.rootEntity, size: geometry.size, arMode: true, select: simulation.select(_:))
+                        .simultaneousGesture(halfPanGesture)
+                        .simultaneousGesture(zoomGesture)
+                } else {
+                    RealityView(root: simulation.rootEntity, size: geometry.size, arMode: false, select: simulation.select(_:))
+                        .simultaneousGesture(fullPanGesture)
+                        .simultaneousGesture(zoomGesture)
+                }
+                ForEach(simulation.entities, id: \.self) { entity in
+                    if let node = entity.component(SimulationComponent.self)?.node, simulation.labelVisible(node), entity.position(relativeTo: nil).z < 1 {
+                        overlay(node: node, position: applyTransform(entity.position(relativeTo: nil)), size: applyTransform(entity.physicalBounds))
+                    }
+                }
+            }
+        }
+        .ignoresSafeArea()
+        .onChange(of: simulation.arMode) { _ in
+            simulation.resetPitch()
         }
     }
     
-    private var panGesture: some Gesture {
+    private func applyTransform(_ vector: SIMD3<Float>) -> CGPoint {
+        simulation.rootEntity.applyTransform(vector) ?? .zero
+    }
+    private func applyTransform(_ bounds: BoundingBox) -> CGFloat {
+        (applyTransform(bounds.max) - applyTransform(bounds.min)).magnitude
+    }
+    
+    private func overlay(node: Node, position: CGPoint, size: CGFloat) -> some View {
+        ZStack {
+            Circle()
+                .stroke(.white, lineWidth: 1)
+                .frame(width: 12)
+                .opacity(simulation.isSelected(node) && size < 10 ? 1 : 0)
+            Text(node.object?.name ?? node.name)
+                .font(.caption2)
+                .opacity(simulation.isSelected(node) ? 1 : simulation.noSelection ? 0.7 : 0.4)
+                .offset(y: max(12, size/2))
+        }
+        .position(x: position.x, y: position.y)
+        .onTapGesture {
+            withAnimation(.easeInOut) {
+                simulation.select(node)
+            }
+        }
+    }
+    
+    private var fullPanGesture: some Gesture {
         DragGesture()
             .onChanged { value in
                 simulation.updateRotationGesture(with: value.translation.width)
@@ -36,6 +77,16 @@ public struct Simulator: View {
             .onEnded { value in
                 simulation.completeRotationGesture(with: value.translation.width)
                 simulation.completePitchGesture(with: value.translation.height)
+            }
+    }
+    
+    private var halfPanGesture: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                simulation.updateRotationGesture(with: value.translation.width)
+            }
+            .onEnded { value in
+                simulation.completeRotationGesture(with: value.translation.width)
             }
     }
     
@@ -51,11 +102,11 @@ public struct Simulator: View {
 }
 #endif
 
-#if os(iOS) || os(tvOS)
+#if os(iOS)
 private struct RealityView: UIViewRepresentable {
     
     let anchor = AnchorEntity()
-    var root: Entity
+    var root: SimulationRootEntity
     
     var size: CGSize
     var arMode: Bool
@@ -67,12 +118,11 @@ private struct RealityView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: mode, automaticallyConfigureSession: true)
-        arView.environment.background = .color(.black)
-        
         anchor.addChild(root)
         
-        anchor.orientation = simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
-        anchor.scale = [2,2,2] * Float(min(size.width, size.height) / max(size.width, size.height))
+        anchor.orientation = arMode ? .init() : simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
+        anchor.position = arMode ? [0,-0.2,-1] : .zero
+        anchor.scale = arMode ? [1,1,1] : [2,2,2] * Float(min(size.width, size.height) / max(size.width, size.height))
         
         context.coordinator.view = arView
         arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap)))
@@ -82,7 +132,7 @@ private struct RealityView: UIViewRepresentable {
     }
     
     func updateUIView(_ arView: ARView, context: Context) {
-        
+        root.applyTransform = arView.project(_:)
     }
     
     func makeCoordinator() -> Coordinator {
@@ -104,10 +154,12 @@ private struct RealityView: UIViewRepresentable {
             
             let tapLocation = recognizer.location(in: view)
             
-            if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
-                select(node)
-            } else {
-                select(nil)
+            withAnimation(.easeInOut) {
+                if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
+                    select(node)
+                } else {
+                    select(nil)
+                }
             }
         }
     }
@@ -116,7 +168,7 @@ private struct RealityView: UIViewRepresentable {
 private struct RealityView: NSViewRepresentable {
     
     let anchor = AnchorEntity()
-    var root: Entity
+    var root: SimulationRootEntity
     
     var size: CGSize
     var arMode: Bool
@@ -139,7 +191,7 @@ private struct RealityView: NSViewRepresentable {
     }
     
     func updateNSView(_ arView: ARView, context: Context) {
-        
+        root.applyTransform = arView.project(_:)
     }
     
     func makeCoordinator() -> Coordinator {
@@ -161,39 +213,14 @@ private struct RealityView: NSViewRepresentable {
             
             let tapLocation = recognizer.location(in: view)
             
-            if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
-                select(node)
-            } else {
-                select(nil)
+            withAnimation(.easeInOut) {
+                if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
+                    select(node)
+                } else {
+                    select(nil)
+                }
             }
         }
     }
 }
 #endif
-
-//let camera = PerspectiveCamera()
-//camera.camera.fieldOfViewInDegrees = 60
-//
-//let cameraAnchor = AnchorEntity(world: .zero)
-//cameraAnchor.addChild(camera)
-//
-//arView.scene.addAnchor(cameraAnchor)
-//
-//let cameraDistance: Float = 3
-//var currentCameraRotation: Float = 0
-//let cameraRotationSpeed: Float = 0.01
-//
-//sceneEventsUpdateSubscription = arView.scene.subscribe(to: SceneEvents.Update.self) { _ in
-//    let x = sin(currentCameraRotation) * cameraDistance
-//    let z = cos(currentCameraRotation) * cameraDistance
-//    
-//    let cameraTranslation = SIMD3<Float>(x, 0, z)
-//    let cameraTransform = Transform(scale: .one,
-//                                    rotation: simd_quatf(),
-//                                    translation: cameraTranslation)
-//    
-//    camera.transform = cameraTransform
-//    camera.look(at: .zero, from: cameraTranslation, relativeTo: nil)
-//
-//    currentCameraRotation += cameraRotationSpeed
-//}

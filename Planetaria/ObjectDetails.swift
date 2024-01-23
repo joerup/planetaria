@@ -13,117 +13,107 @@ struct ObjectDetails: View {
     var object: ObjectNode
     
     var body: some View {
-        #if os(macOS)
-        ScrollView {
-            VStack(alignment: .leading) {
-                VStack(alignment: .leading) {
-                    Text(object.name)
-                        .font(.system(.largeTitle, design: .default, weight: .bold))
-                        .padding(.top, 10)
-                    Text(subtitle)
-                        .font(.system(.headline, design: .default, weight: .semibold))
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
-                    ObjectIcon(object: object, size: 75)
-                        .offset(y: 2)
-                }
-                .padding(.horizontal)
-                properties
-            }
-        }
-        .navigationTitle(object.name)
-        #else
-        VStack {
-            HStack(spacing: 5) {
-                ObjectIcon(object: object, size: 75)
-                    .offset(y: 2)
-                VStack(alignment: .leading) {
-                    Text(object.name)
-                        .font(.system(.title, design: .default, weight: .semibold))
-                    Text(subtitle)
-                        .font(.system(.headline, design: .default, weight: .semibold))
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.gray)
-                }
-                Spacer(minLength: 0)
-            }
-            .padding(.leading, 5)
-            .padding(.top, 10)
-            .padding(.bottom, 5)
-            
-            ScrollView {
-                properties
-            }
+        NavigationSheet {
+            header
+        } content: {
+            properties
         }
         .tint(object.color)
-        #endif
+    }
+    
+    private var header: some View {
+        VStack(alignment: .leading) {
+            Text(object.name)
+                .font(.system(.title, design: .default, weight: .semibold))
+            Text(subtitle)
+                .font(.system(.headline, design: .default, weight: .medium))
+                .foregroundStyle(.secondary)
+        }
+        .padding()
     }
     
     @ViewBuilder
     private var properties: some View {
         if let properties = object.properties {
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 15) {
+                
+                if !properties.photos.isEmpty {
+                    ScrollView(.horizontal) {
+                        LazyHStack {
+                            ForEach(properties.photos, id: \.url) { photo in
+                                PhotoView(photo: photo)
+                            }
+                        }
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, -1)
+                    }
+                    .frame(height: 120)
+                }
                 
                 if object.rank == .primary || object.rank == .secondary {
                     let localizedString = NSLocalizedString(object.name, tableName: "Descriptions", comment: "")
                     Text(localizedString)
-                        .font(.body)
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(.bottom, 10)
                 }
-                
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
-                    if properties.luminosity?.value != 0 {
-                        PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
-                    }
-                    PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod?.dynamic())
-                    PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod?.dynamic())
-                    PropertyText(type: .large, name: "Orbital Distance", property: properties.semimajorAxis?.dynamicDistance(for: object.category))
-                    PropertyText(type: .large, name: "Mass", property: properties.mass)
-                    PropertyText(type: .large, name: "Radius", property: properties.radius)
-//                    PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt?[.deg])
-                    PropertyText(type: .large, name: "Temperature", property: properties.temperature)
-//                    PropertyText(type: .large, name: "Pressure", property: properties.pressure)
-                }
-                .padding(.bottom, 10)
-                .padding(.horizontal, -2)
                 
                 if let discoverer = properties.discoverer, let discovered = properties.discovered {
                     Text("Discovered by \(discoverer) in \(String(discovered)).")
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 if let namesake = properties.namesake {
                     Text("Named after \(namesake).")
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 
-//                VStack {
-//                    Image("Mercury3")
-//                        .resizable()
-//                        .clipShape(RoundedRectangle(cornerRadius: 20))
-//                        .aspectRatio(contentMode: .fit)
-//                    
-//                    HStack {
-//                        Image("Mercury1")
-//                            .resizable()
-//                            .clipShape(RoundedRectangle(cornerRadius: 20))
-//                            .aspectRatio(contentMode: .fit)
-//                        Image("Mercury2")
-//                            .resizable()
-//                            .clipShape(RoundedRectangle(cornerRadius: 20))
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    
-//                    Image("Mercury4")
-//                        .resizable()
-//                        .clipShape(RoundedRectangle(cornerRadius: 20))
-//                        .aspectRatio(contentMode: .fit)
-//                }
-//                .padding(.vertical)
+                Divider()
                 
-//                Footnote()
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
+                    PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
+                    PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod?.dynamic())
+                    PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod?.dynamic())
+                    PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.currentDistance?.local(), units: [.km, .mi])
+                    PropertyText(type: .large, name: "Current Speed", property: properties.currentSpeed?.local(), units: [.km / .hr, .mi / .hr])
+                    PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt)
+                    PropertyText(type: .large, name: "Temperature", property: properties.temperature?.local(), units: [.F, .C, .K])
+                }
+                .padding(.horizontal, -2)
+                
+                Divider()
+                
+                if properties.orbitalElementsAvailable {
+                    VStack(alignment: .leading) {
+                        Text("Orbital Elements")
+                            .font(.system(.headline, weight: .bold))
+                            .padding(.vertical, 5)
+                        PropertyText(type: .row, name: "Semimajor Axis", property: properties.semimajorAxis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
+                        PropertyText(type: .row, name: periapsisName, property: properties.periapsis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
+                        PropertyText(type: .row, name: apoapsisName, property: properties.apoapsis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
+                        PropertyText(type: .row, name: "Eccentricity", property: properties.eccentricity)
+                        PropertyText(type: .row, name: "Inclination", property: properties.inclination)
+                    }
+                    Divider()
+                }
+                
+                if properties.structuralElementsAvailable {
+                    VStack(alignment: .leading) {
+                        Text("Structural Elements")
+                            .font(.system(.headline, weight: .bold))
+                            .padding(.vertical, 5)
+                        PropertyText(type: .row, name: "Mass", property: properties.mass, units: [.kg])
+                        PropertyText(type: .row, name: "Radius", property: properties.radius, units: [.km, .mi])
+                        PropertyText(type: .row, name: "Density", property: properties.density, units: [.g / Cube(.cm), .kg / Cube(.m)])
+                        PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity, units: [.m / Square(.s)])
+                        PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity, units: [.km / .s])
+                    }
+                    Divider()
+                }
+                
+                Footnote()
             }
-            .padding(.horizontal)
+            .safeAreaPadding(.horizontal)
+            .padding(.bottom)
         }
     }
     
@@ -144,5 +134,21 @@ struct ObjectDetails: View {
             return "\(object.category.text)"
         }
     }
+    
+    private var periapsisName: String {
+        switch object.hostNode?.name {
+        case "Sun": return "Perihelion"
+        case "Earth": return "Perigee"
+        default: return "Periapsis"
+        }
+    }
+    private var apoapsisName: String {
+        switch object.hostNode?.name {
+        case "Sun": return "Aphelion"
+        case "Earth": return "Apogee"
+        default: return "Apoapsis"
+        }
+    }
 }
+
 

@@ -19,26 +19,42 @@ extension ObjectNode {
         public var discoverer: String?
         public var namesake: String?
         
-        public var mass: Value<MassU>?
-        public var radius: Value<DistanceU>?
+        public var currentDistance: Value<DistanceU>? {
+            Value(orbit?.position.magnitude, .km)
+        }
+        public var currentSpeed: Value<SpeedU>? {
+            Value(orbit?.velocity.magnitude, .km / .s)
+        }
+        
+        public var orbitalElementsAvailable: Bool {
+            semimajorAxis != nil
+        }
+        public var structuralElementsAvailable: Bool {
+            mass != nil || radius != nil
+        }
+        
+        public var photos: [Photo] = []
+        
+        public var moons: IntValue?
         
         public var orbitalPeriod: Value<TimeU>?
+        public var rotationPeriod: Value<TimeU>?
+        public var axialTilt: Value<AngleU>?
+        public var temperature: Value<TemperatureU>?
         
         public var semimajorAxis: Value<DistanceU>?
+        public var periapsis: Value<DistanceU>?
+        public var apoapsis: Value<DistanceU>?
         public var eccentricity: Value<Unitless>?
         public var inclination: Value<AngleU>?
-        public var longitudeOfPeriapsis: Value<AngleU>?
-        public var longitudeOfAscendingNode: Value<AngleU>?
-        public var meanAnomaly: Value<AngleU>?
         
-        public var perihelionDistance: Value<DistanceU>?
-        public var aphelionDistance: Value<DistanceU>?
+        public var mass: Value<MassU>?
+        public var radius: Value<DistanceU>?
+        public var density: Value<Frac<MassU, VolumeU>>?
+        public var gravity: Value<AccelerationU>?
+        public var escapeVelocity: Value<SpeedU>?
         
-        public var rotationPeriod: Value<TimeU>?
-        
-        public var temperature: Value<TemperatureU>?
         public var pressure: Value<PressureU>?
-        
         public var luminosity: Value<PowerU>?
         
         public init(
@@ -46,16 +62,18 @@ extension ObjectNode {
             discovered: Int?,
             discoverer: String?,
             namesake: String?,
+            moons: Int?,
             mass: Double?,
             radius: Double?,
+            density: Double?,
             semimajorAxis: Double?,
             eccentricity: Double?,
             inclination: Double?,
-            longitudeOfPeriapsis: Double?,
-            longitudeOfAscendingNode: Double?,
-            meanAnomaly: Double?,
             orbitalPeriod: Double?,
             rotationRate: Double?,
+            axialTilt: Double?,
+            gravity: Double?,
+            escapeVelocity: Double?,
             temperature: Double?,
             pressure: Double?,
             luminosity: Double?
@@ -65,31 +83,35 @@ extension ObjectNode {
             self.discoverer = discoverer
             self.namesake = namesake
             
+            self.moons = IntValue(moons)
+            
             self.mass = Value(mass, .kg)
             self.radius = Value(radius, .km)
+            self.density = Value(density, .g / Cube(.cm))
+            self.gravity = Value(gravity, .m / Square(.s))
+            self.escapeVelocity = Value(escapeVelocity, .km / .s)
+            
+            self.orbitalPeriod = Value(orbitalPeriod, .d)
             
             self.semimajorAxis = Value(semimajorAxis, .km)
             self.eccentricity = Value(eccentricity)
             self.inclination = Value(inclination, .deg)
-            self.longitudeOfPeriapsis = Value(longitudeOfPeriapsis, .deg)
-            self.longitudeOfAscendingNode = Value(longitudeOfAscendingNode, .deg)
-            self.meanAnomaly = Value(meanAnomaly, .deg)
-            self.orbitalPeriod = Value(orbitalPeriod, .d)
             
             if let semimajorAxis, let eccentricity {
-                let perihelion = semimajorAxis * (1 - eccentricity)
-                let aphelion = semimajorAxis * (1 + eccentricity)
-                self.perihelionDistance = Value(perihelion, .km)
-                self.aphelionDistance = Value(aphelion, .km)
+                self.periapsis = Value(semimajorAxis * (1 - eccentricity), .km)
+                self.apoapsis = Value(semimajorAxis * (1 + eccentricity), .km)
             }
             
             if let rotationRate {
                 let rotationPeriod = abs(360 / rotationRate)
                 self.rotationPeriod = Value(rotationPeriod, .d)
             }
+            self.axialTilt = Value(axialTilt, .deg)
             
-            self.temperature = Value(temperature, .C)
-            self.pressure = Value(pressure, .bars)
+            if axialTilt != nil {
+                self.temperature = Value(temperature, .C)
+                self.pressure = Value(pressure, .bars)
+            }
             
             self.luminosity = Value(luminosity, .W)
         }

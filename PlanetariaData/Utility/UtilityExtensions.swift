@@ -29,7 +29,33 @@ public let G: Double = 6.67259E-11 // N * m^2 / kg^2
 
 public extension Double {
     
+    func string(_ unit: Unit?) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 3
+        numberFormatter.maximumSignificantDigits = unit is TimeU || unit is AngleU ? 3 : 2
+        
+        let quadrillion = 1E+15
+        let trillion = 1E+12
+        let billion = 1E+9
+        let million = 1E+6
+        
+        if self >= quadrillion {
+            return scientificString
+        } else if self >= trillion {
+            return "\(numberFormatter.string(from: NSNumber(value: self / trillion)) ?? "") T"
+        } else if self >= billion {
+            return "\(numberFormatter.string(from: NSNumber(value: self / billion)) ?? "") B"
+        } else if self >= million {
+            return "\(numberFormatter.string(from: NSNumber(value: self / million)) ?? "") M"
+        } else {
+            return "\(numberFormatter.string(from: NSNumber(value: self)) ?? "")"
+        }
+    }
     var string: String {
+        return string(nil)
+    }
+    var scientificString: String {
         if abs(self) < 1E-10 { return "0" }
         let numberFormatter = NumberFormatter()
         if abs(self) >= 1E+9 || abs(self) < 1E-4 {
@@ -40,7 +66,8 @@ public extension Double {
             numberFormatter.numberStyle = .decimal
             numberFormatter.groupingSeparator = ","
             if abs(self) < 1 {
-                numberFormatter.maximumFractionDigits = 2
+                numberFormatter.maximumSignificantDigits = 3
+                numberFormatter.maximumFractionDigits = 3
             } else {
                 numberFormatter.maximumSignificantDigits = 3
             }
@@ -55,7 +82,6 @@ public extension Double {
 // MARK: - CGSize Stuff
 
 public extension CGSize {
-    // the center point of an area that is our size
     var center: CGPoint {
         CGPoint(x: width/2, y: height/2)
     }
@@ -79,6 +105,12 @@ public extension CGPoint {
     }
     var size: CGSize {
         return CGSize(width: x, height: y)
+    }
+    static func +(lhs: Self, rhs: Self) -> CGPoint {
+        CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+    }
+    static func -(lhs: Self, rhs: Self) -> CGPoint {
+        CGPoint(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
     }
 }
 

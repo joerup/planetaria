@@ -16,26 +16,20 @@ extension Node {
         
         private var rotationRef: Double
         private var rotationRate: Double
-        private var poleRARef: Double?
-        private var poleRARate: Double
-        private var poleDecRef: Double?
-        private var poleDecRate: Double
+        private var poleRA: Double?
+        private var poleDec: Double?
         
-        public init?(rotationRef: Double?, rotationRate: Double?, poleRARef: Double?, poleRARate: Double?, poleDecRef: Double?, poleDecRate: Double?) {
+        public init?(rotationRef: Double?, rotationRate: Double?, poleRA: Double?, poleDec: Double?) {
             guard let rotationRate else { return nil }
             self.angle = 0
             
             self.rotationRef = rotationRef ?? 0
             self.rotationRate = rotationRate
-            self.poleRARef = poleRARef
-            self.poleRARate = poleRARate ?? 0
-            self.poleDecRef = poleDecRef
-            self.poleDecRate = poleDecRate ?? 0
+            self.poleRA = poleRA
+            self.poleDec = poleDec
             
-            if let poleRARef, let poleDecRef {
-                let ra = poleRARef + self.poleRARate * Date.now.j2000Century
-                let dec = poleDecRef + self.poleDecRate * Date.now.j2000Century
-                self.axis = Vector(ra: ra, dec: dec)
+            if let poleRA, let poleDec {
+                self.axis = Vector(ra: poleRA, dec: poleDec)
             }
             
             self.angle = ((rotationRef ?? 0) + rotationRate * Date.now.j2000Date) * .pi/180

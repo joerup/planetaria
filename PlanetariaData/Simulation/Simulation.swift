@@ -50,9 +50,17 @@ final public class Simulation: ObservableObject {
             // Load the entities
             for node in root.tree {
                 let entity = await SimulationEntity(node: node, size: size)
+                entities.append(entity)
                 await MainActor.run { rootEntity.addChild(entity) }
             }
             print("Finished creating entities")
+            
+            // Decode photos
+            let photos = await Photo.decode(from: "\(fileName)-photos")
+            for object in root.tree.compactMap({ $0 as? ObjectNode }) {
+                let matchingPhotos = photos.filter({ $0.id == object.id })
+                object.properties?.photos = matchingPhotos
+            }
             
             await MainActor.run {
                 self.isLoaded = true
@@ -75,6 +83,7 @@ final public class Simulation: ObservableObject {
     // MARK: - Structure
     
     internal var rootEntity = SimulationRootEntity()
+    internal var entities: [SimulationEntity] = []
     
     @Published private var root: SystemNode?
     @Published private var focus: Node?
@@ -105,13 +114,15 @@ final public class Simulation: ObservableObject {
         return object == nil
     }
     
+    internal var inTransition: Bool = false
     internal var inMajorTransition: Bool = false
     
-    public func trailVisibile(_ node: Node) -> Bool {
+    public func trailVisible(_ node: Node) -> Bool {
         return !inMajorTransition && !(node == focus && scale * node.size * 10 > size)
     }
-    public func labelVisibile(_ node: Node) -> Bool {
-        return !inMajorTransition && ((node.system == system || 2 * scale * node.position.magnitude > max(0.1 * size, 50)) && scale * node.size * 10 < size)
+    public func labelVisible(_ node: Node) -> Bool {
+        return !inMajorTransition && node.parent == system && scale * (node.globalPosition - offset).magnitude < 10 * size
+            && (node.system == system || 2 * scale * node.position.magnitude > max(0.1 * size, 50)) && scale * node.size * 100 < size
     }
     
 
@@ -307,6 +318,9 @@ final public class Simulation: ObservableObject {
         
         continuousUpdate()
     }
+    internal func resetRotation() {
+        self.steadyRotation = .zero
+    }
     
     internal func updatePitchGesture(with translation: CGFloat) {
         guard rotateEnabled else { return }
@@ -334,6 +348,9 @@ final public class Simulation: ObservableObject {
             steadyPitch = -.radians(.pi)
         }
         continuousUpdate()
+    }
+    internal func resetPitch() {
+        self.steadyPitch = .zero
     }
 
     
@@ -400,7 +417,11 @@ final public class Simulation: ObservableObject {
         let offset = focus.globalPosition
         let animationTime: Double = 0.5
         
-        // Major transition conditions
+        // Transition conditions
+        self.inTransition = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + animationTime) {
+            self.inTransition = false
+        }
         if abs(log10(steadyScale/scale)) > 3 || system != self.system || (focus != self.focus && focus.system != self.focus && self.focus?.system != focus && abs(log10(steadyScale/scale)) > 1) {
             self.inMajorTransition = true
             DispatchQueue.main.asyncAfter(deadline: .now() + animationTime) {
@@ -418,7 +439,7 @@ final public class Simulation: ObservableObject {
         self.offsetAmount = 1.0
         self.steadyScale = scale
         
-        // Update the entities
+        // Transition the entities
         rootEntity.transition(scale: scale, offset: offset, duration: animationTime)
     }
     
@@ -466,18 +487,4 @@ final public class Simulation: ObservableObject {
     }
 }
 
-
-
-//public func showNode(_ node: Node, scale: CGFloat, offset: Vector) -> Bool {
-//    guard node.isSet, node.parent == system /*|| node.matches(system)*/ else { return false }
-//    let location = scale/self.scale * transform(node.globalPosition - (offset-self.offset))
-//    return node.system == system || (location.isWithin(10*size) && applyScale(node.position.magnitude + node.size) * scale/self.scale * 500 > size)
-//}
-//public func showBody(_ node: Node, scale: CGFloat, offset: Vector) -> Bool {
-//    let location = scale/self.scale * transform(node.globalPosition - (offset-self.offset))
-//    return location.isWithin(10*size) && 3...max(4, size) ~= applyScale(node.size) * scale/self.scale
-//}
-//public func showOrbit(_ node: Node) -> Bool {
-//    return !inTransition && node.orbit != nil && node.parent == system && node.system != system
-//}
 

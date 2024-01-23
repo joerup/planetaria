@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-public struct XButton: View {
+struct XButton: View {
     
     var action: () -> Void
     
-    public init(action: @escaping () -> Void) {
+    init(action: @escaping () -> Void) {
         self.action = action
     }
     
-    public var body: some View {
+    var body: some View {
         Button {
             action()
         } label: {

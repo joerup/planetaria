@@ -8,9 +8,9 @@
 import Foundation
 
 public typealias Value<UnitType: Unit> = Property<Double, UnitType>
+public typealias IntValue = Property<Int, Unitless>
 public typealias TextValue = Property<String?, Unitless>
 public typealias BoolValue = Property<Bool?, Unitless>
-//typealias DirectionValue = Property<Object.Direction, Unitless>
 
 public struct Property<ValueType: Equatable, UnitType: Unit>: Equatable {
 
@@ -36,9 +36,19 @@ public struct Property<ValueType: Equatable, UnitType: Unit>: Equatable {
 
     public var string: String {
         if let double = value as? Double {
-            return double.string
-//        } else if let direction = value as? Object.Direction {
-//            return direction.rawValue
+            return double.string(unit)
+        } else if let string = value as? String {
+            return string
+        } else if let int = value as? Int {
+            return String(int)
+        } else if let bool = value as? Bool {
+            return bool ? "Yes" : "No"
+        }
+        return "Unknown"
+    }
+    public var scientificString: String {
+        if let double = value as? Double {
+            return double.scientificString
         } else if let string = value as? String {
             return string
         } else if let int = value as? Int {
@@ -87,31 +97,23 @@ public struct Property<ValueType: Equatable, UnitType: Unit>: Equatable {
             return self[.yr]
         }
     }
-
-    public func dynamicSize(for node: Node) -> Property<ValueType, UnitType> where ValueType == Double, UnitType == DistanceU {
-        if node.category == .star {
-            return self[.rS]
-        } else if node.category == .planet {
-            return self[.rE]
-        } else {
-            return self[.km]
-        }
+    
+    public func local() -> Property<ValueType, UnitType> where ValueType == Double, UnitType == DistanceU {
+        return Locale.current.measurementSystem == .us ? self[.mi] : self[.km]
     }
+    public func local() -> Property<ValueType, UnitType> where ValueType == Double, UnitType == SpeedU {
+        return Locale.current.measurementSystem == .us ? self[.mi / .hr] : self[.km / .hr]
+    }
+    public func local() -> Property<ValueType, UnitType> where ValueType == Double, UnitType == TemperatureU {
+        return Locale.current.measurementSystem == .us ? self[.F] : self[.C]
+    }
+
     public func dynamicDistance(for category: Node.Category) -> Property<ValueType, UnitType> where ValueType == Double, UnitType == DistanceU {
         switch category {
         case .star, .planet, .asteroid, .tno, .system:
             return self[.AU]
         case .moon:
             return self[.km]
-        }
-    }
-    public func dynamicMass(for node: Node) -> Property<ValueType, UnitType> where ValueType == Double, UnitType == MassU {
-        if node.category == .star {
-            return self[.mS]
-        } else if node.category == .planet {
-            return self[.mE]
-        } else {
-            return self[.kg]
         }
     }
 

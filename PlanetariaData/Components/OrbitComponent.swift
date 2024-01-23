@@ -12,16 +12,16 @@ class OrbitComponent: Component {
     
     var node: Node
     
-    private let numberOfSegments: Int = 50
-    private let thickness: Float = 0.002
+    private let numberOfSegments: Int = 40
+    private let thickness: Float = 0.001
     
-    private var scale: Double
-    private var size: Double
+    private var scale: CGFloat
+    private var size: CGFloat
     
     private var segments: [ModelEntity] = []
     var model: Entity
     
-    init?(node: Node, size: Double) {
+    init?(node: Node, size: CGFloat) {
         guard node.orbit != nil else { return nil }
           
         self.node = node
@@ -32,8 +32,12 @@ class OrbitComponent: Component {
         
         for i in 1...numberOfSegments {
             let mesh = MeshResource.generateBox(width: 1, height: thickness, depth: thickness)
+            #if os(iOS) || os(visionOS)
             var material = UnlitMaterial(color: UIColor(node.color ?? .gray))
             material.blending = .transparent(opacity: .init(floatLiteral: 1.0 - Float(i) / Float(numberOfSegments)))
+            #elseif os(macOS)
+            let material = UnlitMaterial(color: NSColor(node.color ?? .gray))
+            #endif
             let segment = ModelEntity(mesh: mesh, materials: [material])
             segments.append(segment)
             model.addChild(segment)
@@ -42,14 +46,14 @@ class OrbitComponent: Component {
         update(isEnabled: true, isVisible: true, isSelected: false, noSelection: true, scale: 1.0)
     }
     
-    func update(isEnabled: Bool, isVisible: Bool, isSelected: Bool, noSelection: Bool, scale: Double, duration: Double = 0) {
+    func update(isEnabled: Bool, isVisible: Bool, isSelected: Bool, noSelection: Bool, scale: CGFloat, duration: Double = 0) {
         model.isEnabled = isEnabled
-        guard isEnabled, let orbit = node.orbit, !segments.isEmpty else { return }
+        guard isEnabled, let orbit = node.orbit, !segments.isEmpty else { self.scale = scale; return }
         
         let currentPosition = (node.position - node.barycenterPosition) * scale / size
         var lastPoint: Vector = .zero
         let scaleRatio = Float(self.scale / scale)
-        let extraScale: Float = isVisible ? (isSelected ? 1.5 : noSelection ? 1 : 0.1) : 0
+        let extraScale: Float = isVisible ? (isSelected ? 2 : noSelection ? 1 : 0.2) : 0
         self.scale = scale
         
         if duration != 0 {

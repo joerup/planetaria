@@ -20,7 +20,9 @@ struct Acknowledgements: View {
     
     Properties of objects (mass, size, period, etc.) are compiled from the following sources: [NASA JPL Solar System Dynamics](https://ssd.jpl.nasa.gov/), [NASA Planetary Fact Sheets](https://nssdc.gsfc.nasa.gov/planetary/planetfact.html), [IAU Minor Planet Center](https://www.minorplanetcenter.net/), and [Scott S. Sheppard](https://sites.google.com/carnegiescience.edu/sheppard/home?authuser=0).
     
-    3D models of Solar System objects are provided by [NASA Solar System Resources](https://solarsystem.nasa.gov/resources/all/?order=pub_date+desc&per_page=50&page=0&search=&condition_1=1%3Ais_in_resource_list&fs=&fc=&ft=&dp=&category=).
+    Images are provided by [NASA Image and Video Library](https://images.nasa.gov/). Each individual image contains a link to its respective source.
+    
+    3D models are provided by [NASA Solar System Resources](https://solarsystem.nasa.gov/resources/all/?order=pub_date+desc&per_page=50&page=0&search=&condition_1=1%3Ais_in_resource_list&fs=&fc=&ft=&dp=&category=).
     
     The above sources are not affiliated with Planetaria and they do not endorse it.
     """
@@ -47,6 +49,7 @@ struct Acknowledgements: View {
                     Button("Done") {
                         dismiss()
                     }
+                    .foregroundStyle(.blue)
                 }
             }
             #endif
@@ -55,15 +58,15 @@ struct Acknowledgements: View {
     }
 }
 
-public struct Footnote: View {
+struct Footnote: View {
     
     @State private var showAcknowledgements: Bool = false
     
-    public init() { }
+    init() { }
     
-    public var body: some View {
+    var body: some View {
         Text("Acknowledgements")
-            .font(.system(.footnote, design: .rounded, weight: .semibold))
+            .font(.system(.footnote, weight: .semibold))
             .foregroundColor(.init(white: 0.4))
             .underline()
             .padding(.vertical, 5)

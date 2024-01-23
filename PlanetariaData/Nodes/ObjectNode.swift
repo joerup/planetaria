@@ -31,9 +31,9 @@ public class ObjectNode: Node {
     
     private enum CodingKeys: String, CodingKey {
         case group, discovered, discoverer, namesake
-        case mass, size, ringSize, luminosity
-        case semimajorAxis, eccentricity, inclination, longitudeOfPeriapsis, longitudeOfAscendingNode, meanAnomaly, orbitalPeriod
-        case rotationRef, rotationRate, poleRARef, poleRARate, poleDecRef, poleDecRate
+        case mass, size, density, gravity, escapeVelocity, ringSize, luminosity, moons
+        case semimajorAxis, eccentricity, inclination, orbitalPeriod
+        case rotationRef, rotationRate, poleRA, poleDec, axialTilt
         case temperature, pressure
     }
 
@@ -47,35 +47,42 @@ public class ObjectNode: Node {
         
         let mass = (try? container.decode(Double.self, forKey: .mass)) ?? 0
         let size = (try? container.decode(Double.self, forKey: .size)) ?? 0
-        let luminosity = (try? container.decode(Double.self, forKey: .luminosity)) ?? 0
+        let density = (try? container.decode(Double.self, forKey: .density)) ?? 0
+        let gravity = (try? container.decode(Double.self, forKey: .gravity)) ?? 0
+        let escapeVelocity = (try? container.decode(Double.self, forKey: .escapeVelocity)) ?? 0
         let ringSize = (try? container.decode(Double.self, forKey: .ringSize)) ?? 0
+        let luminosity = try? container.decode(Double.self, forKey: .luminosity)
+        let moons = try? container.decode(Int.self, forKey: .moons)
         
         let semimajorAxis = try? container.decode(Double.self, forKey: .semimajorAxis)
         let eccentricity = try? container.decode(Double.self, forKey: .eccentricity)
         let inclination = try? container.decode(Double.self, forKey: .inclination)
-        let longitudeOfPeriapsis = try? container.decode(Double.self, forKey: .longitudeOfPeriapsis)
-        let longitudeOfAscendingNode = try? container.decode(Double.self, forKey: .longitudeOfAscendingNode)
-        let meanAnomaly = try? container.decode(Double.self, forKey: .meanAnomaly)
         let orbitalPeriod = try? container.decode(Double.self, forKey: .orbitalPeriod)
         
         let rotationRef = try? container.decode(Double.self, forKey: .rotationRef)
         let rotationRate = try? container.decode(Double.self, forKey: .rotationRate)
-        let poleRARef = try? container.decode(Double.self, forKey: .poleRARef)
-        let poleRARate = try? container.decode(Double.self, forKey: .poleRARate)
-        let poleDecRef = try? container.decode(Double.self, forKey: .poleDecRef)
-        let poleDecRate = try? container.decode(Double.self, forKey: .poleDecRate)
+        let poleRA = try? container.decode(Double.self, forKey: .poleRA)
+        let poleDec = try? container.decode(Double.self, forKey: .poleDec)
+        let axialTilt = try? container.decode(Double.self, forKey: .axialTilt)
         
         let temperature = try? container.decode(Double.self, forKey: .temperature)
         let pressure = try? container.decode(Double.self, forKey: .pressure)
         
         self.ringSize = ringSize
-        self.luminosity = luminosity
+        self.luminosity = luminosity ?? 0
         
         try super.init(from: decoder)
         
-        self.rotation = Rotation(rotationRef: rotationRef, rotationRate: rotationRate, poleRARef: poleRARef, poleRARate: poleRARate, poleDecRef: poleDecRef, poleDecRate: poleDecRate)
+        self.rotation = Rotation(rotationRef: rotationRef, rotationRate: rotationRate, poleRA: poleRA, poleDec: poleDec)
         
-        self.properties = Properties(group: group, discovered: discovered, discoverer: discoverer, namesake: namesake, mass: mass, radius: size, semimajorAxis: semimajorAxis, eccentricity: eccentricity, inclination: inclination, longitudeOfPeriapsis: longitudeOfPeriapsis, longitudeOfAscendingNode: longitudeOfAscendingNode, meanAnomaly: meanAnomaly, orbitalPeriod: orbitalPeriod, rotationRate: rotationRate, temperature: temperature, pressure: pressure, luminosity: luminosity)
+        self.properties = Properties(group: group, discovered: discovered, discoverer: discoverer, namesake: namesake, moons: moons, mass: mass, radius: size, density: density, semimajorAxis: semimajorAxis, eccentricity: eccentricity, inclination: inclination, orbitalPeriod: orbitalPeriod, rotationRate: rotationRate, axialTilt: axialTilt, gravity: gravity, escapeVelocity: escapeVelocity, temperature: temperature, pressure: pressure, luminosity: luminosity)
         properties?.rotation = rotation
+    }
+    
+    override public func set(position: Vector, velocity: Vector) {
+        super.set(position: position, velocity: velocity)
+        if system == nil {
+            properties?.orbit = orbit
+        }
     }
 }

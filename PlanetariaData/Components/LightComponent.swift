@@ -9,23 +9,15 @@ import RealityKit
 
 class LightComponent: Component {
     
+    var node: Node
+    
     var model: Entity
     
-    #if !os(visionOS)
-    private var intensity: Double
-    private var light: PointLightComponent
-    #endif
-    
     init?(node: Node, size: Double) {
-        guard let object = node as? ObjectNode, object.luminosity > 0 else { return nil }
+        guard let node = node as? ObjectNode else { return nil }
+        self.node = node
+        
         self.model = Entity()
-        
-        #if !os(visionOS)
-        self.intensity = object.intensity * 1000
-        self.light = PointLightComponent(intensity: Float(intensity), attenuationRadius: 1E+20)
-        
-        model.components.set(light)
-        #endif
     }
     
     func update(scale: Double) {

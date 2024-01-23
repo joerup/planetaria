@@ -8,15 +8,15 @@
 import SwiftUI
 import PlanetariaData
 
-public struct ObjectRow: View {
+struct ObjectRow: View {
     
     var object: ObjectNode
     
-    public init(object: ObjectNode) {
+    init(object: ObjectNode) {
         self.object = object
     }
     
-    public var body: some View {
+    var body: some View {
         #if os(macOS)
         HStack {
             ObjectIcon(object: object, size: 30)
@@ -48,5 +48,37 @@ public struct ObjectRow: View {
         .padding()
         .background(Color.gray.opacity(0.1).cornerRadius(15))
         #endif
+    }
+}
+
+struct ObjectIcon: View {
+    
+    var object: ObjectNode
+    var size: CGFloat
+    
+    init(object: ObjectNode, size: CGFloat) {
+        self.object = object
+        self.size = size
+    }
+    
+    var body: some View {
+        Group {
+            #if os(macOS)
+            if let image = NSImage.init(named: object.name) {
+                Image(nsImage: image).resizable()
+            }
+            else {
+                Circle().fill(Color.init(white: 0.3)).padding(size*0.15)
+            }
+            #else
+            if let image = UIImage.init(named: object.name) {
+                Image(uiImage: image).resizable()
+            }
+            else {
+                Circle().fill(Color.init(white: 0.3)).padding(size*0.15)
+            }
+            #endif
+        }
+        .frame(width: size, height: size)
     }
 }

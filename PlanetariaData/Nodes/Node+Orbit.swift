@@ -11,6 +11,9 @@ extension Node {
     
     public class Orbit {
         
+        public var position: Vector
+        public var velocity: Vector
+        
         public var semimajorAxis: Double
         public var eccentricity: Double
         public var orbitalInclination: Double
@@ -24,6 +27,9 @@ extension Node {
         
         public init?(position: Vector, velocity: Vector, mass: Double, size: Double, hostNode: Node?) {
             guard let hostNode, hostNode.mass > 0 else { return nil }
+            
+            self.position = position
+            self.velocity = velocity
             
             let μ = G * (mass + hostNode.mass)
             let r = (position - hostNode.position) * 1000
@@ -45,7 +51,9 @@ extension Node {
             self.trueAnomaly = position.signedAngle(with: eccentricityVector, around: axis, clockwise: false)
         }
         
-        public func update(position: Vector) {
+        public func update(position: Vector, velocity: Vector) {
+            self.position = position
+            self.velocity = velocity
             self.trueAnomaly = position.signedAngle(with: eccentricityVector, around: axis, clockwise: false)
         }
         

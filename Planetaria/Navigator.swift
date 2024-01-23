@@ -21,11 +21,10 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    private let detents: Set<PresentationDetent> = [.preview, .small, .large]
+    private let detents: Set<PresentationDetent> = [.small, .large]
     
-    @State private var savedDetent: PresentationDetent = .preview
-    @State private var selectedDetent: PresentationDetent = .preview
-    @State private var detailDetent: PresentationDetent = .preview
+    @State private var selectedDetent: PresentationDetent = .small
+    @State private var detailDetent: PresentationDetent = .small
     
     private var activeDetent: PresentationDetent {
         showDetail ? detailDetent : selectedDetent
@@ -38,16 +37,13 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
         GeometryReader { geometry in
             if horizontalSizeClass == .compact && verticalSizeClass == .regular {
                 content()
-                    .padding(.bottom, activeDetent.height(size: geometry.size))
                     .overlay(alignment: .top) {
                         Header(showSettings: $showSettings)
                     }
                     .overlay(alignment: .bottom) {
-                        Toolbar()
-                            .padding(5)
-                            .padding(.bottom, activeDetent.height(size: geometry.size))
+                        Toolbar().padding(10)
                     }
-                    .animation(.default, value: activeDetent)
+                    .padding(.bottom, PresentationDetent.small.height(size: geometry.size))
                     .sheet(isPresented: .constant(true)) {
                         menu()
                             .sheet(isPresented: $showDetail) {
@@ -55,6 +51,7 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                                     .padding(.top, 3)
                                     .overlay(alignment: .topTrailing) { closeButton.padding(10) }
                                     .presentationDetents(detents, selection: $detailDetent)
+                                    .presentationBackground(Color(uiColor: .systemGray5))
                                     .presentationBackgroundInteraction(.enabled)
                                     .presentationCornerRadius(20)
                                     .interactiveDismissDisabled()
@@ -63,6 +60,7 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                                     }
                             }
                             .presentationDetents(detents, selection: $selectedDetent)
+                            .presentationBackground(Color(uiColor: .systemGray5))
                             .presentationBackgroundInteraction(.enabled)
                             .presentationCornerRadius(20)
                             .interactiveDismissDisabled()
@@ -73,14 +71,8 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                     }
                     .preferredColorScheme(.dark)
                     .onChange(of: showDetail) { _, showDetail in
-                        if !showDetail {
-                            detailDetent = .preview
-                            selectedDetent = savedDetent
-                        } else {
-                            savedDetent = selectedDetent
-                            selectedDetent = .small
-                            detailDetent = .preview
-                        }
+                        detailDetent = .small
+                        selectedDetent = .small
                     }
             } else {
                 content()
@@ -88,16 +80,14 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                     .overlay {
                         HStack(spacing: 0) {
                             menu()
-                                .background(.ultraThinMaterial)
-                                .transition(.move(edge: .bottom))
+                                .background(Color(uiColor: .systemGray5))
                                 .opacity(showDetail ? 0 : 1)
                                 .overlay {
                                     if showDetail {
                                         detail()
                                             .overlay(alignment: .topTrailing) { closeButton.padding(10) }
-                                            .background(.ultraThinMaterial)
+                                            .background(Color(uiColor: .systemGray5))
                                             .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
-                                            .transition(.move(edge: .bottom))
                                     }
                                 }
                                 .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
@@ -105,7 +95,6 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                                 .padding([.leading, .top], 10)
                                 .ignoresSafeArea(edges: .bottom)
                                 .preferredColorScheme(.dark)
-                                .animation(.default, value: showDetail)
                             VStack {
                                 Header(showSettings: $showSettings)
                                 Spacer()
@@ -140,12 +129,6 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                 }
         }
         .preferredColorScheme(.dark)
-        
-        #elseif os(tvOS)
-        content(.zero)
-            .sheet(isPresented: $showSettings) {
-                Settings()
-            }
         
         #elseif os(visionOS)
         menu()
@@ -191,15 +174,12 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
 extension PresentationDetent {
     
     static var small: PresentationDetent {
-        .height(95)
-    }
-    static var preview: PresentationDetent {
-        .fraction(0.4)
+        .height(250)
     }
     
     func height(size: CGSize) -> CGFloat {
         if self == .small {
-            return 100
+            return 250
         } else {
             return size.height*0.4
         }

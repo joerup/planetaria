@@ -20,8 +20,34 @@ public struct Simulator: View {
     public var body: some View {
         GeometryReader3D { geometry in
             Group {
-                RealityView { content in
+                RealityView { content, attachments in
                     content.add(simulation.rootEntity)
+                } update: { content, attachments in
+                    for entity in simulation.entities {
+                        if let node = entity.component(SimulationComponent.self)?.node {
+                            if let label = attachments.entity(for: "\(node.id)-label") {
+                                label.position = simulation.rootEntity.orientation.act(entity.position) + [0, -0.01, 0]
+                                label.orientation = simulation.rootEntity.orientation.inverse
+                                content.add(label)
+                            }
+                            if let target = attachments.entity(for: "\(node.id)-target") {
+                                target.position = simulation.rootEntity.orientation.act(entity.position)
+                                target.orientation = simulation.rootEntity.orientation.inverse
+                                content.add(target)
+                            }
+                        }
+                    }
+                } attachments: {
+                    ForEach(simulation.entities, id: \.self) { entity in
+                        if let node = entity.component(SimulationComponent.self)?.node {
+                            Attachment(id: "\(node.id)-label") {
+                                labelAttachment(node: node)
+                            }
+                            Attachment(id: "\(node.id)-target") {
+                                targetAttachment(node: node)
+                            }
+                        }
+                    }
                 }
                 .rotation3DEffect(Rotation3D(angle: .radians(-simulation.rotation.radians), axis: .y))
                 .gesture(tapGesture)
@@ -30,11 +56,31 @@ public struct Simulator: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
             .onTapGesture {
-                withAnimation {
+                withAnimation(.easeInOut) {
                     simulation.select(nil)
                 }
             }
         }
+    }
+    
+    private func labelAttachment(node: Node) -> some View {
+        Text(node.object?.name ?? node.name)
+            .font(.caption)
+            .opacity(simulation.isSelected(node) ? 1 : simulation.noSelection ? 0.7 : 0.4)
+            .opacity(simulation.labelVisible(node) ? 1 : 0)
+            .onTapGesture {
+                simulation.select(node)
+            }
+    }
+    
+    private func targetAttachment(node: Node) -> some View {
+        Circle()
+            .stroke(.white, lineWidth: 1)
+            .frame(width: 16)
+            .opacity(simulation.isSelected(node) ? 1 : 0)
+            .onTapGesture {
+                simulation.select(node)
+            }
     }
     
     private var tapGesture: some Gesture {

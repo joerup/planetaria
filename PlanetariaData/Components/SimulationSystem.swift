@@ -37,7 +37,9 @@ class SimulationSystem: System {
             let isEnabled = simulation.selectedSystem == configuration.node.parent
             let isSelected = simulation.isSelected(configuration.node)
             let noSelection = simulation.noSelection
-            let trailVisibile = simulation.trailVisibile(configuration.node)
+            
+            let orbitEnabled = isEnabled && (isSelected || configuration.node.rank == .primary)
+            let trailVisibile = simulation.trailVisible(configuration.node)
             
             if let body = entity.component(BodyComponent.self) {
                 body.update(scale: simulation.scale)
@@ -46,7 +48,10 @@ class SimulationSystem: System {
                 point.update(isEnabled: isEnabled, isSelected: isSelected, noSelection: noSelection)
             }
             if let orbit = entity.component(OrbitComponent.self) {
-                orbit.update(isEnabled: isEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: noSelection, scale: simulation.scale)
+                orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: noSelection, scale: simulation.scale)
+            }
+            if let light = entity.component(LightComponent.self) {
+                light.update(scale: simulation.scale)
             }
         }
     }

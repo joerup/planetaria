@@ -58,4 +58,9 @@ public class SystemNode: Node {
             child.parent = self
         }
     }
+    
+    override public func set(position: Vector, velocity: Vector) {
+        super.set(position: position, velocity: velocity)
+        object?.properties?.orbit = orbit
+    }
 }

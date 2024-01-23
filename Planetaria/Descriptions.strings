@@ -13,7 +13,7 @@
 "Mercury is the smallest and fastest planet in the Solar System, zooming around the Sun in only three months along its eccentric orbit. Its surface is heavily cratered, and it has no atmosphere, causing temperatures to range from very hot on the light side to very cold on the dark side. Despite its high orbital speed, Mercury rotates relatively slowly.";
 
 "Venus" =
-"Venus, the hottest planet in the Solar System, likely underwent a runaway greenhouse effect, resulting in its blazing hot and dense atmosphere. Thick clouds of carbon dioxide and sulfuric acid render the Venusian surface a complete hellscape. Venus spins in the opposite direction of most planets, and it does so very slowly – one rotation actually takes longer than one orbit around the Sun.";
+"Venus, the hottest planet in the Solar System, is plagued by a runaway greenhouse effect. Thick clouds of carbon dioxide and sulfuric acid in Venus's atmosphere render the planet a complete hellscape. Venus spins in the opposite direction of most planets, and it does so very slowly – one rotation actually takes longer than one orbit around the Sun.";
 
 "Earth" =
 "Earth is the only known world to contain life. It's a terrestrial planet with an active and habitable surface, filled with deep oceans, lush forests, vast deserts, and high mountains. Earth's position in the Solar System allows for an abundance of liquid water, which, along with an oxygen-rich atmosphere, lets living organisms thrive both on the land and in the water.";
@@ -25,7 +25,7 @@
 "Jupiter, the largest planet in the Solar System, is a gas giant known for its swirling bands of colorful clouds. Its distinctive Great Red Spot is actually a huge storm that has been active for centuries. Jupiter's massive gravitational influence plays a crucial role in deflecting asteroids and comets from the inner Solar System. The planet spins quickly and has a vast array of moons.";
 
 "Saturn" =
-"Saturn is a gas giant known for its iconic system of rings, composed of many individual ice, rock, and dust particles. Saturn is the second largest planet in the Solar System and it has a fast rotation rate. It also has a very low density – the planet would actually float if submerged in water. Saturn also boasts a very large and diverse set of moons.";
+"Saturn is a gas giant known for its iconic system of rings, composed of many individual ice, rock, and dust particles. Saturn is the second largest planet in the Solar System and it has a fast rotation rate. It also has a very low density – the planet would actually float if submerged in water. Saturn boasts a very large and diverse set of moons.";
 
 "Uranus" =
 "Uranus is an ice giant in the outer Solar System. It rotates on its side, creating extreme decades-long seasonal variations. The planet's atmosphere is the coldest in the Solar System, and it contains a small amount of methane, which gives it a blue-green hue. Uranus also features a faint ring system and many moons.";
@@ -76,7 +76,7 @@
 "Enceladus is a smaller moon of Saturn. It is predominantly coated in ice, making it very reflective. Cryovolcanic geysers on the surface of Enceladus eject large plumes of water vapor and hydrogen into space. These geysers are found near the moon's south pole, marked by blue streaks, which may connect the geysers to a subsurface ocean of water.";
 
 "Tethys" =
-"Tethys is a large moon of Saturn that has a very low density and is primarily composed of water ice. Its surface is very reflective and contains various geological formations. Notable features include Odysseus, a crater that covers a large portion of the surface, and Ithaca Chasma, a large canyon-like rift than encircles much of Tethys.";
+"Tethys is a large moon of Saturn that has a very low density and is primarily composed of water ice. Its surface is very reflective and contains various geological formations. Notable features include Odysseus, a crater that covers a large portion of the surface, and Ithaca Chasma, a large canyon-like rift that encircles much of Tethys.";
 
 "Dione" =
 "Dione is a large moon of Saturn. It is composed of water ice and silicate rock, and it may harbor an internal liquid saltwater ocean. Dione's surface is also home to a network of bright ice cliffs, along with large streaks, and varying amounts of craters.";
@@ -97,10 +97,10 @@
 "Umbriel is a large moon of Uranus. It is characterized by its dark, heavily cratered surface, and it stands out as one of the darkest moons in the solar system.";
  
 "Titania" =
-"Titania is the largest moon of Uranus and is known for its diverse terrain, consisting of impact craters, valleys, and fault lines. It is thought to have a relatively young surface compared to other moons.";
+"Titania is the largest moon of Uranus. Known for its diverse terrain – which consists of impact craters, valleys, and fault lines – Titania is thought to have a relatively young surface compared to other moons.";
 
 "Oberon" =
-"Oberon is the second-largest moon of Uranus. It surface has been bombarded with many impact craters, and it also features deep valleys and canyons. A subsurface ocean may exist beneath Oberon's icy shell.";
+"Oberon is the second-largest moon of Uranus. Its surface has been bombarded with many impact craters, and it also features deep valleys and canyons. A subsurface ocean may exist beneath Oberon's icy shell.";
 
 "Miranda" =
 "Miranda is the smallest and innermost major Uranian moon. It has a chaotic surface with varied terrain, featuring large faults, fractures, and ridges.";

@@ -8,7 +8,7 @@
 import SwiftUI
 import PlanetariaData
 
-public struct FormattedText: View {
+struct FormattedText: View {
     
     var value: String
     var unit: PlanetariaData.Unit?
@@ -29,26 +29,23 @@ public struct FormattedText: View {
         return nil
     }
     
-    public var body: some View {
+    var body: some View {
         HStack(alignment: unit?.string == "º" ? .top : .firstTextBaseline, spacing: 0) {
             HStack(alignment: .top, spacing: 0) {
                 Text(mainValue)
                     .font(.system(valueFont, weight: .semibold))
-                    .foregroundColor(.white)
                 if let superscriptedValue {
                     Text(superscriptedValue)
                         .font(.system(valueFont, weight: .semibold))
-                        .foregroundColor(.white)
                 }
             }
             if let unit {
                 Text(unit.string)
                     .font(.system(unitFont, weight: .semibold))
-                    .foregroundColor(.init(white: 0.7))
+                    .foregroundStyle(.secondary)
             }
         }
         .lineLimit(0)
-        .minimumScaleFactor(0.5)
     }
     
     private func makeSuperscript(_ value: String) -> String {

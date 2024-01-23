@@ -29,24 +29,24 @@ public extension Unit {
     }
 }
 
-public protocol ScaleUnit: Unit {
-    var offsetValue: Double { get }
-    var secondaryOffsetValue: Double { get }
-}
-
-public extension ScaleUnit {
-    func offset(to otherUnit: ScaleUnit) -> Double {
-        return otherUnit.offsetValue - self.offsetValue
-    }
-    func secondaryOffset(to otherUnit: ScaleUnit) -> Double {
-        return otherUnit.secondaryOffsetValue - self.secondaryOffsetValue
-    }
-}
-
 public extension Double {
     func convert(from unit1: Unit, to unit2: Unit) -> Double {
-        if let unit1 = unit1 as? ScaleUnit, let unit2 = unit2 as? ScaleUnit {
-            return (self + unit2.offset(to: unit1)) * unit2.ratio(to: unit1) + unit2.secondaryOffset(to: unit1)
+        if let unit1 = unit1 as? TemperatureU, let unit2 = unit2 as? TemperatureU {
+            switch unit1 {
+            case .K:
+                return (self-273).convert(from: TemperatureU.C, to: unit2)
+            case .F:
+                return ((self-32)*5/9).convert(from: TemperatureU.C, to: unit2)
+            case .C:
+                switch unit2 {
+                case .K:
+                    return self+273
+                case .F:
+                    return self*9/5 + 32
+                case .C:
+                    return self
+                }
+            }
         } else {
             return self * unit2.ratio(to: unit1)
         }
@@ -101,6 +101,9 @@ public struct Frac<Unit1: Unit, Unit2: Unit>: Unit {
     }
     
     public var string: String {
+        if denominator.string == " hr" {
+            return "\(numerator.string.prefix(2))ph"
+        }
         return numerator.string + "/" + (denominator.string.first == " " ? String(denominator.string.dropFirst()) : denominator.string)
     }
     public var relativeValue: Double {
@@ -122,7 +125,7 @@ public struct Frac<Unit1: Unit, Unit2: Unit>: Unit {
 public struct Square<UnitType: Unit>: Unit {
     var unit: UnitType
     
-    init(_ unit: UnitType) {
+    public init(_ unit: UnitType) {
         self.unit = unit
     }
     
@@ -143,7 +146,7 @@ public struct Square<UnitType: Unit>: Unit {
 public struct Cube<UnitType: Unit>: Unit {
     var unit: UnitType
     
-    init(_ unit: UnitType) {
+    public init(_ unit: UnitType) {
         self.unit = unit
     }
     
@@ -280,7 +283,7 @@ public enum TimeU: String, Unit, CaseIterable {
     }
 }
 
-public enum TemperatureU: String, ScaleUnit, CaseIterable {
+public enum TemperatureU: String, Unit, CaseIterable {
     case K
     case C
     case F
@@ -297,20 +300,6 @@ public enum TemperatureU: String, ScaleUnit, CaseIterable {
         case .K: return 1
         case .C: return 1
         case .F: return 9/5
-        }
-    }
-    public var offsetValue: Double {
-        switch self {
-        case .K: return 0
-        case .C: return 273
-        case .F: return 273
-        }
-    }
-    public var secondaryOffsetValue: Double {
-        switch self {
-        case .K: return 0
-        case .C: return 0
-        case .F: return -32
         }
     }
     public var otherUnits: [TemperatureU] {

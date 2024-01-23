@@ -8,28 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		011CB38A2A9C2FAE00749E31 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CB3892A9C2FAE00749E31 /* Navigator.swift */; };
-		011E0ED929730EE400151CD8 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E0ED829730EE400151CD8 /* LaunchScreenView.swift */; };
-		011E0EE52973A98300151CD8 /* SystemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E0EE42973A98300151CD8 /* SystemDetailView.swift */; };
-		011E0EEC2973C38D00151CD8 /* ObjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E0EEB2973C38D00151CD8 /* ObjectDetailView.swift */; };
-		011E0EF129746AD700151CD8 /* DetailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E0EF029746AD700151CD8 /* DetailRow.swift */; };
-		011E0EF329746F4600151CD8 /* DetailSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E0EF229746F4600151CD8 /* DetailSection.swift */; };
-		011E0EF5297471AA00151CD8 /* ObjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011E0EF4297471AA00151CD8 /* ObjectListView.swift */; };
-		0133669C2A16DC9200E8824D /* ObjectPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133669B2A16DC9100E8824D /* ObjectPreview.swift */; };
-		013366A52A1735DD00E8824D /* DetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013366A42A1735DD00E8824D /* DetailSheet.swift */; };
-		0136701F2A1EC665009159F6 /* DetailPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136701E2A1EC665009159F6 /* DetailPreview.swift */; };
-		013E10C52977CC1B00871BBA /* MinorPlanet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013E10C42977CC1B00871BBA /* MinorPlanet.swift */; };
-		013E10C72977CCC400871BBA /* Comet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013E10C62977CCC400871BBA /* Comet.swift */; };
-		013E10CB29784C7900871BBA /* DetailText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013E10CA29784C7900871BBA /* DetailText.swift */; };
 		01489ED42B41F5C300E74447 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01489ED32B41F5C300E74447 /* Planetaria.json */; };
-		0156E2852981D1DE003B592E /* PropertyGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156E2842981D1DE003B592E /* PropertyGroup.swift */; };
-		0156E2872981FB48003B592E /* PropertyBlockDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156E2862981FB48003B592E /* PropertyBlockDetails.swift */; };
-		0156E2892981FB61003B592E /* PropertyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156E2882981FB61003B592E /* PropertyItem.swift */; };
-		0156E28B2981FB78003B592E /* PropertyBlockPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156E28A2981FB78003B592E /* PropertyBlockPreview.swift */; };
-		0156E28F2982469E003B592E /* PropertyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156E28E2982469E003B592E /* PropertyList.swift */; };
-		0156E291298246CB003B592E /* PropertyBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0156E290298246CB003B592E /* PropertyBlock.swift */; };
-		0161E6242A278B8E00EB2B13 /* ObjectStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0161E6232A278B8E00EB2B13 /* ObjectStack.swift */; };
-		016223C8298300AE0006E579 /* PropertyComparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016223C7298300AE0006E579 /* PropertyComparer.swift */; };
-		016223CC2983641C0006E579 /* Object+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016223CB2983641C0006E579 /* Object+Properties.swift */; };
 		016527172B48952A004C0E95 /* Sun.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527162B48952A004C0E95 /* Sun.usdz */; };
 		016527192B489635004C0E95 /* Mercury.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527182B489635004C0E95 /* Mercury.usdz */; };
 		0165271F2B489CF8004C0E95 /* Jupiter.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165271A2B489CF6004C0E95 /* Jupiter.usdz */; };
@@ -70,37 +49,25 @@
 		01682DBB2B51E3140022797E /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B72B51E22B00B3744A /* XButton.swift */; };
 		01682DBC2B51E3160022797E /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B52B51E22B00B3744A /* Acknowledgements.swift */; };
 		01682DBD2B51E31A0022797E /* ObjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BA2B51E22E00B3744A /* ObjectRow.swift */; };
-		01682DBE2B51E31B0022797E /* ObjectIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BB2B51E22E00B3744A /* ObjectIcon.swift */; };
 		01682DBF2B51E31C0022797E /* ObjectCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BC2B51E22E00B3744A /* ObjectCard.swift */; };
 		0168673A2548F1BB007D1553 /* PlanetariaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016867392548F1BB007D1553 /* PlanetariaApp.swift */; };
 		0168673E2548F1BD007D1553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0168673D2548F1BD007D1553 /* Assets.xcassets */; };
-		01698A78296FD40C00B42A81 /* Simulator2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01698A77296FD40C00B42A81 /* Simulator2DView.swift */; };
 		0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169A5A22B3D3E3A00080E6A /* Toolbar.swift */; };
-		016DCD282B4666650030B614 /* SearchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DCD272B4666650030B614 /* SearchMenu.swift */; };
 		016DCD2B2B467C6F0030B614 /* Descriptions.strings in Resources */ = {isa = PBXBuildFile; fileRef = 016DCD2A2B467C6F0030B614 /* Descriptions.strings */; };
 		017166882B45263000A955D2 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166872B45263000A955D2 /* Launcher.swift */; };
 		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
-		018182D6296BD41000262A70 /* Simulator3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018182D5296BD41000262A70 /* Simulator3DView.swift */; };
-		018182DC296D254900262A70 /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018182DB296D254900262A70 /* Object.swift */; };
-		01A0A5DE2B4B420400D20A9C /* Simulator2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A0A5DD2B4B420300D20A9C /* Simulator2D.swift */; };
-		01A5B5A52971F24700626AD5 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B5A42971F24700626AD5 /* Planet.swift */; };
-		01A5B5A72972000200626AD5 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B5A62972000200626AD5 /* Star.swift */; };
-		01A5B5A92972009700626AD5 /* Moon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B5A82972009700626AD5 /* Moon.swift */; };
-		01A5B5AB2972283600626AD5 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B5AA2972283600626AD5 /* System.swift */; };
 		01B540E02B43929D00D5AF51 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B540DF2B43929D00D5AF51 /* Planetaria.json */; };
+		01B9BB0C2B5CA95800933E60 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9BB0B2B5CA95800933E60 /* PhotoView.swift */; };
+		01B9BB0E2B5CA9BA00933E60 /* Planetaria-photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B9BB0D2B5CA9BA00933E60 /* Planetaria-photos.json */; };
 		01C7BE7B2A8C64F80021D753 /* PlanetariaData in Frameworks */ = {isa = PBXBuildFile; productRef = 01C7BE7A2A8C64F80021D753 /* PlanetariaData */; };
+		01C97A062B5D8C6A00065109 /* NavigationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C97A052B5D8C6A00065109 /* NavigationSheet.swift */; };
 		01D4C7972A8C8EE5000F59B7 /* PlanetariaWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4C7962A8C8EE5000F59B7 /* PlanetariaWatchApp.swift */; };
 		01D4C79B2A8C8EE6000F59B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C79A2A8C8EE6000F59B7 /* Assets.xcassets */; };
 		01D4C79E2A8C8EE6000F59B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C79D2A8C8EE6000F59B7 /* Preview Assets.xcassets */; };
 		01D4C7A32A8C8F6C000F59B7 /* PlanetariaData in Frameworks */ = {isa = PBXBuildFile; productRef = 01D4C7A22A8C8F6C000F59B7 /* PlanetariaData */; };
 		01D5069C2AA5616200699FE9 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D5069B2AA5616200699FE9 /* Header.swift */; };
-		01E50F35297C6D7300F2365A /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E50F34297C6D7300F2365A /* SearchListView.swift */; };
-		01E62CC4297721F900C424BC /* ARSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E62CC3297721F800C424BC /* ARSimulator.swift */; };
 		01E840302A1FB2C000B2153E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8402F2A1FB2C000B2153E /* Settings.swift */; };
-		01F403AF296E73EC00C191A2 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F403AE296E73EC00C191A2 /* ARViewContainer.swift */; };
-		01F927832A1C36FE00392CB5 /* OrbitDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F927822A1C36FE00392CB5 /* OrbitDrawing.swift */; };
-		01FA8B84297DD13000BA1D7B /* SystemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FA8B83297DD13000BA1D7B /* SystemListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,29 +89,8 @@
 
 /* Begin PBXFileReference section */
 		011CB3892A9C2FAE00749E31 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
-		011E0ED829730EE400151CD8 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
-		011E0EE42973A98300151CD8 /* SystemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemDetailView.swift; sourceTree = "<group>"; };
-		011E0EEB2973C38D00151CD8 /* ObjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetailView.swift; sourceTree = "<group>"; };
-		011E0EF029746AD700151CD8 /* DetailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRow.swift; sourceTree = "<group>"; };
-		011E0EF229746F4600151CD8 /* DetailSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSection.swift; sourceTree = "<group>"; };
-		011E0EF4297471AA00151CD8 /* ObjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectListView.swift; sourceTree = "<group>"; };
 		012BD6CE2A8C6332009907CC /* PlanetariaData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PlanetariaData; sourceTree = "<group>"; };
-		0133669B2A16DC9100E8824D /* ObjectPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectPreview.swift; sourceTree = "<group>"; };
-		013366A42A1735DD00E8824D /* DetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSheet.swift; sourceTree = "<group>"; };
-		0136701E2A1EC665009159F6 /* DetailPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPreview.swift; sourceTree = "<group>"; };
-		013E10C42977CC1B00871BBA /* MinorPlanet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinorPlanet.swift; sourceTree = "<group>"; };
-		013E10C62977CCC400871BBA /* Comet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comet.swift; sourceTree = "<group>"; };
-		013E10CA29784C7900871BBA /* DetailText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailText.swift; sourceTree = "<group>"; };
 		01489ED32B41F5C300E74447 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
-		0156E2842981D1DE003B592E /* PropertyGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyGroup.swift; sourceTree = "<group>"; };
-		0156E2862981FB48003B592E /* PropertyBlockDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyBlockDetails.swift; sourceTree = "<group>"; };
-		0156E2882981FB61003B592E /* PropertyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyItem.swift; sourceTree = "<group>"; };
-		0156E28A2981FB78003B592E /* PropertyBlockPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyBlockPreview.swift; sourceTree = "<group>"; };
-		0156E28E2982469E003B592E /* PropertyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyList.swift; sourceTree = "<group>"; };
-		0156E290298246CB003B592E /* PropertyBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyBlock.swift; sourceTree = "<group>"; };
-		0161E6232A278B8E00EB2B13 /* ObjectStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectStack.swift; sourceTree = "<group>"; };
-		016223C7298300AE0006E579 /* PropertyComparer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyComparer.swift; sourceTree = "<group>"; };
-		016223CB2983641C0006E579 /* Object+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Object+Properties.swift"; sourceTree = "<group>"; };
 		016527162B48952A004C0E95 /* Sun.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sun.usdz; sourceTree = "<group>"; };
 		016527182B489635004C0E95 /* Mercury.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mercury.usdz; sourceTree = "<group>"; };
 		0165271A2B489CF6004C0E95 /* Jupiter.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Jupiter.usdz; sourceTree = "<group>"; };
@@ -186,9 +132,7 @@
 		016867422548F1BD007D1553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016867472548F1BD007D1553 /* PlanetariaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanetariaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		016867522548F1BD007D1553 /* PlanetariaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanetariaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		01698A77296FD40C00B42A81 /* Simulator2DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator2DView.swift; sourceTree = "<group>"; };
 		0169A5A22B3D3E3A00080E6A /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
-		016DCD272B4666650030B614 /* SearchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenu.swift; sourceTree = "<group>"; };
 		016DCD2A2B467C6F0030B614 /* Descriptions.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Descriptions.strings; sourceTree = "<group>"; };
 		017166872B45263000A955D2 /* Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
 		017166892B45B1A600A955D2 /* ObjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetails.swift; sourceTree = "<group>"; };
@@ -198,29 +142,18 @@
 		017200B72B51E22B00B3744A /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		017200B92B51E22E00B3744A /* PropertyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyText.swift; sourceTree = "<group>"; };
 		017200BA2B51E22E00B3744A /* ObjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectRow.swift; sourceTree = "<group>"; };
-		017200BB2B51E22E00B3744A /* ObjectIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectIcon.swift; sourceTree = "<group>"; };
 		017200BC2B51E22E00B3744A /* ObjectCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCard.swift; sourceTree = "<group>"; };
-		018182D5296BD41000262A70 /* Simulator3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator3DView.swift; sourceTree = "<group>"; };
-		018182DB296D254900262A70 /* Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
-		01A0A5DD2B4B420300D20A9C /* Simulator2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Simulator2D.swift; sourceTree = "<group>"; };
-		01A5B5A42971F24700626AD5 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
-		01A5B5A62972000200626AD5 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
-		01A5B5A82972009700626AD5 /* Moon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moon.swift; sourceTree = "<group>"; };
-		01A5B5AA2972283600626AD5 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
 		01B540DF2B43929D00D5AF51 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
+		01B9BB0B2B5CA95800933E60 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		01B9BB0D2B5CA9BA00933E60 /* Planetaria-photos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Planetaria-photos.json"; sourceTree = "<group>"; };
+		01C97A052B5D8C6A00065109 /* NavigationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSheet.swift; sourceTree = "<group>"; };
 		01D4C7942A8C8EE5000F59B7 /* PlanetariaWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PlanetariaWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D4C7962A8C8EE5000F59B7 /* PlanetariaWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetariaWatchApp.swift; sourceTree = "<group>"; };
 		01D4C79A2A8C8EE6000F59B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01D4C79D2A8C8EE6000F59B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		01D5069B2AA5616200699FE9 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
-		01DE2B302A9C394200D4CF31 /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Sheet.swift; path = ../../../../../../.Trash/Sheet.swift; sourceTree = "<group>"; };
-		01E50F34297C6D7300F2365A /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
-		01E62CC3297721F800C424BC /* ARSimulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSimulator.swift; sourceTree = "<group>"; };
 		01E8402F2A1FB2C000B2153E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		01F403AE296E73EC00C191A2 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
-		01F927822A1C36FE00392CB5 /* OrbitDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbitDrawing.swift; sourceTree = "<group>"; };
-		01FA8B83297DD13000BA1D7B /* SystemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,65 +190,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01106BD32A81A74E00054D22 /* Old */ = {
-			isa = PBXGroup;
-			children = (
-				01A0A5DD2B4B420300D20A9C /* Simulator2D.swift */,
-				01DE2B302A9C394200D4CF31 /* Sheet.swift */,
-				011E0EE82973AAD400151CD8 /* UI */,
-				01698A76296FD3D300B42A81 /* Simulators */,
-				01A5B5A12971F21B00626AD5 /* System Models */,
-				01A5B5B12972310A00626AD5 /* Object Models */,
-			);
-			path = Old;
-			sourceTree = "<group>";
-		};
-		011E0EE82973AAD400151CD8 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				011E0ED829730EE400151CD8 /* LaunchScreenView.swift */,
-				0161E6252A278DCE00EB2B13 /* New Stuff */,
-				0133669F2A16E90300E8824D /* Old Stuff' */,
-				013E10C32977BAD000871BBA /* Details */,
-				01ADA7172978FFFD00824496 /* Properties */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		0133669F2A16E90300E8824D /* Old Stuff' */ = {
-			isa = PBXGroup;
-			children = (
-				01FA8B83297DD13000BA1D7B /* SystemListView.swift */,
-				011E0EEB2973C38D00151CD8 /* ObjectDetailView.swift */,
-				011E0EF4297471AA00151CD8 /* ObjectListView.swift */,
-				013366A42A1735DD00E8824D /* DetailSheet.swift */,
-				0136701E2A1EC665009159F6 /* DetailPreview.swift */,
-				01F927822A1C36FE00392CB5 /* OrbitDrawing.swift */,
-				01E50F34297C6D7300F2365A /* SearchListView.swift */,
-			);
-			path = "Old Stuff'";
-			sourceTree = "<group>";
-		};
-		013E10C32977BAD000871BBA /* Details */ = {
-			isa = PBXGroup;
-			children = (
-				011E0EF029746AD700151CD8 /* DetailRow.swift */,
-				013E10CA29784C7900871BBA /* DetailText.swift */,
-			);
-			path = Details;
-			sourceTree = "<group>";
-		};
-		0161E6252A278DCE00EB2B13 /* New Stuff */ = {
-			isa = PBXGroup;
-			children = (
-				0161E6232A278B8E00EB2B13 /* ObjectStack.swift */,
-				0133669B2A16DC9100E8824D /* ObjectPreview.swift */,
-				011E0EE42973A98300151CD8 /* SystemDetailView.swift */,
-				011E0EF229746F4600151CD8 /* DetailSection.swift */,
-			);
-			path = "New Stuff";
-			sourceTree = "<group>";
-		};
 		016527152B48951D004C0E95 /* 3D Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,70 +266,17 @@
 				01E8402F2A1FB2C000B2153E /* Settings.swift */,
 				0171668B2B45B1AB00A955D2 /* SystemDetails.swift */,
 				017166892B45B1A600A955D2 /* ObjectDetails.swift */,
-				016DCD272B4666650030B614 /* SearchMenu.swift */,
-				017200B92B51E22E00B3744A /* PropertyText.swift */,
-				017200B62B51E22B00B3744A /* FormattedText.swift */,
-				017200B72B51E22B00B3744A /* XButton.swift */,
-				017200B52B51E22B00B3744A /* Acknowledgements.swift */,
 				017200BA2B51E22E00B3744A /* ObjectRow.swift */,
-				017200BB2B51E22E00B3744A /* ObjectIcon.swift */,
 				017200BC2B51E22E00B3744A /* ObjectCard.swift */,
-				01106BD32A81A74E00054D22 /* Old */,
+				01F066322B5784E80024D567 /* Utility */,
 				0168673D2548F1BD007D1553 /* Assets.xcassets */,
 				016527152B48951D004C0E95 /* 3D Models */,
 				016867422548F1BD007D1553 /* Info.plist */,
 				01489ED32B41F5C300E74447 /* Planetaria.json */,
+				01B9BB0D2B5CA9BA00933E60 /* Planetaria-photos.json */,
 				016DCD2A2B467C6F0030B614 /* Descriptions.strings */,
-				01DE2B2E2A9C385900D4CF31 /* Preview Content 22-04-13-235 */,
 			);
 			path = Planetaria;
-			sourceTree = "<group>";
-		};
-		01698A76296FD3D300B42A81 /* Simulators */ = {
-			isa = PBXGroup;
-			children = (
-				01698A77296FD40C00B42A81 /* Simulator2DView.swift */,
-				018182D5296BD41000262A70 /* Simulator3DView.swift */,
-				01F403AE296E73EC00C191A2 /* ARViewContainer.swift */,
-				01E62CC3297721F800C424BC /* ARSimulator.swift */,
-			);
-			path = Simulators;
-			sourceTree = "<group>";
-		};
-		01A5B5A12971F21B00626AD5 /* System Models */ = {
-			isa = PBXGroup;
-			children = (
-				01A5B5AA2972283600626AD5 /* System.swift */,
-			);
-			path = "System Models";
-			sourceTree = "<group>";
-		};
-		01A5B5B12972310A00626AD5 /* Object Models */ = {
-			isa = PBXGroup;
-			children = (
-				018182DB296D254900262A70 /* Object.swift */,
-				016223CB2983641C0006E579 /* Object+Properties.swift */,
-				01A5B5A62972000200626AD5 /* Star.swift */,
-				01A5B5A42971F24700626AD5 /* Planet.swift */,
-				013E10C42977CC1B00871BBA /* MinorPlanet.swift */,
-				01A5B5A82972009700626AD5 /* Moon.swift */,
-				013E10C62977CCC400871BBA /* Comet.swift */,
-			);
-			path = "Object Models";
-			sourceTree = "<group>";
-		};
-		01ADA7172978FFFD00824496 /* Properties */ = {
-			isa = PBXGroup;
-			children = (
-				0156E2882981FB61003B592E /* PropertyItem.swift */,
-				0156E290298246CB003B592E /* PropertyBlock.swift */,
-				0156E2842981D1DE003B592E /* PropertyGroup.swift */,
-				0156E28A2981FB78003B592E /* PropertyBlockPreview.swift */,
-				0156E2862981FB48003B592E /* PropertyBlockDetails.swift */,
-				016223C7298300AE0006E579 /* PropertyComparer.swift */,
-				0156E28E2982469E003B592E /* PropertyList.swift */,
-			);
-			path = Properties;
 			sourceTree = "<group>";
 		};
 		01C7BE792A8C64F80021D753 /* Frameworks */ = {
@@ -484,11 +305,17 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		01DE2B2E2A9C385900D4CF31 /* Preview Content 22-04-13-235 */ = {
+		01F066322B5784E80024D567 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				01B9BB0B2B5CA95800933E60 /* PhotoView.swift */,
+				01C97A052B5D8C6A00065109 /* NavigationSheet.swift */,
+				017200B92B51E22E00B3744A /* PropertyText.swift */,
+				017200B62B51E22B00B3744A /* FormattedText.swift */,
+				017200B52B51E22B00B3744A /* Acknowledgements.swift */,
+				017200B72B51E22B00B3744A /* XButton.swift */,
 			);
-			path = "Preview Content 22-04-13-235";
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -622,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				016DCD2B2B467C6F0030B614 /* Descriptions.strings in Resources */,
+				01B9BB0E2B5CA9BA00933E60 /* Planetaria-photos.json in Resources */,
 				016527192B489635004C0E95 /* Mercury.usdz in Resources */,
 				016527302B489D12004C0E95 /* Pluto.usdz in Resources */,
 				016527402B48C6C5004C0E95 /* Europa.usdz in Resources */,
@@ -695,54 +523,20 @@
 			files = (
 				01D5069C2AA5616200699FE9 /* Header.swift in Sources */,
 				0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */,
-				016DCD282B4666650030B614 /* SearchMenu.swift in Sources */,
-				011E0EF5297471AA00151CD8 /* ObjectListView.swift in Sources */,
-				013E10C52977CC1B00871BBA /* MinorPlanet.swift in Sources */,
 				01682DBA2B51E3130022797E /* FormattedText.swift in Sources */,
-				0133669C2A16DC9200E8824D /* ObjectPreview.swift in Sources */,
-				011E0EE52973A98300151CD8 /* SystemDetailView.swift in Sources */,
-				013366A52A1735DD00E8824D /* DetailSheet.swift in Sources */,
-				01A5B5A52971F24700626AD5 /* Planet.swift in Sources */,
-				0156E2852981D1DE003B592E /* PropertyGroup.swift in Sources */,
-				01698A78296FD40C00B42A81 /* Simulator2DView.swift in Sources */,
-				01E50F35297C6D7300F2365A /* SearchListView.swift in Sources */,
-				0161E6242A278B8E00EB2B13 /* ObjectStack.swift in Sources */,
-				011E0EEC2973C38D00151CD8 /* ObjectDetailView.swift in Sources */,
-				013E10C72977CCC400871BBA /* Comet.swift in Sources */,
-				0156E2892981FB61003B592E /* PropertyItem.swift in Sources */,
-				0136701F2A1EC665009159F6 /* DetailPreview.swift in Sources */,
-				01A5B5A72972000200626AD5 /* Star.swift in Sources */,
-				0156E28B2981FB78003B592E /* PropertyBlockPreview.swift in Sources */,
-				01E62CC4297721F900C424BC /* ARSimulator.swift in Sources */,
-				01FA8B84297DD13000BA1D7B /* SystemListView.swift in Sources */,
-				0156E28F2982469E003B592E /* PropertyList.swift in Sources */,
-				01F927832A1C36FE00392CB5 /* OrbitDrawing.swift in Sources */,
-				016223C8298300AE0006E579 /* PropertyComparer.swift in Sources */,
-				0156E291298246CB003B592E /* PropertyBlock.swift in Sources */,
-				011E0ED929730EE400151CD8 /* LaunchScreenView.swift in Sources */,
+				01C97A062B5D8C6A00065109 /* NavigationSheet.swift in Sources */,
 				0168673A2548F1BB007D1553 /* PlanetariaApp.swift in Sources */,
 				01682DBC2B51E3160022797E /* Acknowledgements.swift in Sources */,
 				0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */,
-				018182DC296D254900262A70 /* Object.swift in Sources */,
-				011E0EF329746F4600151CD8 /* DetailSection.swift in Sources */,
 				01682DB92B51E3000022797E /* PropertyText.swift in Sources */,
-				016223CC2983641C0006E579 /* Object+Properties.swift in Sources */,
+				01B9BB0C2B5CA95800933E60 /* PhotoView.swift in Sources */,
 				01682DBB2B51E3140022797E /* XButton.swift in Sources */,
-				0156E2872981FB48003B592E /* PropertyBlockDetails.swift in Sources */,
-				01A5B5A92972009700626AD5 /* Moon.swift in Sources */,
-				01A5B5AB2972283600626AD5 /* System.swift in Sources */,
-				01A0A5DE2B4B420400D20A9C /* Simulator2D.swift in Sources */,
 				017166882B45263000A955D2 /* Launcher.swift in Sources */,
-				011E0EF129746AD700151CD8 /* DetailRow.swift in Sources */,
-				01682DBE2B51E31B0022797E /* ObjectIcon.swift in Sources */,
-				018182D6296BD41000262A70 /* Simulator3DView.swift in Sources */,
 				01E840302A1FB2C000B2153E /* Settings.swift in Sources */,
 				01682DBF2B51E31C0022797E /* ObjectCard.swift in Sources */,
 				01682DBD2B51E31A0022797E /* ObjectRow.swift in Sources */,
-				013E10CB29784C7900871BBA /* DetailText.swift in Sources */,
 				011CB38A2A9C2FAE00749E31 /* Navigator.swift in Sources */,
 				0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */,
-				01F403AF296E73EC00C191A2 /* ARViewContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

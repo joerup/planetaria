@@ -15,7 +15,7 @@ class PointComponent: Component {
     init?(node: Node) {
         let radius: Float = 0.003
         let sphere = MeshResource.generateSphere(radius: radius)
-        let collisionShape = ShapeResource.generateSphere(radius: 5 * radius)
+        let collisionShape = ShapeResource.generateSphere(radius: 10 * radius)
         #if os(macOS)
         let material = UnlitMaterial(color: NSColor(node.color ?? .gray))
         #else
@@ -32,6 +32,7 @@ class PointComponent: Component {
     }
     
     func update(isEnabled: Bool, isSelected: Bool, noSelection: Bool) {
+        model.position = .zero
         model.scale = SIMD3(repeating: isEnabled ? (isSelected ? 1.2 : noSelection ? 1 : 0.5) : 0)
     }
 }

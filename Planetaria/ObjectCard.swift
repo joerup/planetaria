@@ -8,15 +8,15 @@
 import SwiftUI
 import PlanetariaData
 
-public struct ObjectCard: View {
+struct ObjectCard: View {
     
     var object: ObjectNode
     
-    public init(object: ObjectNode) {
+    init(object: ObjectNode) {
         self.object = object
     }
     
-    public var body: some View {
+    var body: some View {
         VStack {
             ObjectIcon(object: object, size: 75)
                 .scaleEffect(1/1.2)

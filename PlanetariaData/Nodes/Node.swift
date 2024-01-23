@@ -59,13 +59,6 @@ public class Node: Decodable {
         return (hostNode.mass * hostNode.velocity + self.mass * self.velocity) / (hostNode.mass + self.mass)
     }
     
-    public var orbitalElementsAvailable: Bool {
-        return orbit != nil
-    }
-    public var structuralElementsAvailable: Bool {
-        return mass != 0 && size != 0
-    }
-    
     public func set(position: Vector, velocity: Vector) {
         self.position = position
         self.velocity = velocity

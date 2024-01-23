@@ -44,7 +44,15 @@ struct SystemDetails: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        NavigationSheet {
+            header
+        } content: {
+            list
+        }
+    }
+    
+    private var header: some View {
+        VStack(alignment: .leading, spacing: 5) {
             if let parent = system.parent {
                 Button {
                     simulation.leaveSystem()
@@ -56,30 +64,13 @@ struct SystemDetails: View {
                             .padding(.leading, -5)
                         Text("\(parent.name) System")
                     }
+                    .foregroundStyle(.blue)
                 }
-                .padding(.horizontal)
-                .padding(.top)
-                .padding(.bottom, -5)
             }
-            
-            #if os(macOS)
-            Text("\(system.name) System")
-                .font(.system(.largeTitle, design: .default, weight: .bold))
-                .padding(.top, 10)
-                .padding(.horizontal)
-                .padding(.bottom)
-            #else
             Text("\(system.name) System")
                 .font(.system(.title, design: .default, weight: .semibold))
-                .padding()
-            #endif
-            
-            ScrollView {
-                list
-            }
         }
-        .navigationTitle("\(system.name) System")
-        .tint(.mint)
+        .padding()
     }
     
     private var list: some View {
@@ -105,7 +96,7 @@ struct SystemDetails: View {
                         }
                         ForEach(category == "Planets" ? nodes.sorted(by: { $0.id < $1.id }) : nodes, id: \.self) { object in
                             Button {
-                                withAnimation {
+                                withAnimation(.easeInOut) {
                                     simulation.select(object)
                                 }
                             } label: {
@@ -118,6 +109,7 @@ struct SystemDetails: View {
                 }
             }
         }
+        .foregroundStyle(.white)
         .padding(.bottom)
     }
 }
