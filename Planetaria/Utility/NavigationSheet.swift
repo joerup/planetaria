@@ -48,7 +48,11 @@ struct NavigationSheet<Header: View, Content: View>: View {
                     header()
                     Spacer(minLength: 0)
                 }
+                #if os(visionOS)
+                .glassBackgroundEffect()
+                #else
                 .background(Color(uiColor: .systemGray5).opacity(0.95))
+                #endif
                 Divider()
                     .opacity(scrollPosition == 0 ? 0 : 1)
                     .animation(.default, value: scrollPosition)

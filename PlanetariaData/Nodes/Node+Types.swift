@@ -37,6 +37,17 @@ extension Node {
                 return "Trans-Neptunian Object"
             }
         }
+        
+        public var orbiterCategory: Category {
+            switch self {
+            case .system:
+                return .star
+            case .star:
+                return .planet
+            case .planet, .asteroid, .tno, .moon:
+                return .moon
+            }
+        }
     }
 
     public enum Rank: String, Codable, CaseIterable {

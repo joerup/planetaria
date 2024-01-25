@@ -31,10 +31,6 @@ class SimulationEntity: Entity {
             components.set(orbit)
             addChild(orbit.model)
         }
-        if let light = LightComponent(node: node, size: size) {
-            components.set(light)
-            addChild(light.model)
-        }
     }
     
     var physicalBounds: BoundingBox {
@@ -62,6 +58,7 @@ class SimulationRootEntity: Entity {
     func transition(scale: CGFloat, offset: Vector, duration: Double) {
         guard let simulation else { return }
         
+        // Transition models
         scene?.performQuery(Self.query).forEach { entity in
             guard let configuration = entity.component(SimulationComponent.self) else { return }
             
@@ -77,16 +74,13 @@ class SimulationRootEntity: Entity {
             let trailVisibile = simulation.trailVisible(configuration.node)
             
             if let body = entity.component(BodyComponent.self) {
-                body.update(scale: scale, duration: duration)
+                body.update(isEnabled: isEnabled, scale: scale, duration: duration)
             }
             if let point = entity.component(PointComponent.self) {
                 point.update(isEnabled: isEnabled, isSelected: isSelected, noSelection: noSelection)
             }
             if let orbit = entity.component(OrbitComponent.self) {
                 orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: noSelection, scale: scale, duration: duration)
-            }
-            if let light = entity.component(LightComponent.self) {
-                light.update(scale: scale)
             }
         }
     }

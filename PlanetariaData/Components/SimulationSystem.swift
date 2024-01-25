@@ -31,7 +31,6 @@ class SimulationSystem: System {
         // Update models
         context.scene.performQuery(Self.query).forEach { entity in
             guard let configuration = entity.component(SimulationComponent.self) else { return }
-            
             entity.position = configuration.position(scale: simulation.scale, offset: simulation.offset)
             
             let isEnabled = simulation.selectedSystem == configuration.node.parent
@@ -42,16 +41,13 @@ class SimulationSystem: System {
             let trailVisibile = simulation.trailVisible(configuration.node)
             
             if let body = entity.component(BodyComponent.self) {
-                body.update(scale: simulation.scale)
+                body.update(isEnabled: isEnabled, scale: simulation.scale)
             }
             if let point = entity.component(PointComponent.self) {
                 point.update(isEnabled: isEnabled, isSelected: isSelected, noSelection: noSelection)
             }
             if let orbit = entity.component(OrbitComponent.self) {
                 orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: noSelection, scale: simulation.scale)
-            }
-            if let light = entity.component(LightComponent.self) {
-                light.update(scale: simulation.scale)
             }
         }
     }

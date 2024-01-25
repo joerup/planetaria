@@ -62,9 +62,7 @@ public struct Simulator: View {
         }
         .position(x: position.x, y: position.y)
         .onTapGesture {
-            withAnimation(.easeInOut) {
-                simulation.select(node)
-            }
+            simulation.select(node)
         }
     }
     
@@ -122,9 +120,10 @@ private struct RealityView: UIViewRepresentable {
         
         anchor.orientation = arMode ? .init() : simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
         anchor.position = arMode ? [0,-0.2,-1] : .zero
-        anchor.scale = arMode ? [1,1,1] : [2,2,2] * Float(min(size.width, size.height) / max(size.width, size.height))
+        anchor.scale = arMode ? .one : SIMD3(repeating: Float(2 * min(1, size.width/size.height)))
         
         context.coordinator.view = arView
+        arView.environment.background = arMode ? .cameraFeed() : .color(.black)
         arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap)))
         
         arView.scene.anchors.append(anchor)
@@ -154,12 +153,10 @@ private struct RealityView: UIViewRepresentable {
             
             let tapLocation = recognizer.location(in: view)
             
-            withAnimation(.easeInOut) {
-                if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
-                    select(node)
-                } else {
-                    select(nil)
-                }
+            if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
+                select(node)
+            } else {
+                select(nil)
             }
         }
     }
@@ -176,8 +173,6 @@ private struct RealityView: NSViewRepresentable {
     
     func makeNSView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
-        arView.environment.background = .color(.black)
-        
         anchor.addChild(root)
         
         anchor.orientation = simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
@@ -213,12 +208,10 @@ private struct RealityView: NSViewRepresentable {
             
             let tapLocation = recognizer.location(in: view)
             
-            withAnimation(.easeInOut) {
-                if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
-                    select(node)
-                } else {
-                    select(nil)
-                }
+            if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
+                select(node)
+            } else {
+                select(nil)
             }
         }
     }

@@ -56,9 +56,7 @@ public struct Simulator: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
             .onTapGesture {
-                withAnimation(.easeInOut) {
-                    simulation.select(nil)
-                }
+                simulation.select(nil)
             }
         }
     }

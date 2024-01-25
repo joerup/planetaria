@@ -28,6 +28,7 @@ class PointComponent: Component {
         model.components.set(CollisionComponent(shapes: [collisionShape]))
         #if os(visionOS)
         model.components.set(InputTargetComponent())
+        model.components.set(HoverEffectComponent())
         #endif
     }
     

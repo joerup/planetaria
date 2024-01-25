@@ -126,7 +126,9 @@ public extension Array where Element == Double {
     }
     
     var ra: Double {
-        return proj(plane: .celestialPole).angle(with: .vernalEquinox)
+        let ra = proj(plane: .celestialPole).angle(with: .vernalEquinox)
+        if ra.isNaN { return 0 }
+        return ra
     }
     var dec: Double {
         return .pi/2 - angle(with: .celestialPole)

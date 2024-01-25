@@ -10,6 +10,8 @@ import PlanetariaData
 
 struct ObjectDetails: View {
     
+    @EnvironmentObject var simulation: Simulation
+    
     var object: ObjectNode
     
     var body: some View {
@@ -39,20 +41,19 @@ struct ObjectDetails: View {
                 
                 if !properties.photos.isEmpty {
                     ScrollView(.horizontal) {
-                        LazyHStack {
-                            ForEach(properties.photos, id: \.url) { photo in
+                        HStack {
+                            ForEach(properties.photos, id: \.name) { photo in
                                 PhotoView(photo: photo)
                             }
                         }
                         .padding(.vertical, 5)
                         .padding(.horizontal, -1)
                     }
-                    .frame(height: 120)
+                    .frame(height: 125)
                 }
                 
                 if object.rank == .primary || object.rank == .secondary {
-                    let localizedString = NSLocalizedString(object.name, tableName: "Descriptions", comment: "")
-                    Text(localizedString)
+                    Text(NSLocalizedString(object.name, tableName: "Descriptions", comment: ""))
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 
@@ -69,43 +70,69 @@ struct ObjectDetails: View {
                 
                 Divider()
                 
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
-                    PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
-                    PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod?.dynamic())
-                    PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod?.dynamic())
-                    PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.currentDistance?.local(), units: [.km, .mi])
-                    PropertyText(type: .large, name: "Current Speed", property: properties.currentSpeed?.local(), units: [.km / .hr, .mi / .hr])
-                    PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt)
-                    PropertyText(type: .large, name: "Temperature", property: properties.temperature?.local(), units: [.F, .C, .K])
-                }
-                .padding(.horizontal, -2)
+//                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
+//                    PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
+//                    PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod?.dynamic())
+//                    PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod?.dynamic())
+//                    PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.currentDistance?.local(), units: [.km, .mi])
+//                    PropertyText(type: .large, name: "Current Speed", property: properties.currentSpeed?.local(), units: [.km / .hr, .mi / .hr])
+//                    PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt)
+//                    PropertyText(type: .large, name: "Temperature", property: properties.temperature?.local(), units: [.F, .C, .K])
+//                }
+//                .padding(.horizontal, -2)
+//                
+//                Divider()
+//                
+//                if properties.orbitalElementsAvailable {
+//                    VStack(alignment: .leading) {
+//                        Text("Orbital Elements")
+//                            .font(.system(.headline, weight: .bold))
+//                            .padding(.vertical, 5)
+//                        PropertyText(type: .row, name: "Semimajor Axis", property: properties.semimajorAxis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
+//                        PropertyText(type: .row, name: periapsisName, property: properties.periapsis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
+//                        PropertyText(type: .row, name: apoapsisName, property: properties.apoapsis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
+//                        PropertyText(type: .row, name: "Eccentricity", property: properties.eccentricity)
+//                        PropertyText(type: .row, name: "Inclination", property: properties.inclination)
+//                    }
+//                    Divider()
+//                }
+//                
+//                if properties.structuralElementsAvailable {
+//                    VStack(alignment: .leading) {
+//                        Text("Structural Elements")
+//                            .font(.system(.headline, weight: .bold))
+//                            .padding(.vertical, 5)
+//                        PropertyText(type: .row, name: "Mass", property: properties.mass, units: [.kg])
+//                        PropertyText(type: .row, name: "Radius", property: properties.radius, units: [.km, .mi])
+//                        PropertyText(type: .row, name: "Density", property: properties.density, units: [.g / Cube(.cm), .kg / Cube(.m)])
+//                        PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity, units: [.m / Square(.s)])
+//                        PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity, units: [.km / .s])
+//                    }
+//                    Divider()
+//                }
                 
-                Divider()
-                
-                if properties.orbitalElementsAvailable {
+                if !orbiters.isEmpty {
                     VStack(alignment: .leading) {
-                        Text("Orbital Elements")
-                            .font(.system(.headline, weight: .bold))
-                            .padding(.vertical, 5)
-                        PropertyText(type: .row, name: "Semimajor Axis", property: properties.semimajorAxis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
-                        PropertyText(type: .row, name: periapsisName, property: properties.periapsis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
-                        PropertyText(type: .row, name: apoapsisName, property: properties.apoapsis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
-                        PropertyText(type: .row, name: "Eccentricity", property: properties.eccentricity)
-                        PropertyText(type: .row, name: "Inclination", property: properties.inclination)
-                    }
-                    Divider()
-                }
-                
-                if properties.structuralElementsAvailable {
-                    VStack(alignment: .leading) {
-                        Text("Structural Elements")
-                            .font(.system(.headline, weight: .bold))
-                            .padding(.vertical, 5)
-                        PropertyText(type: .row, name: "Mass", property: properties.mass, units: [.kg])
-                        PropertyText(type: .row, name: "Radius", property: properties.radius, units: [.km, .mi])
-                        PropertyText(type: .row, name: "Density", property: properties.density, units: [.g / Cube(.cm), .kg / Cube(.m)])
-                        PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity, units: [.m / Square(.s)])
-                        PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity, units: [.km / .s])
+                        HStack {
+                            Text("\(object.category.orbiterCategory.text)s")
+                                .font(.system(.headline, weight: .bold))
+                            Spacer()
+                            Text("\(properties.moons?.value ?? orbiters.count)")
+                                .foregroundStyle(.secondary)
+                                .font(.system(.headline, weight: .bold))
+                        }
+                        .padding(.vertical, 5)
+                        ScrollView(.horizontal) {
+                            HStack {
+                                ForEach(orbiters) { object in
+                                    Button {
+                                        simulation.select(object)
+                                    } label: {
+                                        ObjectCard(object: object)
+                                    }
+                                }
+                            }
+                        }
                     }
                     Divider()
                 }
@@ -148,6 +175,12 @@ struct ObjectDetails: View {
         case "Earth": return "Apogee"
         default: return "Apoapsis"
         }
+    }
+    
+    private var orbiters: [ObjectNode] {
+        let orbiterCategory = object.category.orbiterCategory
+        guard let system = object.system else { return [] }
+        return system.children.compactMap(\.object).filter({ $0.category == orbiterCategory }).sorted(by: { $0.id < $1.id })
     }
 }
 

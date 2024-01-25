@@ -9,7 +9,7 @@ import Foundation
 
 public struct Photo: Codable, Identifiable {
     public var id: Int
-    public var url: String
+    public var name: String
     public var source: String
     public var desc: String
     

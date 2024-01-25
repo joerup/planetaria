@@ -25,12 +25,13 @@ class BodyComponent: Component {
         bodyEntity.components.set(CollisionComponent(shapes: [collisionShape]))
         #if os(visionOS)
         bodyEntity.components.set(InputTargetComponent())
+        bodyEntity.components.set(HoverEffectComponent())
         #endif
         bodyEntity.scale = SIMD3(repeating: Float(size))
         bodyEntity.orientation = orientation(rotation)
     }
     
-    func update(scale: Double, duration: Double = 0) {
+    func update(isEnabled: Bool, scale: Double, duration: Double = 0) {
         let scale = SIMD3(repeating: Float(diameter * scale))
         model.orientation = orientation(rotation)
         
@@ -47,15 +48,15 @@ class BodyComponent: Component {
         let angle = rotation?.angle ?? .zero
         let axis = rotation?.axis ?? .referencePlane
         let tilt = axis.angle(with: .referencePlane)
-
+        
         // Tilt the object to its correct rotational axis
         let q1 = simd_quatf(angle: Float(-tilt), axis: axis.cross(.referencePlane).unitVector.simdf)
-
+        
         // Align the lat/lon surface origin (0,0) vectors
         let equator = Vector.vernalEquinox.rotated(by: -tilt, about: axis.cross(.referencePlane).unitVector)
         let primeMeridian = Vector.vernalEquinox.rotated(by: axis.ra, about: .celestialPole)
         let q2 = simd_quatf(angle: Float(primeMeridian.signedAngle(with: equator, around: axis, clockwise: true) + angle), axis: axis.simdf)
-
+        
         return q2 * q1
     }
 }

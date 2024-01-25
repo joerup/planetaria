@@ -9,41 +9,6 @@
 /* Begin PBXBuildFile section */
 		011CB38A2A9C2FAE00749E31 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CB3892A9C2FAE00749E31 /* Navigator.swift */; };
 		01489ED42B41F5C300E74447 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01489ED32B41F5C300E74447 /* Planetaria.json */; };
-		016527172B48952A004C0E95 /* Sun.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527162B48952A004C0E95 /* Sun.usdz */; };
-		016527192B489635004C0E95 /* Mercury.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527182B489635004C0E95 /* Mercury.usdz */; };
-		0165271F2B489CF8004C0E95 /* Jupiter.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165271A2B489CF6004C0E95 /* Jupiter.usdz */; };
-		016527202B489CF8004C0E95 /* Venus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165271B2B489CF7004C0E95 /* Venus.usdz */; };
-		016527212B489CF8004C0E95 /* Earth.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165271C2B489CF7004C0E95 /* Earth.usdz */; };
-		016527222B489CF8004C0E95 /* Saturn.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165271D2B489CF8004C0E95 /* Saturn.usdz */; };
-		016527232B489CF8004C0E95 /* Mars.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165271E2B489CF8004C0E95 /* Mars.usdz */; };
-		016527252B489D05004C0E95 /* Uranus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527242B489D05004C0E95 /* Uranus.usdz */; };
-		0165272C2B489D12004C0E95 /* Makemake.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527262B489D11004C0E95 /* Makemake.usdz */; };
-		0165272D2B489D12004C0E95 /* Eris.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527272B489D11004C0E95 /* Eris.usdz */; };
-		0165272E2B489D12004C0E95 /* Neptune.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527282B489D11004C0E95 /* Neptune.usdz */; };
-		0165272F2B489D12004C0E95 /* Ceres.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527292B489D11004C0E95 /* Ceres.usdz */; };
-		016527302B489D12004C0E95 /* Pluto.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165272A2B489D12004C0E95 /* Pluto.usdz */; };
-		016527342B489D1F004C0E95 /* Charon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527322B489D1E004C0E95 /* Charon.usdz */; };
-		016527352B489D1F004C0E95 /* Moon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527332B489D1E004C0E95 /* Moon.usdz */; };
-		0165273C2B48C6C5004C0E95 /* Io.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527362B48C6C3004C0E95 /* Io.usdz */; };
-		0165273D2B48C6C5004C0E95 /* Callisto.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527372B48C6C4004C0E95 /* Callisto.usdz */; };
-		0165273E2B48C6C5004C0E95 /* Phobos.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527382B48C6C4004C0E95 /* Phobos.usdz */; };
-		0165273F2B48C6C5004C0E95 /* Ganymede.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527392B48C6C4004C0E95 /* Ganymede.usdz */; };
-		016527402B48C6C5004C0E95 /* Europa.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165273A2B48C6C4004C0E95 /* Europa.usdz */; };
-		016527412B48C6C5004C0E95 /* Deimos.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165273B2B48C6C5004C0E95 /* Deimos.usdz */; };
-		016527492B48C6E2004C0E95 /* Enceladus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527422B48C6DE004C0E95 /* Enceladus.usdz */; };
-		0165274A2B48C6E2004C0E95 /* Rhea.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527432B48C6DF004C0E95 /* Rhea.usdz */; };
-		0165274B2B48C6E2004C0E95 /* Titan.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527442B48C6DF004C0E95 /* Titan.usdz */; };
-		0165274C2B48C6E2004C0E95 /* Mimas.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527452B48C6E0004C0E95 /* Mimas.usdz */; };
-		0165274D2B48C6E2004C0E95 /* Iapetus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527462B48C6E0004C0E95 /* Iapetus.usdz */; };
-		0165274E2B48C6E2004C0E95 /* Tethys.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527472B48C6E1004C0E95 /* Tethys.usdz */; };
-		0165274F2B48C6E2004C0E95 /* Dione.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527482B48C6E1004C0E95 /* Dione.usdz */; };
-		016527562B48C6FA004C0E95 /* Oberon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527502B48C6F9004C0E95 /* Oberon.usdz */; };
-		016527572B48C6FA004C0E95 /* Ariel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527512B48C6F9004C0E95 /* Ariel.usdz */; };
-		016527582B48C6FA004C0E95 /* Titania.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527522B48C6F9004C0E95 /* Titania.usdz */; };
-		016527592B48C6FA004C0E95 /* Umbriel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527532B48C6F9004C0E95 /* Umbriel.usdz */; };
-		0165275A2B48C6FA004C0E95 /* Miranda.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527542B48C6F9004C0E95 /* Miranda.usdz */; };
-		0165275B2B48C6FA004C0E95 /* Triton.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 016527552B48C6FA004C0E95 /* Triton.usdz */; };
-		0165275D2B48CA93004C0E95 /* Haumea.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0165275C2B48CA93004C0E95 /* Haumea.usdz */; };
 		01682DB92B51E3000022797E /* PropertyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B92B51E22E00B3744A /* PropertyText.swift */; };
 		01682DBA2B51E3130022797E /* FormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B62B51E22B00B3744A /* FormattedText.swift */; };
 		01682DBB2B51E3140022797E /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B72B51E22B00B3744A /* XButton.swift */; };
@@ -57,6 +22,41 @@
 		017166882B45263000A955D2 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166872B45263000A955D2 /* Launcher.swift */; };
 		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
+		0193F2122B61E41E002D97E2 /* Callisto.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1EF2B61E418002D97E2 /* Callisto.usdz */; };
+		0193F2132B61E41E002D97E2 /* Dione.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F02B61E418002D97E2 /* Dione.usdz */; };
+		0193F2142B61E41E002D97E2 /* Uranus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F12B61E419002D97E2 /* Uranus.usdz */; };
+		0193F2152B61E41E002D97E2 /* Triton.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F22B61E419002D97E2 /* Triton.usdz */; };
+		0193F2162B61E41E002D97E2 /* Deimos.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F32B61E419002D97E2 /* Deimos.usdz */; };
+		0193F2172B61E41E002D97E2 /* Rhea.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F42B61E419002D97E2 /* Rhea.usdz */; };
+		0193F2182B61E41E002D97E2 /* Ganymede.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F52B61E419002D97E2 /* Ganymede.usdz */; };
+		0193F2192B61E41E002D97E2 /* Moon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F62B61E419002D97E2 /* Moon.usdz */; };
+		0193F21A2B61E41E002D97E2 /* Mercury.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F72B61E41A002D97E2 /* Mercury.usdz */; };
+		0193F21B2B61E41E002D97E2 /* Jupiter.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F82B61E41A002D97E2 /* Jupiter.usdz */; };
+		0193F21C2B61E41E002D97E2 /* Pluto.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1F92B61E41A002D97E2 /* Pluto.usdz */; };
+		0193F21D2B61E41E002D97E2 /* Saturn.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1FA2B61E41A002D97E2 /* Saturn.usdz */; };
+		0193F21E2B61E41E002D97E2 /* Umbriel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1FB2B61E41A002D97E2 /* Umbriel.usdz */; };
+		0193F21F2B61E41E002D97E2 /* Io.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1FC2B61E41B002D97E2 /* Io.usdz */; };
+		0193F2202B61E41E002D97E2 /* Titan.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1FD2B61E41B002D97E2 /* Titan.usdz */; };
+		0193F2212B61E41E002D97E2 /* Phobos.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1FE2B61E41B002D97E2 /* Phobos.usdz */; };
+		0193F2222B61E41E002D97E2 /* Iapetus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F1FF2B61E41B002D97E2 /* Iapetus.usdz */; };
+		0193F2232B61E41E002D97E2 /* Mars.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2002B61E41B002D97E2 /* Mars.usdz */; };
+		0193F2242B61E41E002D97E2 /* Mimas.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2012B61E41C002D97E2 /* Mimas.usdz */; };
+		0193F2252B61E41E002D97E2 /* Miranda.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2022B61E41C002D97E2 /* Miranda.usdz */; };
+		0193F2262B61E41E002D97E2 /* Tethys.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2032B61E41C002D97E2 /* Tethys.usdz */; };
+		0193F2272B61E41E002D97E2 /* Earth.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2042B61E41C002D97E2 /* Earth.usdz */; };
+		0193F2282B61E41E002D97E2 /* Makemake.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2052B61E41C002D97E2 /* Makemake.usdz */; };
+		0193F2292B61E41E002D97E2 /* Eris.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2062B61E41C002D97E2 /* Eris.usdz */; };
+		0193F22A2B61E41E002D97E2 /* Ceres.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2072B61E41D002D97E2 /* Ceres.usdz */; };
+		0193F22B2B61E41E002D97E2 /* Oberon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2082B61E41D002D97E2 /* Oberon.usdz */; };
+		0193F22C2B61E41E002D97E2 /* Enceladus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2092B61E41D002D97E2 /* Enceladus.usdz */; };
+		0193F22D2B61E41E002D97E2 /* Charon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F20A2B61E41D002D97E2 /* Charon.usdz */; };
+		0193F22E2B61E41E002D97E2 /* Titania.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F20B2B61E41D002D97E2 /* Titania.usdz */; };
+		0193F22F2B61E41E002D97E2 /* Neptune.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F20C2B61E41D002D97E2 /* Neptune.usdz */; };
+		0193F2302B61E41E002D97E2 /* Europa.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F20D2B61E41E002D97E2 /* Europa.usdz */; };
+		0193F2312B61E41E002D97E2 /* Venus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F20E2B61E41E002D97E2 /* Venus.usdz */; };
+		0193F2322B61E41E002D97E2 /* Haumea.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F20F2B61E41E002D97E2 /* Haumea.usdz */; };
+		0193F2332B61E41E002D97E2 /* Ariel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2102B61E41E002D97E2 /* Ariel.usdz */; };
+		0193F2342B61E41E002D97E2 /* Sun.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0193F2112B61E41E002D97E2 /* Sun.usdz */; };
 		01B540E02B43929D00D5AF51 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B540DF2B43929D00D5AF51 /* Planetaria.json */; };
 		01B9BB0C2B5CA95800933E60 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9BB0B2B5CA95800933E60 /* PhotoView.swift */; };
 		01B9BB0E2B5CA9BA00933E60 /* Planetaria-photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B9BB0D2B5CA9BA00933E60 /* Planetaria-photos.json */; };
@@ -91,41 +91,6 @@
 		011CB3892A9C2FAE00749E31 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		012BD6CE2A8C6332009907CC /* PlanetariaData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PlanetariaData; sourceTree = "<group>"; };
 		01489ED32B41F5C300E74447 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
-		016527162B48952A004C0E95 /* Sun.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sun.usdz; sourceTree = "<group>"; };
-		016527182B489635004C0E95 /* Mercury.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mercury.usdz; sourceTree = "<group>"; };
-		0165271A2B489CF6004C0E95 /* Jupiter.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Jupiter.usdz; sourceTree = "<group>"; };
-		0165271B2B489CF7004C0E95 /* Venus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Venus.usdz; sourceTree = "<group>"; };
-		0165271C2B489CF7004C0E95 /* Earth.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Earth.usdz; sourceTree = "<group>"; };
-		0165271D2B489CF8004C0E95 /* Saturn.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Saturn.usdz; sourceTree = "<group>"; };
-		0165271E2B489CF8004C0E95 /* Mars.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mars.usdz; sourceTree = "<group>"; };
-		016527242B489D05004C0E95 /* Uranus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Uranus.usdz; sourceTree = "<group>"; };
-		016527262B489D11004C0E95 /* Makemake.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Makemake.usdz; sourceTree = "<group>"; };
-		016527272B489D11004C0E95 /* Eris.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Eris.usdz; sourceTree = "<group>"; };
-		016527282B489D11004C0E95 /* Neptune.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Neptune.usdz; sourceTree = "<group>"; };
-		016527292B489D11004C0E95 /* Ceres.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Ceres.usdz; sourceTree = "<group>"; };
-		0165272A2B489D12004C0E95 /* Pluto.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Pluto.usdz; sourceTree = "<group>"; };
-		016527322B489D1E004C0E95 /* Charon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Charon.usdz; sourceTree = "<group>"; };
-		016527332B489D1E004C0E95 /* Moon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Moon.usdz; sourceTree = "<group>"; };
-		016527362B48C6C3004C0E95 /* Io.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Io.usdz; sourceTree = "<group>"; };
-		016527372B48C6C4004C0E95 /* Callisto.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Callisto.usdz; sourceTree = "<group>"; };
-		016527382B48C6C4004C0E95 /* Phobos.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Phobos.usdz; sourceTree = "<group>"; };
-		016527392B48C6C4004C0E95 /* Ganymede.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Ganymede.usdz; sourceTree = "<group>"; };
-		0165273A2B48C6C4004C0E95 /* Europa.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Europa.usdz; sourceTree = "<group>"; };
-		0165273B2B48C6C5004C0E95 /* Deimos.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Deimos.usdz; sourceTree = "<group>"; };
-		016527422B48C6DE004C0E95 /* Enceladus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Enceladus.usdz; sourceTree = "<group>"; };
-		016527432B48C6DF004C0E95 /* Rhea.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Rhea.usdz; sourceTree = "<group>"; };
-		016527442B48C6DF004C0E95 /* Titan.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Titan.usdz; sourceTree = "<group>"; };
-		016527452B48C6E0004C0E95 /* Mimas.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mimas.usdz; sourceTree = "<group>"; };
-		016527462B48C6E0004C0E95 /* Iapetus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Iapetus.usdz; sourceTree = "<group>"; };
-		016527472B48C6E1004C0E95 /* Tethys.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Tethys.usdz; sourceTree = "<group>"; };
-		016527482B48C6E1004C0E95 /* Dione.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Dione.usdz; sourceTree = "<group>"; };
-		016527502B48C6F9004C0E95 /* Oberon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Oberon.usdz; sourceTree = "<group>"; };
-		016527512B48C6F9004C0E95 /* Ariel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Ariel.usdz; sourceTree = "<group>"; };
-		016527522B48C6F9004C0E95 /* Titania.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Titania.usdz; sourceTree = "<group>"; };
-		016527532B48C6F9004C0E95 /* Umbriel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Umbriel.usdz; sourceTree = "<group>"; };
-		016527542B48C6F9004C0E95 /* Miranda.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Miranda.usdz; sourceTree = "<group>"; };
-		016527552B48C6FA004C0E95 /* Triton.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Triton.usdz; sourceTree = "<group>"; };
-		0165275C2B48CA93004C0E95 /* Haumea.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Haumea.usdz; sourceTree = "<group>"; };
 		016867362548F1BB007D1553 /* Planetaria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planetaria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016867392548F1BB007D1553 /* PlanetariaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetariaApp.swift; sourceTree = "<group>"; };
 		0168673D2548F1BD007D1553 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -143,6 +108,41 @@
 		017200B92B51E22E00B3744A /* PropertyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyText.swift; sourceTree = "<group>"; };
 		017200BA2B51E22E00B3744A /* ObjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectRow.swift; sourceTree = "<group>"; };
 		017200BC2B51E22E00B3744A /* ObjectCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCard.swift; sourceTree = "<group>"; };
+		0193F1EF2B61E418002D97E2 /* Callisto.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Callisto.usdz; sourceTree = "<group>"; };
+		0193F1F02B61E418002D97E2 /* Dione.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Dione.usdz; sourceTree = "<group>"; };
+		0193F1F12B61E419002D97E2 /* Uranus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Uranus.usdz; sourceTree = "<group>"; };
+		0193F1F22B61E419002D97E2 /* Triton.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Triton.usdz; sourceTree = "<group>"; };
+		0193F1F32B61E419002D97E2 /* Deimos.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Deimos.usdz; sourceTree = "<group>"; };
+		0193F1F42B61E419002D97E2 /* Rhea.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Rhea.usdz; sourceTree = "<group>"; };
+		0193F1F52B61E419002D97E2 /* Ganymede.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Ganymede.usdz; sourceTree = "<group>"; };
+		0193F1F62B61E419002D97E2 /* Moon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Moon.usdz; sourceTree = "<group>"; };
+		0193F1F72B61E41A002D97E2 /* Mercury.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mercury.usdz; sourceTree = "<group>"; };
+		0193F1F82B61E41A002D97E2 /* Jupiter.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Jupiter.usdz; sourceTree = "<group>"; };
+		0193F1F92B61E41A002D97E2 /* Pluto.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Pluto.usdz; sourceTree = "<group>"; };
+		0193F1FA2B61E41A002D97E2 /* Saturn.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Saturn.usdz; sourceTree = "<group>"; };
+		0193F1FB2B61E41A002D97E2 /* Umbriel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Umbriel.usdz; sourceTree = "<group>"; };
+		0193F1FC2B61E41B002D97E2 /* Io.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Io.usdz; sourceTree = "<group>"; };
+		0193F1FD2B61E41B002D97E2 /* Titan.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Titan.usdz; sourceTree = "<group>"; };
+		0193F1FE2B61E41B002D97E2 /* Phobos.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Phobos.usdz; sourceTree = "<group>"; };
+		0193F1FF2B61E41B002D97E2 /* Iapetus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Iapetus.usdz; sourceTree = "<group>"; };
+		0193F2002B61E41B002D97E2 /* Mars.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mars.usdz; sourceTree = "<group>"; };
+		0193F2012B61E41C002D97E2 /* Mimas.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mimas.usdz; sourceTree = "<group>"; };
+		0193F2022B61E41C002D97E2 /* Miranda.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Miranda.usdz; sourceTree = "<group>"; };
+		0193F2032B61E41C002D97E2 /* Tethys.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Tethys.usdz; sourceTree = "<group>"; };
+		0193F2042B61E41C002D97E2 /* Earth.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Earth.usdz; sourceTree = "<group>"; };
+		0193F2052B61E41C002D97E2 /* Makemake.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Makemake.usdz; sourceTree = "<group>"; };
+		0193F2062B61E41C002D97E2 /* Eris.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Eris.usdz; sourceTree = "<group>"; };
+		0193F2072B61E41D002D97E2 /* Ceres.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Ceres.usdz; sourceTree = "<group>"; };
+		0193F2082B61E41D002D97E2 /* Oberon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Oberon.usdz; sourceTree = "<group>"; };
+		0193F2092B61E41D002D97E2 /* Enceladus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Enceladus.usdz; sourceTree = "<group>"; };
+		0193F20A2B61E41D002D97E2 /* Charon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Charon.usdz; sourceTree = "<group>"; };
+		0193F20B2B61E41D002D97E2 /* Titania.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Titania.usdz; sourceTree = "<group>"; };
+		0193F20C2B61E41D002D97E2 /* Neptune.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Neptune.usdz; sourceTree = "<group>"; };
+		0193F20D2B61E41E002D97E2 /* Europa.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Europa.usdz; sourceTree = "<group>"; };
+		0193F20E2B61E41E002D97E2 /* Venus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Venus.usdz; sourceTree = "<group>"; };
+		0193F20F2B61E41E002D97E2 /* Haumea.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Haumea.usdz; sourceTree = "<group>"; };
+		0193F2102B61E41E002D97E2 /* Ariel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Ariel.usdz; sourceTree = "<group>"; };
+		0193F2112B61E41E002D97E2 /* Sun.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sun.usdz; sourceTree = "<group>"; };
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
 		01B540DF2B43929D00D5AF51 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
 		01B9BB0B2B5CA95800933E60 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
@@ -193,41 +193,41 @@
 		016527152B48951D004C0E95 /* 3D Models */ = {
 			isa = PBXGroup;
 			children = (
-				016527162B48952A004C0E95 /* Sun.usdz */,
-				016527182B489635004C0E95 /* Mercury.usdz */,
-				0165271B2B489CF7004C0E95 /* Venus.usdz */,
-				0165271C2B489CF7004C0E95 /* Earth.usdz */,
-				0165271E2B489CF8004C0E95 /* Mars.usdz */,
-				0165271A2B489CF6004C0E95 /* Jupiter.usdz */,
-				0165271D2B489CF8004C0E95 /* Saturn.usdz */,
-				016527242B489D05004C0E95 /* Uranus.usdz */,
-				016527282B489D11004C0E95 /* Neptune.usdz */,
-				0165272A2B489D12004C0E95 /* Pluto.usdz */,
-				016527292B489D11004C0E95 /* Ceres.usdz */,
-				016527272B489D11004C0E95 /* Eris.usdz */,
-				0165275C2B48CA93004C0E95 /* Haumea.usdz */,
-				016527262B489D11004C0E95 /* Makemake.usdz */,
-				016527332B489D1E004C0E95 /* Moon.usdz */,
-				016527382B48C6C4004C0E95 /* Phobos.usdz */,
-				0165273B2B48C6C5004C0E95 /* Deimos.usdz */,
-				016527362B48C6C3004C0E95 /* Io.usdz */,
-				0165273A2B48C6C4004C0E95 /* Europa.usdz */,
-				016527392B48C6C4004C0E95 /* Ganymede.usdz */,
-				016527372B48C6C4004C0E95 /* Callisto.usdz */,
-				016527452B48C6E0004C0E95 /* Mimas.usdz */,
-				016527422B48C6DE004C0E95 /* Enceladus.usdz */,
-				016527472B48C6E1004C0E95 /* Tethys.usdz */,
-				016527482B48C6E1004C0E95 /* Dione.usdz */,
-				016527432B48C6DF004C0E95 /* Rhea.usdz */,
-				016527442B48C6DF004C0E95 /* Titan.usdz */,
-				016527462B48C6E0004C0E95 /* Iapetus.usdz */,
-				016527512B48C6F9004C0E95 /* Ariel.usdz */,
-				016527532B48C6F9004C0E95 /* Umbriel.usdz */,
-				016527522B48C6F9004C0E95 /* Titania.usdz */,
-				016527502B48C6F9004C0E95 /* Oberon.usdz */,
-				016527542B48C6F9004C0E95 /* Miranda.usdz */,
-				016527552B48C6FA004C0E95 /* Triton.usdz */,
-				016527322B489D1E004C0E95 /* Charon.usdz */,
+				0193F2102B61E41E002D97E2 /* Ariel.usdz */,
+				0193F1EF2B61E418002D97E2 /* Callisto.usdz */,
+				0193F2072B61E41D002D97E2 /* Ceres.usdz */,
+				0193F20A2B61E41D002D97E2 /* Charon.usdz */,
+				0193F1F32B61E419002D97E2 /* Deimos.usdz */,
+				0193F1F02B61E418002D97E2 /* Dione.usdz */,
+				0193F2042B61E41C002D97E2 /* Earth.usdz */,
+				0193F2092B61E41D002D97E2 /* Enceladus.usdz */,
+				0193F2062B61E41C002D97E2 /* Eris.usdz */,
+				0193F20D2B61E41E002D97E2 /* Europa.usdz */,
+				0193F1F52B61E419002D97E2 /* Ganymede.usdz */,
+				0193F20F2B61E41E002D97E2 /* Haumea.usdz */,
+				0193F1FF2B61E41B002D97E2 /* Iapetus.usdz */,
+				0193F1FC2B61E41B002D97E2 /* Io.usdz */,
+				0193F1F82B61E41A002D97E2 /* Jupiter.usdz */,
+				0193F2052B61E41C002D97E2 /* Makemake.usdz */,
+				0193F2002B61E41B002D97E2 /* Mars.usdz */,
+				0193F1F72B61E41A002D97E2 /* Mercury.usdz */,
+				0193F2012B61E41C002D97E2 /* Mimas.usdz */,
+				0193F2022B61E41C002D97E2 /* Miranda.usdz */,
+				0193F1F62B61E419002D97E2 /* Moon.usdz */,
+				0193F20C2B61E41D002D97E2 /* Neptune.usdz */,
+				0193F2082B61E41D002D97E2 /* Oberon.usdz */,
+				0193F1FE2B61E41B002D97E2 /* Phobos.usdz */,
+				0193F1F92B61E41A002D97E2 /* Pluto.usdz */,
+				0193F1F42B61E419002D97E2 /* Rhea.usdz */,
+				0193F1FA2B61E41A002D97E2 /* Saturn.usdz */,
+				0193F2112B61E41E002D97E2 /* Sun.usdz */,
+				0193F2032B61E41C002D97E2 /* Tethys.usdz */,
+				0193F1FD2B61E41B002D97E2 /* Titan.usdz */,
+				0193F20B2B61E41D002D97E2 /* Titania.usdz */,
+				0193F1F22B61E419002D97E2 /* Triton.usdz */,
+				0193F1FB2B61E41A002D97E2 /* Umbriel.usdz */,
+				0193F1F12B61E419002D97E2 /* Uranus.usdz */,
+				0193F20E2B61E41E002D97E2 /* Venus.usdz */,
 			);
 			path = "3D Models";
 			sourceTree = "<group>";
@@ -448,45 +448,45 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0193F2232B61E41E002D97E2 /* Mars.usdz in Resources */,
 				016DCD2B2B467C6F0030B614 /* Descriptions.strings in Resources */,
+				0193F22B2B61E41E002D97E2 /* Oberon.usdz in Resources */,
+				0193F2142B61E41E002D97E2 /* Uranus.usdz in Resources */,
+				0193F22A2B61E41E002D97E2 /* Ceres.usdz in Resources */,
+				0193F21A2B61E41E002D97E2 /* Mercury.usdz in Resources */,
+				0193F21F2B61E41E002D97E2 /* Io.usdz in Resources */,
+				0193F2332B61E41E002D97E2 /* Ariel.usdz in Resources */,
+				0193F2202B61E41E002D97E2 /* Titan.usdz in Resources */,
 				01B9BB0E2B5CA9BA00933E60 /* Planetaria-photos.json in Resources */,
-				016527192B489635004C0E95 /* Mercury.usdz in Resources */,
-				016527302B489D12004C0E95 /* Pluto.usdz in Resources */,
-				016527402B48C6C5004C0E95 /* Europa.usdz in Resources */,
-				0165275D2B48CA93004C0E95 /* Haumea.usdz in Resources */,
-				016527212B489CF8004C0E95 /* Earth.usdz in Resources */,
-				016527222B489CF8004C0E95 /* Saturn.usdz in Resources */,
-				016527412B48C6C5004C0E95 /* Deimos.usdz in Resources */,
-				016527202B489CF8004C0E95 /* Venus.usdz in Resources */,
-				016527562B48C6FA004C0E95 /* Oberon.usdz in Resources */,
+				0193F2212B61E41E002D97E2 /* Phobos.usdz in Resources */,
+				0193F2292B61E41E002D97E2 /* Eris.usdz in Resources */,
+				0193F2122B61E41E002D97E2 /* Callisto.usdz in Resources */,
+				0193F2182B61E41E002D97E2 /* Ganymede.usdz in Resources */,
+				0193F2302B61E41E002D97E2 /* Europa.usdz in Resources */,
+				0193F2272B61E41E002D97E2 /* Earth.usdz in Resources */,
+				0193F21E2B61E41E002D97E2 /* Umbriel.usdz in Resources */,
+				0193F22F2B61E41E002D97E2 /* Neptune.usdz in Resources */,
+				0193F2342B61E41E002D97E2 /* Sun.usdz in Resources */,
+				0193F2322B61E41E002D97E2 /* Haumea.usdz in Resources */,
 				0168673E2548F1BD007D1553 /* Assets.xcassets in Resources */,
-				0165274D2B48C6E2004C0E95 /* Iapetus.usdz in Resources */,
-				0165273C2B48C6C5004C0E95 /* Io.usdz in Resources */,
-				016527232B489CF8004C0E95 /* Mars.usdz in Resources */,
-				0165274E2B48C6E2004C0E95 /* Tethys.usdz in Resources */,
-				0165274F2B48C6E2004C0E95 /* Dione.usdz in Resources */,
-				016527582B48C6FA004C0E95 /* Titania.usdz in Resources */,
-				016527592B48C6FA004C0E95 /* Umbriel.usdz in Resources */,
-				016527572B48C6FA004C0E95 /* Ariel.usdz in Resources */,
-				016527342B489D1F004C0E95 /* Charon.usdz in Resources */,
-				0165271F2B489CF8004C0E95 /* Jupiter.usdz in Resources */,
-				016527352B489D1F004C0E95 /* Moon.usdz in Resources */,
-				016527172B48952A004C0E95 /* Sun.usdz in Resources */,
-				0165275B2B48C6FA004C0E95 /* Triton.usdz in Resources */,
-				0165273E2B48C6C5004C0E95 /* Phobos.usdz in Resources */,
-				0165275A2B48C6FA004C0E95 /* Miranda.usdz in Resources */,
-				0165274C2B48C6E2004C0E95 /* Mimas.usdz in Resources */,
-				0165274A2B48C6E2004C0E95 /* Rhea.usdz in Resources */,
-				0165272C2B489D12004C0E95 /* Makemake.usdz in Resources */,
-				016527492B48C6E2004C0E95 /* Enceladus.usdz in Resources */,
+				0193F22E2B61E41E002D97E2 /* Titania.usdz in Resources */,
+				0193F2312B61E41E002D97E2 /* Venus.usdz in Resources */,
+				0193F2252B61E41E002D97E2 /* Miranda.usdz in Resources */,
+				0193F2192B61E41E002D97E2 /* Moon.usdz in Resources */,
+				0193F2282B61E41E002D97E2 /* Makemake.usdz in Resources */,
+				0193F2172B61E41E002D97E2 /* Rhea.usdz in Resources */,
+				0193F21B2B61E41E002D97E2 /* Jupiter.usdz in Resources */,
+				0193F22C2B61E41E002D97E2 /* Enceladus.usdz in Resources */,
+				0193F2262B61E41E002D97E2 /* Tethys.usdz in Resources */,
 				01489ED42B41F5C300E74447 /* Planetaria.json in Resources */,
-				0165272F2B489D12004C0E95 /* Ceres.usdz in Resources */,
-				0165274B2B48C6E2004C0E95 /* Titan.usdz in Resources */,
-				0165272E2B489D12004C0E95 /* Neptune.usdz in Resources */,
-				0165272D2B489D12004C0E95 /* Eris.usdz in Resources */,
-				016527252B489D05004C0E95 /* Uranus.usdz in Resources */,
-				0165273F2B48C6C5004C0E95 /* Ganymede.usdz in Resources */,
-				0165273D2B48C6C5004C0E95 /* Callisto.usdz in Resources */,
+				0193F2242B61E41E002D97E2 /* Mimas.usdz in Resources */,
+				0193F2132B61E41E002D97E2 /* Dione.usdz in Resources */,
+				0193F22D2B61E41E002D97E2 /* Charon.usdz in Resources */,
+				0193F21D2B61E41E002D97E2 /* Saturn.usdz in Resources */,
+				0193F2162B61E41E002D97E2 /* Deimos.usdz in Resources */,
+				0193F2222B61E41E002D97E2 /* Iapetus.usdz in Resources */,
+				0193F21C2B61E41E002D97E2 /* Pluto.usdz in Resources */,
+				0193F2152B61E41E002D97E2 /* Triton.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

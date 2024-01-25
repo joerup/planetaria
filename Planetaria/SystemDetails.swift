@@ -96,9 +96,7 @@ struct SystemDetails: View {
                         }
                         ForEach(category == "Planets" ? nodes.sorted(by: { $0.id < $1.id }) : nodes, id: \.self) { object in
                             Button {
-                                withAnimation(.easeInOut) {
-                                    simulation.select(object)
-                                }
+                                simulation.select(object)
                             } label: {
                                 ObjectRow(object: object)
                             }

@@ -51,7 +51,10 @@ final public class Simulation: ObservableObject {
             for node in root.tree {
                 let entity = await SimulationEntity(node: node, size: size)
                 entities.append(entity)
-                await MainActor.run { rootEntity.addChild(entity) }
+                await MainActor.run {
+                    rootEntity.addChild(entity)
+                }
+                
             }
             print("Finished creating entities")
             
@@ -69,8 +72,6 @@ final public class Simulation: ObservableObject {
         }
         
         BodyComponent.registerComponent()
-        LabelComponent.registerComponent()
-        LightComponent.registerComponent()
         OrbitComponent.registerComponent()
         PointComponent.registerComponent()
         

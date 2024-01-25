@@ -20,7 +20,7 @@ struct PlanetariaApp: App {
         #if os(iOS) || os(macOS) || os(tvOS)
         WindowGroup {
             if simulation.isLoaded {
-                Navigator(showDetail: showDetail, showSettings: $showSettings, menu: menu, detail: detail) {
+                Navigator(showDetail: showDetail, showSettings: $showSettings, menuID: systemID, detailID: objectID, menu: menu, detail: detail) {
                     Simulator(from: simulation)
                 }
                 .environmentObject(simulation)
@@ -34,7 +34,7 @@ struct PlanetariaApp: App {
             Launcher(isLoaded: simulation.isLoaded)
         }
         WindowGroup(id: "navigator") {
-            Navigator(showDetail: showDetail, showSettings: $showSettings, menu: menu, detail: detail) { }
+            Navigator(showDetail: showDetail, showSettings: $showSettings, menuID: systemID, detailID: objectID, menu: menu, detail: detail) { }
                 .environmentObject(simulation)
         }
         .defaultSize(width: 0.5 , height: 0.38, depth: 0, in: .meters)
@@ -55,11 +55,18 @@ struct PlanetariaApp: App {
         }
     }
     
+    private var objectID: Int? {
+        simulation.selectedObject?.id
+    }
+    
+    private var systemID: Int? {
+        simulation.selectedSystem?.id
+    }
+    
     @ViewBuilder
     private func menu() -> some View {
         if let system = simulation.selectedSystem {
             SystemDetails(system: system)
-                .id(system.id)
                 .environmentObject(simulation)
         }
     }
@@ -68,7 +75,6 @@ struct PlanetariaApp: App {
     private func detail() -> some View {
         if let object = simulation.selectedObject {
             ObjectDetails(object: object)
-                .id(object.id)
                 .environmentObject(simulation)
         }
     }

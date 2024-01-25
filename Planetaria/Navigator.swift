@@ -13,6 +13,9 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     @Binding var showDetail: Bool
     @Binding var showSettings: Bool
     
+    var menuID: Int?
+    var detailID: Int?
+    
     @ViewBuilder var menu: () -> Menu
     @ViewBuilder var detail: () -> Detail
     @ViewBuilder var content: () -> Content
@@ -21,14 +24,10 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    private let detents: Set<PresentationDetent> = [.small, .large]
+    private let detents: Set<PresentationDetent> = [.height(MarginConstants.small), .large]
     
-    @State private var selectedDetent: PresentationDetent = .small
-    @State private var detailDetent: PresentationDetent = .small
-    
-    private var activeDetent: PresentationDetent {
-        showDetail ? detailDetent : selectedDetent
-    }
+    @State private var selectedDetent: PresentationDetent = .height(MarginConstants.small)
+    @State private var detailDetent: PresentationDetent = .height(MarginConstants.small)
     #endif
     
     var body: some View {
@@ -37,13 +36,16 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
         GeometryReader { geometry in
             if horizontalSizeClass == .compact && verticalSizeClass == .regular {
                 content()
+                    .frame(height: geometry.size.height + MarginConstants.small)
+                    .offset(y: -(MarginConstants.small + geometry.safeAreaInsets.bottom/2))
                     .overlay(alignment: .top) {
                         Header(showSettings: $showSettings)
                     }
                     .overlay(alignment: .bottom) {
-                        Toolbar().padding(10)
+                        Toolbar()
+                            .padding(10)
+                            .offset(y: -2 * MarginConstants.small)
                     }
-                    .padding(.bottom, PresentationDetent.small.height(size: geometry.size))
                     .sheet(isPresented: .constant(true)) {
                         menu()
                             .sheet(isPresented: $showDetail) {
@@ -71,27 +73,35 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                     }
                     .preferredColorScheme(.dark)
                     .onChange(of: showDetail) { _, showDetail in
-                        detailDetent = .small
-                        selectedDetent = .small
+                        detailDetent = .height(MarginConstants.small)
+                        selectedDetent = .height(MarginConstants.small)
                     }
             } else {
                 content()
-                    .padding(.leading, min(geometry.size.width*0.5, 375))
+                    .frame(width: geometry.size.width + MarginConstants.large)
                     .overlay {
                         HStack(spacing: 0) {
                             menu()
+                                .id(menuID)
                                 .background(Color(uiColor: .systemGray5))
-                                .opacity(showDetail ? 0 : 1)
+                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
+                                .shadow(radius: 10)
+                                .transition(.move(edge: .bottom))
+                                .animation(.default, value: menuID)
                                 .overlay {
                                     if showDetail {
                                         detail()
+                                            .id(detailID)
                                             .overlay(alignment: .topTrailing) { closeButton.padding(10) }
                                             .background(Color(uiColor: .systemGray5))
                                             .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
+                                            .shadow(radius: 10)
+                                            .transition(.move(edge: .bottom))
+                                            .animation(.default, value: detailID)
                                     }
                                 }
-                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
-                                .frame(width: min(geometry.size.width*0.5, 375))
+                                .animation(.default, value: showDetail)
+                                .frame(width: MarginConstants.large)
                                 .padding([.leading, .top], 10)
                                 .ignoresSafeArea(edges: .bottom)
                                 .preferredColorScheme(.dark)
@@ -99,9 +109,10 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                                 Header(showSettings: $showSettings)
                                 Spacer()
                                 Toolbar()
-                                    .padding()
+                                    .padding(10)
                             }
                         }
+                        .padding(.trailing, MarginConstants.large)
                     }
                     .sheet(isPresented: $showSettings) {
                         Settings()
@@ -171,24 +182,7 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     }
 }
 
-extension PresentationDetent {
-    
-    static var small: PresentationDetent {
-        .height(250)
-    }
-    
-    func height(size: CGSize) -> CGFloat {
-        if self == .small {
-            return 250
-        } else {
-            return size.height*0.4
-        }
-    }
-    var offsetFraction: CGFloat {
-        if self == .small {
-            return 0
-        } else {
-            return 0.4
-        }
-    }
+fileprivate struct MarginConstants {
+    static let small: CGFloat = 250
+    static let large: CGFloat = 375
 }

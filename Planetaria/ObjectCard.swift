@@ -18,15 +18,14 @@ struct ObjectCard: View {
     
     var body: some View {
         VStack {
-            ObjectIcon(object: object, size: 75)
-                .scaleEffect(1/1.2)
+            ObjectIcon(object: object, size: 60)
             Text(object.name)
-                .font(.system(.body, design: .rounded, weight: .bold))
+                .font(.system(.caption, weight: .bold))
                 .foregroundStyle(.white)
         }
-        .padding()
-        .aspectRatio(1.0, contentMode: .fit)
-//        .background(.regularMaterial)
+        .frame(width: 80)
+        .padding(.vertical)
+        .background(Color.gray.opacity(0.1).cornerRadius(15))
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }

@@ -12,7 +12,7 @@ class OrbitComponent: Component {
     
     var node: Node
     
-    private let numberOfSegments: Int = 40
+    private let numberOfSegments: Int = 50
     private let thickness: Float = 0.001
     
     private var scale: CGFloat

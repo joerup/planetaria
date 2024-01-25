@@ -15,53 +15,51 @@ struct PhotoView: View {
     var photo: Photo
     
     var body: some View {
-        if let url = URL(string: photo.url) {
-            Button {
-                showFullScreen = true
-            } label: {
-                AsyncImage(url: url) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                } placeholder: {
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(.thinMaterial)
-                        .aspectRatio(1.0, contentMode: .fill)
-                        .overlay(ProgressView().tint(.gray))
+        Button {
+            showFullScreen = true
+        } label: {
+            Image(photo.name)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+        }
+        .buttonStyle(.plain)
+        #if os(iOS) || os(visionOS)
+        .fullScreenCover(isPresented: $showFullScreen) {
+            fullScreen
+        }
+        #elseif os(macOS)
+        .sheet(isPresented: $showFullScreen) {
+            fullScreen
+        }
+        #endif
+    }
+    
+    private var fullScreen: some View {
+        Image(photo.name)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .overlay(alignment: .topTrailing) {
+                XButton {
+                    showFullScreen = false
                 }
+                .padding()
             }
-            .fullScreenCover(isPresented: $showFullScreen) {
-                AsyncImage(url: url) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    ProgressView().tint(.gray)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .overlay(alignment: .topTrailing) {
-                    XButton {
-                        showFullScreen = false
-                    }
-                    .padding()
-                }
-                .overlay(alignment: .bottomLeading) {
-                    HStack {
-                        Text(photo.desc)
-                        Text("|")
-                        if let source = URL(string: photo.source) {
-                            Link(destination: source) {
-                                Text("Source")
-                                    .foregroundStyle(.blue)
-                            }
+            .overlay(alignment: .bottomLeading) {
+                HStack {
+                    Text(photo.desc)
+                    Text("|")
+                    if let source = URL(string: photo.source) {
+                        Link(destination: source) {
+                            Text("Source")
+                                .foregroundStyle(.blue)
                         }
                     }
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                    .padding()
                 }
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .padding()
             }
-        }
     }
 }
