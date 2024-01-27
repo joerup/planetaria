@@ -189,7 +189,7 @@ public extension Sequence where Element: Hashable {
 public extension Date {
     var string: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy MMM dd HH:mm"
+        formatter.dateFormat = "yyyy MMM dd HH:mm:ss"
         return formatter.string(from: self)
     }
     

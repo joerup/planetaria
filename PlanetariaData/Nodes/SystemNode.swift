@@ -10,8 +10,8 @@ import SwiftUI
 
 public class SystemNode: Node {
     
-    var childSystems: [SystemNode]
-    var childObjects: [ObjectNode]
+    public private(set) var childSystems: [SystemNode]
+    public private(set) var childObjects: [ObjectNode]
     
     public private(set) var children: [Node]
     
@@ -59,8 +59,8 @@ public class SystemNode: Node {
         }
     }
     
-    override public func set(position: Vector, velocity: Vector) {
-        super.set(position: position, velocity: velocity)
+    override public func set(state: StateVector) {
+        super.set(state: state)
         object?.properties?.orbit = orbit
     }
 }

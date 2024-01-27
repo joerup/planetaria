@@ -45,8 +45,9 @@ class SimulationEntity: Entity {
 class SimulationRootEntity: Entity {
     
     var simulation: Simulation?
-    
-    var applyTransform: (SIMD3<Float>) -> CGPoint? = { _ in nil }
+    #if os(iOS)
+    var arView: ARView?
+    #endif
     
     required init() { 
         super.init()
@@ -84,6 +85,17 @@ class SimulationRootEntity: Entity {
             }
         }
     }
+    
+    func rotate(rotation: Angle, pitch: Angle, duration: Double = 0) {
+        let orientation = simd_quatf(angle: Float(pitch.radians), axis: SIMD3(1,0,0)) * simd_quatf(angle: Float(-rotation.radians), axis: SIMD3(0,1,0))
+        
+        if duration == 0 {
+            self.orientation = orientation
+        } else {
+            let transformation = Transform(rotation: orientation)
+            self.move(to: transformation, relativeTo: parent, duration: duration, timingFunction: .easeInOut)
+        }
+    }
 }
 
 
@@ -100,14 +112,14 @@ extension Entity {
     
     static func generateBackground() async -> Entity? {
         #if os(visionOS)
-        guard let resource = try? await TextureResource.load(named: "Starfield") else { return nil }
+        guard let resource = try? await TextureResource.load(named: "sky", in: .module) else { return nil }
         #else
-        guard let resource = try? TextureResource.load(named: "Starfield") else { return nil }
+        guard let resource = try? TextureResource.load(named: "sky", in: .module) else { return nil }
         #endif
         
         var material = UnlitMaterial()
         material.color = .init(texture: .init(resource))
-        let entity = ModelEntity(mesh: .generateSphere(radius: 1E+10), materials: [material])
+        let entity = ModelEntity(mesh: .generateBox(size: 1E+10), materials: [material])
         entity.scale *= .init(x: -1, y: 1, z: 1)
         return entity
     }

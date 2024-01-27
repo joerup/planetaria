@@ -21,17 +21,18 @@ public struct Simulator: View {
         GeometryReader { geometry in
             ZStack {
                 if simulation.arMode {
-                    RealityView(root: simulation.rootEntity, size: geometry.size, arMode: true, select: simulation.select(_:))
+                    RealityView(root: simulation.rootEntity, size: geometry.size, arMode: true, select: simulation.selectObject(_:))
                         .simultaneousGesture(halfPanGesture)
                         .simultaneousGesture(zoomGesture)
                 } else {
-                    RealityView(root: simulation.rootEntity, size: geometry.size, arMode: false, select: simulation.select(_:))
+                    RealityView(root: simulation.rootEntity, size: geometry.size, arMode: false, select: simulation.selectObject(_:))
                         .simultaneousGesture(fullPanGesture)
                         .simultaneousGesture(zoomGesture)
                 }
                 ForEach(simulation.entities, id: \.self) { entity in
-                    if let node = entity.component(SimulationComponent.self)?.node, simulation.labelVisible(node), entity.position(relativeTo: nil).z < 1 {
-                        overlay(node: node, position: applyTransform(entity.position(relativeTo: nil)), size: applyTransform(entity.physicalBounds))
+                    if let configuration = entity.component(SimulationComponent.self), simulation.labelVisible(configuration.node), entity.position(relativeTo: nil).z < 1 {
+                        overlay(node: configuration.node)
+                            .position(configuration.screenPosition)
                     }
                 }
             }
@@ -42,27 +43,19 @@ public struct Simulator: View {
         }
     }
     
-    private func applyTransform(_ vector: SIMD3<Float>) -> CGPoint {
-        simulation.rootEntity.applyTransform(vector) ?? .zero
-    }
-    private func applyTransform(_ bounds: BoundingBox) -> CGFloat {
-        (applyTransform(bounds.max) - applyTransform(bounds.min)).magnitude
-    }
-    
-    private func overlay(node: Node, position: CGPoint, size: CGFloat) -> some View {
+    private func overlay(node: Node) -> some View {
         ZStack {
             Circle()
                 .stroke(.white, lineWidth: 1)
                 .frame(width: 12)
-                .opacity(simulation.isSelected(node) && size < 10 ? 1 : 0)
+                .opacity(simulation.isSelected(node) ? 1 : 0)
             Text(node.object?.name ?? node.name)
                 .font(.caption2)
                 .opacity(simulation.isSelected(node) ? 1 : simulation.noSelection ? 0.7 : 0.4)
-                .offset(y: max(12, size/2))
+                .offset(y: 12)
         }
-        .position(x: position.x, y: position.y)
         .onTapGesture {
-            simulation.select(node)
+            simulation.selectObject(node)
         }
     }
     
@@ -116,6 +109,7 @@ private struct RealityView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: mode, automaticallyConfigureSession: true)
+        root.arView = arView
         anchor.addChild(root)
         
         anchor.orientation = arMode ? .init() : simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
@@ -123,7 +117,6 @@ private struct RealityView: UIViewRepresentable {
         anchor.scale = arMode ? .one : SIMD3(repeating: Float(2 * min(1, size.width/size.height)))
         
         context.coordinator.view = arView
-        arView.environment.background = arMode ? .cameraFeed() : .color(.black)
         arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap)))
         
         arView.scene.anchors.append(anchor)
@@ -131,7 +124,7 @@ private struct RealityView: UIViewRepresentable {
     }
     
     func updateUIView(_ arView: ARView, context: Context) {
-        root.applyTransform = arView.project(_:)
+        
     }
     
     func makeCoordinator() -> Coordinator {

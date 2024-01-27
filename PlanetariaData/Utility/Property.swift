@@ -12,7 +12,7 @@ public typealias IntValue = Property<Int, Unitless>
 public typealias TextValue = Property<String?, Unitless>
 public typealias BoolValue = Property<Bool?, Unitless>
 
-public struct Property<ValueType: Equatable, UnitType: Unit>: Equatable {
+public class Property<ValueType: Equatable, UnitType: Unit>: Equatable {
 
     public var value: ValueType
     public var unit: UnitType
@@ -21,7 +21,7 @@ public struct Property<ValueType: Equatable, UnitType: Unit>: Equatable {
         self.value = value
         self.unit = Unitless() as! UnitType
     }
-    public init?(_ value: ValueType?) where UnitType == Unitless {
+    public convenience init?(_ value: ValueType?) where UnitType == Unitless {
         guard let value else { return nil }
         self.init(value)
     }
@@ -29,7 +29,7 @@ public struct Property<ValueType: Equatable, UnitType: Unit>: Equatable {
         self.value = value
         self.unit = unit
     }
-    public init?(_ value: ValueType?, _ unit: UnitType) where ValueType == Double {
+    public convenience init?(_ value: ValueType?, _ unit: UnitType) where ValueType == Double {
         guard let value else { return nil }
         self.init(value, unit)
     }
@@ -68,6 +68,11 @@ public struct Property<ValueType: Equatable, UnitType: Unit>: Equatable {
         return converted(to: unit).value
     }
 
+    public func convert(to otherUnit: UnitType) where ValueType == Double {
+        guard !(unit is Unitless) else { return }
+        self.value = value.convert(from: unit, to: otherUnit)
+        self.unit = otherUnit
+    }
     public func converted(to otherUnit: UnitType) -> Property<ValueType, UnitType> where ValueType == Double {
         guard !(unit is Unitless) else { return self }
         return Property(value.convert(from: unit, to: otherUnit), otherUnit)

@@ -11,19 +11,26 @@ extension SystemNode {
     
     func loadEphemerides() async {
         for system in childSystems {
-            if let ephemerisData = try? await getEphemerisData(node: system) {
-                system.set(position: ephemerisData.position, velocity: ephemerisData.velocity)
-            }
+            await setEphemerides(node: system)
             await system.loadEphemerides()
         }
         for object in childObjects {
-            if let ephemerisData = try? await getEphemerisData(node: object) {
-                object.set(position: ephemerisData.position, velocity: ephemerisData.velocity)
+            await setEphemerides(node: object)
+        }
+    }
+    
+    fileprivate func setEphemerides(node: Node) async {
+        do {
+            if let stateVector = try await getEphemerisData(node: node) {
+                node.set(state: stateVector)
             }
+        } catch {
+            print(error)
         }
     }
 
-    fileprivate func getEphemerisData(node: Node) async throws -> EphemerisData? {
+    fileprivate func getEphemerisData(node: Node) async throws -> StateVector? {
+        guard node.position == .zero, node.velocity == .zero else { return nil }
 
         // Get the Horizons ID and date range
         let objectID = node.id
@@ -62,10 +69,12 @@ extension SystemNode {
                     let vx = Double(rawEphemerisData[5]),
                     let vy = Double(rawEphemerisData[6]),
                     let vz = Double(rawEphemerisData[7])
-            else { throw EphemerisError.invalidEphemeris }
+            else {
+                throw EphemerisError.invalidEphemeris
+            }
 
-            // Create the ephemeris
-            return EphemerisData(position: [x,y,z], velocity: [vx,vy,vz])
+            // Create the state vector
+            return StateVector(position: [x,y,z], velocity: [vx,vy,vz])
             
         } catch {
             throw error
@@ -73,13 +82,7 @@ extension SystemNode {
     }
 }
 
-fileprivate struct EphemerisData {
-    var position: [Double]
-    var velocity: [Double]
-}
-
 fileprivate enum EphemerisError: Error {
     case invalidURL
-    case failedToLoad
     case invalidEphemeris
 }

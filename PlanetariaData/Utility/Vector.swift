@@ -11,6 +11,11 @@ import SceneKit
 
 public typealias Vector = Array<Double>
 
+public struct StateVector {
+    public var position: Vector
+    public var velocity: Vector
+}
+
 public extension Array where Element == Double {
     
     var x: Double {

@@ -21,7 +21,13 @@ public struct Simulator: View {
         GeometryReader3D { geometry in
             Group {
                 RealityView { content, attachments in
-                    content.add(simulation.rootEntity)
+                    let entity = simulation.rootEntity
+                    content.add(entity)
+                    if let env = try? await EnvironmentResource(named: "light", in: .module) {
+                        let iblComponent = ImageBasedLightComponent(source: .single(env), intensityExponent: 7.95)
+                        entity.components[ImageBasedLightComponent.self] = iblComponent
+                        entity.components.set(ImageBasedLightReceiverComponent(imageBasedLight: entity))
+                    }
                 } update: { content, attachments in
                     for entity in simulation.entities {
                         if let node = entity.component(SimulationComponent.self)?.node {
@@ -56,7 +62,7 @@ public struct Simulator: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
             .onTapGesture {
-                simulation.select(nil)
+                simulation.selectObject(nil)
             }
         }
     }
@@ -67,7 +73,7 @@ public struct Simulator: View {
             .opacity(simulation.isSelected(node) ? 1 : simulation.noSelection ? 0.7 : 0.4)
             .opacity(simulation.labelVisible(node) ? 1 : 0)
             .onTapGesture {
-                simulation.select(node)
+                simulation.selectObject(node)
             }
     }
     
@@ -77,7 +83,7 @@ public struct Simulator: View {
             .frame(width: 16)
             .opacity(simulation.isSelected(node) ? 1 : 0)
             .onTapGesture {
-                simulation.select(node)
+                simulation.selectObject(node)
             }
     }
     
@@ -86,7 +92,7 @@ public struct Simulator: View {
             .targetedToAnyEntity()
             .onEnded { value in
                 if let node = value.entity.parent?.component(SimulationComponent.self)?.node {
-                    simulation.select(node)
+                    simulation.selectObject(node)
                 }
             }
     }

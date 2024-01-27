@@ -6,11 +6,14 @@
 //
 
 import RealityKit
+import SwiftUI
 
 class SimulationComponent: Component {
     
     private(set) var node: Node
     private var size: Double
+    
+    var screenPosition: CGPoint = .zero
     
     init(node: Node, size: Double) {
         self.node = node

@@ -26,12 +26,15 @@ class SimulationSystem: System {
         }
         
         // Update orientation
-        root?.orientation = simd_quatf(angle: Float(simulation.pitch.radians), axis: SIMD3(1,0,0)) * simd_quatf(angle: Float(-simulation.rotation.radians), axis: SIMD3(0,1,0))
+        root?.rotate(rotation: simulation.rotation, pitch: simulation.pitch)
         
         // Update models
         context.scene.performQuery(Self.query).forEach { entity in
             guard let configuration = entity.component(SimulationComponent.self) else { return }
             entity.position = configuration.position(scale: simulation.scale, offset: simulation.offset)
+            #if os(iOS)
+            configuration.screenPosition = root?.arView?.project(entity.position(relativeTo: nil)) ?? .zero
+            #endif
             
             let isEnabled = simulation.selectedSystem == configuration.node.parent
             let isSelected = simulation.isSelected(configuration.node)

@@ -81,30 +81,32 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                     .frame(width: geometry.size.width + MarginConstants.large)
                     .overlay {
                         HStack(spacing: 0) {
-                            menu()
-                                .id(menuID)
-                                .background(Color(uiColor: .systemGray5))
-                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
-                                .shadow(radius: 10)
-                                .transition(.move(edge: .bottom))
-                                .animation(.default, value: menuID)
-                                .overlay {
-                                    if showDetail {
-                                        detail()
-                                            .id(detailID)
-                                            .overlay(alignment: .topTrailing) { closeButton.padding(10) }
-                                            .background(Color(uiColor: .systemGray5))
-                                            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
-                                            .shadow(radius: 10)
-                                            .transition(.move(edge: .bottom))
-                                            .animation(.default, value: detailID)
-                                    }
+                            ZStack {
+                                menu()
+                                    .id(menuID)
+                                    .background(Color(uiColor: .systemGray5))
+                                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
+                                    .shadow(radius: 10)
+                                    .transition(.move(edge: .bottom))
+                                    .animation(.default, value: menuID)
+                                if showDetail {
+                                    detail()
+                                        .id(detailID)
+                                        .overlay(alignment: .topTrailing) { closeButton.padding(10) }
+                                        .background(Color(uiColor: .systemGray5))
+                                        .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
+                                        .shadow(radius: 10)
+                                        .transition(.move(edge: .bottom))
+                                        .animation(.default, value: detailID)
                                 }
-                                .animation(.default, value: showDetail)
-                                .frame(width: MarginConstants.large)
-                                .padding([.leading, .top], 10)
-                                .ignoresSafeArea(edges: .bottom)
-                                .preferredColorScheme(.dark)
+                            }
+                            .transition(.move(edge: .bottom))
+                            .animation(.default, value: showDetail)
+                            .frame(width: MarginConstants.large)
+                            .padding([.leading, .top], 10)
+                            .ignoresSafeArea(edges: .bottom)
+                            .preferredColorScheme(.dark)
+                            
                             VStack {
                                 Header(showSettings: $showSettings)
                                 Spacer()
@@ -157,9 +159,9 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
             }
             .safeAreaPadding()
             .ornament(attachmentAnchor: .scene(.top)) {
-                Header(showSettings: $showSettings)
-                    .padding()
-                    .glassBackgroundEffect()
+//                Header(showSettings: $showSettings)
+//                    .padding()
+//                    .glassBackgroundEffect()
             }
             .sheet(isPresented: $showSettings) {
                 Settings()

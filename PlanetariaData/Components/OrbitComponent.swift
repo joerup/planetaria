@@ -53,7 +53,7 @@ class OrbitComponent: Component {
         let currentPosition = (node.position - node.barycenterPosition) * scale / size
         var lastPoint: Vector = .zero
         let scaleRatio = Float(self.scale / scale)
-        let extraScale: Float = isVisible ? (isSelected ? 2 : noSelection ? 1 : 0.2) : 0
+        let extraScale: Float = isVisible ? (isSelected ? 2 : noSelection ? 1 : 0.5) : 0
         self.scale = scale
         
         if duration != 0 {

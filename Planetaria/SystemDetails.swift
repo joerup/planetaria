@@ -34,11 +34,6 @@ struct SystemDetails: View {
                 "Main" : { $0.category != .moon },
                 "Moons" : { $0.category == .moon }
             ]
-//           let groups = system.children.compactMap(\.properties?.group).uniqued()
-//           for group in groups {
-//                categories += [group]
-//               predicates[group] = { $0.properties?.group == group }
-//            }
             categories += ["Moons"]
         }
     }
@@ -49,6 +44,8 @@ struct SystemDetails: View {
         } content: {
             list
         }
+        .tint(system.color)
+        .fontDesign(.rounded)
     }
     
     private var header: some View {
@@ -80,25 +77,13 @@ struct SystemDetails: View {
                     let nodes = system.children.compactMap(\.object).filter({ predicate($0) })
                     if !nodes.isEmpty {
                         if category != "Main" {
-                            Spacer().frame(height: 20)
-                            Text(category)
-                                .textCase(.uppercase)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.secondary)
-                                #if os(macOS)
-                                .font(.headline)
-                                .padding(.bottom, 5)
-                                #else
-                                .font(.subheadline)
-                                .padding(.horizontal, 5)
-                                #endif
-                                .padding(.horizontal)
+                            listSectionHeader(category)
                         }
                         ForEach(category == "Planets" ? nodes.sorted(by: { $0.id < $1.id }) : nodes, id: \.self) { object in
                             Button {
-                                simulation.select(object)
+                                simulation.selectObject(object)
                             } label: {
-                                ObjectRow(object: object)
+                                SelectionRow(name: object.name, icon: object.name)
                             }
                             .buttonStyle(.plain)
                         }
@@ -106,8 +91,46 @@ struct SystemDetails: View {
                     }
                 }
             }
+            if !system.childSystems.isEmpty {
+                listSectionHeader("Moons")
+                ForEach(system.childSystems) { childSystem in
+                    if childSystem.name == "Earth-Moon", let moon = childSystem.children.last {
+                        Button {
+                            simulation.selectObject(moon)
+                        } label: {
+                            SelectionRow(name: moon.name, icon: moon.name)
+                        }
+                        .buttonStyle(.plain)
+                    } else {
+                        Button {
+                            simulation.selectSystem(childSystem)
+                        } label: {
+                            SelectionRow(name: "\(childSystem.name) Moons", icon: childSystem.children.dropFirst().first?.name)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal)
+            }
         }
         .foregroundStyle(.white)
         .padding(.bottom)
+    }
+    
+    @ViewBuilder
+    private func listSectionHeader(_ title: String) -> some View {
+        Spacer().frame(height: 20)
+        Text(title)
+            .textCase(.uppercase)
+            .fontWeight(.semibold)
+            .foregroundStyle(.secondary)
+            #if os(macOS)
+            .font(.headline)
+            .padding(.bottom, 5)
+            #else
+            .font(.subheadline)
+            .padding(.horizontal, 5)
+            #endif
+            .padding(.horizontal)
     }
 }

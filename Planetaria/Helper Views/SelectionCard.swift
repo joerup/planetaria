@@ -1,6 +1,6 @@
 //
-//  SwiftUIView.swift
-//  
+//  SelectionCard.swift
+//
 //
 //  Created by Joe Rupertus on 9/21/23.
 //
@@ -8,18 +8,14 @@
 import SwiftUI
 import PlanetariaData
 
-struct ObjectCard: View {
+struct SelectionCard: View {
     
-    var object: ObjectNode
-    
-    init(object: ObjectNode) {
-        self.object = object
-    }
+    var name: String
     
     var body: some View {
         VStack {
-            ObjectIcon(object: object, size: 60)
-            Text(object.name)
+            ObjectIcon(icon: name, size: 60)
+            Text(name)
                 .font(.system(.caption, weight: .bold))
                 .foregroundStyle(.white)
         }

@@ -51,7 +51,7 @@ struct PlanetariaApp: App {
         Binding {
             simulation.hasSelection
         } set: { _ in
-            simulation.select(nil)
+            simulation.selectObject(nil)
         }
     }
     

@@ -75,12 +75,12 @@ public class ObjectNode: Node {
         
         self.rotation = Rotation(rotationRef: rotationRef, rotationRate: rotationRate, poleRA: poleRA, poleDec: poleDec)
         
-        self.properties = Properties(group: group, discovered: discovered, discoverer: discoverer, namesake: namesake, moons: moons, mass: mass, radius: size, density: density, semimajorAxis: semimajorAxis, eccentricity: eccentricity, inclination: inclination, orbitalPeriod: orbitalPeriod, rotationRate: rotationRate, axialTilt: axialTilt, gravity: gravity, escapeVelocity: escapeVelocity, temperature: temperature, pressure: pressure, luminosity: luminosity)
+        self.properties = Properties(category: category, group: group, discovered: discovered, discoverer: discoverer, namesake: namesake, moons: moons, mass: mass, radius: size, density: density, semimajorAxis: semimajorAxis, eccentricity: eccentricity, inclination: inclination, orbitalPeriod: orbitalPeriod, rotationRate: rotationRate, axialTilt: axialTilt, gravity: gravity, escapeVelocity: escapeVelocity, temperature: temperature, pressure: pressure, luminosity: luminosity)
         properties?.rotation = rotation
     }
     
-    override public func set(position: Vector, velocity: Vector) {
-        super.set(position: position, velocity: velocity)
+    override public func set(state: StateVector) {
+        super.set(state: state)
         if system == nil {
             properties?.orbit = orbit
         }

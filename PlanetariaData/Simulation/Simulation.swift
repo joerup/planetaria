@@ -65,9 +65,10 @@ final public class Simulation: ObservableObject {
                 object.properties?.photos = matchingPhotos
             }
             
+            // Complete
             await MainActor.run {
-                self.isLoaded = true
                 self.run()
+                self.isLoaded = true
             }
         }
         
@@ -122,7 +123,7 @@ final public class Simulation: ObservableObject {
         return !inMajorTransition && !(node == focus && scale * node.size * 10 > size)
     }
     public func labelVisible(_ node: Node) -> Bool {
-        return !inMajorTransition && node.parent == system && scale * (node.globalPosition - offset).magnitude < 10 * size
+        return !inTransition && node.parent == system && scale * (node.globalPosition - offset).magnitude < 10 * size
             && (node.system == system || 2 * scale * node.position.magnitude > max(0.1 * size, 50)) && scale * node.size * 100 < size
     }
     
@@ -162,9 +163,10 @@ final public class Simulation: ObservableObject {
     // MARK: - Settings
     
     @Published public var time: Date = .now
-    @Published public var timeStep: Double = 0.01
     @Published public var timeRatio: Double = 1.0 { didSet { isRealTime = false } }
-    public private(set) var isRealTime: Bool = true
+    @Published public var timeStep: Double = 0.1
+    private var longTimeStep: Double = 1.0
+    public var isRealTime: Bool = true
     public var maxTimeRatio: Double = 1E+5
     
     public var arMode: Bool = false
@@ -184,6 +186,19 @@ final public class Simulation: ObservableObject {
             let dt = self.timeStep * self.timeRatio
             self.time.addTimeInterval(dt)
             self.root?.advance(by: dt)
+            self.synchronize()
+        }
+    }
+    
+    private func synchronize() {
+        guard isRealTime else { return }
+        while -time.timeIntervalSinceNow > longTimeStep {
+            self.time.addTimeInterval(longTimeStep)
+            self.root?.advance(by: longTimeStep)
+        }
+        while time < .now {
+            self.time.addTimeInterval(timeStep)
+            self.root?.advance(by: timeStep)
         }
     }
     
@@ -218,9 +233,9 @@ final public class Simulation: ObservableObject {
         }
     }
     
-    // Select Button
+    // Select Buttons
     
-    public func select(_ node: Node?) {
+    public func selectObject(_ node: Node?) {
         // Reset object
         guard let node, selectEnabled else {
             setObject(nil)
@@ -234,6 +249,11 @@ final public class Simulation: ObservableObject {
         else if let object = node.object {
             zoomToSurface(node: object)
         }
+    }
+    
+    public func selectSystem(_ node: Node?) {
+        guard let node, selectEnabled else { return }
+        zoomToSystem(node: node)
     }
     
     // Input Buttons
@@ -355,7 +375,7 @@ final public class Simulation: ObservableObject {
     }
 
     
-    // MARK: - Navigation Methods
+    // MARK: - Navigation Methods`
     
     // Change the focus node
     private func setFocus(_ node: Node?) {
@@ -413,7 +433,7 @@ final public class Simulation: ObservableObject {
     // Move to a new offset, scale, and focus node
     private func transition(focus: Node?, size: CGFloat) {
         let scale = self.size / size
-        guard let focus, scale.isFinite else { return }
+        guard let focus, scale.isFinite, !inTransition else { return }
         let system = focus.system
         let offset = focus.globalPosition
         let animationTime: Double = 0.5

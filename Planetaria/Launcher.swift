@@ -27,10 +27,17 @@ struct Launcher: View {
             Text("Planetaria")
                 .font(.title)
                 .fontWeight(.bold)
+                .fontDesign(.rounded)
                 .padding()
             ProgressView()
         }
         .preferredColorScheme(.dark)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
+            Image("sky")
+                .resizable()
+                .ignoresSafeArea()
+        }
         
         #elseif os(visionOS)
         VStack {
@@ -41,6 +48,7 @@ struct Launcher: View {
                 .shadow(radius: 10)
             Text("Planetaria")
                 .font(.extraLargeTitle)
+                .fontDesign(.rounded)
                 .fontWeight(.bold)
                 .padding()
             if isLoaded {

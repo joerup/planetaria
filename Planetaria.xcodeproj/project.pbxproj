@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		011CB38A2A9C2FAE00749E31 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011CB3892A9C2FAE00749E31 /* Navigator.swift */; };
 		01489ED42B41F5C300E74447 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01489ED32B41F5C300E74447 /* Planetaria.json */; };
+		014DBF452B64E91300ECF79A /* ObjectIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DBF442B64E91300ECF79A /* ObjectIcon.swift */; };
 		01682DB92B51E3000022797E /* PropertyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B92B51E22E00B3744A /* PropertyText.swift */; };
 		01682DBA2B51E3130022797E /* FormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B62B51E22B00B3744A /* FormattedText.swift */; };
 		01682DBB2B51E3140022797E /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B72B51E22B00B3744A /* XButton.swift */; };
 		01682DBC2B51E3160022797E /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B52B51E22B00B3744A /* Acknowledgements.swift */; };
-		01682DBD2B51E31A0022797E /* ObjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BA2B51E22E00B3744A /* ObjectRow.swift */; };
-		01682DBF2B51E31C0022797E /* ObjectCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BC2B51E22E00B3744A /* ObjectCard.swift */; };
+		01682DBD2B51E31A0022797E /* SelectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BA2B51E22E00B3744A /* SelectionRow.swift */; };
+		01682DBF2B51E31C0022797E /* SelectionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BC2B51E22E00B3744A /* SelectionCard.swift */; };
 		0168673A2548F1BB007D1553 /* PlanetariaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016867392548F1BB007D1553 /* PlanetariaApp.swift */; };
 		0168673E2548F1BD007D1553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0168673D2548F1BD007D1553 /* Assets.xcassets */; };
 		0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169A5A22B3D3E3A00080E6A /* Toolbar.swift */; };
@@ -91,6 +92,7 @@
 		011CB3892A9C2FAE00749E31 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		012BD6CE2A8C6332009907CC /* PlanetariaData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PlanetariaData; sourceTree = "<group>"; };
 		01489ED32B41F5C300E74447 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
+		014DBF442B64E91300ECF79A /* ObjectIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectIcon.swift; sourceTree = "<group>"; };
 		016867362548F1BB007D1553 /* Planetaria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Planetaria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		016867392548F1BB007D1553 /* PlanetariaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetariaApp.swift; sourceTree = "<group>"; };
 		0168673D2548F1BD007D1553 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -106,8 +108,8 @@
 		017200B62B51E22B00B3744A /* FormattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedText.swift; sourceTree = "<group>"; };
 		017200B72B51E22B00B3744A /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		017200B92B51E22E00B3744A /* PropertyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyText.swift; sourceTree = "<group>"; };
-		017200BA2B51E22E00B3744A /* ObjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectRow.swift; sourceTree = "<group>"; };
-		017200BC2B51E22E00B3744A /* ObjectCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCard.swift; sourceTree = "<group>"; };
+		017200BA2B51E22E00B3744A /* SelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionRow.swift; sourceTree = "<group>"; };
+		017200BC2B51E22E00B3744A /* SelectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCard.swift; sourceTree = "<group>"; };
 		0193F1EF2B61E418002D97E2 /* Callisto.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Callisto.usdz; sourceTree = "<group>"; };
 		0193F1F02B61E418002D97E2 /* Dione.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Dione.usdz; sourceTree = "<group>"; };
 		0193F1F12B61E419002D97E2 /* Uranus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Uranus.usdz; sourceTree = "<group>"; };
@@ -190,6 +192,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0140923A2B630E100001E631 /* Helper Views */ = {
+			isa = PBXGroup;
+			children = (
+				017200BA2B51E22E00B3744A /* SelectionRow.swift */,
+				017200BC2B51E22E00B3744A /* SelectionCard.swift */,
+				014DBF442B64E91300ECF79A /* ObjectIcon.swift */,
+				017200B92B51E22E00B3744A /* PropertyText.swift */,
+				01B9BB0B2B5CA95800933E60 /* PhotoView.swift */,
+			);
+			path = "Helper Views";
+			sourceTree = "<group>";
+		};
 		016527152B48951D004C0E95 /* 3D Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,8 +280,7 @@
 				01E8402F2A1FB2C000B2153E /* Settings.swift */,
 				0171668B2B45B1AB00A955D2 /* SystemDetails.swift */,
 				017166892B45B1A600A955D2 /* ObjectDetails.swift */,
-				017200BA2B51E22E00B3744A /* ObjectRow.swift */,
-				017200BC2B51E22E00B3744A /* ObjectCard.swift */,
+				0140923A2B630E100001E631 /* Helper Views */,
 				01F066322B5784E80024D567 /* Utility */,
 				0168673D2548F1BD007D1553 /* Assets.xcassets */,
 				016527152B48951D004C0E95 /* 3D Models */,
@@ -308,9 +321,7 @@
 		01F066322B5784E80024D567 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				01B9BB0B2B5CA95800933E60 /* PhotoView.swift */,
 				01C97A052B5D8C6A00065109 /* NavigationSheet.swift */,
-				017200B92B51E22E00B3744A /* PropertyText.swift */,
 				017200B62B51E22B00B3744A /* FormattedText.swift */,
 				017200B52B51E22B00B3744A /* Acknowledgements.swift */,
 				017200B72B51E22B00B3744A /* XButton.swift */,
@@ -533,9 +544,10 @@
 				01682DBB2B51E3140022797E /* XButton.swift in Sources */,
 				017166882B45263000A955D2 /* Launcher.swift in Sources */,
 				01E840302A1FB2C000B2153E /* Settings.swift in Sources */,
-				01682DBF2B51E31C0022797E /* ObjectCard.swift in Sources */,
-				01682DBD2B51E31A0022797E /* ObjectRow.swift in Sources */,
+				01682DBF2B51E31C0022797E /* SelectionCard.swift in Sources */,
+				01682DBD2B51E31A0022797E /* SelectionRow.swift in Sources */,
 				011CB38A2A9C2FAE00749E31 /* Navigator.swift in Sources */,
+				014DBF452B64E91300ECF79A /* ObjectIcon.swift in Sources */,
 				0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

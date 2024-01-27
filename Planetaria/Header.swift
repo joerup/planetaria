@@ -20,6 +20,8 @@ struct Header: View {
     private var isCompact: Bool {
         verticalSizeClass == .compact || horizontalSizeClass == .compact
     }
+    #else
+    private var isCompact: Bool = false
     #endif
     
     var body: some View {
@@ -28,7 +30,7 @@ struct Header: View {
         HStack {
             settingsButton
             Spacer(minLength: 10)
-            clock(isCompact)
+            clock
             Spacer(minLength: 10)
             arButton
         }
@@ -36,12 +38,12 @@ struct Header: View {
         .padding(.top, isCompact ? 0 : 10)
         
         #elseif os(macOS)
-        clock(false)
+        clock
         
         #elseif os(visionOS)
         HStack {
             settingsButton
-            clock(false)
+            clock
                 .padding(.horizontal)
         }
         
@@ -66,7 +68,20 @@ struct Header: View {
         .buttonStyle(CircleButtonStyle())
     }
     
-    private func clock(_ isCompact: Bool) -> some View {
+    @ViewBuilder
+    private var locationTitle: some View {
+        if let system = simulation.selectedSystem {
+            Text(system.name)
+                .lineLimit(0)
+                .minimumScaleFactor(0.5)
+                .foregroundColor(.mint)
+                .font(.system(isCompact ? .callout : .body, design: .monospaced, weight: .bold))
+                .opacity(0.5)
+                .dynamicTypeSize(..<DynamicTypeSize.xLarge)
+        }
+    }
+    
+    private var clock: some View {
         HStack {
 //            Button {
 //                simulation.decreaseSpeed()

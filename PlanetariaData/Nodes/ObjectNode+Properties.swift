@@ -58,6 +58,7 @@ extension ObjectNode {
         public var luminosity: Value<PowerU>?
         
         public init(
+            category: Node.Category,
             group: String?,
             discovered: Int?,
             discoverer: String?,
@@ -91,25 +92,25 @@ extension ObjectNode {
             self.gravity = Value(gravity, .m / Square(.s))
             self.escapeVelocity = Value(escapeVelocity, .km / .s)
             
-            self.orbitalPeriod = Value(orbitalPeriod, .d)
+            self.orbitalPeriod = Value(orbitalPeriod, .d)?.dynamic()
             
-            self.semimajorAxis = Value(semimajorAxis, .km)
+            self.semimajorAxis = Value(semimajorAxis, .km)?.dynamicDistance(for: category)
             self.eccentricity = Value(eccentricity)
             self.inclination = Value(inclination, .deg)
             
             if let semimajorAxis, let eccentricity {
-                self.periapsis = Value(semimajorAxis * (1 - eccentricity), .km)
-                self.apoapsis = Value(semimajorAxis * (1 + eccentricity), .km)
+                self.periapsis = Value(semimajorAxis * (1 - eccentricity), .km)?.dynamicDistance(for: category)
+                self.apoapsis = Value(semimajorAxis * (1 + eccentricity), .km)?.dynamicDistance(for: category)
             }
             
             if let rotationRate {
                 let rotationPeriod = abs(360 / rotationRate)
-                self.rotationPeriod = Value(rotationPeriod, .d)
+                self.rotationPeriod = Value(rotationPeriod, .d)?.dynamic()
             }
             self.axialTilt = Value(axialTilt, .deg)
             
             if axialTilt != nil {
-                self.temperature = Value(temperature, .C)
+                self.temperature = Value(temperature, .C)?.local()
                 self.pressure = Value(pressure, .bars)
             }
             

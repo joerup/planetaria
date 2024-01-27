@@ -21,6 +21,7 @@ struct ObjectDetails: View {
             properties
         }
         .tint(object.color)
+        .fontDesign(.rounded)
     }
     
     private var header: some View {
@@ -70,46 +71,46 @@ struct ObjectDetails: View {
                 
                 Divider()
                 
-//                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
-//                    PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
-//                    PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod?.dynamic())
-//                    PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod?.dynamic())
-//                    PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.currentDistance?.local(), units: [.km, .mi])
-//                    PropertyText(type: .large, name: "Current Speed", property: properties.currentSpeed?.local(), units: [.km / .hr, .mi / .hr])
-//                    PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt)
-//                    PropertyText(type: .large, name: "Temperature", property: properties.temperature?.local(), units: [.F, .C, .K])
-//                }
-//                .padding(.horizontal, -2)
-//                
-//                Divider()
-//                
-//                if properties.orbitalElementsAvailable {
-//                    VStack(alignment: .leading) {
-//                        Text("Orbital Elements")
-//                            .font(.system(.headline, weight: .bold))
-//                            .padding(.vertical, 5)
-//                        PropertyText(type: .row, name: "Semimajor Axis", property: properties.semimajorAxis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
-//                        PropertyText(type: .row, name: periapsisName, property: properties.periapsis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
-//                        PropertyText(type: .row, name: apoapsisName, property: properties.apoapsis?.dynamicDistance(for: object.category), units: [.AU, .km, .mi])
-//                        PropertyText(type: .row, name: "Eccentricity", property: properties.eccentricity)
-//                        PropertyText(type: .row, name: "Inclination", property: properties.inclination)
-//                    }
-//                    Divider()
-//                }
-//                
-//                if properties.structuralElementsAvailable {
-//                    VStack(alignment: .leading) {
-//                        Text("Structural Elements")
-//                            .font(.system(.headline, weight: .bold))
-//                            .padding(.vertical, 5)
-//                        PropertyText(type: .row, name: "Mass", property: properties.mass, units: [.kg])
-//                        PropertyText(type: .row, name: "Radius", property: properties.radius, units: [.km, .mi])
-//                        PropertyText(type: .row, name: "Density", property: properties.density, units: [.g / Cube(.cm), .kg / Cube(.m)])
-//                        PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity, units: [.m / Square(.s)])
-//                        PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity, units: [.km / .s])
-//                    }
-//                    Divider()
-//                }
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
+                    PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
+                    PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod)
+                    PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod)
+                    PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.currentDistance?.local())
+                    PropertyText(type: .large, name: "Current Speed", property: properties.currentSpeed?.local())
+                    PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt)
+                    PropertyText(type: .large, name: "Temperature", property: properties.temperature)
+                }
+                .padding(.horizontal, -2)
+                
+                Divider()
+                
+                if properties.orbitalElementsAvailable {
+                    VStack(alignment: .leading) {
+                        Text("Orbital Elements")
+                            .font(.system(.headline, weight: .bold))
+                            .padding(.vertical, 5)
+                        PropertyText(type: .row, name: "Semimajor Axis", property: properties.semimajorAxis)
+                        PropertyText(type: .row, name: periapsisName, property: properties.periapsis)
+                        PropertyText(type: .row, name: apoapsisName, property: properties.apoapsis)
+                        PropertyText(type: .row, name: "Eccentricity", property: properties.eccentricity)
+                        PropertyText(type: .row, name: "Inclination", property: properties.inclination)
+                    }
+                    Divider()
+                }
+                
+                if properties.structuralElementsAvailable {
+                    VStack(alignment: .leading) {
+                        Text("Structural Elements")
+                            .font(.system(.headline, weight: .bold))
+                            .padding(.vertical, 5)
+                        PropertyText(type: .row, name: "Mass", property: properties.mass)
+                        PropertyText(type: .row, name: "Radius", property: properties.radius)
+                        PropertyText(type: .row, name: "Density", property: properties.density)
+                        PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity)
+                        PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity)
+                    }
+                    Divider()
+                }
                 
                 if !orbiters.isEmpty {
                     VStack(alignment: .leading) {
@@ -126,9 +127,9 @@ struct ObjectDetails: View {
                             HStack {
                                 ForEach(orbiters) { object in
                                     Button {
-                                        simulation.select(object)
+                                        simulation.selectObject(object)
                                     } label: {
-                                        ObjectCard(object: object)
+                                        SelectionCard(name: object.name)
                                     }
                                 }
                             }

@@ -19,8 +19,8 @@ public class Node: Decodable {
     public var rank: Rank
     public var color: Color?
     
-    public var position: Vector = .zero
-    public var velocity: Vector = .zero
+    public var position: Vector
+    public var velocity: Vector
     
     public var mass: Double
     public var size: Double
@@ -59,15 +59,15 @@ public class Node: Decodable {
         return (hostNode.mass * hostNode.velocity + self.mass * self.velocity) / (hostNode.mass + self.mass)
     }
     
-    public func set(position: Vector, velocity: Vector) {
-        self.position = position
-        self.velocity = velocity
-        self.orbit = Orbit(position: position, velocity: velocity, mass: mass, size: size, hostNode: hostNode)
+    public func set(state: StateVector) {
+        self.position = state.position
+        self.velocity = state.velocity
+        self.orbit = Orbit(position: state.position, velocity: state.velocity, mass: mass, size: size, hostNode: hostNode)
     }
     
     
     private enum CodingKeys: String, CodingKey {
-        case id, name, category, rank, color, mass, size
+        case id, name, category, rank, color, mass, size, position, velocity
     }
 
     public required init(from decoder: Decoder) throws {
@@ -84,6 +84,9 @@ public class Node: Decodable {
         
         self.mass = (try? container.decode(Double.self, forKey: .mass)) ?? 0
         self.size = (try? container.decode(Double.self, forKey: .size)) ?? 0
+        
+        self.position = (try? container.decode(Vector.self, forKey: .position)) ?? .zero
+        self.velocity = (try? container.decode(Vector.self, forKey: .velocity)) ?? .zero
     }
 }
 
