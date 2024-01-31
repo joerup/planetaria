@@ -21,7 +21,7 @@ struct Header: View {
         verticalSizeClass == .compact || horizontalSizeClass == .compact
     }
     #else
-    private var isCompact: Bool = false
+    var isCompact: Bool = false
     #endif
     
     var body: some View {

@@ -45,7 +45,8 @@ class SimulationEntity: Entity {
 class SimulationRootEntity: Entity {
     
     var simulation: Simulation?
-    #if os(iOS)
+    
+    #if os(iOS) || os(macOS)
     var arView: ARView?
     #endif
     
@@ -69,8 +70,6 @@ class SimulationRootEntity: Entity {
             
             let isEnabled = simulation.selectedSystem == configuration.node.parent
             let isSelected = simulation.isSelected(configuration.node)
-            let noSelection = simulation.noSelection
-            
             let orbitEnabled = isEnabled && (isSelected || configuration.node.rank == .primary)
             let trailVisibile = simulation.trailVisible(configuration.node)
             
@@ -78,10 +77,10 @@ class SimulationRootEntity: Entity {
                 body.update(isEnabled: isEnabled, scale: scale, duration: duration)
             }
             if let point = entity.component(PointComponent.self) {
-                point.update(isEnabled: isEnabled, isSelected: isSelected, noSelection: noSelection)
+                point.update(isEnabled: isEnabled, thickness: simulation.entityThickness)
             }
             if let orbit = entity.component(OrbitComponent.self) {
-                orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: noSelection, scale: scale, duration: duration)
+                orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, scale: scale, thickness: simulation.entityThickness, duration: duration)
             }
         }
     }
@@ -110,9 +109,9 @@ extension Entity {
         return component
     }
     
-    static func generateBackground() async -> Entity? {
+    static func generateScene() async -> Entity? {
         #if os(visionOS)
-        guard let resource = try? await TextureResource.load(named: "sky", in: .module) else { return nil }
+        guard let resource = try? await TextureResource(named: "sky", in: .module) else { return nil }
         #else
         guard let resource = try? TextureResource.load(named: "sky", in: .module) else { return nil }
         #endif
@@ -121,6 +120,19 @@ extension Entity {
         material.color = .init(texture: .init(resource))
         let entity = ModelEntity(mesh: .generateBox(size: 1E+10), materials: [material])
         entity.scale *= .init(x: -1, y: 1, z: 1)
+        
         return entity
+    }
+    
+    func lighten() {
+        #if os(visionOS)
+        Task {
+            guard let resource = try? await EnvironmentResource(named: "light") else { return }
+            var iblComponent = ImageBasedLightComponent(source: .single(resource), intensityExponent: 1)
+            iblComponent.inheritsRotation = true
+            components.set(iblComponent)
+            components.set(ImageBasedLightReceiverComponent(imageBasedLight: self))
+        }
+        #endif
     }
 }

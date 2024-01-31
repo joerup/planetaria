@@ -42,9 +42,9 @@ final public class Simulation: ObservableObject {
                 self.size = 2.5 * distance
             }
             
-            // Generate the background
-            if let background = await Entity.generateBackground() {
-                await rootEntity.addChild(background)
+            // Generate the scene
+            if let scene = await Entity.generateScene() {
+                await rootEntity.addChild(scene)
             }
             
             // Load the entities
@@ -124,7 +124,7 @@ final public class Simulation: ObservableObject {
     }
     public func labelVisible(_ node: Node) -> Bool {
         return !inTransition && node.parent == system && scale * (node.globalPosition - offset).magnitude < 10 * size
-            && (node.system == system || 2 * scale * node.position.magnitude > max(0.1 * size, 50)) && scale * node.size * 100 < size
+        && (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) && scale * node.size * 100 < size
     }
     
 
@@ -159,18 +159,31 @@ final public class Simulation: ObservableObject {
         steadyPitch + gesturePitch
     }
     
+    // Thickness
+    @Published private(set) var entityThickness: Float = 0.005
+    @Published private(set) var screenThickness: CGFloat = 0.005
+    private var pixelSize: CGFloat = 100
+    internal func setBounds(_ size: CGSize) {
+        pixelSize = self.size / min(size.width, size.height)
+        if arMode {
+            self.entityThickness = 0.003
+            self.screenThickness = 0.003 * 2 * size.height
+        } else {
+            self.entityThickness = 6.0 / Float(2 * min(size.width, size.height))
+            self.screenThickness = 6.0
+        }
+    }
+    
     
     // MARK: - Settings
     
     @Published public var time: Date = .now
     @Published public var timeRatio: Double = 1.0 { didSet { isRealTime = false } }
     @Published public var timeStep: Double = 0.1
-    private var longTimeStep: Double = 1.0
     public var isRealTime: Bool = true
     public var maxTimeRatio: Double = 1E+5
     
     public var arMode: Bool = false
-    public var floodLighting: Bool = false
     public var showOrbits: Bool = true
     public var showLabels: Bool = true
     
@@ -192,9 +205,14 @@ final public class Simulation: ObservableObject {
     
     private func synchronize() {
         guard isRealTime else { return }
-        while -time.timeIntervalSinceNow > longTimeStep {
-            self.time.addTimeInterval(longTimeStep)
-            self.root?.advance(by: longTimeStep)
+        
+        while -time.timeIntervalSinceNow > 3600 {
+            self.time.addTimeInterval(60)
+            self.root?.advance(by: 60)
+        }
+        while -time.timeIntervalSinceNow > 1 {
+            self.time.addTimeInterval(1)
+            self.root?.advance(by: 1)
         }
         while time < .now {
             self.time.addTimeInterval(timeStep)

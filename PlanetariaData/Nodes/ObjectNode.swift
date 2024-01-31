@@ -47,9 +47,9 @@ public class ObjectNode: Node {
         
         let mass = (try? container.decode(Double.self, forKey: .mass)) ?? 0
         let size = (try? container.decode(Double.self, forKey: .size)) ?? 0
-        let density = (try? container.decode(Double.self, forKey: .density)) ?? 0
-        let gravity = (try? container.decode(Double.self, forKey: .gravity)) ?? 0
-        let escapeVelocity = (try? container.decode(Double.self, forKey: .escapeVelocity)) ?? 0
+        let density = try? container.decode(Double.self, forKey: .density)
+        let gravity = try? container.decode(Double.self, forKey: .gravity)
+        let escapeVelocity = try? container.decode(Double.self, forKey: .escapeVelocity)
         let ringSize = (try? container.decode(Double.self, forKey: .ringSize)) ?? 0
         let luminosity = try? container.decode(Double.self, forKey: .luminosity)
         let moons = try? container.decode(Int.self, forKey: .moons)

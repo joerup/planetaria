@@ -25,7 +25,7 @@ struct PhotoView: View {
         }
         .buttonStyle(.plain)
         #if os(iOS) || os(visionOS)
-        .fullScreenCover(isPresented: $showFullScreen) {
+        .sheet(isPresented: $showFullScreen) {
             fullScreen
         }
         #elseif os(macOS)

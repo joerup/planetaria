@@ -23,16 +23,11 @@ public struct Simulator: View {
                 RealityView { content, attachments in
                     let entity = simulation.rootEntity
                     content.add(entity)
-                    if let env = try? await EnvironmentResource(named: "light", in: .module) {
-                        let iblComponent = ImageBasedLightComponent(source: .single(env), intensityExponent: 7.95)
-                        entity.components[ImageBasedLightComponent.self] = iblComponent
-                        entity.components.set(ImageBasedLightReceiverComponent(imageBasedLight: entity))
-                    }
                 } update: { content, attachments in
                     for entity in simulation.entities {
                         if let node = entity.component(SimulationComponent.self)?.node {
                             if let label = attachments.entity(for: "\(node.id)-label") {
-                                label.position = simulation.rootEntity.orientation.act(entity.position) + [0, -0.01, 0]
+                                label.position = simulation.rootEntity.orientation.act(entity.position) + [0, -3 * simulation.entityThickness, 0]
                                 label.orientation = simulation.rootEntity.orientation.inverse
                                 content.add(label)
                             }
@@ -80,7 +75,7 @@ public struct Simulator: View {
     private func targetAttachment(node: Node) -> some View {
         Circle()
             .stroke(.white, lineWidth: 1)
-            .frame(width: 16)
+            .frame(width: 2.5 * simulation.screenThickness)
             .opacity(simulation.isSelected(node) ? 1 : 0)
             .onTapGesture {
                 simulation.selectObject(node)

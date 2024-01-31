@@ -36,23 +36,31 @@ public struct Simulator: View {
                     }
                 }
             }
+            .onAppear {
+                simulation.setBounds(geometry.size)
+            }
+            .onChange(of: geometry.size) { size in
+                simulation.setBounds(size)
+            }
+            .onChange(of: simulation.arMode) { mode in
+                simulation.setBounds(geometry.size)
+                simulation.resetPitch()
+            }
         }
         .ignoresSafeArea()
-        .onChange(of: simulation.arMode) { _ in
-            simulation.resetPitch()
-        }
     }
     
     private func overlay(node: Node) -> some View {
         ZStack {
             Circle()
                 .stroke(.white, lineWidth: 1)
-                .frame(width: 12)
+                .frame(width: 2.5 * simulation.screenThickness)
                 .opacity(simulation.isSelected(node) ? 1 : 0)
             Text(node.object?.name ?? node.name)
                 .font(.caption2)
                 .opacity(simulation.isSelected(node) ? 1 : simulation.noSelection ? 0.7 : 0.4)
-                .offset(y: 12)
+                .offset(y: 2 * simulation.screenThickness)
+                .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
         }
         .onTapGesture {
             simulation.selectObject(node)
@@ -109,6 +117,7 @@ private struct RealityView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: mode, automaticallyConfigureSession: true)
+        arView.environment.lighting.resource = try? EnvironmentResource.load(named: "light")
         root.arView = arView
         anchor.addChild(root)
         
@@ -166,6 +175,8 @@ private struct RealityView: NSViewRepresentable {
     
     func makeNSView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
+        arView.environment.lighting.resource = try! EnvironmentResource.load(named: "light")
+        root.arView = arView
         anchor.addChild(root)
         
         anchor.orientation = simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
@@ -179,7 +190,7 @@ private struct RealityView: NSViewRepresentable {
     }
     
     func updateNSView(_ arView: ARView, context: Context) {
-        root.applyTransform = arView.project(_:)
+        
     }
     
     func makeCoordinator() -> Coordinator {

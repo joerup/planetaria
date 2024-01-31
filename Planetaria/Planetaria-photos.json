@@ -44,14 +44,20 @@
     {
         "id": 2,
         "name": "Venus2",
-        "source": "https://images.nasa.gov/details/PIA00481",
-        "desc": "Surface of Venus from NASA Magellan spacecraft"
+        "source": "https://images.nasa.gov/details/ARC-1991-AC91-3009",
+        "desc": "Global view of the surface of Venus from Venera data"
     },
     {
         "id": 2,
         "name": "Venus3",
         "source": "https://science.nasa.gov/image-detail/venus-single/",
         "desc": "Venus from NASA's Mariner 10 spacecraft"
+    },
+    {
+        "id": 2,
+        "name": "Venus4",
+        "source": "https://images.nasa.gov/details/PIA00481",
+        "desc": "Surface of Venus from NASA Magellan spacecraft"
     },
     {
         "id": 399,
@@ -134,26 +140,32 @@
     {
         "id": 499,
         "name": "Mars2",
-        "source": "https://images.nasa.gov/details/PIA18614",
-        "desc": "Martian surface from NASA's Opportunity Rover"
+        "source": "https://science.nasa.gov/image-detail/amf-pia11418/",
+        "desc": "Mars from NASA's Mars Reconnaissance Orbiter, 2008"
     },
     {
         "id": 499,
         "name": "Mars3",
-        "source": "https://images.nasa.gov/details/PIA02982",
-        "desc": "Olympus Mons from the Viking 1 Orbiter, 1978"
-    },
-    {
-        "id": 499,
-        "name": "Mars4",
         "source": "https://images.nasa.gov/details/PIA01253",
         "desc": "Mars from the Hubble Space Telescope"
     },
     {
         "id": 499,
-        "name": "Mars5",
+        "name": "Mars4",
         "source": "https://images.nasa.gov/details/PIA02000",
         "desc": "Color Composite of Mars"
+    },
+    {
+        "id": 499,
+        "name": "Mars5",
+        "source": "https://images.nasa.gov/details/PIA18614",
+        "desc": "Martian surface from NASA's Opportunity Rover"
+    },
+    {
+        "id": 499,
+        "name": "Mars6",
+        "source": "https://images.nasa.gov/details/PIA02982",
+        "desc": "Olympus Mons from the Viking 1 Orbiter, 1978"
     },
     {
         "id": 401,

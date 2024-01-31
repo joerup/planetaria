@@ -10,6 +10,8 @@ import PlanetariaData
 
 struct ObjectDetails: View {
     
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
+    
     @EnvironmentObject var simulation: Simulation
     
     var object: ObjectNode
@@ -71,7 +73,7 @@ struct ObjectDetails: View {
                 
                 Divider()
                 
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: dynamicTypeSize >= .xxLarge ? 1 : 2), spacing: 15) {
                     PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
                     PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod)
                     PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod)
@@ -164,14 +166,14 @@ struct ObjectDetails: View {
     }
     
     private var periapsisName: String {
-        switch object.hostNode?.name {
+        switch (object.system ?? object).hostNode?.name {
         case "Sun": return "Perihelion"
         case "Earth": return "Perigee"
         default: return "Periapsis"
         }
     }
     private var apoapsisName: String {
-        switch object.hostNode?.name {
+        switch (object.system ?? object).hostNode?.name {
         case "Sun": return "Aphelion"
         case "Earth": return "Apogee"
         default: return "Apoapsis"

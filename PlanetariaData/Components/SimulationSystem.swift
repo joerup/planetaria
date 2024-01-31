@@ -38,8 +38,6 @@ class SimulationSystem: System {
             
             let isEnabled = simulation.selectedSystem == configuration.node.parent
             let isSelected = simulation.isSelected(configuration.node)
-            let noSelection = simulation.noSelection
-            
             let orbitEnabled = isEnabled && (isSelected || configuration.node.rank == .primary)
             let trailVisibile = simulation.trailVisible(configuration.node)
             
@@ -47,10 +45,10 @@ class SimulationSystem: System {
                 body.update(isEnabled: isEnabled, scale: simulation.scale)
             }
             if let point = entity.component(PointComponent.self) {
-                point.update(isEnabled: isEnabled, isSelected: isSelected, noSelection: noSelection)
+                point.update(isEnabled: isEnabled, thickness: simulation.entityThickness)
             }
             if let orbit = entity.component(OrbitComponent.self) {
-                orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: noSelection, scale: simulation.scale)
+                orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, scale: simulation.scale, thickness: simulation.entityThickness)
             }
         }
     }

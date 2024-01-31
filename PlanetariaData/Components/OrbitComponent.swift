@@ -13,7 +13,6 @@ class OrbitComponent: Component {
     var node: Node
     
     private let numberOfSegments: Int = 50
-    private let thickness: Float = 0.001
     
     private var scale: CGFloat
     private var size: CGFloat
@@ -31,7 +30,8 @@ class OrbitComponent: Component {
         self.model = Entity()
         
         for i in 1...numberOfSegments {
-            let mesh = MeshResource.generateBox(width: 1, height: thickness, depth: thickness)
+            let thickness: Float = node.object?.category == .planet ? 1 : 0.8
+            let mesh = MeshResource.generateBox(width: 1.0, height: thickness, depth: thickness)
             #if os(iOS) || os(visionOS)
             var material = UnlitMaterial(color: UIColor(node.color ?? .gray))
             material.blending = .transparent(opacity: .init(floatLiteral: 1.0 - Float(i) / Float(numberOfSegments)))
@@ -43,17 +43,17 @@ class OrbitComponent: Component {
             model.addChild(segment)
         }
         
-        update(isEnabled: true, isVisible: true, isSelected: false, noSelection: true, scale: 1.0)
+        update(isEnabled: true, isVisible: true, scale: 1.0, thickness: 0.001)
     }
     
-    func update(isEnabled: Bool, isVisible: Bool, isSelected: Bool, noSelection: Bool, scale: CGFloat, duration: Double = 0) {
+    func update(isEnabled: Bool, isVisible: Bool, scale: CGFloat, thickness: Float, duration: Double = 0) {
         model.isEnabled = isEnabled
         guard isEnabled, let orbit = node.orbit, !segments.isEmpty else { self.scale = scale; return }
         
         let currentPosition = (node.position - node.barycenterPosition) * scale / size
         var lastPoint: Vector = .zero
         let scaleRatio = Float(self.scale / scale)
-        let extraScale: Float = isVisible ? (isSelected ? 2 : noSelection ? 1 : 0.5) : 0
+        let extraScale: Float = thickness * (isVisible ? 1 : 0)
         self.scale = scale
         
         if duration != 0 {

@@ -9,20 +9,6 @@ import Foundation
 import SwiftUI
 import SceneKit
 
-// MARK: - Gradients
-
-public extension View {
-    func gradientForeground(colors: [Color]) -> some View {
-        self.overlay(
-            LinearGradient(
-                colors: colors,
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing)
-        )
-        .mask(self)
-    }
-}
-
 // MARK: - Math Stuff
 
 public let G: Double = 6.67259E-11 // N * m^2 / kg^2

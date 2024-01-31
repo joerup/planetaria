@@ -1,0 +1,25 @@
+{
+  "name": "Solar",
+  "id": 0,
+  "category": "system",
+  "rank": "primary",
+  "objects": [
+    {
+      "name": "Sun",
+      "id": 10,
+      "category": "star",
+      "rank": "primary",
+      "mass": 1.9885E+30,
+      "size": 1E7,
+      "luminosity": 3.83E+26
+    },
+    {
+      "name": "Earth",
+      "id": 399,
+      "category": "planet",
+      "rank": "primary",
+      "mass": 5.97217E+24,
+      "size": 1E7
+    }
+  ]
+}

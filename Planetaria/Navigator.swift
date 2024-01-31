@@ -78,43 +78,43 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                     }
             } else {
                 content()
-                    .frame(width: geometry.size.width + MarginConstants.large)
+                    .frame(width: geometry.size.width + MarginConstants.size(class: horizontalSizeClass) + geometry.safeAreaInsets.leading)
                     .overlay {
                         HStack(spacing: 0) {
-                            ZStack {
-                                menu()
-                                    .id(menuID)
-                                    .background(Color(uiColor: .systemGray5))
-                                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
-                                    .shadow(radius: 10)
-                                    .transition(.move(edge: .bottom))
-                                    .animation(.default, value: menuID)
-                                if showDetail {
-                                    detail()
-                                        .id(detailID)
-                                        .overlay(alignment: .topTrailing) { closeButton.padding(10) }
-                                        .background(Color(uiColor: .systemGray5))
-                                        .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
-                                        .shadow(radius: 10)
-                                        .transition(.move(edge: .bottom))
-                                        .animation(.default, value: detailID)
+                            menu()
+                                .id(menuID)
+                                .background(Color(uiColor: .systemGray5))
+                                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
+                                .shadow(radius: 10)
+                                .transition(.move(edge: .bottom))
+                                .animation(.default, value: menuID)
+                                .overlay {
+                                    if showDetail {
+                                        detail()
+                                            .id(detailID)
+                                            .overlay(alignment: .topTrailing) { closeButton.padding(10) }
+                                            .background(Color(uiColor: .systemGray5))
+                                            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, topTrailingRadius: 20))
+                                            .shadow(radius: 10)
+                                            .transition(.move(edge: .bottom))
+                                            .animation(.default, value: detailID)
+                                    }
                                 }
-                            }
-                            .transition(.move(edge: .bottom))
-                            .animation(.default, value: showDetail)
-                            .frame(width: MarginConstants.large)
-                            .padding([.leading, .top], 10)
-                            .ignoresSafeArea(edges: .bottom)
-                            .preferredColorScheme(.dark)
-                            
+                                .transition(.move(edge: .bottom))
+                                .animation(.default, value: showDetail)
+                                .frame(width: MarginConstants.size(class: horizontalSizeClass))
+                                .padding([.leading, .top], 10)
+                                .ignoresSafeArea(edges: .bottom)
+                                .preferredColorScheme(.dark)
                             VStack {
                                 Header(showSettings: $showSettings)
+                                    .padding(.top, geometry.safeAreaInsets.top == 0 ? 5 : 0)
                                 Spacer()
                                 Toolbar()
-                                    .padding(10)
+                                    .padding(.bottom, horizontalSizeClass == .regular ? 10 : geometry.safeAreaInsets.bottom == 0 ? 5 : 0)
                             }
                         }
-                        .padding(.trailing, MarginConstants.large)
+                        .padding(.trailing, MarginConstants.size(class: horizontalSizeClass) + geometry.safeAreaInsets.leading)
                     }
                     .sheet(isPresented: $showSettings) {
                         Settings()
@@ -186,5 +186,9 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
 
 fileprivate struct MarginConstants {
     static let small: CGFloat = 250
+    static let medium: CGFloat = 300
     static let large: CGFloat = 375
+    static func size(class sizeClass: UserInterfaceSizeClass?) -> CGFloat {
+        return sizeClass == .regular ? large : medium
+    }
 }

@@ -6,6 +6,7 @@
 //
 
 import RealityKit
+import SwiftUI
 
 class BodyComponent: Component {
     
@@ -15,7 +16,20 @@ class BodyComponent: Component {
     private var rotation: Node.Rotation?
     
     init?(node: Node, size: Double) {
-        guard let body = node as? ObjectNode, let bodyEntity = try? ModelEntity.load(named: node.name) else { return nil }
+        guard let body = node as? ObjectNode else { return nil }
+        
+        var bodyEntity: Entity
+        if let entity = try? ModelEntity.load(named: node.name) {
+            bodyEntity = entity
+        } else {
+            let mesh = MeshResource.generateSphere(radius: 0.5)
+            #if os(macOS)
+            let material = UnlitMaterial(color: NSColor(node.color ?? .gray))
+            #else
+            let material = UnlitMaterial(color: UIColor(node.color ?? .gray))
+            #endif
+            bodyEntity = ModelEntity(mesh: mesh, materials: [material])
+        }
         
         self.model = bodyEntity
         self.diameter = 2 * body.totalSize / size
@@ -27,6 +41,8 @@ class BodyComponent: Component {
         bodyEntity.components.set(InputTargetComponent())
         bodyEntity.components.set(HoverEffectComponent())
         #endif
+        
+        model.lighten()
         bodyEntity.scale = SIMD3(repeating: Float(size))
         bodyEntity.orientation = orientation(rotation)
     }

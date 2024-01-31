@@ -16,7 +16,7 @@ struct SelectionRow: View {
     var body: some View {
         #if os(macOS)
         HStack {
-            if let iocn {
+            if let icon {
                 ObjectIcon(icon: icon, size: 30)
                     .scaleEffect(1.2)
             }
