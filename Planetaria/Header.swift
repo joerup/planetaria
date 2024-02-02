@@ -42,7 +42,6 @@ struct Header: View {
         
         #elseif os(visionOS)
         HStack {
-            settingsButton
             clock
                 .padding(.horizontal)
         }
@@ -96,9 +95,12 @@ struct Header: View {
             Text(simulation.time.string)
                 .lineLimit(0)
                 .minimumScaleFactor(0.5)
+                #if os(visionOS)
                 .foregroundColor(simulation.isRealTime ? .white : .mint)
+                #else
+                .foregroundColor(simulation.isRealTime ? .gray : .mint)
+                #endif
                 .font(.system(isCompact ? .callout : .body, design: .monospaced, weight: .bold))
-                .opacity(0.5)
             
 //            Button {
 //                simulation.increaseSpeed()

@@ -133,6 +133,7 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                 }
         } detail: {
             content()
+                .overlay(alignment: .topTrailing) { closeButton.padding(10) }
                 .overlay(alignment: .top) {
                     Header(showSettings: $showSettings)
                 }
@@ -145,23 +146,30 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
         
         #elseif os(visionOS)
         menu()
+            .id(menuID)
             .opacity(showDetail ? 0 : 1)
-            .animation(.default, value: showDetail)
-            .sheet(isPresented: $showDetail) {
-                detail()
-                    .overlay(alignment: .topTrailing) { closeButton.padding(10) }
-                    .safeAreaPadding()
-                    .ornament(attachmentAnchor: .scene(.bottom)) {
-                        Toolbar()
-                            .padding()
-                            .glassBackgroundEffect()
-                    }
-            }
             .safeAreaPadding()
+            .animation(.default, value: menuID)
+            .overlay {
+                if showDetail {
+                    detail()
+                        .id(detailID)
+                        .overlay(alignment: .topTrailing) { closeButton.padding(10) }
+                        .safeAreaPadding()
+                        .glassBackgroundEffect()
+                        .animation(.default, value: detailID)
+                }
+            }
+            .animation(.default, value: showDetail)
+            .ornament(visibility: showDetail ? .visible : .hidden, attachmentAnchor: .scene(.bottom)) {
+                Toolbar()
+                    .padding()
+                    .glassBackgroundEffect()
+            }
             .ornament(attachmentAnchor: .scene(.top)) {
-//                Header(showSettings: $showSettings)
-//                    .padding()
-//                    .glassBackgroundEffect()
+                Header(showSettings: $showSettings)
+                    .padding()
+                    .glassBackgroundEffect()
             }
             .sheet(isPresented: $showSettings) {
                 Settings()
@@ -171,16 +179,9 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     }
     
     private var closeButton: some View {
-        Button {
+        XButton {
             showDetail = false
-        } label: {
-            Image(systemName: "xmark.circle.fill")
-                .symbolRenderingMode(.hierarchical)
-                .font(.title)
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel("Close")
-        .tint(.gray)
     }
 }
 

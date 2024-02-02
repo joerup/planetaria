@@ -21,7 +21,12 @@ struct SelectionCard: View {
         }
         .frame(width: 80)
         .padding(.vertical)
-        .background(Color.gray.opacity(0.1).cornerRadius(15))
+        #if os(visionOS)
+        .background(Color.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 20))
+        #else
+        .background(Color.gray.opacity(0.1))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        #endif
     }
 }

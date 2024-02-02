@@ -42,14 +42,13 @@ struct Acknowledgements: View {
                 .padding()
             }
             .navigationTitle("Acknowledgements")
-            #if os(iOS)
+            #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
                         dismiss()
                     }
-                    .foregroundStyle(.blue)
                 }
             }
             #endif
@@ -67,7 +66,7 @@ struct Footnote: View {
     var body: some View {
         Text("Acknowledgements")
             .font(.system(.footnote, weight: .semibold))
-            .foregroundColor(.init(white: 0.4))
+            .foregroundStyle(.secondary)
             .underline()
             .padding(.vertical, 5)
             .onTapGesture {

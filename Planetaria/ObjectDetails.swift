@@ -40,110 +40,148 @@ struct ObjectDetails: View {
     @ViewBuilder
     private var properties: some View {
         if let properties = object.properties {
+            #if os(iOS) || os(macOS)
             VStack(alignment: .leading, spacing: 15) {
-                
-                if !properties.photos.isEmpty {
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(properties.photos, id: \.name) { photo in
-                                PhotoView(photo: photo)
-                            }
-                        }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, -1)
-                    }
-                    .frame(height: 125)
-                }
-                
-                if object.rank == .primary || object.rank == .secondary {
-                    Text(NSLocalizedString(object.name, tableName: "Descriptions", comment: ""))
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                
-                if let discoverer = properties.discoverer, let discovered = properties.discovered {
-                    Text("Discovered by \(discoverer) in \(String(discovered)).")
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                if let namesake = properties.namesake {
-                    Text("Named after \(namesake).")
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                
+                photoRow(photos: properties.photos)
+                description(properties: properties)
                 Divider()
-                
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: dynamicTypeSize >= .xxLarge ? 1 : 2), spacing: 15) {
-                    PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
-                    PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod)
-                    PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod)
-                    PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.currentDistance?.local())
-                    PropertyText(type: .large, name: "Current Speed", property: properties.currentSpeed?.local())
-                    PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt)
-                    PropertyText(type: .large, name: "Temperature", property: properties.temperature)
-                }
-                .padding(.horizontal, -2)
-                
+                majorProperties(properties: properties)
                 Divider()
-                
-                if properties.orbitalElementsAvailable {
-                    VStack(alignment: .leading) {
-                        Text("Orbital Elements")
-                            .font(.system(.headline, weight: .bold))
-                            .padding(.vertical, 5)
-                        PropertyText(type: .row, name: "Semimajor Axis", property: properties.semimajorAxis)
-                        PropertyText(type: .row, name: periapsisName, property: properties.periapsis)
-                        PropertyText(type: .row, name: apoapsisName, property: properties.apoapsis)
-                        PropertyText(type: .row, name: "Eccentricity", property: properties.eccentricity)
-                        PropertyText(type: .row, name: "Inclination", property: properties.inclination)
-                    }
-                    Divider()
-                }
-                
-                if properties.structuralElementsAvailable {
-                    VStack(alignment: .leading) {
-                        Text("Structural Elements")
-                            .font(.system(.headline, weight: .bold))
-                            .padding(.vertical, 5)
-                        PropertyText(type: .row, name: "Mass", property: properties.mass)
-                        PropertyText(type: .row, name: "Radius", property: properties.radius)
-                        PropertyText(type: .row, name: "Density", property: properties.density)
-                        PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity)
-                        PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity)
-                    }
-                    Divider()
-                }
-                
-                if !orbiters.isEmpty {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("\(object.category.orbiterCategory.text)s")
-                                .font(.system(.headline, weight: .bold))
-                            Spacer()
-                            Text("\(properties.moons?.value ?? orbiters.count)")
-                                .foregroundStyle(.secondary)
-                                .font(.system(.headline, weight: .bold))
-                        }
-                        .padding(.vertical, 5)
-                        ScrollView(.horizontal) {
-                            HStack {
-                                ForEach(orbiters) { object in
-                                    Button {
-                                        simulation.selectObject(object)
-                                    } label: {
-                                        SelectionCard(name: object.name)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    Divider()
-                }
-                
+                orbitalProperties(properties: properties)
+                Divider()
+                structuralProperties(properties: properties)
+                Divider()
+                orbiterRow(properties: properties)
                 Footnote()
             }
-            .safeAreaPadding(.horizontal)
             .padding(.bottom)
+            #elseif os(visionOS)
+            VStack(alignment: .leading, spacing: 15) {
+                photoRow(photos: properties.photos)
+                description(properties: properties)
+                Divider()
+                majorProperties(properties: properties, large: true)
+                Divider()
+                HStack(alignment: .top, spacing: 25) {
+                    orbitalProperties(properties: properties)
+                    structuralProperties(properties: properties)
+                }
+                Divider()
+                orbiterRow(properties: properties)
+                Footnote()
+            }
+            .padding(.bottom)
+            #endif
+        }
+    }
+    
+    @ViewBuilder
+    private func photoRow(photos: [Photo]) -> some View {
+        if !photos.isEmpty {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(photos, id: \.name) { photo in
+                        PhotoView(photo: photo)
+                    }
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal, -1)
+            }
+            .frame(height: 125)
+        }
+    }
+    
+    @ViewBuilder 
+    private func description(properties: ObjectNode.Properties) -> some View {
+        if object.rank == .primary || object.rank == .secondary {
+            Text(NSLocalizedString(object.name, tableName: "Descriptions", comment: ""))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        if let discoverer = properties.discoverer, let discovered = properties.discovered {
+            Text("Discovered by \(discoverer) in \(String(discovered)).")
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        if let namesake = properties.namesake {
+            Text("Named after \(namesake).")
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+    
+    @ViewBuilder
+    private func majorProperties(properties: ObjectNode.Properties, large: Bool = false) -> some View {
+        let columns = (dynamicTypeSize >= .xxLarge ? 1 : 2) + (large ? 1 : 0)
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: columns), spacing: 15) {
+            PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
+            PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod)
+            PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod)
+            PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.currentDistance?.local())
+            PropertyText(type: .large, name: "Current Speed", property: properties.currentSpeed?.local())
+            PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt)
+            PropertyText(type: .large, name: "Temperature", property: properties.temperature)
+        }
+        .padding(.horizontal, -2)
+    }
+    
+    @ViewBuilder
+    private func orbitalProperties(properties: ObjectNode.Properties) -> some View {
+        if properties.orbitalElementsAvailable {
+            VStack(alignment: .leading) {
+                Text("Orbital Elements")
+                    .font(.system(.headline, weight: .bold))
+                    .padding(.vertical, 5)
+                PropertyText(type: .row, name: "Semimajor Axis", property: properties.semimajorAxis)
+                PropertyText(type: .row, name: periapsisName, property: properties.periapsis)
+                PropertyText(type: .row, name: apoapsisName, property: properties.apoapsis)
+                PropertyText(type: .row, name: "Eccentricity", property: properties.eccentricity)
+                PropertyText(type: .row, name: "Inclination", property: properties.inclination)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func structuralProperties(properties: ObjectNode.Properties) -> some View {
+        if properties.structuralElementsAvailable {
+            VStack(alignment: .leading) {
+                Text("Structural Elements")
+                    .font(.system(.headline, weight: .bold))
+                    .padding(.vertical, 5)
+                PropertyText(type: .row, name: "Mass", property: properties.mass)
+                PropertyText(type: .row, name: "Radius", property: properties.radius)
+                PropertyText(type: .row, name: "Density", property: properties.density)
+                PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity)
+                PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func orbiterRow(properties: ObjectNode.Properties) -> some View {
+        if !orbiters.isEmpty {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("\(object.category.orbiterCategory.text)s")
+                        .font(.system(.headline, weight: .bold))
+                    Spacer()
+                    Text("\(properties.moons?.value ?? orbiters.count)")
+                        .foregroundStyle(.secondary)
+                        .font(.system(.headline, weight: .bold))
+                }
+                .padding(.vertical, 5)
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(orbiters) { object in
+                            Button {
+                                simulation.selectObject(object)
+                            } label: {
+                                SelectionCard(name: object.name)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                }
+            }
         }
     }
     

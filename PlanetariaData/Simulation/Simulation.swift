@@ -166,8 +166,8 @@ final public class Simulation: ObservableObject {
     internal func setBounds(_ size: CGSize) {
         pixelSize = self.size / min(size.width, size.height)
         if arMode {
-            self.entityThickness = 0.003
-            self.screenThickness = 0.003 * 2 * size.height
+            self.entityThickness = 0.002
+            self.screenThickness = 0.002 * 4 * size.height
         } else {
             self.entityThickness = 6.0 / Float(2 * min(size.width, size.height))
             self.screenThickness = 6.0

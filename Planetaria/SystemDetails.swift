@@ -63,6 +63,7 @@ struct SystemDetails: View {
                     }
                     .foregroundStyle(.blue)
                 }
+                .buttonStyle(.plain)
             }
             Text("\(system.name) System")
                 .font(.system(.title, design: .default, weight: .semibold))
@@ -87,7 +88,6 @@ struct SystemDetails: View {
                             }
                             .buttonStyle(.plain)
                         }
-                        .padding(.horizontal)
                     }
                 }
             }
@@ -110,7 +110,6 @@ struct SystemDetails: View {
                         .buttonStyle(.plain)
                     }
                 }
-                .padding(.horizontal)
             }
         }
         .foregroundStyle(.white)

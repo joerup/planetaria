@@ -47,7 +47,13 @@ struct SelectionRow: View {
                 .padding(.trailing, 5)
         }
         .padding()
-        .background(Color.gray.opacity(0.1).cornerRadius(15))
+        #if os(visionOS)
+        .background(.background.opacity(0.5))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        #else
+        .background(.gray.opacity(0.1))
+        .clipShape(RoundedRectangle(cornerRadius: 15))
+        #endif
         #endif
     }
 }

@@ -37,11 +37,11 @@ struct PlanetariaApp: App {
             Navigator(showDetail: showDetail, showSettings: $showSettings, menuID: systemID, detailID: objectID, menu: menu, detail: detail) { }
                 .environmentObject(simulation)
         }
-        .defaultSize(width: 0.5 , height: 0.38, depth: 0, in: .meters)
+        .defaultSize(width: 0.5, height: 0.5, depth: 0, in: .meters)
         
         ImmersiveSpace(id: "simulator") {
             Simulator(from: simulation)
-                .offset(y: -1200).offset(z: -1500)
+                .offset(y: -1000).offset(z: -1500)
         }
         
         #endif

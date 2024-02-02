@@ -39,7 +39,6 @@ class BodyComponent: Component {
         bodyEntity.components.set(CollisionComponent(shapes: [collisionShape]))
         #if os(visionOS)
         bodyEntity.components.set(InputTargetComponent())
-        bodyEntity.components.set(HoverEffectComponent())
         #endif
         
         model.lighten()
