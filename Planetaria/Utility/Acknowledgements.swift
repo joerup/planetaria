@@ -45,15 +45,18 @@ struct Acknowledgements: View {
             #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
                         dismiss()
+                    } label: {
+                        Text("Done")
+                            .fontWeight(.semibold)
                     }
                 }
             }
             #endif
         }
-        .tint(.blue)
+        .tint(.mint)
     }
 }
 

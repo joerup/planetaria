@@ -18,17 +18,26 @@ struct Settings: View {
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     
     @State private var presentShare: Bool = false
+    @State private var presentAcknowledgements: Bool = false
     
     var body: some View {
         NavigationStack {
             List {
-//                Section {
-//                    Toggle("Show Orbits", isOn: $simulation.showOrbits)
-//                    Toggle("Show Labels", isOn: $simulation.showLabels)
-//                }
-//                Section {
-//                    Toggle("Flood Lighting", isOn: $simulation.floodLighting)
-//                }
+                Section {
+                    Toggle("Show Orbits", isOn: $simulation.showOrbits)
+                    Toggle("Show Labels", isOn: $simulation.showLabels)
+                }
+                
+                Section {
+                    Button {
+                        self.presentAcknowledgements.toggle()
+                    } label: {
+                        row("Acknowledgements")
+                    }
+                    .sheet(isPresented: $presentAcknowledgements) {
+                        Acknowledgements()
+                    }
+                }
                 
                 Section {
                     Link(destination: URL(string: "https://www.joerup.com/planetaria")!) {

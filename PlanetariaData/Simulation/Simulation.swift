@@ -120,10 +120,10 @@ final public class Simulation: ObservableObject {
     internal var inMajorTransition: Bool = false
     
     public func trailVisible(_ node: Node) -> Bool {
-        return !inMajorTransition && !(node == focus && scale * node.size * 10 > size)
+        return !inMajorTransition && showOrbits && !(node == focus && scale * node.size * 10 > size)
     }
     public func labelVisible(_ node: Node) -> Bool {
-        return !inTransition && node.parent == system && scale * (node.globalPosition - offset).magnitude < 10 * size
+        return !inTransition && showLabels && node.parent == system && scale * (node.globalPosition - offset).magnitude < 10 * size
         && (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) && scale * node.size * 100 < size
     }
     

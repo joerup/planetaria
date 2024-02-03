@@ -128,7 +128,6 @@ struct SystemDetails: View {
             .padding(.bottom, 5)
             #else
             .font(.subheadline)
-            .padding(.horizontal, 5)
             #endif
             .padding(.horizontal)
     }

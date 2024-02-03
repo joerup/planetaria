@@ -199,6 +199,7 @@
 		0109A09A2B6754C300FD18CE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0168673D2548F1BD007D1553 /* Assets.xcassets */,
 				01255DCC2B696471004BC207 /* 3D Models */,
 				01255D532B696078004BC207 /* light.skybox */,
 			);
@@ -295,7 +296,6 @@
 				017166892B45B1A600A955D2 /* ObjectDetails.swift */,
 				0140923A2B630E100001E631 /* Helper Views */,
 				01F066322B5784E80024D567 /* Utility */,
-				0168673D2548F1BD007D1553 /* Assets.xcassets */,
 				016867422548F1BD007D1553 /* Info.plist */,
 				0109A09A2B6754C300FD18CE /* Resources */,
 				01489ED32B41F5C300E74447 /* Planetaria.json */,
@@ -731,7 +731,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
@@ -745,6 +745,7 @@
 				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rupertusapps.Planetaria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -763,7 +764,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
@@ -777,6 +778,7 @@
 				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rupertusapps.Planetaria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = xros;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

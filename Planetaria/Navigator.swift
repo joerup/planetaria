@@ -106,6 +106,9 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                                 .padding([.leading, .top], 10)
                                 .ignoresSafeArea(edges: .bottom)
                                 .preferredColorScheme(.dark)
+                                .sheet(isPresented: $showSettings) {
+                                    Settings()
+                                }
                             VStack {
                                 Header(showSettings: $showSettings)
                                     .padding(.top, geometry.safeAreaInsets.top == 0 ? 5 : 0)
@@ -115,9 +118,6 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                             }
                         }
                         .padding(.trailing, MarginConstants.size(class: horizontalSizeClass) + geometry.safeAreaInsets.leading)
-                    }
-                    .sheet(isPresented: $showSettings) {
-                        Settings()
                     }
             }
         }

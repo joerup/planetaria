@@ -70,7 +70,7 @@ class SimulationRootEntity: Entity {
             
             let isEnabled = simulation.selectedSystem == configuration.node.parent
             let isSelected = simulation.isSelected(configuration.node)
-            let orbitEnabled = isEnabled && (isSelected || configuration.node.rank == .primary)
+            let orbitEnabled = simulation.showOrbits && isEnabled && (isSelected || configuration.node.rank == .primary)
             let trailVisibile = simulation.trailVisible(configuration.node)
             
             if let body = entity.component(BodyComponent.self) {
