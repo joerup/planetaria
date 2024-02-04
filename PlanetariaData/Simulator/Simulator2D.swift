@@ -29,12 +29,6 @@ public struct Simulator: View {
                         .simultaneousGesture(fullPanGesture)
                         .simultaneousGesture(zoomGesture)
                 }
-                ForEach(simulation.entities, id: \.self) { entity in
-                    if let configuration = entity.component(SimulationComponent.self), simulation.labelVisible(configuration.node), entity.position(relativeTo: nil).z < 1 {
-                        overlay(node: configuration.node)
-                            .position(configuration.screenPosition)
-                    }
-                }
             }
             .onAppear {
                 simulation.setBounds(geometry.size)
@@ -48,23 +42,6 @@ public struct Simulator: View {
             }
         }
         .ignoresSafeArea()
-    }
-    
-    private func overlay(node: Node) -> some View {
-        ZStack {
-            Circle()
-                .stroke(.white, lineWidth: 1)
-                .frame(width: 2.5 * simulation.screenThickness)
-                .opacity(simulation.isSelected(node) ? 1 : 0)
-            Text(node.object?.name ?? node.name)
-                .font(.caption2)
-                .opacity(simulation.isSelected(node) ? 1 : simulation.noSelection ? 0.7 : 0.4)
-                .offset(y: 2 * simulation.screenThickness)
-                .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
-        }
-        .onTapGesture {
-            simulation.selectObject(node)
-        }
     }
     
     private var fullPanGesture: some Gesture {

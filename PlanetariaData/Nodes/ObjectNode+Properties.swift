@@ -11,6 +11,7 @@ extension ObjectNode {
     
     public class Properties {
         
+        var host: Node?
         var orbit: Node.Orbit?
         var rotation: Node.Rotation?
         
@@ -20,7 +21,8 @@ extension ObjectNode {
         public var namesake: String?
         
         public var currentDistance: Value<DistanceU>? {
-            Value(orbit?.position.magnitude, .km)
+            guard let orbit, let host else { return nil }
+            return Value((orbit.position - host.position).magnitude, .km)
         }
         public var currentSpeed: Value<SpeedU>? {
             Value(orbit?.velocity.magnitude, .km / .s)

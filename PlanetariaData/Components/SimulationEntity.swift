@@ -31,6 +31,10 @@ class SimulationEntity: Entity {
             components.set(orbit)
             addChild(orbit.model)
         }
+        if let label = LabelComponent(node: node) {
+            components.set(label)
+            addChild(label.model)
+        }
     }
     
     var physicalBounds: BoundingBox {
@@ -57,7 +61,7 @@ class SimulationRootEntity: Entity {
     
     private static let query = EntityQuery(where: .has(SimulationComponent.self))
     
-    func transition(scale: CGFloat, offset: Vector, duration: Double) {
+    func transition(scale: CGFloat, offset: Vector, duration: Double = 0) {
         guard let simulation else { return }
         
         // Transition models
@@ -72,6 +76,7 @@ class SimulationRootEntity: Entity {
             let isSelected = simulation.isSelected(configuration.node)
             let orbitEnabled = simulation.showOrbits && isEnabled && (isSelected || configuration.node.rank == .primary)
             let trailVisibile = simulation.trailVisible(configuration.node)
+            let labelVisible = simulation.labelVisible(configuration.node)
             
             if let body = entity.component(BodyComponent.self) {
                 body.update(isEnabled: isEnabled, scale: scale, duration: duration)
@@ -82,17 +87,9 @@ class SimulationRootEntity: Entity {
             if let orbit = entity.component(OrbitComponent.self) {
                 orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, scale: scale, thickness: simulation.entityThickness, duration: duration)
             }
-        }
-    }
-    
-    func rotate(rotation: Angle, pitch: Angle, duration: Double = 0) {
-        let orientation = simd_quatf(angle: Float(pitch.radians), axis: SIMD3(1,0,0)) * simd_quatf(angle: Float(-rotation.radians), axis: SIMD3(0,1,0))
-        
-        if duration == 0 {
-            self.orientation = orientation
-        } else {
-            let transformation = Transform(rotation: orientation)
-            self.move(to: transformation, relativeTo: parent, duration: duration, timingFunction: .easeInOut)
+            if let label = entity.component(LabelComponent.self) {
+                label.update(isEnabled: isEnabled, isVisible: labelVisible, orientation: simulation.orientation, thickness: simulation.entityThickness)
+            }
         }
     }
 }
@@ -128,7 +125,7 @@ extension Entity {
         #if os(visionOS)
         Task {
             guard let resource = try? await EnvironmentResource(named: "light") else { return }
-            var iblComponent = ImageBasedLightComponent(source: .single(resource), intensityExponent: 1)
+            var iblComponent = ImageBasedLightComponent(source: .single(resource), intensityExponent: 0.5)
             iblComponent.inheritsRotation = true
             components.set(iblComponent)
             components.set(ImageBasedLightReceiverComponent(imageBasedLight: self))

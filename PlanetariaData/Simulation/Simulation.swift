@@ -123,7 +123,7 @@ final public class Simulation: ObservableObject {
         return !inMajorTransition && showOrbits && !(node == focus && scale * node.size * 10 > size)
     }
     public func labelVisible(_ node: Node) -> Bool {
-        return !inTransition && showLabels && node.parent == system && scale * (node.globalPosition - offset).magnitude < 10 * size
+        return !inMajorTransition && showLabels && node.parent == system && scale * (node.globalPosition - offset).magnitude < 10 * size
         && (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) && scale * node.size * 100 < size
     }
     
@@ -157,6 +157,11 @@ final public class Simulation: ObservableObject {
     @Published private var gesturePitch: Angle = .zero
     internal var pitch: Angle {
         steadyPitch + gesturePitch
+    }
+    
+    // Orientation
+    internal var orientation: simd_quatf {
+        simd_quatf(angle: Float(pitch.radians), axis: [1,0,0]) * simd_quatf(angle: Float(-rotation.radians), axis: [0,1,0])
     }
     
     // Thickness
@@ -433,7 +438,9 @@ final public class Simulation: ObservableObject {
     private func zoomToOrbit(node: Node) {
         print("zooming to orbit of \(node.name)")
         let node = node.system ?? node
-        transition(focus: node.parent, size: 2.5 * (node.position.magnitude + node.totalSize))
+        let ratio = 2.5 * scale * (node.position.magnitude + node.totalSize) / size
+        let fraction = max(0.7, min(1.0, ratio))
+        transition(focus: node.parent, size: 2.5 / fraction * (node.position.magnitude + node.totalSize))
     }
     
     // Zoom to a node's local system

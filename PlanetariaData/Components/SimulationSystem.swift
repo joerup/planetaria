@@ -26,7 +26,7 @@ class SimulationSystem: System {
         }
         
         // Update orientation
-        root?.rotate(rotation: simulation.rotation, pitch: simulation.pitch)
+        root?.orientation = simulation.orientation
         
         // Update models
         context.scene.performQuery(Self.query).forEach { entity in
@@ -40,6 +40,7 @@ class SimulationSystem: System {
             let isSelected = simulation.isSelected(configuration.node)
             let orbitEnabled = isEnabled && (isSelected || configuration.node.rank == .primary)
             let trailVisibile = simulation.trailVisible(configuration.node)
+            let labelVisible = simulation.labelVisible(configuration.node)
             
             if let body = entity.component(BodyComponent.self) {
                 body.update(isEnabled: isEnabled, scale: simulation.scale)
@@ -49,6 +50,9 @@ class SimulationSystem: System {
             }
             if let orbit = entity.component(OrbitComponent.self) {
                 orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, scale: simulation.scale, thickness: simulation.entityThickness)
+            }
+            if let label = entity.component(LabelComponent.self) {
+                label.update(isEnabled: isEnabled, isVisible: labelVisible, orientation: simulation.orientation, thickness: simulation.entityThickness)
             }
         }
     }
