@@ -20,7 +20,8 @@ class LabelComponent: Component {
             font: .systemFont(ofSize: 1.0)
         )
         self.model = ModelEntity(mesh: label, materials: [UnlitMaterial(color: .white)])
-            
+        
+        model.components.set(BillboardComponent())
         #if os(visionOS)
         model.components.set(InputTargetComponent())
         model.components.set(HoverEffectComponent())
@@ -29,8 +30,7 @@ class LabelComponent: Component {
     
     func update(isEnabled: Bool, isVisible: Bool, orientation: simd_quatf, thickness: Float) {
         model.isEnabled = isEnabled
-        model.position = orientation.inverse.act([0, 0.01, 6 * thickness])
+        model.position = orientation.inverse.act([0, 0, 0])
         model.scale = SIMD3(repeating: 4 * thickness * (isVisible ? 1 : 0))
-        model.orientation = orientation.inverse * simd_quatf(angle: -.pi/2, axis: [1,0,0])
     }
 }

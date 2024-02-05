@@ -52,7 +52,7 @@ struct Launcher: View {
                 .fontDesign(.rounded)
                 .fontWeight(.bold)
                 .padding()
-            if isLoaded {
+            ZStack {
                 Button {
                     Task {
                         await openImmersiveSpace(id: "simulator")
@@ -61,14 +61,18 @@ struct Launcher: View {
                     }
                 } label: {
                     Text("Enter the Solar System")
-                        .font(.largeTitle)
+                        .font(.title)
+                        .fontDesign(.rounded)
                         .fontWeight(.bold)
                         .padding()
                 }
                 .padding()
-            } else {
-                ProgressView()
-                    .padding()
+                .opacity(isLoaded ? 1 : 0)
+                
+                if !isLoaded {
+                    ProgressView()
+                        .padding()
+                }
             }
         }
         

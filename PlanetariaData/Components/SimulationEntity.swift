@@ -35,6 +35,10 @@ class SimulationEntity: Entity {
             components.set(label)
             addChild(label.model)
         }
+        if let target = TargetSelectComponent(node: node) {
+            components.set(target)
+            addChild(target.model)
+        }
     }
     
     var physicalBounds: BoundingBox {
@@ -89,6 +93,9 @@ class SimulationRootEntity: Entity {
             }
             if let label = entity.component(LabelComponent.self) {
                 label.update(isEnabled: isEnabled, isVisible: labelVisible, orientation: simulation.orientation, thickness: simulation.entityThickness)
+            }
+            if let target = entity.component(TargetSelectComponent.self) {
+                target.update(isSelected: isSelected, thickness: simulation.entityThickness)
             }
         }
     }

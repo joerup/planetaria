@@ -54,6 +54,9 @@ class SimulationSystem: System {
             if let label = entity.component(LabelComponent.self) {
                 label.update(isEnabled: isEnabled, isVisible: labelVisible, orientation: simulation.orientation, thickness: simulation.entityThickness)
             }
+            if let target = entity.component(TargetSelectComponent.self) {
+                target.update(isSelected: isSelected, thickness: simulation.entityThickness)
+            }
         }
     }
 }

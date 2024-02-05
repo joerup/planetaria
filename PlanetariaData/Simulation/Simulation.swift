@@ -79,6 +79,9 @@ final public class Simulation: ObservableObject {
         rootEntity.simulation = self
         SimulationComponent.registerComponent()
         SimulationSystem.registerSystem()
+        
+        BillboardComponent.registerComponent()
+        BillboardSystem.registerSystem()
     }
     
     
@@ -123,8 +126,7 @@ final public class Simulation: ObservableObject {
         return !inMajorTransition && showOrbits && !(node == focus && scale * node.size * 10 > size)
     }
     public func labelVisible(_ node: Node) -> Bool {
-        return !inMajorTransition && showLabels && node.parent == system && scale * (node.globalPosition - offset).magnitude < 10 * size
-        && (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) && scale * node.size * 100 < size
+        return !inMajorTransition && showLabels && node.parent == system && (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) && scale * node.size * 100 < size
     }
     
 
@@ -448,7 +450,7 @@ final public class Simulation: ObservableObject {
         print("zooming to system of \(node.name)")
         let node = node.object ?? node
         let distance = node.system?.scaleDistance ?? .infinity
-        transition(focus: node.parent, size: min(130 * node.size, 2.5 * distance))
+        transition(focus: node.parent, size: 2.5 * distance)
     }
     
     

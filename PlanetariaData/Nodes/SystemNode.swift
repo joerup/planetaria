@@ -34,7 +34,7 @@ public class SystemNode: Node {
     }
     
     public var scaleDistance: Double? {
-        guard let child = children.max(by: { $0.position.magnitude < $1.position.magnitude }) else { return nil }
+        guard let child = children.filter({ $0.rank == .primary }).max(by: { $0.position.magnitude < $1.position.magnitude }) else { return nil }
         return child.position.magnitude
     }
     
