@@ -1,6 +1,6 @@
 //
 //  Property.swift
-//  Planetaria
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 1/20/23.
 //

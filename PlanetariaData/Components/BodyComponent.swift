@@ -1,6 +1,6 @@
 //
 //  BodyComponent.swift
-//  
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 1/9/24.
 //

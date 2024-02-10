@@ -1,6 +1,6 @@
 //
 //  Unit.swift
-//  Planetaria
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 1/18/23.
 //

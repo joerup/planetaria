@@ -1,6 +1,6 @@
 //
 //  Node.swift
-//  Planetaria
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 8/2/23.
 //

@@ -1,6 +1,6 @@
 //
 //  SimulationEntity.swift
-//
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 1/5/24.
 //
@@ -35,10 +35,6 @@ class SimulationEntity: Entity {
             components.set(label)
             addChild(label.model)
         }
-        if let target = TargetSelectComponent(node: node) {
-            components.set(target)
-            addChild(target.model)
-        }
     }
     
     var physicalBounds: BoundingBox {
@@ -53,12 +49,13 @@ class SimulationEntity: Entity {
 class SimulationRootEntity: Entity {
     
     var simulation: Simulation?
+    var target = TargetSelector()
     
     #if os(iOS) || os(macOS)
     var arView: ARView?
     #endif
     
-    required init() { 
+    required init() {
         super.init()
         self.name = "root"
     }
@@ -89,14 +86,22 @@ class SimulationRootEntity: Entity {
                 point.update(isEnabled: isEnabled, thickness: simulation.entityThickness)
             }
             if let orbit = entity.component(OrbitComponent.self) {
-                orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, scale: scale, thickness: simulation.entityThickness, duration: duration)
+                orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: simulation.noSelection, scale: scale, thickness: simulation.entityThickness, duration: duration)
             }
             if let label = entity.component(LabelComponent.self) {
-                label.update(isEnabled: isEnabled, isVisible: labelVisible, orientation: simulation.orientation, thickness: simulation.entityThickness)
+                label.update(isEnabled: isEnabled, isVisible: labelVisible, thickness: simulation.entityThickness)
             }
-            if let target = entity.component(TargetSelectComponent.self) {
-                target.update(isSelected: isSelected, thickness: simulation.entityThickness)
+            
+            if isSelected {
+                setTarget(entity)
             }
+        }
+    }
+    
+    func setTarget(_ entity: Entity) {
+        if entity != target.parent {
+            target.removeFromParent()
+            entity.addChild(target)
         }
     }
 }

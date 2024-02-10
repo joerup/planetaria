@@ -1,6 +1,6 @@
 //
 //  Billboard.swift
-//
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 2/4/24.
 //
@@ -29,7 +29,7 @@ public class BillboardSystem: System {
     func setUpSession() {
         Task {
             do {
-                try await arKitSession?.run([worldTrackingProvider])
+                try await arKitSession.run([worldTrackingProvider])
             } catch {
                 print(error)
             }
@@ -37,19 +37,14 @@ public class BillboardSystem: System {
     }
     
     public func update(context: SceneUpdateContext) {
-        
         let entities = context.scene.performQuery(Self.query).map({ $0 })
         
-        guard !entities.isEmpty,
-              let pose = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime()) else { return }
+        guard !entities.isEmpty, let pose = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime()) else { return }
         
         let cameraTransform = Transform(matrix: pose.originFromAnchorTransform)
         
         for entity in entities {
-            entity.look(at: cameraTransform.translation,
-                        from: entity.position(relativeTo: nil),
-                        relativeTo: nil,
-                        forward: .positiveZ)
+            entity.look(at: cameraTransform.translation, from: entity.position(relativeTo: nil), relativeTo: nil, forward: .positiveZ)
         }
     }
 }

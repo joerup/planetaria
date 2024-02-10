@@ -1,6 +1,6 @@
 //
 //  Vector.swift
-//  Planetaria
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 6/11/23.
 //

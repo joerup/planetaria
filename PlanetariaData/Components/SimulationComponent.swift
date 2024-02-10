@@ -1,6 +1,6 @@
 //
 //  SimulationComponent.swift
-//  
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 1/13/24.
 //

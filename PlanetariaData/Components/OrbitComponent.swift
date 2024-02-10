@@ -1,6 +1,6 @@
 //
 //  OrbitComponent.swift
-//
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 1/14/24.
 //
@@ -43,17 +43,17 @@ class OrbitComponent: Component {
             model.addChild(segment)
         }
         
-        update(isEnabled: true, isVisible: true, scale: 1.0, thickness: 0.001)
+        update(isEnabled: true, isVisible: true, isSelected: false, noSelection: true, scale: 1.0, thickness: 0.001)
     }
     
-    func update(isEnabled: Bool, isVisible: Bool, scale: CGFloat, thickness: Float, duration: Double = 0) {
+    func update(isEnabled: Bool, isVisible: Bool, isSelected: Bool, noSelection: Bool, scale: CGFloat, thickness: Float, duration: Double = 0) {
         model.isEnabled = isEnabled
         guard isEnabled, let orbit = node.orbit, !segments.isEmpty else { self.scale = scale; return }
         
         let currentPosition = (node.position - node.barycenterPosition) * scale / size
         var lastPoint: Vector = .zero
         let scaleRatio = Float(self.scale / scale)
-        let extraScale: Float = thickness * (isVisible ? 1 : 0)
+        let extraScale: Float = thickness * (isVisible ? 1 : 0) * (isSelected ? 1.1 : noSelection ? 1.0 : 0.5)
         self.scale = scale
         
         if duration != 0 {

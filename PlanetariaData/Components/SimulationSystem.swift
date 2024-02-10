@@ -1,6 +1,6 @@
 //
 //  SimulationSystem.swift
-//
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 1/13/24.
 //
@@ -25,8 +25,9 @@ class SimulationSystem: System {
             return
         }
         
-        // Update orientation
+        // Update root
         root?.orientation = simulation.orientation
+        root?.target.update(isEnabled: simulation.hasSelection, thickness: simulation.entityThickness)
         
         // Update models
         context.scene.performQuery(Self.query).forEach { entity in
@@ -49,13 +50,14 @@ class SimulationSystem: System {
                 point.update(isEnabled: isEnabled, thickness: simulation.entityThickness)
             }
             if let orbit = entity.component(OrbitComponent.self) {
-                orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, scale: simulation.scale, thickness: simulation.entityThickness)
+                orbit.update(isEnabled: orbitEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: simulation.noSelection, scale: simulation.scale, thickness: simulation.entityThickness)
             }
             if let label = entity.component(LabelComponent.self) {
-                label.update(isEnabled: isEnabled, isVisible: labelVisible, orientation: simulation.orientation, thickness: simulation.entityThickness)
+                label.update(isEnabled: isEnabled, isVisible: labelVisible, thickness: simulation.entityThickness)
             }
-            if let target = entity.component(TargetSelectComponent.self) {
-                target.update(isSelected: isSelected, thickness: simulation.entityThickness)
+            
+            if isSelected {
+                root?.setTarget(entity)
             }
         }
     }

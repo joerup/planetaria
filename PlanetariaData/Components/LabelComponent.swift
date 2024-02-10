@@ -1,6 +1,6 @@
 //
 //  LabelComponent.swift
-//
+//  PlanetariaData
 //
 //  Created by Joe Rupertus on 2/4/24.
 //
@@ -11,15 +11,25 @@ import SwiftUI
 
 class LabelComponent: Component {
     
-    var model: ModelEntity
+    var model: Entity
     
     init?(node: Node) {
-        let label = MeshResource.generateText(
-            node.object?.name ?? node.name,
-            extrusionDepth: 0.01,
-            font: .systemFont(ofSize: 1.0)
-        )
-        self.model = ModelEntity(mesh: label, materials: [UnlitMaterial(color: .white)])
+        let text = node.object?.name ?? node.name
+        let font: UIFont = .systemFont(ofSize: 1.0)
+        
+        let labelMesh = MeshResource.generateText(text, extrusionDepth: 0.01, font: font)
+        let labelEntity = ModelEntity(mesh: labelMesh, materials: [UnlitMaterial(color: .white)])
+        self.model = Entity()
+        model.addChild(labelEntity)
+        
+        let sampleLabel = UILabel()
+        sampleLabel.text = text
+        sampleLabel.font = font
+        sampleLabel.textAlignment = .center
+        sampleLabel.numberOfLines = 1
+        let width = sampleLabel.intrinsicContentSize.width
+        
+        labelEntity.position = [-Float(width)/2, -1.7, 0.1]
         
         model.components.set(BillboardComponent())
         #if os(visionOS)
@@ -28,9 +38,9 @@ class LabelComponent: Component {
         #endif
     }
     
-    func update(isEnabled: Bool, isVisible: Bool, orientation: simd_quatf, thickness: Float) {
+    func update(isEnabled: Bool, isVisible: Bool, thickness: Float) {
         model.isEnabled = isEnabled
-        model.position = orientation.inverse.act([0, 0, 0])
+        model.position = .zero
         model.scale = SIMD3(repeating: 4 * thickness * (isVisible ? 1 : 0))
     }
 }
