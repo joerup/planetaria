@@ -13,6 +13,7 @@ struct PlanetariaApp: App {
     
     @StateObject private var simulation = Simulation(from: "Planetaria")
     
+    @State private var showSimulator: Bool = false
     @State private var showSettings: Bool = false
     
     var body: some Scene {
@@ -30,12 +31,13 @@ struct PlanetariaApp: App {
         }
         
         #elseif os(visionOS)
-        WindowGroup(id: "launcher") {
-            Launcher(isLoaded: simulation.isLoaded)
-        }
-        WindowGroup(id: "navigator") {
-            Navigator(showDetail: showDetail, showSettings: $showSettings, menuID: systemID, detailID: objectID, menu: menu, detail: detail) { }
-                .environmentObject(simulation)
+        WindowGroup {
+            if !showSimulator {
+                Launcher(isLoaded: simulation.isLoaded, showSimulator: $showSimulator)
+            } else {
+                Navigator(showDetail: showDetail, showSettings: $showSettings, menuID: systemID, detailID: objectID, menu: menu, detail: detail, content: {}, showSimulator: $showSimulator)
+                    .environmentObject(simulation)
+            }
         }
         .defaultSize(width: 0.5, height: 0.5, depth: 0, in: .meters)
         

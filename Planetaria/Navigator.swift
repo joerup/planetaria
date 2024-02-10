@@ -10,8 +10,6 @@ import PlanetariaData
 
 struct Navigator<Content: View, Menu: View, Detail: View>: View {
     
-    @Environment(\.scenePhase) var scenePhase
-    
     @Binding var showDetail: Bool
     @Binding var showSettings: Bool
     
@@ -32,9 +30,9 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     @State private var detailDetent: PresentationDetent = .height(MarginConstants.small)
     
     #elseif os(visionOS)
-    @Environment(\.openWindow) var openWindow
-    @Environment(\.dismissWindow) var dismissWindow
+    @Environment(\.scenePhase) var scenePhase
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    @Binding var showSimulator: Bool
     
     #endif
     
@@ -184,8 +182,10 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
             }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
-                    openWindow(id: "launcher")
-                    dismissWindow(id: "navigator")
+                    Task {
+                        showSimulator = false
+                        await dismissImmersiveSpace()
+                    }
                 }
             }
         

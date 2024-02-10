@@ -10,11 +10,16 @@ import RealityKit
 
 struct Launcher: View {
     
+    @Environment(\.scenePhase) var scenePhase
+    
     #if os(visionOS)
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
+    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
     @Environment(\.openWindow) var openWindow
     @Environment(\.dismissWindow) var dismissWindow
     var isLoaded: Bool
+    
+    @Binding var showSimulator: Bool
     #endif
     
     var body: some View {
@@ -55,10 +60,8 @@ struct Launcher: View {
             ZStack {
                 Button {
                     Task {
+                        showSimulator = true
                         await openImmersiveSpace(id: "simulator")
-                        dismissWindow(id: "launcher")
-                        dismissWindow(id: "navigator")
-                        openWindow(id: "navigator")
                     }
                 } label: {
                     Text("Enter the Solar System")
