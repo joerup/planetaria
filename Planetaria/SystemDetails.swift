@@ -111,6 +111,7 @@ struct SystemDetails: View {
         }
         .foregroundStyle(.white)
         .padding(.bottom)
+        .tint(nil)
     }
     
     @ViewBuilder

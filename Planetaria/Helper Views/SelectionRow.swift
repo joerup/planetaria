@@ -47,10 +47,7 @@ struct SelectionRow: View {
                 .padding(.trailing, 5)
         }
         .padding()
-        #if os(visionOS)
-        .buttonStyle(.borderedProminent)
-        .tint(.gray)
-        #else
+        #if !os(visionOS)
         .background(.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 15))
         #endif

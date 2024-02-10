@@ -56,8 +56,9 @@ struct Launcher: View {
                 Button {
                     Task {
                         await openImmersiveSpace(id: "simulator")
+                        dismissWindow(id: "launcher")
+                        dismissWindow(id: "navigator")
                         openWindow(id: "navigator")
-                        dismissWindow()
                     }
                 } label: {
                     Text("Enter the Solar System")

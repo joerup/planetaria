@@ -180,6 +180,7 @@ struct ObjectDetails: View {
                         }
                     }
                 }
+                .tint(nil)
             }
         }
     }

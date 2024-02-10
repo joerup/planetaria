@@ -11,7 +11,7 @@ import PlanetariaData
 @main
 struct PlanetariaApp: App {
     
-    @StateObject private var simulation = Simulation(from: "sample")
+    @StateObject private var simulation = Simulation(from: "Planetaria")
     
     @State private var showSettings: Bool = false
     

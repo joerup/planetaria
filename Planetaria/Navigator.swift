@@ -184,8 +184,8 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
             }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
-                    dismissWindow(id: "navigator")
                     openWindow(id: "launcher")
+                    dismissWindow(id: "navigator")
                 }
             }
         
