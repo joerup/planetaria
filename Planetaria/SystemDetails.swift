@@ -86,7 +86,6 @@ struct SystemDetails: View {
                             } label: {
                                 SelectionRow(name: object.name, icon: object.name)
                             }
-                            .buttonStyle(.plain)
                         }
                     }
                 }
@@ -100,14 +99,12 @@ struct SystemDetails: View {
                         } label: {
                             SelectionRow(name: moon.name, icon: moon.name)
                         }
-                        .buttonStyle(.plain)
                     } else {
                         Button {
                             simulation.selectSystem(childSystem)
                         } label: {
                             SelectionRow(name: "\(childSystem.name) Moons", icon: childSystem.children.dropFirst().first?.name)
                         }
-                        .buttonStyle(.plain)
                     }
                 }
             }

@@ -177,7 +177,6 @@ struct ObjectDetails: View {
                             } label: {
                                 SelectionCard(name: object.name)
                             }
-                            .buttonStyle(.plain)
                         }
                     }
                 }

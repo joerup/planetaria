@@ -10,6 +10,8 @@ import PlanetariaData
 
 struct Navigator<Content: View, Menu: View, Detail: View>: View {
     
+    @Environment(\.scenePhase) var scenePhase
+    
     @Binding var showDetail: Bool
     @Binding var showSettings: Bool
     
@@ -28,6 +30,12 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     
     @State private var selectedDetent: PresentationDetent = .height(MarginConstants.small)
     @State private var detailDetent: PresentationDetent = .height(MarginConstants.small)
+    
+    #elseif os(visionOS)
+    @Environment(\.openWindow) var openWindow
+    @Environment(\.dismissWindow) var dismissWindow
+    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
+    
     #endif
     
     var body: some View {
@@ -173,6 +181,12 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
             }
             .sheet(isPresented: $showSettings) {
                 Settings()
+            }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active {
+                    dismissWindow(id: "navigator")
+                    openWindow(id: "launcher")
+                }
             }
         
         #endif

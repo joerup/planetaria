@@ -48,8 +48,8 @@ struct SelectionRow: View {
         }
         .padding()
         #if os(visionOS)
-        .background(.background.opacity(0.5))
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .buttonStyle(.borderedProminent)
+        .tint(.gray)
         #else
         .background(.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 15))
