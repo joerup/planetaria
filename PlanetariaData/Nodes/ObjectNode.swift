@@ -77,12 +77,12 @@ public class ObjectNode: Node {
         
         self.properties = Properties(category: category, group: group, discovered: discovered, discoverer: discoverer, namesake: namesake, moons: moons, mass: mass, radius: size, density: density, semimajorAxis: semimajorAxis, eccentricity: eccentricity, inclination: inclination, orbitalPeriod: orbitalPeriod, rotationRate: rotationRate, axialTilt: axialTilt, gravity: gravity, escapeVelocity: escapeVelocity, temperature: temperature, pressure: pressure, luminosity: luminosity)
         properties?.rotation = rotation
-        properties?.host = hostNode ?? system?.hostNode
     }
     
     override public func set(state: StateVector) {
         super.set(state: state)
-        if system == nil {
+        properties?.host = hostNode ?? system?.hostNode
+        if system == nil, properties?.orbit == nil {
             properties?.orbit = orbit
         }
     }

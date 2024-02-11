@@ -18,8 +18,6 @@ struct Launcher: View {
     @Environment(\.openWindow) var openWindow
     @Environment(\.dismissWindow) var dismissWindow
     var isLoaded: Bool
-    
-    @Binding var showSimulator: Bool
     #endif
     
     var body: some View {
@@ -60,7 +58,6 @@ struct Launcher: View {
             ZStack {
                 Button {
                     Task {
-                        showSimulator = true
                         await openImmersiveSpace(id: "simulator")
                     }
                 } label: {

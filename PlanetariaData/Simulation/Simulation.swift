@@ -72,16 +72,8 @@ final public class Simulation: ObservableObject {
             }
         }
         
-        BodyComponent.registerComponent()
-        OrbitComponent.registerComponent()
-        PointComponent.registerComponent()
-        
+        Entity.registerAll()
         rootEntity.simulation = self
-        SimulationComponent.registerComponent()
-        SimulationSystem.registerSystem()
-        
-        BillboardComponent.registerComponent()
-        BillboardSystem.registerSystem()
     }
     
     

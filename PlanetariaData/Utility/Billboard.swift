@@ -5,7 +5,9 @@
 //  Created by Joe Rupertus on 2/4/24.
 //
 
+#if canImport(ARKit)
 import ARKit
+#endif
 import Foundation
 import RealityKit
 import SwiftUI

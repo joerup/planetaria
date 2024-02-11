@@ -133,6 +133,19 @@ extension Entity {
         return entity
     }
     
+    static func registerAll() {
+        BodyComponent.registerComponent()
+        LabelComponent.registerComponent()
+        OrbitComponent.registerComponent()
+        PointComponent.registerComponent()
+        
+        SimulationComponent.registerComponent()
+        SimulationSystem.registerSystem()
+        
+        BillboardComponent.registerComponent()
+        BillboardSystem.registerSystem()
+    }
+    
     func lighten() {
         #if os(visionOS)
         Task {

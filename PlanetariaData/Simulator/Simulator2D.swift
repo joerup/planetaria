@@ -11,6 +11,8 @@ import RealityKit
 #if os(iOS) || os(macOS)
 public struct Simulator: View {
     
+    @Environment(\.scenePhase) var scenePhase
+    
     @ObservedObject private var simulation: Simulation
 
     public init(from simulation: Simulation) {
@@ -39,6 +41,9 @@ public struct Simulator: View {
             .onChange(of: simulation.arMode) { mode in
                 simulation.setBounds(geometry.size)
                 simulation.resetPitch()
+            }
+            .onChange(of: scenePhase) { _ in
+                Entity.registerAll()
             }
         }
         .ignoresSafeArea()

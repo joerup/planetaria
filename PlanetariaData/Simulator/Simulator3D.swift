@@ -10,6 +10,8 @@ import RealityKit
 
 #if os(visionOS)
 public struct Simulator: View {
+    
+    @Environment(\.scenePhase) var scenePhase
 
     @ObservedObject private var simulation: Simulation
 
@@ -29,6 +31,9 @@ public struct Simulator: View {
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
             .onAppear {
                 simulation.setBounds(.init(width: geometry.size.width, height: geometry.size.height))
+            }
+            .onChange(of: scenePhase) { _, _ in
+                Entity.registerAll()
             }
         }
     }

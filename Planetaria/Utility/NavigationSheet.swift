@@ -40,7 +40,7 @@ struct NavigationSheet<Header: View, Content: View>: View {
                     header()
                     Spacer(minLength: 0)
                 }
-                .background(.regularMaterial)
+                .background(.thinMaterial)
                 Divider()
                     .opacity(scrollPosition == 0 ? 0 : 1)
                     .animation(.default, value: scrollPosition)

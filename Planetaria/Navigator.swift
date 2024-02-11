@@ -21,8 +21,8 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     @ViewBuilder var content: () -> Content
     
     #if os(iOS)
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
 
     private let detents: Set<PresentationDetent> = [.height(MarginConstants.small), .large]
     
@@ -30,9 +30,9 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     @State private var detailDetent: PresentationDetent = .height(MarginConstants.small)
     
     #elseif os(visionOS)
-    @Environment(\.scenePhase) var scenePhase
-    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
-    @Binding var showSimulator: Bool
+    @Environment(\.openImmersiveSpace) private var openImmersiveSpace
+    @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
+    @Environment(\.scenePhase) private var scenePhase
     
     #endif
     
@@ -180,12 +180,9 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
             .sheet(isPresented: $showSettings) {
                 Settings()
             }
-            .onChange(of: scenePhase) { _, phase in
-                if phase == .active {
-                    Task {
-                        showSimulator = false
-                        await dismissImmersiveSpace()
-                    }
+            .onChange(of: scenePhase) { _, _ in
+                Task {
+                    await dismissImmersiveSpace()
                 }
             }
         

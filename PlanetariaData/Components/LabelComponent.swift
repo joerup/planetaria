@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 import SwiftUI
+import UIKit
 
 class LabelComponent: Component {
     

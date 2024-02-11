@@ -13,8 +13,8 @@ struct PlanetariaApp: App {
     
     @StateObject private var simulation = Simulation(from: "Planetaria")
     
-    @State private var showSimulator: Bool = false
     @State private var showSettings: Bool = false
+    @State private var showImmersiveSpace: Bool = false
     
     var body: some Scene {
         
@@ -32,18 +32,20 @@ struct PlanetariaApp: App {
         
         #elseif os(visionOS)
         WindowGroup {
-            if !showSimulator {
-                Launcher(isLoaded: simulation.isLoaded, showSimulator: $showSimulator)
-            } else {
-                Navigator(showDetail: showDetail, showSettings: $showSettings, menuID: systemID, detailID: objectID, menu: menu, detail: detail, content: {}, showSimulator: $showSimulator)
+            if showImmersiveSpace {
+                Navigator(showDetail: showDetail, showSettings: $showSettings, menuID: systemID, detailID: objectID, menu: menu, detail: detail, content: {})
                     .environmentObject(simulation)
+            } else {
+                Launcher(isLoaded: simulation.isLoaded)
             }
         }
-        .defaultSize(width: 0.5, height: 0.5, depth: 0, in: .meters)
+        .defaultSize(width: 0.6, height: 0.5, depth: 0, in: .meters)
         
         ImmersiveSpace(id: "simulator") {
             Simulator(from: simulation)
                 .offset(y: -1000).offset(z: -1500)
+                .onAppear { showImmersiveSpace = true }
+                .onDisappear { showImmersiveSpace = false }
         }
         
         #endif
