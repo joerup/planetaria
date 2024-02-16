@@ -45,7 +45,6 @@ struct SystemDetails: View {
             list
         }
         .tint(system.color)
-        .fontDesign(.rounded)
     }
     
     private var header: some View {
@@ -61,7 +60,7 @@ struct SystemDetails: View {
                             .padding(.leading, -5)
                         Text("\(parent.name) System")
                     }
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(.mint)
                 }
                 .buttonStyle(.plain)
             }

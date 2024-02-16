@@ -11,7 +11,6 @@ import PlanetariaData
 struct Navigator<Content: View, Menu: View, Detail: View>: View {
     
     @Binding var showDetail: Bool
-    @Binding var showSettings: Bool
     
     var menuID: Int?
     var detailID: Int?
@@ -19,6 +18,8 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     @ViewBuilder var menu: () -> Menu
     @ViewBuilder var detail: () -> Detail
     @ViewBuilder var content: () -> Content
+    
+    @State private var showSettings: Bool = false
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -78,7 +79,7 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                             }
                     }
                     .preferredColorScheme(.dark)
-                    .onChange(of: showDetail) { _, showDetail in
+                    .onChange(of: showDetail) { showDetail in
                         detailDetent = .height(MarginConstants.small)
                         selectedDetent = .height(MarginConstants.small)
                     }
@@ -169,11 +170,6 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
             .animation(.default, value: showDetail)
             .ornament(visibility: showDetail ? .visible : .hidden, attachmentAnchor: .scene(.bottom)) {
                 Toolbar()
-                    .padding()
-                    .glassBackgroundEffect()
-            }
-            .ornament(attachmentAnchor: .scene(.top)) {
-                Header(showSettings: $showSettings)
                     .padding()
                     .glassBackgroundEffect()
             }

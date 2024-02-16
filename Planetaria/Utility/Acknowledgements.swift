@@ -51,6 +51,7 @@ struct Acknowledgements: View {
                     } label: {
                         Text("Done")
                             .fontWeight(.semibold)
+                            .foregroundStyle(.mint)
                     }
                 }
             }

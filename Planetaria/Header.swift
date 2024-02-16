@@ -30,21 +30,10 @@ struct Header: View {
         HStack {
             settingsButton
             Spacer(minLength: 10)
-            clock
-            Spacer(minLength: 10)
             arButton
         }
         .padding(.horizontal)
         .padding(.top, isCompact ? 0 : 10)
-        
-        #elseif os(macOS)
-        clock
-        
-        #elseif os(visionOS)
-        HStack {
-            clock
-                .padding(.horizontal)
-        }
         
         #endif
     }

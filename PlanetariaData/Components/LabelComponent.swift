@@ -8,7 +8,12 @@
 import Foundation
 import RealityKit
 import SwiftUI
+#if canImport(UIKit)
 import UIKit
+typealias FontType = UIFont
+#else
+typealias FontType = NSFont
+#endif
 
 class LabelComponent: Component {
     
@@ -16,7 +21,7 @@ class LabelComponent: Component {
     
     init?(node: Node) {
         let text = node.object?.name ?? node.name
-        let font: UIFont = .systemFont(ofSize: 1.0)
+        let font: FontType = .systemFont(ofSize: 1.0)
         
         let labelMesh = MeshResource.generateText(text, extrusionDepth: 0.01, font: font)
         let labelEntity = ModelEntity(mesh: labelMesh, materials: [UnlitMaterial(color: .white)])

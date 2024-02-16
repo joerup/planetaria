@@ -21,7 +21,6 @@ extension ObjectNode {
         public var namesake: String?
         
         public var currentDistance: Value<DistanceU>? {
-            print(host)
             guard let orbit, let host else { return nil }
             return Value((orbit.position - host.position).magnitude, .km)
         }

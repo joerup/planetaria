@@ -23,7 +23,6 @@ struct ObjectDetails: View {
             properties
         }
         .tint(object.color)
-        .fontDesign(.rounded)
     }
     
     private var header: some View {

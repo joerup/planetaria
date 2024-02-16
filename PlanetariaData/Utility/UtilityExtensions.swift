@@ -192,7 +192,6 @@ public extension Date {
 
 public extension Color {
     
-    // Initialize Color from a hex string (e.g., "#FF0000" for red)
     init(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
         hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")

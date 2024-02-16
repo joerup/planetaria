@@ -73,7 +73,6 @@ struct Settings: View {
                     VStack {
                         Text("Planetaria")
                             .font(.title3)
-                            .fontDesign(.rounded)
                             .fontWeight(.bold)
                             .foregroundColor(.mint)
                         Text("Version \(appVersion ?? "")")
