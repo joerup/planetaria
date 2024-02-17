@@ -59,7 +59,7 @@ class OrbitComponent: Component {
         if duration != 0 {
             model.scale = SIMD3(repeating: scaleRatio)
             model.move(to: Transform(), relativeTo: model.parent, duration: duration, timingFunction: .easeInOut)
-        }
+        } 
         
         for i in 0..<segments.endIndex {
         

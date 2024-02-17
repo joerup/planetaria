@@ -1,5 +1,5 @@
 /*
-  Descriptions.strings
+  Planetaria-descriptions.strings
   Planetaria
 
   Created by Joe Rupertus on 1/18/23.
@@ -7,7 +7,7 @@
 */
 
 "Sun" =
-"The Sun is a yellow main-sequence star in the center of the Solar System. It is composed of plasma and incandescent gas at unimaginably hot temperatures. The Sun produces nuclear energy by fusing hydrogen into helium in its core, and it radiates light and heat to all of the planets and moons of the Solar System.";
+"The Sun is a middle-sized yellow star that radiates light and heat to all of the planets and moons of the Solar System. Within the Sun's unimaginably hot photosphere, there are many cooler, darker areas called sunspots. The solar wind, a stream of charged particles, is constantly emitted from the surface, along with the occasional solar flare: a more intense burst of energy.";
 
 "Mercury" =
 "Mercury is the smallest and fastest planet in the Solar System, zooming around the Sun in only three months along its eccentric orbit. Its surface is heavily cratered, and it has no atmosphere, causing temperatures to range from very hot on the light side to very cold on the dark side. Despite its high orbital speed, Mercury rotates relatively slowly.";
@@ -49,7 +49,7 @@
 "Makemake is a large dwarf planet in the Kuiper Belt with a high orbital inclination. Its icy surface is very reflective, making it relatively bright and red in color. Makemake also has one small moon.";
 
 "Moon" =
-"The Moon is Earth's sole natural satellite. It is notable for its distinctive lunar phases as viewed from Earth, as well as its tidal effects on Earth's oceans. The Moon is tidally locked to Earth, which means only one side is ever visible. It is believed to have formed long ago after a large object known as Theia collided with Earth.";
+"The Moon, also known as Luna, is a large satellite of Earth. It's notable for its lunar phases as viewed from Earth, as well as its tidal effects on the planet's oceans. The Moon is tidally locked to Earth, which means only one side is ever visible. It is believed to have formed long ago after a large object known as Theia collided with Earth.";
 
 "Phobos" =
 "Phobos is the larger of the two Martian moons, and it orbits very closely to the planet's surface, with an orbital period of just a few hours. It has an oblong shape and many impact craters. In the far future, Phobos is expected to either crash into Mars or be torn apart by its gravity.";

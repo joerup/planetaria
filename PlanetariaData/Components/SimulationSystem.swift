@@ -56,7 +56,7 @@ class SimulationSystem: System {
                 label.update(isEnabled: isEnabled, isVisible: labelVisible, thickness: simulation.entityThickness)
             }
             
-            if isSelected {
+            if isSelected, configuration.node.category != .system {
                 root?.setTarget(entity)
             }
         }

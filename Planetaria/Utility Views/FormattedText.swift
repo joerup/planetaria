@@ -20,7 +20,7 @@ struct FormattedText: View {
         HStack(alignment: unit?.string == "º" ? .top : .firstTextBaseline, spacing: 0) {
             Text(value)
                 .font(.system(valueFont, weight: .semibold))
-                .brightness(0.3)
+                .brightness(0.25)
                 .saturation(0.5)
             if let unit {
                 Text(unit.string)

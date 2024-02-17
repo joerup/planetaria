@@ -46,10 +46,14 @@ struct ObjectDetails: View {
                 Divider()
                 majorProperties(properties: properties)
                 Divider()
-                orbitalProperties(properties: properties)
-                Divider()
-                structuralProperties(properties: properties)
-                Divider()
+                if properties.orbitalElementsAvailable {
+                    orbitalProperties(properties: properties)
+                    Divider()
+                }
+                if properties.structuralElementsAvailable {
+                    structuralProperties(properties: properties)
+                    Divider()
+                }
                 orbiterRow(properties: properties)
                 Footnote()
             }
@@ -62,8 +66,12 @@ struct ObjectDetails: View {
                 majorProperties(properties: properties, large: true)
                 Divider()
                 HStack(alignment: .top, spacing: 25) {
-                    orbitalProperties(properties: properties)
-                    structuralProperties(properties: properties)
+                    if properties.orbitalElementsAvailable {
+                        orbitalProperties(properties: properties)
+                    }
+                    if properties.structuralElementsAvailable {
+                        structuralProperties(properties: properties)
+                    }
                 }
                 Divider()
                 orbiterRow(properties: properties)
@@ -93,7 +101,7 @@ struct ObjectDetails: View {
     @ViewBuilder 
     private func description(properties: ObjectNode.Properties) -> some View {
         if object.rank == .primary || object.rank == .secondary {
-            Text(NSLocalizedString(object.name, tableName: "Descriptions", comment: ""))
+            Text(NSLocalizedString(object.name, tableName: "\(simulation.title)-descriptions", comment: ""))
                 .fixedSize(horizontal: false, vertical: true)
         }
         if let discoverer = properties.discoverer, let discovered = properties.discovered {
@@ -125,33 +133,29 @@ struct ObjectDetails: View {
     
     @ViewBuilder
     private func orbitalProperties(properties: ObjectNode.Properties) -> some View {
-        if properties.orbitalElementsAvailable {
-            VStack(alignment: .leading) {
-                Text("Orbital Elements")
-                    .font(.system(.headline, weight: .bold))
-                    .padding(.vertical, 5)
-                PropertyText(type: .row, name: "Semimajor Axis", property: properties.semimajorAxis)
-                PropertyText(type: .row, name: periapsisName, property: properties.periapsis)
-                PropertyText(type: .row, name: apoapsisName, property: properties.apoapsis)
-                PropertyText(type: .row, name: "Eccentricity", property: properties.eccentricity)
-                PropertyText(type: .row, name: "Inclination", property: properties.inclination)
-            }
+        VStack(alignment: .leading) {
+            Text("Orbital Elements")
+                .font(.system(.headline, weight: .bold))
+                .padding(.vertical, 5)
+            PropertyText(type: .row, name: "Semimajor Axis", property: properties.semimajorAxis)
+            PropertyText(type: .row, name: periapsisName, property: properties.periapsis)
+            PropertyText(type: .row, name: apoapsisName, property: properties.apoapsis)
+            PropertyText(type: .row, name: "Eccentricity", property: properties.eccentricity)
+            PropertyText(type: .row, name: "Inclination", property: properties.inclination)
         }
     }
     
     @ViewBuilder
     private func structuralProperties(properties: ObjectNode.Properties) -> some View {
-        if properties.structuralElementsAvailable {
-            VStack(alignment: .leading) {
-                Text("Structural Elements")
-                    .font(.system(.headline, weight: .bold))
-                    .padding(.vertical, 5)
-                PropertyText(type: .row, name: "Mass", property: properties.mass)
-                PropertyText(type: .row, name: "Radius", property: properties.radius)
-                PropertyText(type: .row, name: "Density", property: properties.density)
-                PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity)
-                PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity)
-            }
+        VStack(alignment: .leading) {
+            Text("Structural Elements")
+                .font(.system(.headline, weight: .bold))
+                .padding(.vertical, 5)
+            PropertyText(type: .row, name: "Mass", property: properties.mass)
+            PropertyText(type: .row, name: "Radius", property: properties.radius)
+            PropertyText(type: .row, name: "Density", property: properties.density)
+            PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity)
+            PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity)
         }
     }
     

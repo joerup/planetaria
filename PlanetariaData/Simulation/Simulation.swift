@@ -26,6 +26,7 @@ final public class Simulation: ObservableObject {
             
             // Create the node references
             await MainActor.run {
+                self.title = fileName
                 self.root = root
                 self.focus = root
                 self.system = root
@@ -78,6 +79,8 @@ final public class Simulation: ObservableObject {
     
     
     // MARK: - Structure
+    
+    public private(set) var title: String = ""
     
     internal var rootEntity = SimulationRootEntity()
     internal var entities: [SimulationEntity] = []

@@ -13,7 +13,7 @@ class PointComponent: Component {
     var model: ModelEntity
     
     init?(node: Node) {
-        let thickness: Float = node.object?.category == .planet ? 1.1 : 0.9
+        let thickness: Float = node.object?.category == .planet || node.object?.category == .star ? 1.1 : 0.9
         let sphere = MeshResource.generateSphere(radius: thickness)
         let collisionShape = ShapeResource.generateSphere(radius: 10)
         #if os(macOS)
