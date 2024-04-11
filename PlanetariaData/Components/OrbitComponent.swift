@@ -43,7 +43,7 @@ class OrbitComponent: Component {
             model.addChild(segment)
         }
         
-        update(isEnabled: true, isVisible: true, isSelected: false, noSelection: true, scale: 1.0, thickness: 0.001)
+        update(isEnabled: false, isVisible: true, isSelected: false, noSelection: true, scale: 1.0, thickness: 0.001)
     }
     
     func update(isEnabled: Bool, isVisible: Bool, isSelected: Bool, noSelection: Bool, scale: CGFloat, thickness: Float, duration: Double = 0) {

@@ -22,7 +22,10 @@ final public class Simulation: ObservableObject {
                   let json = try? String(contentsOfFile: file),
                   let data = json.data(using: .utf8),
                   let root = try? JSONDecoder().decode(SystemNode.self, from: data)
-            else { return }
+            else {
+                print("Error decoding nodes")
+                return
+            }
             
             // Create the node references
             await MainActor.run {
@@ -34,7 +37,7 @@ final public class Simulation: ObservableObject {
             print("Finished decoding nodes")
             
             // Load the ephemerides
-            await root.loadEphemerides()
+            await loadEphemerides()
             print("Finished loading ephemerides")
             
             // Set the scaling size
@@ -118,10 +121,13 @@ final public class Simulation: ObservableObject {
     internal var inMajorTransition: Bool = false
     
     public func trailVisible(_ node: Node) -> Bool {
-        return !inMajorTransition && showOrbits && !(node == focus && scale * node.size * 10 > size)
+        !inMajorTransition && showOrbits && !(node == focus && scale * node.size * 10 > size)
     }
     public func labelVisible(_ node: Node) -> Bool {
-        return !inMajorTransition && showLabels && node.parent == system && (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) && scale * node.size * 100 < size
+        !inMajorTransition && showLabels && node.parent == system &&
+        (isSelected(node) || node.rank == .primary || node.rank == .secondary) &&
+        (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) && 
+        scale * node.size * 100 < size
     }
     
 
@@ -196,6 +202,61 @@ final public class Simulation: ObservableObject {
     
     // MARK: - Motion
     
+    private func loadEphemerides() async {
+        let urlStr = "https://script.google.com/macros/s/AKfycbwnEMsgrHDoboUKHZljiLycXQ-GOvHdehYHQANEftj41azbkNaeAJiIBwdORo7wUlwX/exec"
+        guard let root, let url = URL(string: urlStr) else { return }
+        
+        var states: [Int : StateVector] = [:]
+        
+        // Make the API call
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let string = String(decoding: data, as: UTF8.self)
+            let ephemerides = string.split(separator: "\n")
+            guard ephemerides.count >= 2 else { return }
+            
+            // Set the timestamp
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MMM-dd-HH:mm:ss.SSSS"
+            if let timestamp = ephemerides[0].split(separator: ",").first, let time = formatter.date(from: String(timestamp)) {
+                print("time: \(time)")
+                await MainActor.run {
+                    self.time = time
+                }
+            }
+            
+            for i in 1 ..< ephemerides.count {
+                let ephemerisData = ephemerides[i].split(separator: ",")
+                
+                // Parse the ephemeris data
+                guard ephemerisData.count >= 8,
+                  let id = Int(ephemerisData[0]),
+                  let x = Double(ephemerisData[2]),
+                  let y = Double(ephemerisData[3]),
+                  let z = Double(ephemerisData[4]),
+                  let vx = Double(ephemerisData[5]),
+                  let vy = Double(ephemerisData[6]),
+                  let vz = Double(ephemerisData[7])
+                else {
+                    continue
+                }
+                
+                // Hash the state vector
+                let stateVector = StateVector(position: [x,y,z], velocity: [vx,vy,vz])
+                states[id] = stateVector
+            }
+        } catch {
+            print(error)
+        }
+        
+        // Set the ephemeris for each node
+        for node in root.tree {
+            if let stateVector = states[node.id] {
+                node.set(state: stateVector)
+            }
+        }
+    }
+    
     private func run() {
         Timer.scheduledTimer(withTimeInterval: timeStep, repeats: true) { _ in
             let dt = self.timeStep * self.timeRatio
@@ -209,8 +270,12 @@ final public class Simulation: ObservableObject {
         guard isRealTime else { return }
         
         while -time.timeIntervalSinceNow > 3600 {
-            self.time.addTimeInterval(60)
-            self.root?.advance(by: 60)
+            self.time.addTimeInterval(600)
+            self.root?.advance(by: 600)
+        }
+        while -time.timeIntervalSinceNow > 60 {
+            self.time.addTimeInterval(30)
+            self.root?.advance(by: 30)
         }
         while -time.timeIntervalSinceNow > 1 {
             self.time.addTimeInterval(1)
