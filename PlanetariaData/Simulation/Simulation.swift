@@ -58,7 +58,6 @@ final public class Simulation: ObservableObject {
                 await MainActor.run {
                     rootEntity.addChild(entity)
                 }
-                
             }
             print("Finished creating entities")
             
@@ -73,6 +72,7 @@ final public class Simulation: ObservableObject {
             await MainActor.run {
                 self.run()
                 self.isLoaded = true
+                print("Finished setup")
             }
         }
         

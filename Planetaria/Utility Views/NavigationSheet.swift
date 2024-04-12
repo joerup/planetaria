@@ -9,6 +9,9 @@ import SwiftUI
 
 struct NavigationSheet<Header: View, Content: View>: View {
     
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    
     var header: () -> Header
     var content: () -> Content
     
@@ -71,11 +74,19 @@ struct NavigationSheet<Header: View, Content: View>: View {
                 }
             }
             VStack(alignment: .leading, spacing: 0) {
-                HStack(spacing: 0) {
-                    header()
-                    Spacer(minLength: 0)
+                if horizontalSizeClass == .compact && verticalSizeClass == .regular {
+                    HStack(spacing: 0) {
+                        header()
+                        Spacer(minLength: 0)
+                    }
+                    .background(.background.opacity(0.95))
+                } else {
+                    HStack(spacing: 0) {
+                        header()
+                        Spacer(minLength: 0)
+                    }
+                    .background(Color(uiColor: .systemGray5).opacity(0.95))
                 }
-                .background(Color(uiColor: .systemGray5).opacity(0.95))
                 Divider()
                     .opacity(scrollPosition == 0 ? 0 : 1)
                     .animation(.default, value: scrollPosition)

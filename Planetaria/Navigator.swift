@@ -37,6 +37,8 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
     
     #endif
     
+    @State private var isPresented: Bool = true
+    
     var body: some View {
         
         #if os(iOS)
@@ -55,12 +57,14 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                     }
                     .sheet(isPresented: .constant(true)) {
                         menu()
+                            .id(menuID)
                             .sheet(isPresented: $showDetail) {
                                 detail()
+                                    .id(detailID)
                                     .padding(.top, 3)
                                     .overlay(alignment: .topTrailing) { closeButton.padding(10) }
                                     .presentationDetents(detents, selection: $detailDetent)
-                                    .presentationBackground(Color(uiColor: .systemGray5))
+//                                    .presentationBackground(Color(uiColor: .systemGray5)) /* broken */
                                     .presentationBackgroundInteraction(.enabled)
                                     .presentationCornerRadius(20)
                                     .interactiveDismissDisabled()
@@ -69,11 +73,10 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
                                     }
                             }
                             .presentationDetents(detents, selection: $selectedDetent)
-                            .presentationBackground(Color(uiColor: .systemGray5))
+//                            .presentationBackground(Color(uiColor: .systemGray5)) /* broken */
                             .presentationBackgroundInteraction(.enabled)
                             .presentationCornerRadius(20)
                             .interactiveDismissDisabled()
-                            .preferredColorScheme(.dark)
                             .sheet(isPresented: $showSettings) {
                                 Settings()
                             }

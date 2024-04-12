@@ -19,13 +19,20 @@ struct PlanetariaApp: App {
         
         #if os(iOS) || os(macOS) || os(tvOS)
         WindowGroup {
-            if simulation.isLoaded {
-                Navigator(showDetail: showDetail, menuID: systemID, detailID: objectID, menu: menu, detail: detail) {
-                    Simulator(from: simulation)
+            Group {
+                if simulation.isLoaded {
+                    Navigator(showDetail: showDetail, menuID: systemID, detailID: objectID, menu: menu, detail: detail) {
+                        Simulator(from: simulation)
+                    }
+                    .environmentObject(simulation)
+                } else {
+                    Launcher()
                 }
-                .environmentObject(simulation)
-            } else {
-                Launcher()
+            }
+            .onAppear {
+                Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+                    print("tick \(Date())")
+                }
             }
         }
         
