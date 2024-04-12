@@ -234,6 +234,7 @@ final public class Simulation: ObservableObject {
             // Set the timestamp
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MMM-dd-HH:mm:ss.SSSS"
+            formatter.timeZone = .gmt
             if let timestamp = ephemerides[0].split(separator: ",").first, let time = formatter.date(from: String(timestamp)) {
                 print("time: \(time)")
                 await MainActor.run {
