@@ -13,11 +13,15 @@ final public class Simulation: ObservableObject {
     
     // MARK: - Setup
     
+    @Published public private(set) var status: Status = .uninitialized
     @Published public private(set) var isLoaded: Bool = false
     
     public init(from fileName: String) {
         Task {
             // Decode the tree from the file
+            await MainActor.run {
+                status = .decodingNodes
+            }
             guard let file = Bundle.main.path(forResource: fileName, ofType: "json"),
                   let json = try? String(contentsOfFile: file),
                   let data = json.data(using: .utf8),
@@ -37,6 +41,9 @@ final public class Simulation: ObservableObject {
             print("Finished decoding nodes")
             
             // Load the ephemerides
+            await MainActor.run {
+                status = .loadingEphemerides
+            }
             await loadEphemerides()
             print("Finished loading ephemerides")
             
@@ -47,6 +54,9 @@ final public class Simulation: ObservableObject {
             }
             
             // Generate the scene
+            await MainActor.run {
+                status = .creatingEntities
+            }
             if let scene = await Entity.generateScene() {
                 await rootEntity.addChild(scene)
             }
@@ -62,6 +72,9 @@ final public class Simulation: ObservableObject {
             print("Finished creating entities")
             
             // Decode photos
+            await MainActor.run {
+                status = .fetchingContent
+            }
             let photos = await Photo.decode(from: "\(fileName)-photos")
             for object in root.tree.compactMap({ $0 as? ObjectNode }) {
                 let matchingPhotos = photos.filter({ $0.id == object.id })
@@ -72,6 +85,7 @@ final public class Simulation: ObservableObject {
             await MainActor.run {
                 self.run()
                 self.isLoaded = true
+                status = .loaded
                 print("Finished setup")
             }
         }
@@ -269,13 +283,9 @@ final public class Simulation: ObservableObject {
     private func synchronize() {
         guard isRealTime else { return }
         
-        while -time.timeIntervalSinceNow > 3600 {
-            self.time.addTimeInterval(600)
-            self.root?.advance(by: 600)
-        }
         while -time.timeIntervalSinceNow > 60 {
-            self.time.addTimeInterval(30)
-            self.root?.advance(by: 30)
+            self.time.addTimeInterval(60)
+            self.root?.advance(by: 60)
         }
         while -time.timeIntervalSinceNow > 1 {
             self.time.addTimeInterval(1)
@@ -489,20 +499,23 @@ final public class Simulation: ObservableObject {
         }
     }
     
+    private let zoomObjectCoefficient: CGFloat = 2.2
+    private let zoomOrbitCoefficient: CGFloat = 2.5
+    
     // Zoom to a node's surface
     private func zoomToSurface(node: Node) {
         print("zooming to surface of \(node.name)")
         let node = node.object ?? node
-        transition(focus: node, size: 2.5 * node.totalSize)
+        transition(focus: node, size: zoomObjectCoefficient * node.totalSize)
     }
     
     // Zoom to a node's orbital path
     private func zoomToOrbit(node: Node) {
         print("zooming to orbit of \(node.name)")
         let node = node.system ?? node
-        let ratio = 2.5 * scale * (node.position.magnitude + node.totalSize) / size
+        let ratio = zoomOrbitCoefficient * scale * (node.position.magnitude + node.totalSize) / size
         let fraction = max(0.7, min(1.0, ratio))
-        transition(focus: node.parent, size: 2.5 / fraction * (node.position.magnitude + node.totalSize))
+        transition(focus: node.parent, size: zoomOrbitCoefficient / fraction * (node.position.magnitude + node.totalSize))
     }
     
     // Zoom to a node's local system
@@ -510,7 +523,7 @@ final public class Simulation: ObservableObject {
         print("zooming to system of \(node.name)")
         let node = node.object ?? node
         let distance = node.system?.scaleDistance ?? .infinity
-        transition(focus: node.parent, size: 2.5 * distance)
+        transition(focus: node.parent, size: zoomOrbitCoefficient * distance)
     }
     
     
@@ -592,6 +605,15 @@ final public class Simulation: ObservableObject {
         if let parentSystem = system?.parent, let distance = system?.scaleDistance, scale * distance < 0.05 * size {
             setSystem(parentSystem)
         }
+    }
+
+    public enum Status {
+        case uninitialized
+        case decodingNodes
+        case loadingEphemerides
+        case creatingEntities
+        case fetchingContent
+        case loaded
     }
 }
 

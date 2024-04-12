@@ -29,11 +29,6 @@ struct PlanetariaApp: App {
                     Launcher()
                 }
             }
-            .onAppear {
-                Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                    print("tick \(Date())")
-                }
-            }
         }
         
         #elseif os(visionOS)
