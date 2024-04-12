@@ -182,17 +182,19 @@ final public class Simulation: ObservableObject {
     }
     
     // Thickness
+    private let entityThicknessM: Float = 0.002
+    private let entityThicknessPx: CGFloat = 6.0
     @Published private(set) var entityThickness: Float = 0.005
     @Published private(set) var screenThickness: CGFloat = 0.005
     private var pixelSize: CGFloat = 100
     internal func setBounds(_ size: CGSize) {
         pixelSize = self.size / min(size.width, size.height)
         if arMode {
-            self.entityThickness = 0.002
-            self.screenThickness = 0.002 * 4 * size.height
+            self.entityThickness = entityThicknessM
+            self.screenThickness = CGFloat(entityThicknessM) * 4 * size.height
         } else {
-            self.entityThickness = 6.0 / Float(2 * min(size.width, size.height))
-            self.screenThickness = 6.0
+            self.entityThickness = Float(entityThicknessPx) / Float(2 * min(size.width, size.height))
+            self.screenThickness = entityThicknessPx
         }
     }
     
@@ -499,7 +501,7 @@ final public class Simulation: ObservableObject {
         }
     }
     
-    private let zoomObjectCoefficient: CGFloat = 2.2
+    private let zoomObjectCoefficient: CGFloat = 2.4
     private let zoomOrbitCoefficient: CGFloat = 2.5
     
     // Zoom to a node's surface

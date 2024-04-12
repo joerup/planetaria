@@ -30,7 +30,7 @@ class OrbitComponent: Component {
         self.model = Entity()
         
         for i in 1...numberOfSegments {
-            let thickness: Float = node.object?.category == .planet ? 1 : 0.8
+            let thickness: Float = node.object?.category == .planet ? 0.5 : 0.4
             let mesh = MeshResource.generateBox(width: 1.0, height: thickness, depth: thickness)
             #if os(iOS) || os(visionOS)
             var material = UnlitMaterial(color: UIColor(node.color ?? .gray))
@@ -53,7 +53,7 @@ class OrbitComponent: Component {
         let currentPosition = (node.position - node.barycenterPosition) * scale / size
         var lastPoint: Vector = .zero
         let scaleRatio = Float(self.scale / scale)
-        let extraScale: Float = thickness * (isVisible ? 1 : 0) * (isSelected ? 1.1 : noSelection ? 1.0 : 0.5)
+        let extraScale: Float = thickness * (isVisible ? 1 : 0) * (isSelected ? 1.1 : noSelection ? 1.0 : 0.8)
         self.scale = scale
         
         if duration != 0 {
