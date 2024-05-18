@@ -50,10 +50,31 @@ extension Node {
         }
     }
 
-    public enum Rank: String, Codable, CaseIterable {
+    public enum Rank: String, Codable, CaseIterable, Equatable, Comparable {
         case primary
         case secondary
         case tertiary
         case quaternary
+        
+        var priorityValue: Int {
+            switch self {
+            case .primary:
+                return 1
+            case .secondary:
+                return 2
+            case .tertiary:
+                return 3
+            case .quaternary:
+                return 4
+            }
+        }
+        
+        public static func == (lhs: Rank, rhs: Rank) -> Bool {
+            return lhs.priorityValue == rhs.priorityValue
+        }
+        public static func < (lhs: Rank, rhs: Rank) -> Bool {
+            return lhs.priorityValue > rhs.priorityValue
+        }
+        // 1 is highest, 4 is lowest
     }
 }

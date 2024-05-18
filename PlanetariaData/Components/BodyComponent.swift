@@ -41,12 +41,12 @@ class BodyComponent: Component {
         bodyEntity.components.set(InputTargetComponent())
         #endif
         
-        model.lighten()
+        bodyEntity.lighten()
         bodyEntity.scale = SIMD3(repeating: Float(size))
         bodyEntity.orientation = orientation(rotation)
     }
     
-    func update(isEnabled: Bool, scale: Double, duration: Double = 0) {
+    func update(scale: Double, duration: Double = 0) {
         let scale = SIMD3(repeating: Float(diameter * scale))
         model.orientation = orientation(rotation)
         

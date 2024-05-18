@@ -44,9 +44,9 @@ class LabelComponent: Component {
         #endif
     }
     
-    func update(isEnabled: Bool, isVisible: Bool, thickness: Float) {
+    func update(isEnabled: Bool, isVisible: Bool, thickness: Float, cameraPosition: SIMD3<Float>) {
         model.isEnabled = isEnabled
         model.position = .zero
-        model.scale = SIMD3(repeating: 4 * thickness * (isVisible ? 1 : 0))
+        model.scale = SIMD3(repeating: 3 * thickness * (isVisible ? 1 : 0) * distance(model.position(relativeTo: nil), cameraPosition))
     }
 }

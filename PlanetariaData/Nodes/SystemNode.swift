@@ -10,10 +10,9 @@ import SwiftUI
 
 public class SystemNode: Node {
     
-    public private(set) var childSystems: [SystemNode]
-    public private(set) var childObjects: [ObjectNode]
-    
-    public private(set) var children: [Node]
+    public var childSystems: [SystemNode]
+    public var childObjects: [ObjectNode]
+    public var children: [Node]
     
     public var tree: [Node] {
         return [self] + subtree
@@ -33,8 +32,12 @@ public class SystemNode: Node {
         get { return object?.color } set { }
     }
     
-    public var scaleDistance: Double? {
-        guard let child = children.filter({ $0.rank == .primary }).max(by: { $0.position.magnitude < $1.position.magnitude }) else { return nil }
+    public var scaleDistance: Double {
+        guard let child = children.max(by: { $0.position.magnitude < $1.position.magnitude }) else { return 0 }
+        return child.position.magnitude
+    }
+    public var primaryScaleDistance: Double {
+        guard let child = children.filter({ $0.rank == .primary }).max(by: { $0.position.magnitude < $1.position.magnitude }) else { return 0 }
         return child.position.magnitude
     }
     
@@ -59,8 +62,12 @@ public class SystemNode: Node {
         }
     }
     
-    override public func set(state: StateVector) {
+    override internal func set(state: StateVector) {
         super.set(state: state)
         object?.properties?.orbit = orbit
+    }
+    
+    public var totalEnergy: Double {
+        return childSystems.map(\.totalEnergy).reduce(0, +) + childObjects.map({ 1/2 * $0.mass * pow($0.velocity.magnitude, 2) - G * ($0.hostNode?.mass ?? 1) * $0.mass / $0.position.magnitude }).reduce(0, +)
     }
 }

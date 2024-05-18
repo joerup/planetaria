@@ -28,13 +28,19 @@ struct SystemDetails: View {
                 "Dwarf Planets" : { ($0.rank == .primary || $0.rank == .secondary) && ($0.category == .tno || $0.category == .asteroid) },
                 "Other" : { $0.category != .star && $0.category != .planet && !(($0.rank == .primary || $0.rank == .secondary) && ($0.category == .tno || $0.category == .asteroid)) }
             ]
+        } else if system.childObjects.contains(where: { $0.properties?.group != nil }) {
+            let groups: [String] = system.childObjects.compactMap(\.properties?.group).uniqued()
+            categories = ["Main"] + groups
+            predicates = [
+                "Main" : { $0.category != .moon }
+            ]
+            groups.forEach { group in predicates[group] = { $0.object?.properties?.group == group } }
         } else {
-            categories = ["Main"]
+            categories = ["Main", "Moons"]
             predicates = [
                 "Main" : { $0.category != .moon },
                 "Moons" : { $0.category == .moon }
             ]
-            categories += ["Moons"]
         }
     }
     
@@ -72,9 +78,12 @@ struct SystemDetails: View {
     
     private var list: some View {
         VStack(alignment: .leading) {
+//            Text("\(system.elapsedTime)")
+//            Text("\(system.timeStep)")
+//            Text("\(system.totalEnergy)")
             ForEach(categories, id: \.self) { category in
                 if let predicate = predicates[category] {
-                    let nodes = system.children.compactMap(\.object).filter({ predicate($0) })
+                    let nodes = system.children.compactMap(\.object).filter({ predicate($0) && $0.rank >= .secondary })
                     if !nodes.isEmpty {
                         if category != "Main" {
                             listSectionHeader(category)

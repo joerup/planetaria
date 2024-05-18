@@ -134,14 +134,18 @@ final public class Simulation: ObservableObject {
     internal var inTransition: Bool = false
     internal var inMajorTransition: Bool = false
     
+    public func pointVisible(_ node: Node) -> Bool {
+        !(system == node)
+    }
     public func trailVisible(_ node: Node) -> Bool {
-        !inMajorTransition && showOrbits && !(node == focus && scale * node.size * 10 > size)
+        !inMajorTransition && showOrbits && !((node == focus || node.object == focus || node == focus?.parent) && (scale * 10 * node.size > size || scale * 10 * (node.system?.primaryScaleDistance ?? 0) > size))
     }
     public func labelVisible(_ node: Node) -> Bool {
-        !inMajorTransition && showLabels && node.parent == system &&
-        (isSelected(node) || node.rank == .primary || node.rank == .secondary) &&
-        (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) && 
-        scale * node.size * 100 < size
+        !inMajorTransition && showLabels && (node.parent == system || node.parent == system?.parent) &&
+        (isSelected(node) || node.rank >= .secondary) &&
+        (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) &&
+        (scale * node.size * 50 < size || (node != focus && node.system != focus)) &&
+        node != system
     }
     
 
@@ -183,7 +187,7 @@ final public class Simulation: ObservableObject {
     
     // Thickness
     private let entityThicknessM: Float = 0.002
-    private let entityThicknessPx: CGFloat = 6.0
+    private let entityThicknessPx: CGFloat = 4.0
     @Published private(set) var entityThickness: Float = 0.005
     @Published private(set) var screenThickness: CGFloat = 0.005
     private var pixelSize: CGFloat = 100
@@ -202,10 +206,10 @@ final public class Simulation: ObservableObject {
     // MARK: - Settings
     
     @Published public var time: Date = .now
-    @Published public var timeRatio: Double = 1.0 { didSet { isRealTime = false } }
-    @Published public var timeStep: Double = 0.1
+    @Published public var frameRatio: Double = 1.0 { didSet { isRealTime = false } }
+    @Published public var frameInterval: Double = 1.0
     public var isRealTime: Bool = true
-    public var maxTimeRatio: Double = 1E+5
+    public var maxFrameRatio: Double = 1E+7
     
     public var arMode: Bool = false
     public var showOrbits: Bool = true
@@ -275,28 +279,19 @@ final public class Simulation: ObservableObject {
     }
     
     private func run() {
-        Timer.scheduledTimer(withTimeInterval: timeStep, repeats: true) { _ in
-            let dt = self.timeStep * self.timeRatio
+        Timer.scheduledTimer(withTimeInterval: frameInterval, repeats: true) { _ in
+            let dt = self.frameInterval * self.frameRatio
             self.time.addTimeInterval(dt)
-            self.root?.advance(by: dt)
+            self.root?.advanceSystem(by: dt)
             self.synchronize()
         }
     }
     
     private func synchronize() {
         guard isRealTime else { return }
-        
-        while -time.timeIntervalSinceNow > 60 {
-            self.time.addTimeInterval(60)
-            self.root?.advance(by: 60)
-        }
-        while -time.timeIntervalSinceNow > 1 {
-            self.time.addTimeInterval(1)
-            self.root?.advance(by: 1)
-        }
-        while time < .now {
-            self.time.addTimeInterval(timeStep)
-            self.root?.advance(by: timeStep)
+        if time < .now {
+            self.time.addTimeInterval(-time.timeIntervalSinceNow)
+            self.root?.advanceSystem(by: -time.timeIntervalSinceNow)
         }
     }
     
@@ -306,28 +301,28 @@ final public class Simulation: ObservableObject {
     // Clock Buttons
     
     public func increaseSpeed() {
-        switch timeRatio {
-        case 1: timeRatio = 100
-        case -100: timeRatio = 1
-        case ...(-100): timeRatio /= 10
-        case (100)...: timeRatio *= 10
-        default: timeRatio = 1
+        switch frameRatio {
+        case 1: frameRatio = 100
+        case -100: frameRatio = 1
+        case ...(-100): frameRatio /= 10
+        case (100)...: frameRatio *= 10
+        default: frameRatio = 1
         }
-        if abs(timeRatio) >= maxTimeRatio {
-            timeRatio = maxTimeRatio
+        if abs(frameRatio) >= maxFrameRatio {
+            frameRatio = maxFrameRatio
         }
     }
     
     public func decreaseSpeed() {
-        switch timeRatio {
-        case 1: timeRatio = -100
-        case 100: timeRatio = 1
-        case ...(-100): timeRatio *= 10
-        case (100)...: timeRatio /= 10
-        default: timeRatio = 1
+        switch frameRatio {
+        case 1: frameRatio = -100
+        case 100: frameRatio = 1
+        case ...(-100): frameRatio *= 10
+        case (100)...: frameRatio /= 10
+        default: frameRatio = 1
         }
-        if abs(timeRatio) >= maxTimeRatio {
-            timeRatio = -maxTimeRatio
+        if abs(frameRatio) >= maxFrameRatio {
+            frameRatio = -maxFrameRatio
         }
     }
     
@@ -525,7 +520,7 @@ final public class Simulation: ObservableObject {
     private func zoomToSystem(node: Node) {
         print("zooming to system of \(node.name)")
         let node = node.object ?? node
-        let distance = node.system?.scaleDistance ?? .infinity
+        let distance = node.system?.primaryScaleDistance ?? .infinity
         transition(focus: node.parent, size: zoomOrbitCoefficient * distance)
     }
     
@@ -539,7 +534,7 @@ final public class Simulation: ObservableObject {
         guard let focus, scale.isFinite, !inTransition else { return }
         let system = focus.system
         let offset = focus.globalPosition
-        let animationTime: Double = 0.5
+        let animationTime: Double = 0//0.5
         
         // Transition conditions
         self.inTransition = true
@@ -601,11 +596,11 @@ final public class Simulation: ObservableObject {
         }
 
         // Select the child system if zoomed in enough (the reference node/child system is a system that comprises more than 5% of the screen)
-        if focus != system, let childSystem = focus as? SystemNode, let distance = childSystem.scaleDistance, scale * distance > 0.05 * size {
+        if focus != system, let childSystem = focus as? SystemNode, scale * childSystem.scaleDistance > 0.05 * size || scale * childSystem.primaryScaleDistance > 0.01 * size {
             setSystem(childSystem)
         }
         // Select the parent system if zoomed out enough (the reference node/child system is a system that comprises less than 5% of the screen)
-        if let parentSystem = system?.parent, let distance = system?.scaleDistance, scale * distance < 0.05 * size {
+        if let system, let parentSystem = system.parent, scale * system.scaleDistance < 0.05 * size && scale * system.primaryScaleDistance < 0.01 * size {
             setSystem(parentSystem)
         }
     }

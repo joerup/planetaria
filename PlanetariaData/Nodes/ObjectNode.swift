@@ -79,7 +79,7 @@ public class ObjectNode: Node {
         properties?.rotation = rotation
     }
     
-    override public func set(state: StateVector) {
+    override internal func set(state: StateVector) {
         super.set(state: state)
         properties?.host = hostNode ?? system?.hostNode
         if system == nil, properties?.orbit == nil {

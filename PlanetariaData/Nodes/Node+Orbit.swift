@@ -25,6 +25,8 @@ extension Node {
         public var eccentricityVector: Vector
         public var lineOfNodes: Vector
         
+        public var period: Double
+        
         public init?(position: Vector, velocity: Vector, mass: Double, size: Double, hostNode: Node?) {
             guard let hostNode, hostNode.mass > 0 else { return nil }
             
@@ -49,6 +51,8 @@ extension Node {
             self.longitudeOfPeriapsis = eccentricityVector.rotated(by: -orbitalInclination, about: lineOfNodes).angle
             
             self.trueAnomaly = position.signedAngle(with: eccentricityVector, around: axis, clockwise: false)
+            
+            self.period = 2 * .pi / sqrt(μ) * pow(semimajorAxis * 1000, 3/2)
         }
         
         public func update(position: Vector, velocity: Vector) {

@@ -22,6 +22,12 @@ public class Node: Decodable {
     public var position: Vector
     public var velocity: Vector
     
+    public var elapsedTime: Double = 0
+    public var period: Double = 1.0
+    public var timeStep: Double = 1.0
+    private static let precision: Double = 0.001
+    // frequency of timesteps relative to orbital period
+    
     public var mass: Double
     public var size: Double
     
@@ -59,12 +65,18 @@ public class Node: Decodable {
         return (hostNode.mass * hostNode.velocity + self.mass * self.velocity) / (hostNode.mass + self.mass)
     }
     
-    public func set(state: StateVector) {
+    internal func set(state: StateVector) {
         self.position = state.position
         self.velocity = state.velocity
         self.orbit = Orbit(position: state.position, velocity: state.velocity, mass: mass, size: size, hostNode: hostNode)
+        if let orbit {
+            self.period = orbit.period
+            self.timeStep = orbit.period * Self.precision
+            if hostNode?.timeStep == 1.0 && timeStep != 1.0 {
+                hostNode?.timeStep = timeStep
+            }
+        }
     }
-    
     
     private enum CodingKeys: String, CodingKey {
         case id, name, category, rank, color, mass, size, position, velocity

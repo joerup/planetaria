@@ -17,7 +17,7 @@ class TargetSelector: Entity {
         
         for i in 0..<numberOfSides {
             let angle = Double(i)/Double(numberOfSides) * 2 * .pi
-            let segment = MeshResource.generateBox(width: 1, height: 0.3, depth: 0.3)
+            let segment = MeshResource.generateBox(width: 1, height: 0.1, depth: 0.1)
             let model = ModelEntity(mesh: segment, materials: [UnlitMaterial(color: .white)])
             self.addChild(model)
             model.position = simd_quatf(angle: Float(angle), axis: [0,0,1]).act([1,0,0])
@@ -32,9 +32,9 @@ class TargetSelector: Entity {
         #endif
     }
     
-    func update(isEnabled: Bool, thickness: Float) {
+    func update(isEnabled: Bool, thickness: Float, cameraPosition: SIMD3<Float>) {
         self.isEnabled = isEnabled
         self.position = .zero
-        self.scale = SIMD3(repeating: 2 * thickness)
+        self.scale = SIMD3(repeating: 1.7 * thickness * distance(self.position(relativeTo: nil), cameraPosition))
     }
 }

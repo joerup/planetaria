@@ -32,6 +32,8 @@ struct ObjectDetails: View {
             Text(subtitle)
                 .font(.system(.headline, design: .default, weight: .medium))
                 .foregroundStyle(.secondary)
+//            Text("\(object.elapsedTime)")
+//            Text("\(object.timeStep)")
         }
         .padding()
     }

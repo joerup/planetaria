@@ -13,9 +13,9 @@ class PointComponent: Component {
     var model: ModelEntity
     
     init?(node: Node) {
-        let thickness: Float = node.object?.category == .planet || node.object?.category == .star ? 1.1 : 0.9
+        let thickness: Float = (node.object?.category == .planet || node.object?.category == .star ? 0.7 : 0.5)
         let sphere = MeshResource.generateSphere(radius: thickness)
-        let collisionShape = ShapeResource.generateSphere(radius: 10)
+        let collisionShape = ShapeResource.generateSphere(radius: 8)
         #if os(macOS)
         let material = UnlitMaterial(color: NSColor(node.color ?? .gray))
         #else
@@ -32,8 +32,8 @@ class PointComponent: Component {
         #endif
     }
     
-    func update(isEnabled: Bool, thickness: Float) {
+    func update(isEnabled: Bool, isVisible: Bool, thickness: Float, cameraPosition: SIMD3<Float>) {
         model.position = .zero
-        model.scale = SIMD3(repeating: thickness * (isEnabled ? 1 : 0))
+        model.scale = SIMD3(repeating: thickness * (isEnabled ? 1 : 0) * (isVisible ? 1 : 0) * distance(model.position(relativeTo: nil), cameraPosition))
     }
 }

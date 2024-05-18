@@ -12,7 +12,7 @@ import Foundation
 import RealityKit
 import SwiftUI
 
-public struct BillboardComponent: Component, Codable {
+public class BillboardComponent: Component, Codable {
     public init() { }
 }
 

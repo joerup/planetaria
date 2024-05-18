@@ -10,12 +10,14 @@ import SwiftUI
 
 class SimulationComponent: Component {
     
+    private(set) var entity: SimulationEntity
     private(set) var node: Node
-    private var size: Double
+    private(set) var size: Double
     
-    var screenPosition: CGPoint = .zero
+    var isSelected: Bool = false
     
-    init(node: Node, size: Double) {
+    init(entity: SimulationEntity, node: Node, size: Double) {
+        self.entity = entity
         self.node = node
         self.size = size
     }

@@ -30,6 +30,8 @@ struct Header: View {
         HStack {
             settingsButton
             Spacer(minLength: 10)
+            //clock
+            Spacer(minLength: 10)
             arButton
         }
         .padding(.horizontal)
@@ -71,35 +73,35 @@ struct Header: View {
     
     private var clock: some View {
         HStack {
-//            Button {
-//                simulation.decreaseSpeed()
-//            } label: {
-//                Image(systemName: "backward")
-//                    .foregroundStyle(simulation.timeRatio < -1 ? .mint : .white)
-//                    .imageScale(isCompact ? .small : .medium)
-//                    .padding(.horizontal)
-//                    .padding(.vertical, 12)
-//            }
+            Button {
+                simulation.decreaseSpeed()
+            } label: {
+                Image(systemName: "backward\(simulation.frameRatio < -1 ? ".fill" : "")")
+                    .foregroundStyle(simulation.frameRatio < -1 ? .pink : .white)
+                    .imageScale(isCompact ? .small : .medium)
+                    .padding(.horizontal)
+                    .padding(.vertical, 12)
+            }
             
             Text(simulation.time.string)
                 .lineLimit(0)
                 .minimumScaleFactor(0.5)
                 #if os(visionOS)
-                .foregroundColor(simulation.isRealTime ? .white : .mint)
+                .foregroundColor(simulation.isRealTime ? .white : simulation.frameRatio < 0 ? .pink : .mint)
                 #else
-                .foregroundColor(simulation.isRealTime ? .gray : .mint)
+                .foregroundColor(simulation.isRealTime ? .gray : simulation.frameRatio < 0 ? .pink : .mint)
                 #endif
                 .font(.system(isCompact ? .callout : .body, design: .monospaced, weight: .bold))
             
-//            Button {
-//                simulation.increaseSpeed()
-//            } label: {
-//                Image(systemName: "forward")
-//                    .foregroundStyle(simulation.timeRatio > 1 ? .mint : .white)
-//                    .imageScale(isCompact ? .small : .medium)
-//                    .padding(.horizontal)
-//                    .padding(.vertical, 12)
-//            }
+            Button {
+                simulation.increaseSpeed()
+            } label: {
+                Image(systemName: "forward\(simulation.frameRatio > 1 ? ".fill" : "")")
+                    .foregroundStyle(simulation.frameRatio > 1 ? .mint : .white)
+                    .imageScale(isCompact ? .small : .medium)
+                    .padding(.horizontal)
+                    .padding(.vertical, 12)
+            }
         }
         .dynamicTypeSize(..<DynamicTypeSize.xLarge)
     }
