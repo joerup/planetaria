@@ -13,7 +13,7 @@ class PointComponent: Component {
     var model: ModelEntity
     
     init?(node: Node) {
-        let thickness: Float = (node.object?.category == .planet || node.object?.category == .star ? 0.7 : 0.5)
+        let thickness: Float = 0.5
         let sphere = MeshResource.generateSphere(radius: thickness)
         let collisionShape = ShapeResource.generateSphere(radius: 8)
         #if os(macOS)
@@ -32,8 +32,15 @@ class PointComponent: Component {
         #endif
     }
     
-    func update(isEnabled: Bool, isVisible: Bool, thickness: Float, cameraPosition: SIMD3<Float>) {
-        model.position = .zero
-        model.scale = SIMD3(repeating: thickness * (isEnabled ? 1 : 0) * (isVisible ? 1 : 0) * distance(model.position(relativeTo: nil), cameraPosition))
+    func update(isEnabled: Bool, isVisible: Bool, thickness: Float, cameraPosition: SIMD3<Float>, duration: Double = 0) {
+        let scale = SIMD3(repeating: thickness * (isEnabled ? 1 : 0) * (isVisible ? 1 : 0) * distance(model.position(relativeTo: nil), cameraPosition))
+        
+        if duration == 0 {
+            model.position = .zero
+            model.scale = scale
+        } else {
+            let transform = Transform(scale: scale, rotation: model.orientation, translation: model.position)
+            model.move(to: transform, relativeTo: model.parent, duration: duration, timingFunction: .easeInOut)
+        }
     }
 }

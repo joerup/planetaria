@@ -135,16 +135,16 @@ final public class Simulation: ObservableObject {
     internal var inMajorTransition: Bool = false
     
     public func pointVisible(_ node: Node) -> Bool {
-        !(system == node)
+        showLabels && !(system == node)
     }
     public func trailVisible(_ node: Node) -> Bool {
         !inMajorTransition && showOrbits && !((node == focus || node.object == focus || node == focus?.parent) && (scale * 10 * node.size > size || scale * 10 * (node.system?.primaryScaleDistance ?? 0) > size))
     }
     public func labelVisible(_ node: Node) -> Bool {
-        !inMajorTransition && showLabels && (node.parent == system || node.parent == system?.parent) &&
+        showLabels && (node.parent == system || node.parent == system?.parent) &&
         (isSelected(node) || node.rank >= .secondary) &&
         (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) &&
-        (scale * node.size * 50 < size || (node != focus && node.system != focus)) &&
+        (scale * node.size * 75 < size || (node != focus && node.system != focus)) &&
         node != system
     }
     
@@ -207,7 +207,7 @@ final public class Simulation: ObservableObject {
     
     @Published public var time: Date = .now
     @Published public var frameRatio: Double = 1.0 { didSet { isRealTime = false } }
-    @Published public var frameInterval: Double = 1.0
+    @Published public var frameInterval: Double = 0.1
     public var isRealTime: Bool = true
     public var maxFrameRatio: Double = 1E+7
     
@@ -527,6 +527,8 @@ final public class Simulation: ObservableObject {
     
     // MARK: Navigation Logic
     
+    private let animationTime: Double = 0.5
+    
     // Transition animation
     // Move to a new offset, scale, and focus node
     private func transition(focus: Node?, size: CGFloat) {
@@ -534,7 +536,6 @@ final public class Simulation: ObservableObject {
         guard let focus, scale.isFinite, !inTransition else { return }
         let system = focus.system
         let offset = focus.globalPosition
-        let animationTime: Double = 0//0.5
         
         // Transition conditions
         self.inTransition = true
@@ -553,13 +554,14 @@ final public class Simulation: ObservableObject {
         if let system {
             setSystem(system)
         }
+        let oldScale = steadyScale
         
         // Set the scale and offset
         self.offsetAmount = 1.0
         self.steadyScale = scale
         
         // Transition the entities
-        rootEntity.transition(scale: scale, offset: offset, duration: animationTime)
+        rootEntity.transition(oldScale: oldScale, newScale: scale, offset: offset, duration: animationTime)
     }
     
     // Navigation changes when gestures occur

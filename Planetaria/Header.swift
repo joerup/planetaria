@@ -30,7 +30,7 @@ struct Header: View {
         HStack {
             settingsButton
             Spacer(minLength: 10)
-            //clock
+            clock
             Spacer(minLength: 10)
             arButton
         }

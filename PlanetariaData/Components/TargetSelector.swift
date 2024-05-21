@@ -25,7 +25,6 @@ class TargetSelector: Entity {
         }
         
         components.set(BillboardComponent())
-        
         #if os(visionOS)
         components.set(InputTargetComponent())
         components.set(HoverEffectComponent())
@@ -33,8 +32,12 @@ class TargetSelector: Entity {
     }
     
     func update(isEnabled: Bool, thickness: Float, cameraPosition: SIMD3<Float>) {
+        let modelPosition = self.position(relativeTo: nil)
+        let targetPosition = modelPosition - (cameraPosition - modelPosition)
+        let scale = SIMD3(repeating: 1.7 * thickness * distance(modelPosition, cameraPosition))
+        
         self.isEnabled = isEnabled
         self.position = .zero
-        self.scale = SIMD3(repeating: 1.7 * thickness * distance(self.position(relativeTo: nil), cameraPosition))
+        self.scale = scale
     }
 }

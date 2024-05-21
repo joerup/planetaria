@@ -19,7 +19,7 @@ class LabelComponent: Component {
     
     var model: Entity
     
-    init?(node: Node) {
+    init?(node: Node, thickness: Float = 0.001, cameraPosition: SIMD3<Float> = .zero) {
         let text = node.object?.name ?? node.name
         let font: FontType = .systemFont(ofSize: 1.0)
         
@@ -42,11 +42,20 @@ class LabelComponent: Component {
         model.components.set(InputTargetComponent())
         model.components.set(HoverEffectComponent())
         #endif
+        
+        update(isEnabled: true, isVisible: true, thickness: thickness, cameraPosition: cameraPosition)
     }
     
-    func update(isEnabled: Bool, isVisible: Bool, thickness: Float, cameraPosition: SIMD3<Float>) {
-        model.isEnabled = isEnabled
-        model.position = .zero
-        model.scale = SIMD3(repeating: 3 * thickness * (isVisible ? 1 : 0) * distance(model.position(relativeTo: nil), cameraPosition))
+    func update(isEnabled: Bool, isVisible: Bool, thickness: Float, cameraPosition: SIMD3<Float>, duration: Double = 0) {
+        let modelPosition = model.position(relativeTo: nil)
+        let scale = SIMD3(repeating: 3 * thickness * (isEnabled ? 1 : 0) * (isVisible ? 1 : 0) * distance(modelPosition, cameraPosition))
+        
+        if duration == 0 {
+            model.position = .zero
+            model.scale = scale
+        } else {
+            let transform = Transform(scale: scale, rotation: model.orientation, translation: model.position)
+            model.move(to: transform, relativeTo: model.parent, duration: duration, timingFunction: .easeInOut)
+        }
     }
 }

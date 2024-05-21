@@ -111,6 +111,9 @@ private struct RealityView: UIViewRepresentable {
         arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap)))
         
         arView.scene.anchors.append(anchor)
+        
+        //arView.debugOptions.insert(.showStatistics)
+        
         return arView
     }
     
