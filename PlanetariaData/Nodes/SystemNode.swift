@@ -68,6 +68,9 @@ public class SystemNode: Node {
     }
     
     public var totalEnergy: Double {
-        return childSystems.map(\.totalEnergy).reduce(0, +) + childObjects.map({ 1/2 * $0.mass * pow($0.velocity.magnitude, 2) - G * ($0.hostNode?.mass ?? 1) * $0.mass / $0.position.magnitude }).reduce(0, +)
+        return childSystems.map(\.totalEnergy).reduce(0, +) + childObjects.map(objectEnergy(_:)).reduce(0, +)
+    }
+    private func objectEnergy(_ object: ObjectNode) -> Double {
+        1/2 * object.mass * pow(object.velocity.magnitude, 2) - G * (object.hostNode?.mass ?? 1) * object.mass / object.position.magnitude
     }
 }

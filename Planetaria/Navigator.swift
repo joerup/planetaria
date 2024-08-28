@@ -155,35 +155,39 @@ struct Navigator<Content: View, Menu: View, Detail: View>: View {
         .preferredColorScheme(.dark)
         
         #elseif os(visionOS)
-        menu()
-            .id(menuID)
-            .opacity(showDetail ? 0 : 1)
-            .safeAreaPadding()
-            .animation(.default, value: menuID)
-            .overlay {
+        HStack(spacing: 30) {
+            menu()
+                .safeAreaPadding(.top, 20)
+                .safeAreaPadding(.horizontal, 10)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .glassBackgroundEffect()
+            Group {
                 if showDetail {
                     detail()
-                        .id(detailID)
-                        .overlay(alignment: .topTrailing) { closeButton.padding(10) }
-                        .safeAreaPadding()
-                        .glassBackgroundEffect()
-                        .animation(.default, value: detailID)
+                } else {
+                    Text("Select an object")
+                        .foregroundStyle(.secondary)
                 }
             }
-            .animation(.default, value: showDetail)
-            .ornament(visibility: showDetail ? .visible : .hidden, attachmentAnchor: .scene(.bottom)) {
-                Toolbar()
-                    .padding()
-                    .glassBackgroundEffect()
+            .safeAreaPadding(.top, 20)
+            .safeAreaPadding(.horizontal, 10)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .glassBackgroundEffect()
+        }
+        .padding(30)
+        .ornament(visibility: showDetail ? .visible : .hidden, attachmentAnchor: .scene(.bottom)) {
+            Toolbar()
+                .padding()
+                .glassBackgroundEffect()
+        }
+        .sheet(isPresented: $showSettings) {
+            Settings()
+        }
+        .onChange(of: scenePhase) { _, _ in
+            Task {
+                await dismissImmersiveSpace()
             }
-            .sheet(isPresented: $showSettings) {
-                Settings()
-            }
-            .onChange(of: scenePhase) { _, _ in
-                Task {
-                    await dismissImmersiveSpace()
-                }
-            }
+        }
         
         #endif
     }

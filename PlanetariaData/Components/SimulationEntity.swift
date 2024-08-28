@@ -5,8 +5,8 @@
 //  Created by Joe Rupertus on 1/5/24.
 //
 
+import Foundation
 import RealityKit
-import SwiftUI
 
 class SimulationEntity: Entity {
     
@@ -89,99 +89,3 @@ class SimulationEntity: Entity {
         }
     }
 }
-
-class SimulationRootEntity: Entity {
-    
-    var simulation: Simulation?
-    var target = TargetSelector()
-    
-    #if os(iOS) || os(macOS)
-    var arView: ARView?
-    #elseif os(visionOS)
-    private let arKitSession = ARKitSession()
-    private let worldTrackingProvider = WorldTrackingProvider()
-    #endif
-    
-    required init() {
-        super.init()
-        self.name = "root"
-        
-        #if os(visionOS)
-        Task {
-            do {
-                try await arKitSession.run([worldTrackingProvider])
-            } catch {
-                print(error)
-            }
-        }
-        #endif
-    }
-    
-    #if os(iOS) || os(macOS)
-    var cameraPosition: SIMD3<Float> {
-        arView?.cameraTransform.translation ?? .zero
-    }
-    #elseif os(visionOS)
-    var cameraPosition: SIMD3<Float> {
-        guard let pose = worldTrackingProvider.queryDeviceAnchor(atTimestamp: CACurrentMediaTime()) else { return }
-        let cameraTransform = Transform(matrix: pose.originFromAnchorTransform)
-        return cameraTransform.translation
-    }
-    #endif
-    
-    private static let query = EntityQuery(where: .has(SimulationComponent.self))
-    
-    func transition(oldScale: CGFloat, newScale: CGFloat, offset: Vector, duration: Double = 0) {
-        guard let simulation else { return }
-        
-        // Transition models
-        scene?.performQuery(Self.query).forEach { entity in
-            guard let configuration = entity.component(SimulationComponent.self) else { return }
-            
-            let position = configuration.position(scale: newScale, offset: offset)
-            let transform = Transform(scale: entity.scale, rotation: entity.orientation, translation: position)
-            entity.move(to: transform, relativeTo: entity.parent, duration: duration, timingFunction: .easeInOut)
-            
-            let isEnabled = simulation.selectedSystem == configuration.node.parent || simulation.selectedSystem?.parent == configuration.node.parent
-            let isSelected = simulation.isSelected(configuration.node)
-            let pointVisible = simulation.pointVisible(configuration.node)
-            let trailVisibile = simulation.trailVisible(configuration.node)
-            let labelVisible = simulation.labelVisible(configuration.node)
-            
-            // Update the selection
-            if isSelected, !configuration.isSelected {
-                configuration.entity.select(scale: oldScale, thickness: simulation.entityThickness, cameraPosition: cameraPosition)
-            }
-            else if !isSelected, configuration.isSelected {
-                configuration.entity.deselect()
-            }
-            
-            // Update the components
-            if let point = entity.component(PointComponent.self) {
-                point.update(isEnabled: isEnabled, isVisible: pointVisible, thickness: simulation.entityThickness, cameraPosition: cameraPosition, duration: duration)
-            }
-            if let body = entity.component(BodyComponent.self) {
-                body.update(scale: newScale, duration: duration)
-            }
-            if let orbit = entity.component(OrbitComponent.self) {
-                orbit.update(isEnabled: isEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: simulation.noSelection, scale: newScale, thickness: simulation.entityThickness, cameraPosition: cameraPosition, duration: duration)
-            }
-            if let label = entity.component(LabelComponent.self) {
-                label.update(isEnabled: isEnabled, isVisible: labelVisible, thickness: simulation.entityThickness, cameraPosition: cameraPosition, duration: duration)
-            }
-            
-            if isSelected {
-                setTarget(entity)
-            }
-        }
-    }
-    
-    func setTarget(_ entity: Entity) {
-        if entity != target.parent {
-            target.removeFromParent()
-            entity.addChild(target)
-        }
-    }
-}
-
-

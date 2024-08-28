@@ -11,7 +11,8 @@ import SwiftUI
 #if canImport(UIKit)
 import UIKit
 typealias FontType = UIFont
-#else
+#elseif canImport(AppKit)
+import AppKit
 typealias FontType = NSFont
 #endif
 
@@ -28,11 +29,17 @@ class LabelComponent: Component {
         self.model = Entity()
         model.addChild(labelEntity)
         
-        let sampleLabel = UILabel()
-        sampleLabel.text = text
+        #if os(macOS)
+        let sampleLabel = NSTextField(string: text)
         sampleLabel.font = font
+        sampleLabel.alignment = .center
+        #elseif os(iOS) || os(visionOS)
+        let sampleLabel = UILabel()
         sampleLabel.textAlignment = .center
+        sampleLabel.text = text
         sampleLabel.numberOfLines = 1
+        sampleLabel.font = font
+        #endif
         let width = sampleLabel.intrinsicContentSize.width
         
         labelEntity.position = [-Float(width)/2, -1.7, 0.1]

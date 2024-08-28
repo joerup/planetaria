@@ -33,13 +33,13 @@ public struct Simulator: View {
                 }
             }
             .onAppear {
-                simulation.setBounds(geometry.size)
+                simulation.rootEntity.setSizes(geometry.size)
             }
             .onChange(of: geometry.size) { size in
-                simulation.setBounds(size)
+                simulation.rootEntity.setSizes(size)
             }
             .onChange(of: simulation.arMode) { mode in
-                simulation.setBounds(geometry.size)
+                simulation.rootEntity.setSizes(geometry.size)
                 simulation.resetPitch()
             }
             .onChange(of: scenePhase) { _ in

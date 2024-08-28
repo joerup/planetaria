@@ -13,10 +13,13 @@ final public class Simulation: ObservableObject {
     
     // MARK: - Setup
     
-    @Published public private(set) var status: Status = .uninitialized
-    @Published public private(set) var isLoaded: Bool = false
+    @Published public private(set) var status: Status
+    @Published public private(set) var isLoaded: Bool
     
     public init(from fileName: String) {
+        status = .uninitialized
+        isLoaded = false
+        
         Task {
             // Decode the tree from the file
             await MainActor.run {
@@ -47,10 +50,10 @@ final public class Simulation: ObservableObject {
             await loadEphemerides()
             print("Finished loading ephemerides")
             
-            // Set the scaling size
+            // Set the initial positioning parameters
             await MainActor.run {
                 let distance = root.children.filter({ $0.rank == .primary }).map(\.position.magnitude).max() ?? 1
-                self.size = 2.5 * distance
+                size = 2.5 * distance
             }
             
             // Generate the scene
@@ -138,12 +141,12 @@ final public class Simulation: ObservableObject {
         showLabels && !(system == node)
     }
     public func trailVisible(_ node: Node) -> Bool {
-        !inMajorTransition && showOrbits && !((node == focus || node.object == focus || node == focus?.parent) && (scale * 10 * node.size > size || scale * 10 * (node.system?.primaryScaleDistance ?? 0) > size))
+        /*!inMajorTransition && */showOrbits && !((node == focus || node.object == focus || node == focus?.parent) && (scale * 10 * node.size > size || scale * 10 * (node.system?.primaryScaleDistance ?? 0) > size))
     }
     public func labelVisible(_ node: Node) -> Bool {
         showLabels && (node.parent == system || node.parent == system?.parent) &&
         (isSelected(node) || node.rank >= .secondary) &&
-        (node.system == system || 2 * scale * node.position.magnitude > 100 * pixelSize) &&
+        (node.system == system || 2 * scale * node.position.magnitude > 100 * rootEntity.pixelSize) &&
         (scale * node.size * 75 < size || (node != focus && node.system != focus)) &&
         node != system
     }
@@ -183,23 +186,6 @@ final public class Simulation: ObservableObject {
     // Orientation
     internal var orientation: simd_quatf {
         simd_quatf(angle: Float(pitch.radians), axis: [1,0,0]) * simd_quatf(angle: Float(-rotation.radians), axis: [0,1,0])
-    }
-    
-    // Thickness
-    private let entityThicknessM: Float = 0.002
-    private let entityThicknessPx: CGFloat = 4.0
-    @Published private(set) var entityThickness: Float = 0.005
-    @Published private(set) var screenThickness: CGFloat = 0.005
-    private var pixelSize: CGFloat = 100
-    internal func setBounds(_ size: CGSize) {
-        pixelSize = self.size / min(size.width, size.height)
-        if arMode {
-            self.entityThickness = entityThicknessM
-            self.screenThickness = CGFloat(entityThicknessM) * 4 * size.height
-        } else {
-            self.entityThickness = Float(entityThicknessPx) / Float(2 * min(size.width, size.height))
-            self.screenThickness = entityThicknessPx
-        }
     }
     
     
@@ -468,7 +454,7 @@ final public class Simulation: ObservableObject {
     }
 
     
-    // MARK: - Navigation Methods`
+    // MARK: - Navigation Methods
     
     // Change the focus node
     private func setFocus(_ node: Node?) {
@@ -525,9 +511,7 @@ final public class Simulation: ObservableObject {
     }
     
     
-    // MARK: Navigation Logic
-    
-    private let animationTime: Double = 0.5
+    // MARK: - Navigation Logic
     
     // Transition animation
     // Move to a new offset, scale, and focus node
@@ -539,12 +523,12 @@ final public class Simulation: ObservableObject {
         
         // Transition conditions
         self.inTransition = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + animationTime) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + rootEntity.animationTime) {
             self.inTransition = false
         }
         if abs(log10(steadyScale/scale)) > 3 || system != self.system || (focus != self.focus && focus.system != self.focus && self.focus?.system != focus && abs(log10(steadyScale/scale)) > 1) {
             self.inMajorTransition = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + animationTime) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + rootEntity.animationTime) {
                 self.inMajorTransition = false
             }
         }
@@ -554,14 +538,13 @@ final public class Simulation: ObservableObject {
         if let system {
             setSystem(system)
         }
-        let oldScale = steadyScale
-        
-        // Set the scale and offset
-        self.offsetAmount = 1.0
-        self.steadyScale = scale
         
         // Transition the entities
-        rootEntity.transition(oldScale: oldScale, newScale: scale, offset: offset, duration: animationTime)
+        rootEntity.transition(scale: scale, offset: offset)
+        
+        // Update the saved offset and scale
+        self.offsetAmount = 1.0
+        self.steadyScale = scale
     }
     
     // Navigation changes when gestures occur

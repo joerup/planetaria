@@ -27,22 +27,23 @@ class SimulationSystem: System {
             return
         }
         guard !simulation.inTransition else { return }
+        let (scale, orientation, offset) = root.adjustParameters(scale: simulation.scale, orientation: simulation.orientation, offset: simulation.offset, size: simulation.size)
         
         // Update root
-        root.orientation = simulation.orientation
-        root.target.update(isEnabled: simulation.hasSelection, thickness: simulation.entityThickness, cameraPosition: root.cameraPosition)
+        root.orientation = orientation
+        root.target.update(isEnabled: simulation.hasSelection, thickness: root.entityThickness, cameraPosition: root.cameraPosition)
         
         // Update models
         entities.forEach { entity in
             guard let configuration = entity.component(SimulationComponent.self) else { return }
-            entity.position = configuration.position(scale: simulation.scale, offset: simulation.offset)
+            entity.position = configuration.position(scale: scale, offset: offset)
             
             // Update the selection
             
             let isSelected = simulation.isSelected(configuration.node)
             
             if isSelected, !configuration.isSelected {
-                configuration.entity.select(scale: simulation.scale, thickness: simulation.entityThickness, cameraPosition: root.cameraPosition)
+                configuration.entity.select(scale: scale, thickness: root.entityThickness, cameraPosition: root.cameraPosition)
             }
             else if !isSelected, configuration.isSelected {
                 configuration.entity.deselect()
@@ -54,7 +55,7 @@ class SimulationSystem: System {
             let pointVisible = simulation.pointVisible(configuration.node)
             
             if let point = entity.component(PointComponent.self) {
-                point.update(isEnabled: isEnabled, isVisible: pointVisible, thickness: simulation.entityThickness, cameraPosition: root.cameraPosition)
+                point.update(isEnabled: isEnabled, isVisible: pointVisible, thickness: root.entityThickness, cameraPosition: root.cameraPosition)
             }
             if isSelected, configuration.node.category != .system {
                 root.setTarget(entity)
@@ -68,13 +69,13 @@ class SimulationSystem: System {
             let labelVisible = simulation.labelVisible(configuration.node)
             
             if let body = entity.component(BodyComponent.self) {
-                body.update(scale: simulation.scale)
+                body.update(scale: scale)
             }
             if let label = entity.component(LabelComponent.self) {
-                label.update(isEnabled: isEnabled, isVisible: labelVisible, thickness: simulation.entityThickness, cameraPosition: root.cameraPosition)
+                label.update(isEnabled: isEnabled, isVisible: labelVisible, thickness: root.entityThickness, cameraPosition: root.cameraPosition)
             }
             if let orbit = entity.component(OrbitComponent.self) {
-                orbit.update(isEnabled: isEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: simulation.noSelection, scale: simulation.scale, thickness: simulation.entityThickness, cameraPosition: root.cameraPosition)
+                orbit.update(isEnabled: isEnabled, isVisible: trailVisibile, isSelected: isSelected, noSelection: simulation.noSelection, scale: scale, thickness: root.entityThickness, cameraPosition: root.cameraPosition)
             }
             
         }

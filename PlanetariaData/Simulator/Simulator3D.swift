@@ -24,13 +24,13 @@ public struct Simulator: View {
             RealityView { content in
                 content.add(simulation.rootEntity)
             }
-            .rotation3DEffect(Rotation3D(angle: .radians(-simulation.rotation.radians), axis: .y))
-            .gesture(tapGesture)
-            .simultaneousGesture(panGesture)
-            .simultaneousGesture(zoomGesture)
+//            .rotation3DEffect(Rotation3D(angle: .radians(-simulation.rotation.radians), axis: .y))
+//            .gesture(tapGesture)
+//            .simultaneousGesture(panGesture)
+//            .simultaneousGesture(zoomGesture)
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
             .onAppear {
-                simulation.setBounds(.init(width: geometry.size.width, height: geometry.size.height))
+                simulation.rootEntity.setSizes(.init(width: 2 * geometry.size.width, height: 2 * geometry.size.height))
             }
             .onChange(of: scenePhase) { _, _ in
                 Entity.registerAll()

@@ -15,14 +15,14 @@ class TargetSelector: Entity {
     required init() {
         super.init()
         
-        for i in 0..<numberOfSides {
-            let angle = Double(i)/Double(numberOfSides) * 2 * .pi
-            let segment = MeshResource.generateBox(width: 1, height: 0.1, depth: 0.1)
-            let model = ModelEntity(mesh: segment, materials: [UnlitMaterial(color: .white)])
-            self.addChild(model)
-            model.position = simd_quatf(angle: Float(angle), axis: [0,0,1]).act([1,0,0])
-            model.orientation = simd_quatf(angle: Float(angle + .pi/2), axis: [0,0,1])
-        }
+//        for i in 0..<numberOfSides {
+//            let angle = Double(i)/Double(numberOfSides) * 2 * .pi
+//            let segment = MeshResource.generateBox(width: 1, height: 0.1, depth: 0.1)
+//            let model = ModelEntity(mesh: segment, materials: [UnlitMaterial(color: .white)])
+//            self.addChild(model)
+//            model.position = simd_quatf(angle: Float(angle), axis: [0,0,1]).act([1,0,0])
+//            model.orientation = simd_quatf(angle: Float(angle + .pi/2), axis: [0,0,1])
+//        }
         
         components.set(BillboardComponent())
         #if os(visionOS)

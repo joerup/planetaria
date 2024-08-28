@@ -22,6 +22,7 @@ class SimulationComponent: Component {
         self.size = size
     }
     
+    // Get the position for this object, taking into account the current scale and offset
     func position(scale: Double, offset: Vector) -> SIMD3<Float> {
         let position = scale * (node.globalPosition - offset) / size
         return position.simdf
