@@ -712,23 +712,5 @@
         "name": "Ceres4",
         "source": "https://images.nasa.gov/details/PIA22485",
         "desc": "Ceres from NASA's Dawn spacecraft"
-    },
-    {
-        "id": 136199,
-        "name": "Eris1",
-        "source": "https://photojournal.jpl.nasa.gov/target/Eris",
-        "desc": "Artist concept of Eris"
-    },
-    {
-        "id": 136108,
-        "name": "Haumea1",
-        "source": "https://science.nasa.gov/dwarf-planets/haumea/",
-        "desc": "Artist concept of Haumea"
-    },
-    {
-        "id": 136472,
-        "name": "Makemake1",
-        "source": "https://science.nasa.gov/missions/hubble/hubble-discovers-moon-orbiting-the-dwarf-planet-makemake/",
-        "desc": "Artist concept of Makemake"
-    },
+    }
 ]

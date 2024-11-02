@@ -13,20 +13,14 @@ public class Node: Decodable {
     public var id: Int
     public var name: String
     
-    public var parent: SystemNode?
+    weak public var parent: SystemNode?
     
     public var category: Category
     public var rank: Rank
     public var color: Color?
     
-    public var position: Vector
-    public var velocity: Vector
-    
-    public var elapsedTime: Double = 0
-    public var period: Double = 1.0
-    public var timeStep: Double = 1.0
-    private static let precision: Double = 0.001
-    // frequency of timesteps relative to orbital period
+    public var position: Vector3
+    public var velocity: Vector3
     
     public var mass: Double
     public var size: Double
@@ -34,6 +28,10 @@ public class Node: Decodable {
     public var totalSize: Double {
         return size
     }
+    
+    internal var elapsedTime: Double = 0
+    private(set) var timeStep: Double = 1.0
+    static let timeStepFraction: Double = 0.0025
     
     public var orbit: Orbit?
     public var rotation: Rotation?
@@ -48,33 +46,51 @@ public class Node: Decodable {
     public var siblings: [Node] {
         return parent?.children ?? []
     }
-    public var hostNode: Node? {
+    public var hostNode: ObjectNode? {
         guard let object = parent?.object else { return nil }
         return object != self ? object : nil
     }
     
-    public var globalPosition: Vector {
+    public var globalPosition: Vector3 {
         return parentLine.map(\.position).reduce(.zero, +) + self.position
     }
-    public var barycenterPosition: Vector {
+    public var barycenterPosition: Vector3 {
         guard let hostNode else { return .zero }
         return (hostNode.mass * hostNode.position + self.mass * self.position) / (hostNode.mass + self.mass)
     }
-    public var barycenterVelocity: Vector {
+    public var barycenterVelocity: Vector3 {
         guard let hostNode else { return .zero }
         return (hostNode.mass * hostNode.velocity + self.mass * self.velocity) / (hostNode.mass + self.mass)
     }
     
-    internal func set(state: StateVector) {
+    internal func set(state: StateVector, time: Date) {
         self.position = state.position
         self.velocity = state.velocity
         self.orbit = Orbit(position: state.position, velocity: state.velocity, mass: mass, size: size, hostNode: hostNode)
         if let orbit {
-            self.period = orbit.period
-            self.timeStep = orbit.period * Self.precision
+            self.timeStep = orbit.period * Self.timeStepFraction
             if hostNode?.timeStep == 1.0 && timeStep != 1.0 {
                 hostNode?.timeStep = timeStep
             }
+        }
+        self.rotation?.set(time: time)
+    }
+    
+    public var subtitle: String {
+        if category == .planet, parent?.parent?.name == "Solar" {
+            return "The \((id/100).ordinalString) Planet from the Sun"
+        }
+        else if category == .planet, parent?.name == "Solar" {
+            return "The \(id.ordinalString) Planet from the Sun"
+        }
+        else if category == .moon, let host = hostNode {
+            return "Moon of \(host.name)"
+        }
+        else if rank == .primary || rank == .secondary, category == .tno || category == .asteroid {
+            return "Dwarf Planet"
+        }
+        else {
+            return "\(category.text)"
         }
     }
     
@@ -97,8 +113,8 @@ public class Node: Decodable {
         self.mass = (try? container.decode(Double.self, forKey: .mass)) ?? 0
         self.size = (try? container.decode(Double.self, forKey: .size)) ?? 0
         
-        self.position = (try? container.decode(Vector.self, forKey: .position)) ?? .zero
-        self.velocity = (try? container.decode(Vector.self, forKey: .velocity)) ?? .zero
+        self.position = (try? container.decode(Vector3.self, forKey: .position)) ?? .zero
+        self.velocity = (try? container.decode(Vector3.self, forKey: .velocity)) ?? .zero
     }
 }
 
@@ -108,6 +124,12 @@ extension Node: Identifiable, Equatable, Hashable {
     }
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+    }
+}
+
+extension Node {
+    public func globalPositionAtFraction(_ fraction: Double) -> Vector3 {
+        parentLine.map(\.position).reduce(.zero, +) + self.position * fraction
     }
 }
 

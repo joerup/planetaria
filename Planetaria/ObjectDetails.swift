@@ -17,29 +17,18 @@ struct ObjectDetails: View {
     var object: ObjectNode
     
     var body: some View {
-        NavigationSheet {
-            header
-        } content: {
-            properties
+        ScrollSheet(title: object.name) {
+            page
         }
         .tint(object.color)
     }
     
-    private var header: some View {
-        VStack(alignment: .leading) {
-            Text(object.name)
-                .font(.system(.title, design: .default, weight: .semibold))
-            Text(subtitle)
-                .font(.system(.headline, design: .default, weight: .medium))
-                .foregroundStyle(.secondary)
-//            Text("\(object.elapsedTime)")
-//            Text("\(object.timeStep)")
-        }
-        .padding()
-    }
-    
     @ViewBuilder
-    private var properties: some View {
+    private var page: some View {
+        Text(object.subtitle)
+            .font(.system(.headline, design: .default, weight: .medium))
+            .foregroundStyle(.secondary)
+            .padding(.bottom)
         if let properties = object.properties {
             #if os(iOS) || os(macOS)
             VStack(alignment: .leading, spacing: 15) {
@@ -56,7 +45,6 @@ struct ObjectDetails: View {
                     structuralProperties(properties: properties)
                     Divider()
                 }
-                orbiterRow(properties: properties)
                 Footnote()
             }
             .padding(.bottom)
@@ -76,7 +64,6 @@ struct ObjectDetails: View {
                     }
                 }
                 Divider()
-                orbiterRow(properties: properties)
                 Footnote()
             }
             .padding(.bottom)
@@ -103,7 +90,7 @@ struct ObjectDetails: View {
     @ViewBuilder 
     private func description(properties: ObjectNode.Properties) -> some View {
         if object.rank == .primary || object.rank == .secondary {
-            Text(NSLocalizedString(object.name, tableName: "\(simulation.title)-descriptions", comment: ""))
+            Text(NSLocalizedString(object.name, tableName: "\(simulation.fileName)-descriptions", comment: ""))
                 .fixedSize(horizontal: false, vertical: true)
         }
         if let discoverer = properties.discoverer, let discovered = properties.discovered {
@@ -187,24 +174,6 @@ struct ObjectDetails: View {
                 }
                 .tint(nil)
             }
-        }
-    }
-    
-    private var subtitle: String {
-        if object.category == .planet, object.parent?.parent?.name == "Solar" {
-            return "The \((object.id/100).ordinalString) Planet from the Sun"
-        }
-        else if object.category == .planet, object.parent?.name == "Solar" {
-            return "The \(object.id.ordinalString) Planet from the Sun"
-        }
-        else if object.category == .moon, let host = object.hostNode {
-            return "Moon of \(host.name)"
-        }
-        else if object.rank == .primary || object.rank == .secondary, object.category == .tno || object.category == .asteroid {
-            return "Dwarf Planet"
-        }
-        else {
-            return "\(object.category.text)"
         }
     }
     

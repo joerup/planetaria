@@ -10,23 +10,36 @@ import SwiftUI
 
 public class SystemNode: Node {
     
-    public var childSystems: [SystemNode]
-    public var childObjects: [ObjectNode]
-    public var children: [Node]
+    public let childSystems: [SystemNode]
+    public let childObjects: [ObjectNode]
+    public let children: [Node]
     
     public var tree: [Node] {
-        return [self] + subtree
+        [self] + subtree
     }
     private var subtree: [Node] {
-        return children + childSystems.map(\.subtree).reduce([], +)
+        children + childSystems.map(\.subtree).reduce([], +)
     }
     
     override public var system: SystemNode? {
-        return self
+        self
     }
     override public var object: ObjectNode? {
-        return childObjects.first
+        childObjects.first
     }
+    
+    public private(set) var primaryCategory: Node.Category?
+    public private(set) var secondaryCategory: Node.Category?
+    
+    public func children(type: Category?) -> [ObjectNode] {
+        guard let type else { return [] }
+        return children.compactMap(\.object).filter { $0.category == type }
+    }
+    public func children(types: [Category]) -> [ObjectNode] {
+        return children.compactMap(\.object).filter { types.contains($0.category) }
+    }
+    
+    private(set) var systemTimeStep: Double = 1.0
     
     override public var color: Color? {
         get { return object?.color } set { }
@@ -54,6 +67,9 @@ public class SystemNode: Node {
         
         try super.init(from: decoder)
         
+        self.primaryCategory = childObjects.first?.category
+        self.secondaryCategory = childObjects.map(\.category).first(where: { $0 != primaryCategory })
+        
         self.mass = children.map(\.mass).reduce(0, +)
         self.size = 0
         
@@ -62,9 +78,16 @@ public class SystemNode: Node {
         }
     }
     
-    override internal func set(state: StateVector) {
-        super.set(state: state)
+    override internal func set(state: StateVector, time: Date) {
+        super.set(state: state, time: time)
         object?.properties?.orbit = orbit
+    }
+    
+    internal func setStep() {
+        systemTimeStep = 0.5 * (children.filter({ $0 != object }).map(\.timeStep).min() ?? 1.0)
+        for system in childSystems {
+            system.setStep()
+        }
     }
     
     public var totalEnergy: Double {

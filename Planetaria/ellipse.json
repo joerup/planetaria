@@ -1,0 +1,53 @@
+{
+    "name": "Solar",
+    "id": 0,
+    "category": "system",
+    "rank": "primary",
+    "objects": [
+        {
+            "name": "Sun",
+            "id": 10,
+            "category": "star",
+            "rank": "primary",
+            "color": "#ffd104",
+            "mass": 1.9885E+30,
+            "size": 695700,
+            "density": 1.408,
+            "rotationRef": 84.176,
+            "rotationRate": 14.1844,
+            "poleRA": 286.13,
+            "poleDec": 63.87,
+            "axialTilt": 7.25,
+            "gravity": 274,
+            "escapeVelocity": 617.6,
+            "temperature": 5500,
+            "luminosity": 3.83E+26
+        },
+        {
+            "name": "Eris",
+            "id": 136199,
+            "category": "tno",
+            "rank": "primary",
+            "color": "#7faed4",
+            "discovered": 2005,
+            "discoverer": "Michael E. Brown, Chad Trujillo, and David Rabinowitz",
+            "namesake": "the Greek goddess of chaos",
+            "mass": 1.66E+22,
+            "size": 1200,
+            "density": 2.43,
+            "semimajorAxis": 10152004370,
+            "eccentricity": 0.4361,
+            "inclination": 44.04,
+            "longitudeOfPeriapsis": 151,
+            "longitudeOfAscendingNode": 36.1,
+            "meanAnomaly": 208.8,
+            "orbitalPeriod": 204199,
+            "rotationRate": 22.805,
+            "axialTilt": 78,
+            "gravity": 0.8,
+            "escapeVelocity": 1.4,
+            "temperature": -230,
+            "moons": 1
+        }
+    ]
+}

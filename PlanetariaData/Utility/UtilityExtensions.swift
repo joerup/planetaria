@@ -21,10 +21,10 @@ public extension Double {
         numberFormatter.maximumFractionDigits = 3
         numberFormatter.maximumSignificantDigits = unit is TimeU || unit is AngleU ? 3 : 2
         
-        let quadrillion = 1E+15
-        let trillion = 1E+12
-        let billion = 1E+9
-        let million = 1E+6
+        let quadrillion: Double = 1E+15
+        let trillion: Double = 1E+12
+        let billion: Double = 1E+9
+        let million: Double = 1E+6
         
         if self >= quadrillion {
             return scientificString
@@ -127,7 +127,6 @@ extension CGAffineTransform {
     }
 }
 
-
 // MARK: - Miscellaneous
 
 #if os(iOS)
@@ -190,6 +189,14 @@ public extension Date {
     }
 }
 
+#if os(macOS)
+typealias ColorType = NSColor
+typealias FontType = NSFont
+#else
+typealias ColorType = UIColor
+typealias FontType = UIFont
+#endif
+
 public extension Color {
     
     init(hex: String) {
@@ -206,6 +213,48 @@ public extension Color {
         
         self.init(red: red, green: green, blue: blue)
     }
+    
+    var hex: UInt32 {
+        // Convert SwiftUI Color to UIColor
+        let uiColor = ColorType(self)
+
+        // Extract RGBA components
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+
+        #if os(macOS)
+        uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        #else
+        guard uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
+            return 0
+        }
+        #endif
+
+        // Convert components (0.0 - 1.0) to 0 - 255 range
+        let a = UInt32(alpha * 255) << 24
+        let r = UInt32(red * 255) << 16
+        let g = UInt32(green * 255) << 8
+        let b = UInt32(blue * 255) << 0
+
+        // Combine into a single UInt32 value in RRGGBBAA format
+        return a | r | g | b
+    }
+    
+    func lighter(amount: CGFloat = 0.3) -> Color {
+        let uiColor = ColorType(self)
+        let r = uiColor.cgColor.components?[0] ?? 0
+        let g = uiColor.cgColor.components?[1] ?? 0
+        let b = uiColor.cgColor.components?[2] ?? 0
+        
+        // Blend with white
+        let newR = r + (1 - r) * amount
+        let newG = g + (1 - g) * amount
+        let newB = b + (1 - b) * amount
+        
+        return Color(red: newR, green: newG, blue: newB)
+    }
 }
 
 #if os(visionOS)
@@ -215,3 +264,37 @@ public extension Size3D {
     }
 }
 #endif
+
+public extension simd_quatf {
+    static var identity: simd_quatf {
+        return simd_quatf(ix: 0, iy: 0, iz: 0, r: 1)
+    }
+}
+
+public extension SIMD3<Double> {
+    /// Converts Cartesian coordinates to Spherical coordinates.
+    /// - Returns: A tuple (r, θ, φ) where:
+    ///   - `r`: Radius (distance from the origin)
+    ///   - `θ`: Azimuth angle in radians (angle from the positive x-axis in the xy-plane)
+    ///   - `φ`: Elevation angle in radians (angle from the xy-plane)
+    func toSphericalCoordinates() -> (radius: Double, azimuth: Double, elevation: Double) {
+        let x = self.x
+        let y = self.y
+        let z = self.z
+
+        // Radius: r = sqrt(x^2 + y^2 + z^2)
+        let radius = sqrt(x * x + y * y + z * z)
+
+        // Azimuth: θ = atan2(x, z)
+        let azimuth = atan2(x, z)
+
+        // Elevation: φ = atan2(y, sqrt(x^2 + z^2))
+        let elevation = sqrt(x * x + z * z) != 0 ? atan2(y, sqrt(x * x + z * z)) : 0
+
+        return (radius, azimuth, elevation)
+    }
+}
+
+enum GeneralError: Error {
+    case somethingWentWrong
+}

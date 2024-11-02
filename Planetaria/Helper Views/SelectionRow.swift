@@ -37,6 +37,7 @@ struct SelectionRow: View {
                     .offset(y: 1)
             }
             Text(name)
+                .lineLimit(0)
                 .font(.system(.title2, weight: .semibold))
                 .foregroundStyle(.primary)
             Spacer()
@@ -46,10 +47,12 @@ struct SelectionRow: View {
                 .foregroundColor(.init(white: 0.6))
                 .padding(.trailing, 5)
         }
-        .padding()
         #if !os(visionOS)
+        .padding()
         .background(.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 15))
+        #else
+        .padding(.vertical)
         #endif
         #endif
     }

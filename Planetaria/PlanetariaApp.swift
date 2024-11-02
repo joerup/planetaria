@@ -11,76 +11,55 @@ import PlanetariaData
 @main
 struct PlanetariaApp: App {
     
-    @StateObject private var simulation = Simulation(from: "Planetaria")
+    @StateObject private var simulation = Simulation(from: "Planetaria", url: Self.url)
     
-    @State private var showImmersiveSpace: Bool = false
+    static let url = "https://script.google.com/macros/s/AKfycbwnEMsgrHDoboUKHZljiLycXQ-GOvHdehYHQANEftj41azbkNaeAJiIBwdORo7wUlwX/exec"
+    
+    #if os(visionOS)
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismissWindow) private var dismissWindow
+    #endif
     
     var body: some Scene {
         
         #if os(iOS) || os(macOS) || os(tvOS)
         WindowGroup {
-            Group {
-                if simulation.isLoaded {
-                    Navigator(showDetail: showDetail, menuID: systemID, detailID: objectID, menu: menu, detail: detail) {
-                        Simulator(from: simulation)
-                    }
-                    .environmentObject(simulation)
-                } else {
-                    Launcher()
+            if simulation.isLoaded {
+                Navigator(for: simulation) {
+                    Simulator(for: simulation)
                 }
+            } else {
+                Launcher(for: simulation)
             }
         }
         
         #elseif os(visionOS)
-        WindowGroup {
-            if showImmersiveSpace {
-                Navigator(showDetail: showDetail, menuID: systemID, detailID: objectID, menu: menu, detail: detail, content: {})
-                    .environmentObject(simulation)
-            } else {
-                Launcher(isLoaded: simulation.isLoaded)
-            }
+        WindowGroup(id: "launcher") {
+            Launcher(for: simulation)
         }
-        .defaultSize(width: 0.6, height: 0.5, depth: 0, in: .meters)
+        
+        WindowGroup(id: "controls") {
+            Navigator(for: simulation)
+        }
+        .windowStyle(.automatic)
+        .defaultSize(width: 0.5, height: 0.1, depth: 0, in: .meters)
         
         ImmersiveSpace(id: "simulator") {
-            Simulator(from: simulation)
-                .offset(y: -1000).offset(z: -1500)
-                .onAppear { showImmersiveSpace = true }
-                .onDisappear { showImmersiveSpace = false }
+            Simulator(for: simulation)
+                .onAppear {
+                    openWindow(id: "controls")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        dismissWindow(id: "launcher")
+                    }
+                }
+                .onDisappear {
+                    openWindow(id: "launcher")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        dismissWindow(id: "controls")
+                    }
+                }
         }
         
         #endif
-    }
-    
-    private var showDetail: Binding<Bool> {
-        Binding {
-            simulation.hasSelection
-        } set: { _ in
-            simulation.selectObject(nil)
-        }
-    }
-    
-    private var objectID: Int? {
-        simulation.selectedObject?.id
-    }
-    
-    private var systemID: Int? {
-        simulation.selectedSystem?.id
-    }
-    
-    @ViewBuilder
-    private func menu() -> some View {
-        if let system = simulation.selectedSystem {
-            SystemDetails(system: system)
-                .environmentObject(simulation)
-        }
-    }
-    
-    @ViewBuilder
-    private func detail() -> some View {
-        if let object = simulation.selectedObject {
-            ObjectDetails(object: object)
-                .environmentObject(simulation)
-        }
     }
 }

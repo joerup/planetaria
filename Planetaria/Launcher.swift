@@ -6,22 +6,42 @@
 //
 
 import SwiftUI
-import RealityKit
+import PlanetariaData
 
 struct Launcher: View {
     
-    @Environment(\.scenePhase) var scenePhase
+    @ObservedObject var simulation: Simulation
     
     #if os(visionOS)
     @Environment(\.openImmersiveSpace) var openImmersiveSpace
-    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
-    @Environment(\.openWindow) var openWindow
-    @Environment(\.dismissWindow) var dismissWindow
-    var isLoaded: Bool
     #endif
     
+    init(for simulation: Simulation) {
+        self.simulation = simulation
+    }
+    
     var body: some View {
+        #if os(iOS) || os(macOS)
+        loadingScreen
+            .overlay(alignment: .bottom) {
+                if case .error(let error) = simulation.status {
+                    errorMessage(error: error)
+                } else {
+                    statusText
+                }
+            }
         
+        #elseif os(visionOS)
+        if case .error(let error) = simulation.status {
+            errorMessage(error: error)
+        } else {
+            loadingScreen
+        }
+        
+        #endif
+    }
+    
+    private var loadingScreen: some View {
         #if os(iOS) || os(macOS) || os(tvOS)
         VStack {
             Image("Planetaria Symbol")
@@ -65,16 +85,54 @@ struct Launcher: View {
                         .padding()
                 }
                 .padding()
-                .opacity(isLoaded ? 1 : 0)
+                .opacity(simulation.isLoaded ? 1 : 0)
                 
-                if !isLoaded {
+                if !simulation.isLoaded {
                     ProgressView()
                         .padding()
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background {
+            Image("sky")
+                .resizable()
+                .opacity(0.1)
+                .ignoresSafeArea()
+        }
         
         #endif
     }
     
+    private func errorMessage(error: Simulation.SimulationError) -> some View {
+        VStack {
+            Text(error.text)
+                .font(.headline)
+                .fontWeight(.semibold)
+                .foregroundStyle(.red)
+                .italic()
+                .padding(.bottom)
+            Text("\(error.detailText) [contact support](https://planetaria.app/support).")
+                .multilineTextAlignment(.center)
+                .padding(.bottom)
+            Button("Try Again", systemImage: "arrow.clockwise") {
+                simulation.load()
+            }
+            .padding(5)
+        }
+        .padding()
+        #if os(iOS) || os(macOS)
+        .background(Color(white: 0.15))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .frame(maxWidth: 500)
+        .padding()
+        #endif
+    }
+    
+    private var statusText: some View {
+        Text("\(simulation.status.text)...")
+            .fontWeight(.semibold)
+            .foregroundStyle(.gray)
+            .padding(.bottom, 40)
+    }
 }

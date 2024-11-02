@@ -15,7 +15,7 @@ public struct Simulator: View {
 
     @ObservedObject private var simulation: Simulation
 
-    public init(from simulation: Simulation) {
+    public init(for simulation: Simulation) {
         self.simulation = simulation
     }
     
@@ -24,10 +24,9 @@ public struct Simulator: View {
             RealityView { content in
                 content.add(simulation.rootEntity)
             }
-//            .rotation3DEffect(Rotation3D(angle: .radians(-simulation.rotation.radians), axis: .y))
-//            .gesture(tapGesture)
-//            .simultaneousGesture(panGesture)
-//            .simultaneousGesture(zoomGesture)
+            .gesture(tapGesture)
+            .simultaneousGesture(panGesture)
+            .simultaneousGesture(zoomGesture)
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
             .onAppear {
                 simulation.rootEntity.setSizes(.init(width: 2 * geometry.size.width, height: 2 * geometry.size.height))
@@ -40,31 +39,36 @@ public struct Simulator: View {
     
     private var tapGesture: some Gesture {
         SpatialTapGesture()
-            .targetedToAnyEntity()
+            .targetedToEntity(where: .has(InteractionComponent.self))
             .onEnded { value in
-                if let node = value.entity.parent?.component(SimulationComponent.self)?.node {
+                if let node = value.entity.component(InteractionComponent.self)?.node {
                     simulation.selectObject(node)
                 }
             }
     }
     
+    private let translationAngleFactor: CGFloat = .pi / 400
     private var panGesture: some Gesture {
         DragGesture()
+            .targetedToEntity(where: .has(InteractionComponent.self))
             .onChanged { value in
-                simulation.updateRotationGesture(with: value.translation3D.x)
+                simulation.updateRotationGesture(with: .radians(-value.translation3D.x * translationAngleFactor))
+                simulation.updatePitchGesture(with: .radians(value.translation3D.y * translationAngleFactor))
             }
             .onEnded { value in
-                simulation.completeRotationGesture(with: value.translation3D.x)
+                simulation.completeRotationGesture(with: .radians(-value.translation3D.x * translationAngleFactor))
+                simulation.completePitchGesture(with: .radians(value.translation3D.y * translationAngleFactor))
             }
     }
     
     private var zoomGesture: some Gesture {
         MagnificationGesture()
+            .targetedToEntity(where: .has(InteractionComponent.self))
             .onChanged { value in
-                simulation.updateScaleGesture(to: value)
+                simulation.updateScaleGesture(to: value.gestureValue)
             }
             .onEnded { value in
-                simulation.completeScaleGesture(to: value)
+                simulation.completeScaleGesture(to: value.gestureValue)
             }
     }
 }

@@ -35,8 +35,8 @@ public class Property<ValueType: Equatable, UnitType: Unit>: Equatable {
     }
 
     public var string: String {
-        if let double = value as? Double {
-            return double.string(unit)
+        if let num = value as? Double {
+            return num.string(unit)
         } else if let string = value as? String {
             return string
         } else if let int = value as? Int {
@@ -47,8 +47,8 @@ public class Property<ValueType: Equatable, UnitType: Unit>: Equatable {
         return "Unknown"
     }
     public var scientificString: String {
-        if let double = value as? Double {
-            return double.scientificString
+        if let num = value as? Double {
+            return num.scientificString
         } else if let string = value as? String {
             return string
         } else if let int = value as? Int {

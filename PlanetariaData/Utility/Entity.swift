@@ -23,79 +23,57 @@ extension Entity {
         return component
     }
     
-    static func generateScene() async -> Entity? {
-        #if os(visionOS)
-        guard let resource = try? await TextureResource(named: "sky", in: .module) else { return nil }
-        #else
-        guard let resource = try? TextureResource.load(named: "sky", in: .module) else { return nil }
-        #endif
-        
-        var material = UnlitMaterial()
-        material.color = .init(texture: .init(resource))
-        let entity = ModelEntity(mesh: .generateBox(size: 1E+10), materials: [material])
-        entity.scale *= .init(x: -1, y: 1, z: 1)
-        
-        return entity
+    var globalDirection: SIMD3<Float> {
+        return orientation(relativeTo: nil).inverse.act([0,0,-1])
+    }
+    
+    func globalPosition(_ position: SIMD3<Float>) -> SIMD3<Float> {
+        return orientation(relativeTo: nil).inverse.act(position/self.scale(relativeTo: nil) - self.position(relativeTo: nil))
+    }
+    
+    func distanceScale(position: SIMD3<Float>, cameraPosition: SIMD3<Float>, cameraForward: SIMD3<Float>) -> Float {
+        return abs(dot(position - cameraPosition, cameraForward))
+    }
+    
+    func billboardOrientation(position: SIMD3<Float>, cameraPosition: SIMD3<Float>, toPoint: Bool) -> simd_quatf {
+        guard let parent else { return .identity }
+        if toPoint {
+            let forward = normalize(cameraPosition - position)
+            let right = normalize(cross([0,1,0], forward))
+            let up = cross(forward, right)
+            let rotationMatrix = simd_float3x3(right, up, forward)
+            return simd_quatf(rotationMatrix)
+        } else {
+            let transform = Transform(matrix: parent.transformMatrix(relativeTo: nil))
+            return transform.rotation.inverse
+        }
     }
     
     static func registerAll() {
-        BodyComponent.registerComponent()
-        LabelComponent.registerComponent()
-        OrbitComponent.registerComponent()
-        PointComponent.registerComponent()
-        
         SimulationComponent.registerComponent()
         SimulationSystem.registerSystem()
         
-        BillboardComponent.registerComponent()
-        BillboardSystem.registerSystem()
+        InteractionComponent.registerComponent()
+        BodyComponent.registerComponent()
+        TargetComponent.registerComponent()
+        LabelComponent.registerComponent()
+        
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+            OrbitComponent.registerComponent()
+        } else {
+            OrbitComponentLegacy.registerComponent()
+        }
     }
     
     func lighten() {
-        #if os(visionOS)
-        Task {
-            guard let resource = try? await EnvironmentResource(named: "light") else { return }
-            var iblComponent = ImageBasedLightComponent(source: .single(resource), intensityExponent: 0)
-            iblComponent.inheritsRotation = true
-            components.set(iblComponent)
-            components.set(ImageBasedLightReceiverComponent(imageBasedLight: self))
-        }
-        #endif
-    }
-}
-
-class BillboardComponent: Component, Codable {
-    var isActive: Bool = false
-    
-    public init() { }
-}
-
-class BillboardSystem: System {
-    
-    private static let query = EntityQuery(where: .has(BillboardComponent.self))
-    
-    private var root: SimulationRootEntity?
-    private var simulation: Simulation?
-    
-    required init(scene: RealityKit.Scene) { }
-    
-    func update(context: SceneUpdateContext) {
-        guard let root, let simulation else {
-            if let root = context.scene.findEntity(named: "root") as? SimulationRootEntity {
-                self.root = root
-                self.simulation = root.simulation
-            }
-            return
-        }
-        
-        context.scene.performQuery(Self.query).forEach { entity in
-            guard let billboard = entity.component(BillboardComponent.self), !(simulation.inTransition && billboard.isActive) else { return }
-            billboard.isActive = true
-            
-            let entityPosition = entity.position(relativeTo: nil)
-            let target = entityPosition - (root.cameraPosition - entityPosition)
-            
-            entity.look(at: target, from: entityPosition, relativeTo: nil)
-        }
+//        #if os(visionOS)
+//        Task {
+//            guard let resource = try? await EnvironmentResource(named: "light") else { return }
+//            var iblComponent = ImageBasedLightComponent(source: .single(resource), intensityExponent: 0)
+//            iblComponent.inheritsRotation = true
+//            components.set(iblComponent)
+//            components.set(ImageBasedLightReceiverComponent(imageBasedLight: self))
+//        }
+//        #endif
     }
 }

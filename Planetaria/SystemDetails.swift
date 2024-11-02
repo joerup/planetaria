@@ -10,115 +10,72 @@ import PlanetariaData
 
 struct SystemDetails: View {
     
+    @Environment(\.dismiss) var dismiss
+    
     @EnvironmentObject var simulation: Simulation
     
-    private var system: SystemNode
+    private let system: SystemNode
     
-    private var categories: [String] = []
-    private var predicates: [String : (Node) -> Bool] = [:]
-    
+    private let primaryObjects: [Node]
+    private let secondaryObjects: [Node]
+    private let dwarfPlanets: [Node]
+
     init(system: SystemNode) {
         self.system = system
         
-        if system.children.contains(where: { $0.category == .star }) {
-            categories = ["Main","Planets","Dwarf Planets","Other"]
-            predicates = [
-                "Main" : { $0.category == .star },
-                "Planets" : { $0.category == .planet },
-                "Dwarf Planets" : { ($0.rank == .primary || $0.rank == .secondary) && ($0.category == .tno || $0.category == .asteroid) },
-                "Other" : { $0.category != .star && $0.category != .planet && !(($0.rank == .primary || $0.rank == .secondary) && ($0.category == .tno || $0.category == .asteroid)) }
-            ]
-        } else if system.childObjects.contains(where: { $0.properties?.group != nil }) {
-            let groups: [String] = system.childObjects.compactMap(\.properties?.group).uniqued()
-            categories = ["Main"] + groups
-            predicates = [
-                "Main" : { $0.category != .moon }
-            ]
-            groups.forEach { group in predicates[group] = { $0.object?.properties?.group == group } }
-        } else {
-            categories = ["Main", "Moons"]
-            predicates = [
-                "Main" : { $0.category != .moon },
-                "Moons" : { $0.category == .moon }
-            ]
-        }
+        self.primaryObjects = system.children(type: system.primaryCategory)
+        self.secondaryObjects = system.children(type: system.secondaryCategory).sorted { $0.id < $1.id }
+        self.dwarfPlanets = system.children(types: [.asteroid, .tno]).filter { $0.category != system.primaryCategory }
     }
     
     var body: some View {
-        NavigationSheet {
-            header
-        } content: {
+        ScrollSheet(title: "\(system.name) System") {
             list
         }
-        .tint(system.color)
-    }
-    
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            if let parent = system.parent {
-                Button {
-                    simulation.leaveSystem()
-                } label: {
-                    HStack {
-                        Image(systemName: "chevron.backward")
-                            .imageScale(.large)
-                            .fontWeight(.semibold)
-                            .padding(.leading, -5)
-                        Text("\(parent.name) System")
-                    }
-                    .foregroundStyle(.mint)
-                }
-                .buttonStyle(.plain)
-            }
-            Text("\(system.name) System")
-                .font(.system(.title, design: .default, weight: .semibold))
-        }
-        .padding()
     }
     
     private var list: some View {
         VStack(alignment: .leading) {
-//            Text("\(system.elapsedTime)")
-//            Text("\(system.timeStep)")
-//            Text("\(system.totalEnergy)")
-            ForEach(categories, id: \.self) { category in
-                if let predicate = predicates[category] {
-                    let nodes = system.children.compactMap(\.object).filter({ predicate($0) && $0.rank >= .secondary })
-                    if !nodes.isEmpty {
-                        if category != "Main" {
-                            listSectionHeader(category)
-                        }
-                        ForEach(category == "Planets" ? nodes.sorted(by: { $0.id < $1.id }) : nodes, id: \.self) { object in
-                            Button {
-                                simulation.selectObject(object)
-                            } label: {
-                                SelectionRow(name: object.name, icon: object.name)
-                            }
-                        }
-                    }
+            
+            // Primary Objects (Stars or Planets)
+            ForEach(primaryObjects) { child in
+                Button {
+                    simulation.selectObject(child)
+                    dismiss()
+                } label: {
+                    SelectionRow(name: child.name, icon: child.name)
                 }
+                .disabled(simulation.isSelected(child))
             }
-            if !system.childSystems.isEmpty {
-                listSectionHeader("Moons")
-                ForEach(system.childSystems) { childSystem in
-                    if childSystem.name == "Earth-Moon", let moon = childSystem.children.last {
-                        Button {
-                            simulation.selectObject(moon)
-                        } label: {
-                            SelectionRow(name: moon.name, icon: moon.name)
-                        }
-                    } else {
-                        Button {
-                            simulation.selectSystem(childSystem)
-                        } label: {
-                            SelectionRow(name: "\(childSystem.name) Moons", icon: childSystem.children.dropFirst().first?.name)
-                        }
+            
+            // Secondary Objects (Planets or Moons)
+            listSectionHeader("\(system.secondaryCategory?.text ?? "")s")
+            ForEach(secondaryObjects) { child in
+                Button {
+                    simulation.selectObject(child)
+                    dismiss()
+                } label: {
+                    SelectionRow(name: child.name, icon: child.name)
+                }
+                .disabled(simulation.isSelected(child))
+            }
+            
+            // Dwarf Planets
+            if !dwarfPlanets.isEmpty {
+                listSectionHeader("Dwarf Planets")
+                ForEach(dwarfPlanets) { child in
+                    Button {
+                        simulation.selectObject(child)
+                        dismiss()
+                    } label: {
+                        SelectionRow(name: child.name, icon: child.name)
                     }
+                    .disabled(simulation.isSelected(child))
                 }
             }
         }
         .foregroundStyle(.white)
-        .padding(.bottom)
+        .padding(.vertical)
         .tint(nil)
     }
     

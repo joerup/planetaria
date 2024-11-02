@@ -15,21 +15,24 @@ public struct Simulator: View {
     
     @ObservedObject private var simulation: Simulation
 
-    public init(from simulation: Simulation) {
+    public init(for simulation: Simulation) {
         self.simulation = simulation
     }
     
     public var body: some View {
         GeometryReader { geometry in
             ZStack {
-                if simulation.arMode {
-                    RealityView(root: simulation.rootEntity, size: geometry.size, arMode: true, select: simulation.selectObject(_:))
-                        .simultaneousGesture(halfPanGesture)
-                        .simultaneousGesture(zoomGesture)
-                } else {
+                switch simulation.viewType {
+                case .fixed:
                     RealityView(root: simulation.rootEntity, size: geometry.size, arMode: false, select: simulation.selectObject(_:))
-                        .simultaneousGesture(fullPanGesture)
+                        .simultaneousGesture(panGesture)
                         .simultaneousGesture(zoomGesture)
+                case .augmented:
+                    RealityView(root: simulation.rootEntity, size: geometry.size, arMode: true, select: simulation.selectObject(_:))
+                        .simultaneousGesture(panGesture)
+                        .simultaneousGesture(zoomGesture)
+                case .immersive:
+                    EmptyView()
                 }
             }
             .onAppear {
@@ -38,7 +41,7 @@ public struct Simulator: View {
             .onChange(of: geometry.size) { size in
                 simulation.rootEntity.setSizes(size)
             }
-            .onChange(of: simulation.arMode) { mode in
+            .onChange(of: simulation.viewType) { mode in
                 simulation.rootEntity.setSizes(geometry.size)
                 simulation.resetPitch()
             }
@@ -49,25 +52,16 @@ public struct Simulator: View {
         .ignoresSafeArea()
     }
     
-    private var fullPanGesture: some Gesture {
+    private let translationAngleFactor: CGFloat = .pi / 400
+    private var panGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                simulation.updateRotationGesture(with: value.translation.width)
-                simulation.updatePitchGesture(with: value.translation.height)
+                simulation.updateRotationGesture(with: .radians(-value.translation.width * translationAngleFactor))
+                simulation.updatePitchGesture(with: .radians(value.translation.height * translationAngleFactor))
             }
             .onEnded { value in
-                simulation.completeRotationGesture(with: value.translation.width)
-                simulation.completePitchGesture(with: value.translation.height)
-            }
-    }
-    
-    private var halfPanGesture: some Gesture {
-        DragGesture()
-            .onChanged { value in
-                simulation.updateRotationGesture(with: value.translation.width)
-            }
-            .onEnded { value in
-                simulation.completeRotationGesture(with: value.translation.width)
+                simulation.completeRotationGesture(with: .radians(-value.translation.width * translationAngleFactor))
+                simulation.completePitchGesture(with: .radians(value.translation.height * translationAngleFactor))
             }
     }
     
@@ -99,11 +93,11 @@ private struct RealityView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: mode, automaticallyConfigureSession: true)
-        arView.environment.lighting.resource = try? EnvironmentResource.load(named: "light")
+//        arView.environment.lighting.resource = try? EnvironmentResource.load(named: "light")
         root.arView = arView
         anchor.addChild(root)
         
-        anchor.orientation = arMode ? .init() : simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
+        anchor.orientation = arMode ? .identity : simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
         anchor.position = arMode ? [0,-0.2,-1] : .zero
         anchor.scale = arMode ? .one : SIMD3(repeating: Float(2 * min(1, size.width/size.height)))
         
@@ -112,7 +106,9 @@ private struct RealityView: UIViewRepresentable {
         
         arView.scene.anchors.append(anchor)
         
-        //arView.debugOptions.insert(.showStatistics)
+        if root.debugMode {
+            arView.debugOptions.insert(.showStatistics)
+        }
         
         return arView
     }
@@ -140,10 +136,8 @@ private struct RealityView: UIViewRepresentable {
             
             let tapLocation = recognizer.location(in: view)
             
-            if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
+            if let entity = view.entity(at: tapLocation), let node = entity.component(InteractionComponent.self)?.node {
                 select(node)
-            } else {
-                select(nil)
             }
         }
     }
@@ -197,10 +191,8 @@ private struct RealityView: NSViewRepresentable {
             
             let tapLocation = recognizer.location(in: view)
             
-            if let entity = view.entity(at: tapLocation), let node = entity.parent?.component(SimulationComponent.self)?.node {
+            if let entity = view.entity(at: tapLocation), let node = entity.component(InteractionComponent.self)?.node {
                 select(node)
-            } else {
-                select(nil)
             }
         }
     }

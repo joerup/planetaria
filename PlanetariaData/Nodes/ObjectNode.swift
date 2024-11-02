@@ -13,20 +13,20 @@ public class ObjectNode: Node {
     public var properties: Properties?
     
     override public var system: SystemNode? {
-        return parent?.object == self ? parent : nil
+        parent?.object == self ? parent : nil
     }
     override public var object: ObjectNode? {
-        return self
+        self
     }
 
     public var ringSize: Double
     override public var totalSize: Double {
-        return size + ringSize
+        size + ringSize
     }
     
     public var luminosity: Double
     public var intensity: Double {
-        return luminosity / (4E6 * .pi * size * size)
+        luminosity / (4E6 * .pi * size * size)
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -79,8 +79,8 @@ public class ObjectNode: Node {
         properties?.rotation = rotation
     }
     
-    override internal func set(state: StateVector) {
-        super.set(state: state)
+    override internal func set(state: StateVector, time: Date) {
+        super.set(state: state, time: time)
         properties?.host = hostNode ?? system?.hostNode
         if system == nil, properties?.orbit == nil {
             properties?.orbit = orbit

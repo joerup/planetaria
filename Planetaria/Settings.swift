@@ -87,11 +87,8 @@ struct Settings: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+                    ControlButton(icon: "xmark") {
                         dismiss()
-                    } label: {
-                        Text("Done")
-                            .fontWeight(.semibold)
                     }
                 }
             }

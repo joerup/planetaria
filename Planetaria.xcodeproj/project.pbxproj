@@ -48,27 +48,28 @@
 		014DBF452B64E91300ECF79A /* ObjectIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DBF442B64E91300ECF79A /* ObjectIcon.swift */; };
 		01682DB92B51E3000022797E /* PropertyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B92B51E22E00B3744A /* PropertyText.swift */; };
 		01682DBA2B51E3130022797E /* FormattedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B62B51E22B00B3744A /* FormattedText.swift */; };
-		01682DBB2B51E3140022797E /* XButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B72B51E22B00B3744A /* XButton.swift */; };
 		01682DBC2B51E3160022797E /* Acknowledgements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200B52B51E22B00B3744A /* Acknowledgements.swift */; };
 		01682DBD2B51E31A0022797E /* SelectionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BA2B51E22E00B3744A /* SelectionRow.swift */; };
 		01682DBF2B51E31C0022797E /* SelectionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017200BC2B51E22E00B3744A /* SelectionCard.swift */; };
 		0168673A2548F1BB007D1553 /* PlanetariaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016867392548F1BB007D1553 /* PlanetariaApp.swift */; };
 		0168673E2548F1BD007D1553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0168673D2548F1BD007D1553 /* Assets.xcassets */; };
-		0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169A5A22B3D3E3A00080E6A /* Toolbar.swift */; };
 		016DCD2B2B467C6F0030B614 /* Planetaria-descriptions.strings in Resources */ = {isa = PBXBuildFile; fileRef = 016DCD2A2B467C6F0030B614 /* Planetaria-descriptions.strings */; };
 		017166882B45263000A955D2 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166872B45263000A955D2 /* Launcher.swift */; };
 		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
+		01A1E96D2CCEC542006E0968 /* ellipse.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A1E96C2CCEC542006E0968 /* ellipse.json */; };
+		01ACBD0A2CCB4F1A00775D99 /* ScrollSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */; };
+		01B13FD92CD42CA7009E4569 /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B13FD82CD42C9E009E4569 /* ControlButton.swift */; };
+		01B1642D2CBCF0A900CA663B /* ColorMaterialScene.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01B1642C2CBCF0A900CA663B /* ColorMaterialScene.usdz */; };
 		01B540E02B43929D00D5AF51 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B540DF2B43929D00D5AF51 /* Planetaria.json */; };
 		01B9BB0C2B5CA95800933E60 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9BB0B2B5CA95800933E60 /* PhotoView.swift */; };
 		01B9BB0E2B5CA9BA00933E60 /* Planetaria-photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B9BB0D2B5CA9BA00933E60 /* Planetaria-photos.json */; };
 		01C7BE7B2A8C64F80021D753 /* PlanetariaData in Frameworks */ = {isa = PBXBuildFile; productRef = 01C7BE7A2A8C64F80021D753 /* PlanetariaData */; };
-		01C97A062B5D8C6A00065109 /* NavigationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C97A052B5D8C6A00065109 /* NavigationSheet.swift */; };
 		01D4C7972A8C8EE5000F59B7 /* PlanetariaWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4C7962A8C8EE5000F59B7 /* PlanetariaWatchApp.swift */; };
 		01D4C79B2A8C8EE6000F59B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C79A2A8C8EE6000F59B7 /* Assets.xcassets */; };
 		01D4C79E2A8C8EE6000F59B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C79D2A8C8EE6000F59B7 /* Preview Assets.xcassets */; };
 		01D4C7A32A8C8F6C000F59B7 /* PlanetariaData in Frameworks */ = {isa = PBXBuildFile; productRef = 01D4C7A22A8C8F6C000F59B7 /* PlanetariaData */; };
-		01D5069C2AA5616200699FE9 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D5069B2AA5616200699FE9 /* Header.swift */; };
+		01D62B322CC43153005AD8F7 /* SearchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D62B312CC4314F005AD8F7 /* SearchMenu.swift */; };
 		01E840302A1FB2C000B2153E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8402F2A1FB2C000B2153E /* Settings.swift */; };
 		01FC6B202B67E6FF00380474 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 01FC6B1F2B67E6FF00380474 /* sample.json */; };
 /* End PBXBuildFile section */
@@ -137,27 +138,28 @@
 		016867422548F1BD007D1553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016867472548F1BD007D1553 /* PlanetariaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanetariaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		016867522548F1BD007D1553 /* PlanetariaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanetariaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0169A5A22B3D3E3A00080E6A /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 		016DCD2A2B467C6F0030B614 /* Planetaria-descriptions.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "Planetaria-descriptions.strings"; sourceTree = "<group>"; };
 		017166872B45263000A955D2 /* Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
 		017166892B45B1A600A955D2 /* ObjectDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetails.swift; sourceTree = "<group>"; };
 		0171668B2B45B1AB00A955D2 /* SystemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemDetails.swift; sourceTree = "<group>"; };
 		017200B52B51E22B00B3744A /* Acknowledgements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acknowledgements.swift; sourceTree = "<group>"; };
 		017200B62B51E22B00B3744A /* FormattedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedText.swift; sourceTree = "<group>"; };
-		017200B72B51E22B00B3744A /* XButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XButton.swift; sourceTree = "<group>"; };
 		017200B92B51E22E00B3744A /* PropertyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyText.swift; sourceTree = "<group>"; };
 		017200BA2B51E22E00B3744A /* SelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionRow.swift; sourceTree = "<group>"; };
 		017200BC2B51E22E00B3744A /* SelectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCard.swift; sourceTree = "<group>"; };
+		01A1E96C2CCEC542006E0968 /* ellipse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ellipse.json; sourceTree = "<group>"; };
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
+		01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSheet.swift; sourceTree = "<group>"; };
+		01B13FD82CD42C9E009E4569 /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
+		01B1642C2CBCF0A900CA663B /* ColorMaterialScene.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = ColorMaterialScene.usdz; sourceTree = "<group>"; };
 		01B540DF2B43929D00D5AF51 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
 		01B9BB0B2B5CA95800933E60 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		01B9BB0D2B5CA9BA00933E60 /* Planetaria-photos.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Planetaria-photos.json"; sourceTree = "<group>"; };
-		01C97A052B5D8C6A00065109 /* NavigationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSheet.swift; sourceTree = "<group>"; };
 		01D4C7942A8C8EE5000F59B7 /* PlanetariaWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PlanetariaWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D4C7962A8C8EE5000F59B7 /* PlanetariaWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetariaWatchApp.swift; sourceTree = "<group>"; };
 		01D4C79A2A8C8EE6000F59B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01D4C79D2A8C8EE6000F59B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		01D5069B2AA5616200699FE9 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		01D62B312CC4314F005AD8F7 /* SearchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenu.swift; sourceTree = "<group>"; };
 		01E8402F2A1FB2C000B2153E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		01FC6B1F2B67E6FF00380474 /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,6 +201,7 @@
 		0109A09A2B6754C300FD18CE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01B1642C2CBCF0A900CA663B /* ColorMaterialScene.usdz */,
 				0168673D2548F1BD007D1553 /* Assets.xcassets */,
 				01255DCC2B696471004BC207 /* 3D Models */,
 				01255D532B696078004BC207 /* light.skybox */,
@@ -253,9 +256,13 @@
 			children = (
 				017200BA2B51E22E00B3744A /* SelectionRow.swift */,
 				017200BC2B51E22E00B3744A /* SelectionCard.swift */,
-				014DBF442B64E91300ECF79A /* ObjectIcon.swift */,
-				017200B92B51E22E00B3744A /* PropertyText.swift */,
 				01B9BB0B2B5CA95800933E60 /* PhotoView.swift */,
+				014DBF442B64E91300ECF79A /* ObjectIcon.swift */,
+				01B13FD82CD42C9E009E4569 /* ControlButton.swift */,
+				01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */,
+				017200B92B51E22E00B3744A /* PropertyText.swift */,
+				017200B62B51E22B00B3744A /* FormattedText.swift */,
+				017200B52B51E22B00B3744A /* Acknowledgements.swift */,
 			);
 			path = "Helper Views";
 			sourceTree = "<group>";
@@ -289,18 +296,17 @@
 				016867392548F1BB007D1553 /* PlanetariaApp.swift */,
 				011CB3892A9C2FAE00749E31 /* Navigator.swift */,
 				017166872B45263000A955D2 /* Launcher.swift */,
-				01D5069B2AA5616200699FE9 /* Header.swift */,
-				0169A5A22B3D3E3A00080E6A /* Toolbar.swift */,
 				0171668B2B45B1AB00A955D2 /* SystemDetails.swift */,
 				017166892B45B1A600A955D2 /* ObjectDetails.swift */,
+				01D62B312CC4314F005AD8F7 /* SearchMenu.swift */,
 				01E8402F2A1FB2C000B2153E /* Settings.swift */,
 				0140923A2B630E100001E631 /* Helper Views */,
-				01F066322B5784E80024D567 /* Utility Views */,
 				0109A09A2B6754C300FD18CE /* Resources */,
 				01489ED32B41F5C300E74447 /* Planetaria.json */,
 				01B9BB0D2B5CA9BA00933E60 /* Planetaria-photos.json */,
 				016DCD2A2B467C6F0030B614 /* Planetaria-descriptions.strings */,
 				01FC6B1F2B67E6FF00380474 /* sample.json */,
+				01A1E96C2CCEC542006E0968 /* ellipse.json */,
 				016867422548F1BD007D1553 /* Info.plist */,
 			);
 			path = Planetaria;
@@ -330,17 +336,6 @@
 				01D4C79D2A8C8EE6000F59B7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		01F066322B5784E80024D567 /* Utility Views */ = {
-			isa = PBXGroup;
-			children = (
-				01C97A052B5D8C6A00065109 /* NavigationSheet.swift */,
-				017200B62B51E22B00B3744A /* FormattedText.swift */,
-				017200B52B51E22B00B3744A /* Acknowledgements.swift */,
-				017200B72B51E22B00B3744A /* XButton.swift */,
-			);
-			path = "Utility Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -473,6 +468,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01A1E96D2CCEC542006E0968 /* ellipse.json in Resources */,
 				01255E032B696471004BC207 /* Titan.usdz in Resources */,
 				01255E062B696471004BC207 /* Io.usdz in Resources */,
 				016DCD2B2B467C6F0030B614 /* Planetaria-descriptions.strings in Resources */,
@@ -504,6 +500,7 @@
 				01255E0A2B696471004BC207 /* Mars.usdz in Resources */,
 				01255DFF2B696471004BC207 /* Phobos.usdz in Resources */,
 				01255DF72B696471004BC207 /* Jupiter.usdz in Resources */,
+				01B1642D2CBCF0A900CA663B /* ColorMaterialScene.usdz in Resources */,
 				01255DF92B696471004BC207 /* Europa.usdz in Resources */,
 				01255E012B696471004BC207 /* Sun.usdz in Resources */,
 				01489ED42B41F5C300E74447 /* Planetaria.json in Resources */,
@@ -548,23 +545,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01D5069C2AA5616200699FE9 /* Header.swift in Sources */,
 				0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */,
 				01682DBA2B51E3130022797E /* FormattedText.swift in Sources */,
-				01C97A062B5D8C6A00065109 /* NavigationSheet.swift in Sources */,
 				0168673A2548F1BB007D1553 /* PlanetariaApp.swift in Sources */,
 				01682DBC2B51E3160022797E /* Acknowledgements.swift in Sources */,
 				0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */,
 				01682DB92B51E3000022797E /* PropertyText.swift in Sources */,
 				01B9BB0C2B5CA95800933E60 /* PhotoView.swift in Sources */,
-				01682DBB2B51E3140022797E /* XButton.swift in Sources */,
+				01B13FD92CD42CA7009E4569 /* ControlButton.swift in Sources */,
 				017166882B45263000A955D2 /* Launcher.swift in Sources */,
 				01E840302A1FB2C000B2153E /* Settings.swift in Sources */,
 				01682DBF2B51E31C0022797E /* SelectionCard.swift in Sources */,
 				01682DBD2B51E31A0022797E /* SelectionRow.swift in Sources */,
 				011CB38A2A9C2FAE00749E31 /* Navigator.swift in Sources */,
 				014DBF452B64E91300ECF79A /* ObjectIcon.swift in Sources */,
-				0169A5A32B3D3E3A00080E6A /* Toolbar.swift in Sources */,
+				01ACBD0A2CCB4F1A00775D99 /* ScrollSheet.swift in Sources */,
+				01D62B322CC43153005AD8F7 /* SearchMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,7 +727,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
@@ -742,7 +738,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rupertusapps.Planetaria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;
@@ -765,7 +761,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
@@ -776,7 +772,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rupertusapps.Planetaria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;

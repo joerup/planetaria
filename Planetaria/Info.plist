@@ -31,10 +31,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Allow camera access to use AR.</string>
 	<key>UIAppFonts</key>
-	<array>
-		<string>Outfit.ttf</string>
-		<string>Outfit-Bold.ttf</string>
-	</array>
+	<array/>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

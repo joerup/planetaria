@@ -18,7 +18,7 @@ struct PhotoView: View {
         Button {
             showFullScreen = true
         } label: {
-            Image(photo.name)
+            Image("\(photo.name)_preview")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -41,7 +41,7 @@ struct PhotoView: View {
             .aspectRatio(contentMode: .fit)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay(alignment: .topTrailing) {
-                XButton {
+                ControlButton(icon: "xmark") {
                     showFullScreen = false
                 }
                 .padding()
