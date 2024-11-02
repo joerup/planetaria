@@ -28,6 +28,12 @@ struct Settings: View {
                     Toggle("Show Labels", isOn: $simulation.showLabels)
                 }
                 
+                if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+                    Section {
+                        Toggle("Flood Lights", isOn: $simulation.showFloodLights)
+                    }
+                }
+                
                 Section {
                     Button {
                         self.presentAcknowledgements.toggle()

@@ -64,16 +64,4 @@ extension Entity {
             OrbitComponentLegacy.registerComponent()
         }
     }
-    
-    func lighten() {
-//        #if os(visionOS)
-//        Task {
-//            guard let resource = try? await EnvironmentResource(named: "light") else { return }
-//            var iblComponent = ImageBasedLightComponent(source: .single(resource), intensityExponent: 0)
-//            iblComponent.inheritsRotation = true
-//            components.set(iblComponent)
-//            components.set(ImageBasedLightReceiverComponent(imageBasedLight: self))
-//        }
-//        #endif
-    }
 }

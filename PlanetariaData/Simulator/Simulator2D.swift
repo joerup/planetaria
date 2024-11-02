@@ -93,7 +93,6 @@ private struct RealityView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero, cameraMode: mode, automaticallyConfigureSession: true)
-//        arView.environment.lighting.resource = try? EnvironmentResource.load(named: "light")
         root.arView = arView
         anchor.addChild(root)
         

@@ -45,6 +45,11 @@ class SimulationSystem: System {
         // Update scene entities in the root
         root.sceneBackground.update(orientation: orientation)
         root.cameraMarker.update(cameraPosition: cameraPosition, arMode: simulation.viewType == .augmented, debugMode: root.debugMode)
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+            root.updateLights(isEnabled: !simulation.showFloodLights)
+        } else {
+            root.updateLights(isEnabled: false)
+        }
         
         // Update simulation entities
         for entity in entities {
@@ -95,13 +100,17 @@ class SimulationSystem: System {
             let labelVisible = simulation.showLabels && physicalSize <= targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode
             let trailVisibile = simulation.showOrbits && orbitSize >= minimumSize
             let interactionVisible = pointVisible || bodyVisible
+            var lightsVisible = false
+            if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+                lightsVisible = !simulation.showFloodLights
+            }
             
             // Update the components
             if let interaction = entity.component(InteractionComponent.self) {
                 interaction.update(isEnabled: interactionVisible, scale: scale, thickness: entityThickness, modelPosition: position, cameraPosition: cameraPosition)
             }
             if let body = entity.component(BodyComponent.self) {
-                body.update(isEnabled: bodyVisible, scale: scale, orientation: orientation)
+                body.update(isEnabled: bodyVisible, scale: scale, orientation: orientation, lightEnabled: lightsVisible)
             }
             if let target = entity.component(TargetComponent.self) {
                 target.update(isEnabled: pointVisible, scale: billboardScale, orientation: billboardOrientation, opacity: opacity)

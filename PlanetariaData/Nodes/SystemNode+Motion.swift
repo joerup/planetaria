@@ -108,17 +108,29 @@ extension SystemNode {
         node.velocity += avgVelocity / 6
     }
 
-    // Calculate the net acceleration of a node
+//    // Calculate the net acceleration of a node
+//    private func acceleration(for target: Node, offset: Vector3 = .zero) -> Vector3 {
+//        var acc: Vector3 = .zero
+//        
+//        for child in children {
+//            guard target != child else { continue }
+//            let displacement = child.position - (target.position + offset)
+//            let magnitudeSquared = displacement.magnitudeSquared
+//            guard magnitudeSquared > .zero else { continue }
+//            acc += child.mass / magnitudeSquared * displacement.unitVector
+//        }
+//        return G * 1E-9 * acc
+//    }
+    
     private func acceleration(for target: Node, offset: Vector3 = .zero) -> Vector3 {
         var acc: Vector3 = .zero
         
-        for child in children {
-            guard target != child else { continue }
-            let displacement = child.position - (target.position + offset)
-            let magnitudeSquared = displacement.magnitudeSquared
-            guard magnitudeSquared > .zero else { continue }
-            acc += child.mass / magnitudeSquared * displacement.unitVector
-        }
+        guard let object, target != object else { return .zero }
+        let displacement = object.position - (target.position + offset)
+        let magnitudeSquared = displacement.magnitudeSquared
+        guard magnitudeSquared > .zero else { return .zero }
+        acc += object.mass / magnitudeSquared * displacement.unitVector
+        
         return G * 1E-9 * acc
     }
 }

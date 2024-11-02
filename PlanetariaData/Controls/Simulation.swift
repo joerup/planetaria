@@ -77,6 +77,7 @@ final public class Simulation: ObservableObject {
     
     public var showOrbits: Bool = true
     public var showLabels: Bool = true
+    public var showFloodLights: Bool = false
     
     public var selectEnabled: Bool = true
     public var zoomEnabled: Bool = true
@@ -673,7 +674,7 @@ final public class Simulation: ObservableObject {
             scale = exp(log(originalScale) * (1 - k) + log(targetScale) * k)
             
             let r = targetScale / originalScale
-            let w = (pow(r, k) - 1) / (r - 1)
+            let w = r == 1 ? k : (pow(r, k) - 1) / (r - 1)
             
             let originalOffset = originalFocus?.globalPositionAtFraction(originalOffsetAmount) ?? .zero
             let targetOffset = targetFocus?.globalPosition ?? .zero

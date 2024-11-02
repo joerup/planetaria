@@ -24,9 +24,10 @@ import RealityKit
     private let size: Double
     private let orientation: simd_quatf
     
-    private let fullSegments: Int = 172
-    private let partialSegments: Int = 16
+    private var angles: [Double] = []
     
+    private let fullSegments: Int = 150
+    private let partialSegments: Int = 80
     private var segments: Int {
         switch type {
         case .full: return fullSegments
@@ -47,6 +48,17 @@ import RealityKit
         self.size = size
         
         self.orientation = simd_quatf(angle: Float(orbit.orbitalInclination), axis: orbit.lineOfNodes.toFloat()) * simd_quatf(angle: Float(orbit.longitudeOfPeriapsis), axis: [0,1,0])
+        
+        let param: Double = 0.7
+        let power: Double = 3.0
+        self.angles = (0..<segments).map { i in
+            let t = Double(i) / Double(fullSegments)
+            if t < param {
+                return pow(t / param, power) * Double.pi
+            } else {
+                return (0.5 + (t - param) * (0.5 / (1 - param))) * 2 * Double.pi
+            }
+        }
         
         do {
             let lowLevelMesh = try initialMesh(color: node.color?.lighter() ?? .gray)
@@ -80,9 +92,8 @@ import RealityKit
         let currentPoint = orbit.ellipsePosition(orbit.centralAnomaly) / size
         
         // Compute segment points to define the orbit
-        let angleIncrement = 2 * Double.pi / Double(fullSegments)
         for i in 1..<segments {
-            let angle = orbit.centralAnomaly - Double(i) * angleIncrement
+            let angle = orbit.centralAnomaly - angles[i]
             var point = orbit.ellipsePosition(angle) / size
             
             point -= currentPoint

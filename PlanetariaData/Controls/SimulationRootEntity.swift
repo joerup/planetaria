@@ -47,6 +47,8 @@ class SimulationRootEntity: Entity {
     }
     #endif
     
+    private var realisticLighting: Bool = true
+    
     required init() {
         super.init()
         self.name = "root"
@@ -75,6 +77,15 @@ class SimulationRootEntity: Entity {
         case .immersive:
             self.entityThickness = 0.002
         }
+    }
+    
+    // Update the lights
+    func updateLights(isEnabled: Bool) {
+        if realisticLighting == isEnabled { return }
+        realisticLighting = isEnabled
+        #if os(iOS) || os(macOS)
+        arView?.environment.lighting.resource = isEnabled ? nil : try? EnvironmentResource.load(named: "light")
+        #endif
     }
     
     // A marker to show where the camera currently is
