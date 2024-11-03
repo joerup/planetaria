@@ -14,6 +14,8 @@ class LabelComponent: Component {
     
     var model: Entity
     
+    private var label: Entity
+    private var width: Float
     private var opacity: Float = 1.0
     
     init?(node: Node) {
@@ -22,6 +24,7 @@ class LabelComponent: Component {
         
         let labelMesh = MeshResource.generateText(text, extrusionDepth: 0.01, font: font)
         let labelEntity = ModelEntity(mesh: labelMesh, materials: [UnlitMaterial(color: .white)])
+        self.label = labelEntity
         self.model = Entity()
         model.addChild(labelEntity)
         
@@ -36,9 +39,9 @@ class LabelComponent: Component {
         sampleLabel.numberOfLines = 1
         sampleLabel.font = font
         #endif
-        let width = sampleLabel.intrinsicContentSize.width
+        self.width = Float(sampleLabel.intrinsicContentSize.width)
         
-        labelEntity.position = [-Float(width)/2, -2.0, 0.1]
+        labelEntity.position = labelPosition()
     }
     
     func update(isEnabled: Bool, scale: Float, orientation: simd_quatf, opacity: Float) {
@@ -53,6 +56,23 @@ class LabelComponent: Component {
                 model.components.set(OpacityComponent(opacity: opacity))
             }
         }
+    }
+    
+    func select() {
+        let scale = SIMD3<Float>(repeating: 1.2)
+        let position = labelPosition(scale: 1.2)
+        let transform = Transform(scale: scale, translation: position)
+        label.move(to: transform, relativeTo: model, duration: 0.5)
+    }
+    func deselect() {
+        let scale = SIMD3<Float>(repeating: 1.0)
+        let position = labelPosition()
+        let transform = Transform(scale: scale, translation: position)
+        label.move(to: transform, relativeTo: model, duration: 0.5)
+    }
+    
+    private func labelPosition(scale: Float = 1.0) -> SIMD3<Float> {
+        return [-width/2 * scale, -1.8 * scale, 0.1]
     }
 }
 

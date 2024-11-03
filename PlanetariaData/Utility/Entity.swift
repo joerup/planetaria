@@ -55,6 +55,7 @@ extension Entity {
         
         InteractionComponent.registerComponent()
         BodyComponent.registerComponent()
+        PointComponent.registerComponent()
         TargetComponent.registerComponent()
         LabelComponent.registerComponent()
         

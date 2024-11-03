@@ -112,6 +112,9 @@ class SimulationSystem: System {
             if let body = entity.component(BodyComponent.self) {
                 body.update(isEnabled: bodyVisible, scale: scale, orientation: orientation, lightEnabled: lightsVisible)
             }
+            if let point = entity.component(PointComponent.self) {
+                point.update(isEnabled: pointVisible, scale: billboardScale, opacity: opacity)
+            }
             if let target = entity.component(TargetComponent.self) {
                 target.update(isEnabled: pointVisible, scale: billboardScale, orientation: billboardOrientation, opacity: opacity)
             }

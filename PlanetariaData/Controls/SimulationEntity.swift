@@ -28,9 +28,9 @@ class SimulationEntity: Entity {
             components.set(body)
             addChild(body.model)
         }
-        if let target = TargetComponent(node: node) {
-            components.set(target)
-            addChild(target.model)
+        if let point = PointComponent(node: node) {
+            components.set(point)
+            addChild(point.model)
         }
         if let label = LabelComponent(node: node) {
             components.set(label)
@@ -54,6 +54,14 @@ class SimulationEntity: Entity {
     func select() {
         guard let configuration = component(SimulationComponent.self) else { return }
         configuration.isSelected = true
+        
+        if let target = TargetComponent(node: configuration.node) {
+            components.set(target)
+            addChild(target.model)
+        }
+        if let label = component(LabelComponent.self) {
+            label.select()
+        }
                 
         guard configuration.node.rank <= .secondary else { return }
         
@@ -73,6 +81,14 @@ class SimulationEntity: Entity {
     func deselect() {
         guard let configuration = component(SimulationComponent.self) else { return }
         configuration.isSelected = false
+        
+        if let target = component(TargetComponent.self) {
+            components.remove(TargetComponent.self)
+            removeChild(target.model)
+        }
+        if let label = component(LabelComponent.self) {
+            label.deselect()
+        }
         
         guard configuration.node.rank <= .secondary else { return }
         

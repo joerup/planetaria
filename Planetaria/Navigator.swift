@@ -117,6 +117,7 @@ struct Navigator<Content: View>: View {
                             .padding(.bottom, verticalSizeClass == .regular ? 10 : 0)
                         }
                     }
+                    .preferredColorScheme(.dark)
             }
             
             #elseif os(macOS)

@@ -61,7 +61,7 @@ import RealityKit
         }
         
         do {
-            let lowLevelMesh = try initialMesh(color: node.color?.lighter() ?? .gray)
+            let lowLevelMesh = try initialMesh(color: node.color ?? .gray)
             lowLevelMesh.withUnsafeMutableBytes(bufferIndex: 0) { rawBytes in
                 self.vertexBuffer = rawBytes.bindMemory(to: OrbitVertex.self)
             }
@@ -81,12 +81,7 @@ import RealityKit
         guard isEnabled, let vertexBuffer, let orbit = node.orbit else { return }
         
         // Anchor the orbit to the object position
-        vertexBuffer[0].position =
-        if let object = node.object, object != node {
-            .zero//object.position.toFloat() / Float(size)
-        } else {
-            .zero
-        }
+        vertexBuffer[0].position = .zero
         
         // Offset the orbit by the current position
         let currentPoint = orbit.ellipsePosition(orbit.centralAnomaly) / size
@@ -204,7 +199,7 @@ class OrbitComponentLegacy: Component {
     var model: Entity
     
     init?(node: Node, size: Double) {
-        guard node.orbit != nil else { return nil }
+        guard node.orbit != nil, node.rank == .primary else { return nil }
           
         self.node = node
         self.size = size
@@ -214,7 +209,7 @@ class OrbitComponentLegacy: Component {
         for i in 1...numberOfSegments {
             let thickness: Float = node.object?.category == .planet ? 0.5 : 0.4
             let mesh = MeshResource.generateBox(width: 1.0, height: thickness, depth: thickness)
-            var material = UnlitMaterial(color: ColorType(node.color ?? .gray))
+            var material = UnlitMaterial(color: ColorType((node.color ?? .gray).lighter()))
             material.blending = .transparent(opacity: .init(floatLiteral: 1.0 - Float(i) / Float(numberOfSegments)))
             let segment = ModelEntity(mesh: mesh, materials: [material])
             segments.append(segment)
@@ -228,7 +223,7 @@ class OrbitComponentLegacy: Component {
         
         let currentPosition = (node.position - node.barycenterPosition) * scale / size
         var lastPoint: Vector3 = .zero
-        let extraScale: Float = thickness * (isVisible ? 1 : 0) * (isSelected ? 1.1 : noSelection ? 1.0 : 0.8)
+        let extraScale: Float = thickness * 0.5 * (isVisible ? 1 : 0) * (isSelected ? 1.1 : noSelection ? 1.0 : 0.8)
         
         for i in 0..<segments.endIndex {
         
