@@ -39,6 +39,17 @@ public class SystemNode: Node {
         return children.compactMap(\.object).filter { types.contains($0.category) }
     }
     
+    public var hasCentralObject: Bool {
+        (object?.size ?? 0) > (object?.position.magnitude ?? 0)
+    }
+    
+    public var centerOfMass: Vector3 {
+        return children.map({ $0.mass * $0.position }).reduce(.zero, +) / mass
+    }
+    public var centerOfMassVelocity: Vector3 {
+        return children.map({ $0.mass * $0.velocity }).reduce(.zero, +) / mass
+    }
+    
     private(set) var systemTimeStep: Double = 1.0
     
     override public var color: Color? {
@@ -76,15 +87,26 @@ public class SystemNode: Node {
         for child in children {
             child.parent = self
         }
+        for child in children {
+            if child == object {
+                child.hostNode = childObjects.filter({ $0 != child && $0.mass >= 0.01 * child.mass }).max(by: { $0.mass < $1.mass })
+            } else {
+                child.hostNode = object
+            }
+        }
     }
     
-    override internal func set(state: StateVector, time: Date) {
-        super.set(state: state, time: time)
+    override internal func setOrbitAndRotation(time: Date) {
+        super.setOrbitAndRotation(time: time)
         object?.properties?.orbit = orbit
     }
     
     internal func setStep() {
-        systemTimeStep = 0.5 * (children.filter({ $0 != object }).map(\.timeStep).min() ?? 1.0)
+        let minStep = children.filter({ $0 != object }).compactMap(\.timeStep).min() ?? 1.0
+        if let object, object.timeStep == 0 {
+            object.timeStep = minStep
+        }
+        systemTimeStep = minStep
         for system in childSystems {
             system.setStep()
         }

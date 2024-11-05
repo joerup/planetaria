@@ -33,9 +33,7 @@ extension Node {
         
         public private(set) var period: Double
         
-        init?(position: Vector3, velocity: Vector3, mass: Double, size: Double, hostNode: Node?) {
-            guard let hostNode, hostNode.mass > 0 else { return nil }
-            
+        init(position: Vector3, velocity: Vector3, mass: Double, size: Double, hostNode: Node) {
             self.position = position
             self.velocity = velocity
             
@@ -43,7 +41,9 @@ extension Node {
             let r = (position - hostNode.position) * 1000
             let v = (velocity - hostNode.velocity) * 1000
             
-            self.semimajorAxis = μ / (2 * μ / r.magnitude - pow(v.magnitude, 2)) / 1000 * hostNode.mass / (hostNode.mass + mass)
+            let totalSemimajorAxis = μ / (2 * μ / r.magnitude - pow(v.magnitude, 2)) / 1000
+            self.semimajorAxis = totalSemimajorAxis * hostNode.mass / (hostNode.mass + mass)
+            self.period = Double(2 * .pi / sqrt(μ) * pow(totalSemimajorAxis * 1000, 3/2))
             
             self.axis = cross(r, v).unitVector
             self.orbitalInclination = axis.angle(with: .referencePlane)
@@ -61,8 +61,6 @@ extension Node {
             
             self.trueAnomaly = position.signedAngle(with: eccentricityVector, around: axis, clockwise: false)
             self.centralAnomaly = (position + focusOffsetFromCenter).signedAngle(with: eccentricityVector, around: axis, clockwise: false)
-            
-            self.period = Double(2 * .pi / sqrt(μ) * pow(semimajorAxis * 1000, 3/2))
         }
         
         func update(position: Vector3, velocity: Vector3) {

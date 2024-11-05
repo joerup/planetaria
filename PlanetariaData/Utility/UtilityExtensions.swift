@@ -178,11 +178,42 @@ public extension Date {
         return formatter.string(from: self)
     }
     
+    static let reference2000: Date = {
+        var components = DateComponents()
+        components.year = 2000
+        components.month = 1
+        components.day = 1
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        return Calendar(identifier: .gregorian).date(from: components)!
+    }()
+
+    static let reference2050: Date = {
+        var components = DateComponents()
+        components.year = 2050
+        components.month = 1
+        components.day = 1
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        return Calendar(identifier: .gregorian).date(from: components)!
+    }()
+
+    static let j2000ReferenceDate: Date = {
+        var components = DateComponents()
+        components.timeZone = .gmt
+        components.year = 2000
+        components.month = 1
+        components.day = 1
+        components.hour = 11
+        components.minute = 58
+        components.second = 56
+        return Calendar(identifier: .gregorian).date(from: components)!
+    }()
+    
     var j2000Date: Double {
-        let j2000ReferenceDate = DateComponents(timeZone: .gmt, year: 2000, month: 1, day: 1, hour: 11, minute: 58, second: 56)
-        let calendar = Calendar(identifier: .gregorian)
-        let referenceDate = calendar.date(from: j2000ReferenceDate)!
-        return timeIntervalSince(referenceDate) / 86400
+        return timeIntervalSince(Self.j2000ReferenceDate) / 86400
     }
     var j2000Century: Double {
         return j2000Date / 36525

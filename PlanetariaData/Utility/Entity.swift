@@ -66,3 +66,49 @@ extension Entity {
         }
     }
 }
+
+public extension Entity {
+    
+    /// Finds all decendant entites with a model component.
+    ///
+    /// - Returns: An array of decendant entities that have a model component.
+    private func getModelDescendents() -> [Entity] {
+        var descendents = [Entity]()
+        
+        for child in children {
+            if child.components[ModelComponent.self] != nil {
+                descendents.append(child)
+            }
+            descendents.append(contentsOf: child.getModelDescendents())
+        }
+        return descendents
+    }
+
+    @available(iOS 18.0, macOS 15.0, visionOS 2.0, *)
+    func setSunPosition(_ position: SIMD3<Float>) {
+        for modelEntity in self.getModelDescendents() {
+            guard var modelComponent = modelEntity.component(ModelComponent.self) else {
+                return
+            }
+
+            // Tell any material that has a sun angle parameter about the
+            // position of the sun so that it can adjust its appearance.
+            modelComponent.materials = modelComponent.materials.map {
+                guard var material = $0 as? ShaderGraphMaterial else { return $0 }
+                if material.parameterNames.contains("sun_direction") {
+                    do {
+                        try material.setParameter(
+                            name: "sun_direction",
+                            value: .simd3Float(position)
+                        )
+                    } catch {
+                        fatalError("Failed to set material parameter: \(error.localizedDescription)")
+                    }
+                }
+                return material
+            }
+ 
+            modelEntity.components.set(modelComponent)
+        }
+    }
+}

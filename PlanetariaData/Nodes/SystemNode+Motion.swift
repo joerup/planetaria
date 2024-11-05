@@ -29,7 +29,6 @@ extension SystemNode {
         // Perform each step
         for _ in 0..<steps {
             for node in children {
-                guard node != object else { continue }
                 node.elapsedTime += dt
                 
                 // Update this node if its time step has elapsed
@@ -45,9 +44,17 @@ extension SystemNode {
         // (if the time step never elapsed in any step, it will be updated here)
         // (this guarantees an update for every node every frame)
         for node in children {
-            guard node != object else { continue }
             stepVerlet(node: node, dt: node.elapsedTime)
             node.elapsedTime = 0
+        }
+        
+        // Modify state by the center of mass
+        // (keeps everything centered on the system and corrects for error buildup)
+        let comP = self.centerOfMass
+        let comV = self.centerOfMassVelocity
+        for node in children {
+            node.position -= comP
+            node.velocity -= comV
         }
         
         // Update the stored orbit and rotation states
@@ -108,28 +115,25 @@ extension SystemNode {
         node.velocity += avgVelocity / 6
     }
 
-//    // Calculate the net acceleration of a node
-//    private func acceleration(for target: Node, offset: Vector3 = .zero) -> Vector3 {
-//        var acc: Vector3 = .zero
-//        
-//        for child in children {
-//            guard target != child else { continue }
-//            let displacement = child.position - (target.position + offset)
-//            let magnitudeSquared = displacement.magnitudeSquared
-//            guard magnitudeSquared > .zero else { continue }
-//            acc += child.mass / magnitudeSquared * displacement.unitVector
-//        }
-//        return G * 1E-9 * acc
-//    }
-    
+    // Calculate the net acceleration of a node
     private func acceleration(for target: Node, offset: Vector3 = .zero) -> Vector3 {
         var acc: Vector3 = .zero
         
-        guard let object, target != object else { return .zero }
-        let displacement = object.position - (target.position + offset)
-        let magnitudeSquared = displacement.magnitudeSquared
-        guard magnitudeSquared > .zero else { return .zero }
-        acc += object.mass / magnitudeSquared * displacement.unitVector
+        if let hostNode = target.hostNode {
+            let displacement = hostNode.position - (target.position + offset)
+            let magnitudeSquared = displacement.magnitudeSquared
+            guard magnitudeSquared > .zero else { return .zero }
+            acc += hostNode.mass / magnitudeSquared * displacement.unitVector
+            
+        } else {
+            for child in children {
+                guard target != child else { continue }
+                let displacement = child.position - (target.position + offset)
+                let magnitudeSquared = displacement.magnitudeSquared
+                guard magnitudeSquared > .zero else { continue }
+                acc += child.mass / magnitudeSquared * displacement.unitVector
+            }
+        }
         
         return G * 1E-9 * acc
     }

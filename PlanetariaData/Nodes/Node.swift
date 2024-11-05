@@ -30,7 +30,7 @@ public class Node: Decodable {
     }
     
     internal var elapsedTime: Double = 0
-    private(set) var timeStep: Double = 1.0
+    internal var timeStep: Double = 0
     static let timeStepFraction: Double = 0.0025
     
     public var orbit: Orbit?
@@ -46,10 +46,7 @@ public class Node: Decodable {
     public var siblings: [Node] {
         return parent?.children ?? []
     }
-    public var hostNode: ObjectNode? {
-        guard let object = parent?.object else { return nil }
-        return object != self ? object : nil
-    }
+    public var hostNode: ObjectNode?
     
     public var globalPosition: Vector3 {
         return parentLine.map(\.position).reduce(.zero, +) + self.position
@@ -63,15 +60,16 @@ public class Node: Decodable {
         return (hostNode.mass * hostNode.velocity + self.mass * self.velocity) / (hostNode.mass + self.mass)
     }
     
-    internal func set(state: StateVector, time: Date) {
+    internal func setState(_ state: StateVector) {
         self.position = state.position
         self.velocity = state.velocity
-        self.orbit = Orbit(position: state.position, velocity: state.velocity, mass: mass, size: size, hostNode: hostNode)
-        if let orbit {
+    }
+    
+    internal func setOrbitAndRotation(time: Date) {
+        if let hostNode {
+            let orbit = Orbit(position: position, velocity: velocity, mass: mass, size: size, hostNode: hostNode)
+            self.orbit = orbit
             self.timeStep = orbit.period * Self.timeStepFraction
-            if hostNode?.timeStep == 1.0 && timeStep != 1.0 {
-                hostNode?.timeStep = timeStep
-            }
         }
         self.rotation?.set(time: time)
     }

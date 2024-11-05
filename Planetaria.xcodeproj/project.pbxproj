@@ -13,14 +13,12 @@
 		01255DF12B696471004BC207 /* Enceladus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DCE2B696471004BC207 /* Enceladus.usdz */; };
 		01255DF22B696471004BC207 /* Charon.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DCF2B696471004BC207 /* Charon.usdz */; };
 		01255DF32B696471004BC207 /* Pluto.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD02B696471004BC207 /* Pluto.usdz */; };
-		01255DF42B696471004BC207 /* Venus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD12B696471004BC207 /* Venus.usdz */; };
 		01255DF52B696471004BC207 /* Ganymede.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD22B696471004BC207 /* Ganymede.usdz */; };
 		01255DF62B696471004BC207 /* Eris.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD32B696471004BC207 /* Eris.usdz */; };
 		01255DF72B696471004BC207 /* Jupiter.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD42B696471004BC207 /* Jupiter.usdz */; };
 		01255DF82B696471004BC207 /* Callisto.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD52B696471004BC207 /* Callisto.usdz */; };
 		01255DF92B696471004BC207 /* Europa.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD62B696471004BC207 /* Europa.usdz */; };
 		01255DFA2B696471004BC207 /* Mimas.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD72B696471004BC207 /* Mimas.usdz */; };
-		01255DFB2B696471004BC207 /* Earth.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD82B696471004BC207 /* Earth.usdz */; };
 		01255DFC2B696471004BC207 /* Haumea.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DD92B696471004BC207 /* Haumea.usdz */; };
 		01255DFD2B696471004BC207 /* Mercury.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DDA2B696471004BC207 /* Mercury.usdz */; };
 		01255DFE2B696471004BC207 /* Miranda.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DDB2B696471004BC207 /* Miranda.usdz */; };
@@ -60,6 +58,7 @@
 		01A1E96D2CCEC542006E0968 /* ellipse.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A1E96C2CCEC542006E0968 /* ellipse.json */; };
 		01ACBD0A2CCB4F1A00775D99 /* ScrollSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */; };
 		01B13FD92CD42CA7009E4569 /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B13FD82CD42C9E009E4569 /* ControlButton.swift */; };
+		01B13FEB2CD77084009E4569 /* Earth.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01B13FEA2CD77084009E4569 /* Earth.usdz */; };
 		01B1642D2CBCF0A900CA663B /* ColorMaterialScene.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01B1642C2CBCF0A900CA663B /* ColorMaterialScene.usdz */; };
 		01B540E02B43929D00D5AF51 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B540DF2B43929D00D5AF51 /* Planetaria.json */; };
 		01B9BB0C2B5CA95800933E60 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9BB0B2B5CA95800933E60 /* PhotoView.swift */; };
@@ -71,6 +70,7 @@
 		01D4C7A32A8C8F6C000F59B7 /* PlanetariaData in Frameworks */ = {isa = PBXBuildFile; productRef = 01D4C7A22A8C8F6C000F59B7 /* PlanetariaData */; };
 		01D62B322CC43153005AD8F7 /* SearchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D62B312CC4314F005AD8F7 /* SearchMenu.swift */; };
 		01E840302A1FB2C000B2153E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E8402F2A1FB2C000B2153E /* Settings.swift */; };
+		01F2B7EB2CD81C9700179385 /* Venus.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01F2B7EA2CD81C9700179385 /* Venus.usdz */; };
 		01FC6B202B67E6FF00380474 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 01FC6B1F2B67E6FF00380474 /* sample.json */; };
 /* End PBXBuildFile section */
 
@@ -98,14 +98,12 @@
 		01255DCE2B696471004BC207 /* Enceladus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Enceladus.usdz; sourceTree = "<group>"; };
 		01255DCF2B696471004BC207 /* Charon.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Charon.usdz; sourceTree = "<group>"; };
 		01255DD02B696471004BC207 /* Pluto.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Pluto.usdz; sourceTree = "<group>"; };
-		01255DD12B696471004BC207 /* Venus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Venus.usdz; sourceTree = "<group>"; };
 		01255DD22B696471004BC207 /* Ganymede.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Ganymede.usdz; sourceTree = "<group>"; };
 		01255DD32B696471004BC207 /* Eris.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Eris.usdz; sourceTree = "<group>"; };
 		01255DD42B696471004BC207 /* Jupiter.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Jupiter.usdz; sourceTree = "<group>"; };
 		01255DD52B696471004BC207 /* Callisto.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Callisto.usdz; sourceTree = "<group>"; };
 		01255DD62B696471004BC207 /* Europa.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Europa.usdz; sourceTree = "<group>"; };
 		01255DD72B696471004BC207 /* Mimas.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mimas.usdz; sourceTree = "<group>"; };
-		01255DD82B696471004BC207 /* Earth.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Earth.usdz; sourceTree = "<group>"; };
 		01255DD92B696471004BC207 /* Haumea.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Haumea.usdz; sourceTree = "<group>"; };
 		01255DDA2B696471004BC207 /* Mercury.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Mercury.usdz; sourceTree = "<group>"; };
 		01255DDB2B696471004BC207 /* Miranda.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Miranda.usdz; sourceTree = "<group>"; };
@@ -151,6 +149,7 @@
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
 		01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSheet.swift; sourceTree = "<group>"; };
 		01B13FD82CD42C9E009E4569 /* ControlButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
+		01B13FEA2CD77084009E4569 /* Earth.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Earth.usdz; sourceTree = "<group>"; };
 		01B1642C2CBCF0A900CA663B /* ColorMaterialScene.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = ColorMaterialScene.usdz; sourceTree = "<group>"; };
 		01B540DF2B43929D00D5AF51 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
 		01B9BB0B2B5CA95800933E60 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
@@ -161,6 +160,7 @@
 		01D4C79D2A8C8EE6000F59B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		01D62B312CC4314F005AD8F7 /* SearchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMenu.swift; sourceTree = "<group>"; };
 		01E8402F2A1FB2C000B2153E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		01F2B7EA2CD81C9700179385 /* Venus.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Venus.usdz; sourceTree = "<group>"; };
 		01FC6B1F2B67E6FF00380474 /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,14 +216,14 @@
 				01255DCE2B696471004BC207 /* Enceladus.usdz */,
 				01255DCF2B696471004BC207 /* Charon.usdz */,
 				01255DD02B696471004BC207 /* Pluto.usdz */,
-				01255DD12B696471004BC207 /* Venus.usdz */,
 				01255DD22B696471004BC207 /* Ganymede.usdz */,
+				01B13FEA2CD77084009E4569 /* Earth.usdz */,
+				01F2B7EA2CD81C9700179385 /* Venus.usdz */,
 				01255DD32B696471004BC207 /* Eris.usdz */,
 				01255DD42B696471004BC207 /* Jupiter.usdz */,
 				01255DD52B696471004BC207 /* Callisto.usdz */,
 				01255DD62B696471004BC207 /* Europa.usdz */,
 				01255DD72B696471004BC207 /* Mimas.usdz */,
-				01255DD82B696471004BC207 /* Earth.usdz */,
 				01255DD92B696471004BC207 /* Haumea.usdz */,
 				01255DDA2B696471004BC207 /* Mercury.usdz */,
 				01255DDB2B696471004BC207 /* Miranda.usdz */,
@@ -482,7 +482,6 @@
 				01255E022B696471004BC207 /* Deimos.usdz in Resources */,
 				01255E052B696471004BC207 /* Oberon.usdz in Resources */,
 				01255E122B696471004BC207 /* Makemake.usdz in Resources */,
-				01255DFB2B696471004BC207 /* Earth.usdz in Resources */,
 				01255DF52B696471004BC207 /* Ganymede.usdz in Resources */,
 				01255DF02B696471004BC207 /* Triton.usdz in Resources */,
 				01255DFA2B696471004BC207 /* Mimas.usdz in Resources */,
@@ -490,11 +489,11 @@
 				0168673E2548F1BD007D1553 /* Assets.xcassets in Resources */,
 				01255D542B696078004BC207 /* light.skybox in Resources */,
 				01255E092B696471004BC207 /* Umbriel.usdz in Resources */,
+				01B13FEB2CD77084009E4569 /* Earth.usdz in Resources */,
 				01255E0F2B696471004BC207 /* Dione.usdz in Resources */,
 				01255DFD2B696471004BC207 /* Mercury.usdz in Resources */,
 				01255E082B696471004BC207 /* Saturn.usdz in Resources */,
 				01255E072B696471004BC207 /* Neptune.usdz in Resources */,
-				01255DF42B696471004BC207 /* Venus.usdz in Resources */,
 				01255E0E2B696471004BC207 /* Rhea.usdz in Resources */,
 				01255DF12B696471004BC207 /* Enceladus.usdz in Resources */,
 				01255E0A2B696471004BC207 /* Mars.usdz in Resources */,
@@ -507,6 +506,7 @@
 				01255E042B696471004BC207 /* Uranus.usdz in Resources */,
 				01255DF32B696471004BC207 /* Pluto.usdz in Resources */,
 				01255E102B696471004BC207 /* Titania.usdz in Resources */,
+				01F2B7EB2CD81C9700179385 /* Venus.usdz in Resources */,
 				01255E0D2B696471004BC207 /* Ceres.usdz in Resources */,
 				01255DFE2B696471004BC207 /* Miranda.usdz in Resources */,
 				01255DF62B696471004BC207 /* Eris.usdz in Resources */,
@@ -727,7 +727,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
@@ -761,7 +761,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;

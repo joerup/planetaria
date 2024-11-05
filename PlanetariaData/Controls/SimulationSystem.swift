@@ -40,6 +40,8 @@ class SimulationSystem: System {
         
         // Get the camera state
         let (cameraPosition, cameraForward) = root.cameraState
+        
+        // Get the entity thickness
         let entityThickness = root.entityThickness
         
         // Update scene entities in the root
@@ -78,14 +80,19 @@ class SimulationSystem: System {
             let billboardOrientation = entity.billboardOrientation(position: position, cameraPosition: cameraPosition, toPoint: simulation.viewType == .augmented || simulation.viewType == .immersive)
             
             // Calculate the opacity
+            let opacityPrimary: Float = simulation.viewType == .immersive ? 0.25 : 0.25
+            let opacitySecondary: Float = simulation.viewType == .immersive ? 0.1 : 0.25
+            let opacityTertiary: Float = simulation.viewType == .immersive ? 0.05 : 0.15
             let opacity: Float =
-            if simulation.isSelected(node) || (noSelection && simulation.isSystem(node.system)) {
-                1.0
-            } else if (noSelection || (simulation.stateSystem && simulation.isSelected((node.system ?? node).hostNode))) && simulation.isInSystem(node.system ?? node) {
-                node.rank == .primary ? 1.0 : node.rank == .secondary ? 0.6 : 0.4
-            } else {
-                0.2
-            }
+                if simulation.isSelected(node) {
+                    1.0
+                } else if (noSelection && simulation.isSystem(node.system)) {
+                    node.rank == .primary ? 1.0 : opacitySecondary
+                } else if (noSelection || (simulation.stateSystem && simulation.isSelected((node.system ?? node).hostNode))) && simulation.isInSystem(node.system ?? node) {
+                    node.rank == .primary ? 1.0 : opacitySecondary
+                } else {
+                    node.rank == .primary ? opacityPrimary : opacityTertiary
+                }
             
             // Determine component visibility
             let minimumSize = 0.1 * billboardScale * Float(simulation.size)
@@ -97,8 +104,8 @@ class SimulationSystem: System {
             
             let bodyVisible = physicalSize >= minimumSize || (node.object?.luminosity ?? 0) > 0
             let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode
-            let labelVisible = simulation.showLabels && physicalSize <= targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode
-            let trailVisibile = simulation.showOrbits && orbitSize >= minimumSize
+            let labelVisible = simulation.showLabels && physicalSize <= 1.5 * targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode
+            let trailVisible = simulation.showOrbits && orbitSize >= minimumSize && !(physicalSize >= 10 * targetSize && node.system?.object == node)
             let interactionVisible = pointVisible || bodyVisible
             var lightsVisible = false
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
@@ -121,14 +128,13 @@ class SimulationSystem: System {
             if let label = entity.component(LabelComponent.self) {
                 label.update(isEnabled: labelVisible, scale: billboardScale, orientation: billboardOrientation, opacity: opacity)
             }
-            
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
                 if let orbit = entity.component(OrbitComponent.self) {
-                    orbit.update(isEnabled: trailVisibile, scale: scale, orientation: orientation, opacity: opacity)
+                    orbit.update(isEnabled: trailVisible, scale: scale, orientation: orientation, opacity: opacity)
                 }
             } else {
                 if let orbit = entity.component(OrbitComponentLegacy.self) {
-                    orbit.update(isEnabled: trailVisibile, isVisible: trailVisibile, isSelected: isSelected, noSelection: noSelection, scale: scale, orientation: orientation, thickness: entityThickness, modelPosition: position, cameraPosition: cameraPosition)
+                    orbit.update(isEnabled: trailVisible, isVisible: trailVisible, isSelected: isSelected, noSelection: noSelection, scale: scale, orientation: orientation, thickness: entityThickness, modelPosition: position, cameraPosition: cameraPosition)
                 }
             }
         }

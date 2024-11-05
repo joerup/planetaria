@@ -13,6 +13,8 @@ class BodyComponent: Component {
     
     var model: Entity
     
+    private var name: String
+    private var node: Node
     private var diameter: Double
     private var rotation: Node.Rotation?
     
@@ -25,6 +27,9 @@ class BodyComponent: Component {
     init?(node: Node, size: Double) {
         guard let body = node as? ObjectNode else { return nil }
         
+        self.name = node.name
+        self.node = node
+        
         var bodyEntity: Entity
         if let entity = try? ModelEntity.load(named: node.name) {
             bodyEntity = entity
@@ -33,8 +38,8 @@ class BodyComponent: Component {
             let material = UnlitMaterial(color: ColorType(node.color ?? .gray))
             bodyEntity = ModelEntity(mesh: mesh, materials: [material])
         }
-        
         self.model = bodyEntity
+        
         self.diameter = 2 * body.totalSize / size
         self.rotation = body.rotation
         
@@ -56,18 +61,29 @@ class BodyComponent: Component {
     }
     
     func update(isEnabled: Bool, scale: Double, orientation: simd_quatf, lightEnabled: Bool) {
+        let bodyOrientation = self.orientation(rotation)
+        
         model.isEnabled = isEnabled
         model.scale = SIMD3(repeating: Float(diameter * scale))
-        model.orientation = orientation * self.orientation(rotation)
+        model.orientation = orientation * bodyOrientation
+        
         if self.lightEnabled != lightEnabled {
             setLighting(enabled: lightEnabled)
+        }
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *), name == "Earth", let orbit = node.parent?.orbit {
+            if lightEnabled {
+                let totalRotation = simd_quatf(angle: .pi/2, axis: [0,1,0]) * bodyOrientation.inverse
+                model.setSunPosition(totalRotation.act(orbit.position.unitVector.toFloat()))
+            } else {
+                model.setSunPosition(.zero)
+            }
         }
     }
     
     private func orientation(_ rotation: Node.Rotation?) -> simd_quatf {
         guard let rotation else { return .identity }
         
-        let angle = rotation.angle
+        let angle = rotation.angle.truncatingRemainder(dividingBy: 2 * .pi)
         if let axis = rotation.axis {
             
             let tilt = axis.angle(with: .referencePlane)

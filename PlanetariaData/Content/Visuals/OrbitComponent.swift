@@ -26,21 +26,14 @@ import RealityKit
     
     private var angles: [Double] = []
     
-    private let fullSegments: Int = 150
-    private let partialSegments: Int = 80
-    private var segments: Int {
-        switch type {
-        case .full: return fullSegments
-        case .partial: return partialSegments
-        }
-    }
+    private var segments: Int = 150
     
     private var opacity: Float = 1.0
     
     fileprivate var vertexBuffer: UnsafeMutableBufferPointer<OrbitVertex>?
     
     init?(node: Node, size: Double, type: TrailType) {
-        guard let orbit = node.orbit else { return nil }
+        guard let orbit = node.orbit, orbit.position.magnitude > node.size else { return nil }
         
         self.model = Entity()
         self.type = type
@@ -50,9 +43,9 @@ import RealityKit
         self.orientation = simd_quatf(angle: Float(orbit.orbitalInclination), axis: orbit.lineOfNodes.toFloat()) * simd_quatf(angle: Float(orbit.longitudeOfPeriapsis), axis: [0,1,0])
         
         let param: Double = 0.7
-        let power: Double = 3.0
+        let power: Double = 2.0
         self.angles = (0..<segments).map { i in
-            let t = Double(i) / Double(fullSegments)
+            let t = Double(i) / Double(segments)
             if t < param {
                 return pow(t / param, power) * Double.pi
             } else {
@@ -99,6 +92,7 @@ import RealityKit
         // Apply scale and rotation
         model.scale = SIMD3(repeating: Float(scale))
         model.orientation = orientation * self.orientation
+        model.position = .zero
         
         // Apply opacity
         if self.opacity != opacity {
@@ -199,7 +193,7 @@ class OrbitComponentLegacy: Component {
     var model: Entity
     
     init?(node: Node, size: Double) {
-        guard node.orbit != nil, node.rank == .primary else { return nil }
+        guard let orbit = node.orbit, orbit.position.magnitude > node.size, node.rank == .primary else { return nil }
           
         self.node = node
         self.size = size

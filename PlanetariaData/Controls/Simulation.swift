@@ -188,8 +188,11 @@ final public class Simulation: ObservableObject {
         let ephemerides = try await loadEphemerides(from: ephemerisURL)
         for node in root.tree {
             if let stateVector = ephemerides[node.id] {
-                node.set(state: stateVector, time: time)
+                node.setState(stateVector)
             }
+        }
+        for node in root.tree {
+            node.setOrbitAndRotation(time: time)
         }
         root.setStep()
         
@@ -267,6 +270,9 @@ final public class Simulation: ObservableObject {
         return states
     }
     
+    
+    // MARK: - Updates
+    
     // Advance the system by the time interval
     internal func advance() {
         guard !isPaused else { isRealTime = false; return }
@@ -279,7 +285,9 @@ final public class Simulation: ObservableObject {
         }
         // Update the system by a custom rate
         else {
-            let dt = frameRatio/60
+            var dt = frameRatio/60
+            dt = min(dt, -time.timeIntervalSince(.reference2050))
+            dt = max(dt, -time.timeIntervalSince(.reference2000))
             self.time.addTimeInterval(dt)
             self.root?.advanceSystem(by: dt)
         }
@@ -538,7 +546,7 @@ final public class Simulation: ObservableObject {
             }
         }
         else if let object = self.object {
-            self.object = object.parent == root ? nil : object.hostNode
+            self.object = object.parent == root ? nil : object.hostNode == object.parent?.object ? object.hostNode : nil
             if object == focus?.object || focus != (object.system ?? object).parent {
                 zoomToOrbit(node: object)
             }
