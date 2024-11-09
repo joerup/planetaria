@@ -87,7 +87,7 @@ struct ScrollSheet<Content: View>: View {
             }
             .navigationTitle(title)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem {
                     closeButton
                 }
             }

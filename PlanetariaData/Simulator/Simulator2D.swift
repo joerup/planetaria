@@ -37,13 +37,16 @@ public struct Simulator: View {
             }
             .onAppear {
                 simulation.rootEntity.setSizes(geometry.size)
+                updateAnchorScale(geometry.size)
             }
             .onChange(of: geometry.size) { size in
                 simulation.rootEntity.setSizes(size)
+                updateAnchorScale(size)
             }
             .onChange(of: simulation.viewType) { mode in
                 simulation.rootEntity.setSizes(geometry.size)
                 simulation.resetPitch()
+                updateAnchorScale(geometry.size)
             }
             .onChange(of: scenePhase) { _ in
                 Entity.registerAll()
@@ -74,6 +77,12 @@ public struct Simulator: View {
                 simulation.completeScaleGesture(to: value)
             }
     }
+    
+    private func updateAnchorScale(_ size: CGSize) {
+        if let anchor = simulation.rootEntity.arView?.scene.anchors.first {
+            anchor.scale = simulation.viewType == .augmented ? .one : SIMD3(repeating: Float(2 * min(1, size.width/size.height)))
+        }
+    }
 }
 #endif
 
@@ -98,7 +107,6 @@ private struct RealityView: UIViewRepresentable {
         
         anchor.orientation = arMode ? .identity : simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
         anchor.position = arMode ? [0,-0.2,-1] : .zero
-        anchor.scale = arMode ? .one : SIMD3(repeating: Float(2 * min(1, size.width/size.height)))
         
         context.coordinator.view = arView
         arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap)))
@@ -153,12 +161,10 @@ private struct RealityView: NSViewRepresentable {
     
     func makeNSView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
-        arView.environment.lighting.resource = try! EnvironmentResource.load(named: "light")
         root.arView = arView
         anchor.addChild(root)
         
         anchor.orientation = simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
-        anchor.scale = [2,2,2] * Float(min(size.width, size.height) / max(size.width, size.height))
         
         context.coordinator.view = arView
         arView.addGestureRecognizer(NSClickGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleClick)))

@@ -100,12 +100,16 @@ class SimulationSystem: System {
 
             let orbitSize = Float(scale * (node.system ?? node).position.magnitude)
             let physicalSize = Float(scale * node.size)
+            let physicalObjectSize = Float(scale * (node.object ?? node).size)
             let isCentral = node.system != nil && node.system?.orbit == nil // edge case for Sun
+            
+            let fadeFractionFactor: Float = simulation.viewType == .immersive ? 100 : 10
+            let fadeFraction: Float = max(0.0, min(1.0, 1.0 - (physicalObjectSize - targetSize) / (fadeFractionFactor * targetSize - targetSize)))
             
             let bodyVisible = physicalSize >= minimumSize || (node.object?.luminosity ?? 0) > 0
             let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode
             let labelVisible = simulation.showLabels && physicalSize <= 1.5 * targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode
-            let trailVisible = simulation.showOrbits && orbitSize >= minimumSize && !(physicalSize >= 10 * targetSize && node.system?.object == node)
+            let trailVisible = simulation.showOrbits && orbitSize >= minimumSize
             let interactionVisible = pointVisible || bodyVisible
             var lightsVisible = false
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
@@ -130,7 +134,8 @@ class SimulationSystem: System {
             }
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
                 if let orbit = entity.component(OrbitComponent.self) {
-                    orbit.update(isEnabled: trailVisible, scale: scale, orientation: orientation, opacity: opacity)
+                    orbit.update(isEnabled: trailVisible, scale: scale, orientation: orientation, opacity: opacity, fadeFraction: fadeFraction)
+                    
                 }
             } else {
                 if let orbit = entity.component(OrbitComponentLegacy.self) {

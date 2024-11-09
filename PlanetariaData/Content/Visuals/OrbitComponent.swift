@@ -26,9 +26,14 @@ import RealityKit
     
     private var angles: [Double] = []
     
+    private var fadeSegments: Int = 20
     private var segments: Int = 150
     
+    private var fadeAlphas: [Float] = []
+    
     private var opacity: Float = 1.0
+    
+    private var isSmallOrbit: Bool
     
     fileprivate var vertexBuffer: UnsafeMutableBufferPointer<OrbitVertex>?
     
@@ -40,18 +45,11 @@ import RealityKit
         self.node = node
         self.size = size
         
+        self.isSmallOrbit = orbit.position.magnitude < 10 * node.size
+        
         self.orientation = simd_quatf(angle: Float(orbit.orbitalInclination), axis: orbit.lineOfNodes.toFloat()) * simd_quatf(angle: Float(orbit.longitudeOfPeriapsis), axis: [0,1,0])
         
-        let param: Double = 0.7
-        let power: Double = 2.0
-        self.angles = (0..<segments).map { i in
-            let t = Double(i) / Double(segments)
-            if t < param {
-                return pow(t / param, power) * Double.pi
-            } else {
-                return (0.5 + (t - param) * (0.5 / (1 - param))) * 2 * Double.pi
-            }
-        }
+        setAngles()
         
         do {
             let lowLevelMesh = try initialMesh(color: node.color ?? .gray)
@@ -69,7 +67,7 @@ import RealityKit
         }
     }
     
-    func update(isEnabled: Bool, scale: Double, orientation: simd_quatf, opacity: Float) {
+    func update(isEnabled: Bool, scale: Double, orientation: simd_quatf, opacity: Float, fadeFraction: Float) {
         model.isEnabled = isEnabled
         guard isEnabled, let vertexBuffer, let orbit = node.orbit else { return }
         
@@ -89,12 +87,30 @@ import RealityKit
             vertexBuffer[i].position = point.toFloat()
         }
         
+        // Calculate the object offset (if there is one) to align the trail to the body's center
+        // (skip this in certain cases, like a binary system - should align to system barycenter)
+        let objectOffset: SIMD3<Float> =
+        if let object = node.object, node != object, object.orbit != nil, orbit.position.magnitude <= node.size {
+            orientation.act((object.position * scale / size).toFloat())
+        } else {
+            .zero
+        }
+        
+        // Update the fade segments
+        for i in 0..<fadeSegments {
+            // fadeFraction ranges from 0.0 (when object is large) to 1.0 (when object is small)
+            let alphaFloat = fadeAlphas[i] * (1-fadeFraction) + fadeFraction * (type == .partial ? 0.5 : 1.0)
+            let alpha = UInt32(255 * alphaFloat) << 24
+            vertexBuffer[i].color = vertexBuffer[i].color & 0x00FFFFFF | alpha
+        }
+        
         // Apply scale and rotation
         model.scale = SIMD3(repeating: Float(scale))
         model.orientation = orientation * self.orientation
-        model.position = .zero
+        model.position = objectOffset
         
         // Apply opacity
+        let opacity = isSmallOrbit ? (opacity * fadeFraction) : opacity
         if self.opacity != opacity {
             self.opacity = opacity
             model.components.remove(OpacityComponent.self)
@@ -102,7 +118,7 @@ import RealityKit
         }
     }
     
-    func initialMesh(color: Color) throws -> LowLevelMesh {
+    private func initialMesh(color: Color) throws -> LowLevelMesh {
         var desc = OrbitVertex.descriptor
         desc.vertexCapacity = segments
         desc.indexCapacity = segments
@@ -114,7 +130,14 @@ import RealityKit
         // Fill vertex data to create gradient
         mesh.withUnsafeMutableBytes(bufferIndex: 0) { rawBytes in
             let vertices = rawBytes.bindMemory(to: OrbitVertex.self)
-            for i in 0..<segments {
+            
+            for i in 0..<fadeSegments {
+                let fraction = pow(Float(i) / Float(fadeSegments), 2.0) * (type == .partial ? 0.5 : 1.0)
+                self.fadeAlphas.append(fraction)
+                let alpha = UInt32(255 * fraction) << 24
+                vertices[i].color = hex & 0x00FFFFFF | alpha
+            }
+            for i in fadeSegments..<segments {
                 let fraction = (1 - Float(i) / Float(segments)) * (type == .partial ? 0.5 : 1.0)
                 let alpha = UInt32(255 * fraction) << 24
                 vertices[i].color = hex & 0x00FFFFFF | alpha
@@ -130,7 +153,6 @@ import RealityKit
         }
         
         // Define the bounding box
-        // (i have no idea why this works so don't touch it)
         let distance = 4 * Float(node.position.magnitude / size)
         let meshBounds = BoundingBox(
             min: [-distance, -distance, -distance],
@@ -147,6 +169,31 @@ import RealityKit
         ])
 
         return mesh
+    }
+    
+    private func setAngles() {
+        let fraction = (node.object?.size ?? node.size) / (node.position.magnitude)
+        let minAngle = atan(fraction)
+        let fadeFactor: Double = 10.0 // orbit will reach full opacity at at this factor of the object size
+        let fadeAngle = atan(fadeFactor * fraction)
+        
+        let param: Double = 0.7
+        let power: Double = 2.0
+        
+        let fadeAngles = (0..<fadeSegments).map { i in
+            let t = Double(i) / Double(fadeSegments-1)
+            return minAngle + (fadeAngle - minAngle) * t
+        }
+        let angles = (fadeSegments..<segments).map { i in
+            let t = Double(i - fadeSegments) / Double(segments - fadeSegments)
+            if t < param {
+                return 0.5 * pow(t / param, power) * (2 * Double.pi - fadeAngle) + fadeAngle
+            } else {
+                return (0.5 + (t - param) * (0.5 / (1 - param))) * (2 * Double.pi - fadeAngle) + fadeAngle
+            }
+        }
+        
+        self.angles = fadeAngles + angles
     }
 }
 

@@ -23,6 +23,10 @@ struct Navigator<Content: View>: View {
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Environment(\.verticalSizeClass) private var verticalSizeClass
+    
+    #elseif os(macOS)
+    private let verticalSizeClass: UserInterfaceSizeClass = .regular
+    private let horizontalSizeClass: UserInterfaceSizeClass = .regular
 
     #elseif os(visionOS)
     @Environment(\.dismissImmersiveSpace) private var dismissImmersiveSpace
@@ -123,28 +127,7 @@ struct Navigator<Content: View>: View {
             #elseif os(macOS)
             GeometryReader { geometry in
                 HStack(spacing: 0) {
-                    if showDetails {
-                        details()
-                            .frame(maxWidth: min(geometry.size.width * 0.4, 350), maxHeight: .infinity)
-                            .overlay(alignment: .topTrailing) {
-                                XButton {
-                                    withAnimation {
-                                        showDetails = false
-                                    }
-                                }
-                                .padding(8)
-                            }
-                        Divider()
-                            .ignoresSafeArea(.all)
-                    }
                     content()
-                        .overlay(alignment: .top) {
-                            Header(showSettings: $showSettings, showSearch: $showSearch)
-                        }
-                        .overlay(alignment: .bottom) {
-                            Toolbar(showDetails: $showDetails, showList: $showList)
-                                .padding(.bottom, 10)
-                        }
                 }
                 .preferredColorScheme(.dark)
             }

@@ -8,7 +8,6 @@
 import SwiftUI
 import PlanetariaData
 
-#if os(iOS) || os(tvOS) || os(visionOS)
 struct Settings: View {
     
     @EnvironmentObject var simulation: Simulation
@@ -57,6 +56,7 @@ struct Settings: View {
                     }
                 }
                 
+                #if os(iOS) || os(tvOS) || os(visionOS)
                 Section {
                     Button {
                         guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1546887479?action=write-review")
@@ -74,6 +74,7 @@ struct Settings: View {
                         ActivityViewController(activityItems: [URL(string: "https://apps.apple.com/us/app/planetaria/id1546887479")!])
                     })
                 }
+                #endif
                 
                 Section {} header: {
                     VStack {
@@ -90,6 +91,7 @@ struct Settings: View {
                 }
             }
             .navigationTitle("Settings")
+            #if os(iOS) || os(tvOS) || os(visionOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -98,6 +100,7 @@ struct Settings: View {
                     }
                 }
             }
+            #endif
         }
         .tint(.mint)
     }
@@ -112,6 +115,7 @@ struct Settings: View {
     }
 }
 
+#if os(iOS) || os(tvOS) || os(visionOS)
 struct ActivityViewController: UIViewControllerRepresentable {
 
     var activityItems: [Any]
