@@ -90,6 +90,7 @@ struct Settings: View {
                     .textCase(nil)
                 }
             }
+            .tint(.mint)
             .navigationTitle("Settings")
             #if os(iOS) || os(tvOS) || os(visionOS)
             .navigationBarTitleDisplayMode(.inline)
@@ -102,7 +103,6 @@ struct Settings: View {
             }
             #endif
         }
-        .tint(.mint)
     }
     
     private func row(_ text: String) -> some View {

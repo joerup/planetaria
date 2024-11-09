@@ -16,74 +16,34 @@ struct ObjectDetails: View {
     
     var object: ObjectNode
     
+    private var cutoffWidth: CGFloat = 400
+    
+    init(object: ObjectNode) {
+        self.object = object
+    }
+    
     var body: some View {
-        ScrollSheet(title: object.name) {
-            page
+        GeometryReader { geometry in
+            ScrollSheet(title: object.name, subtitle: object.subtitle, icon: object.name) {
+                page(size: geometry.size)
+            }
         }
-        .tint(object.color)
     }
     
     @ViewBuilder
-    private var page: some View {
-        Text(object.subtitle)
-            .font(.system(.headline, design: .default, weight: .medium))
-            .foregroundStyle(.secondary)
-            .padding(.bottom)
+    private func page(size: CGSize) -> some View {
+        let large = size.width > cutoffWidth
         if let properties = object.properties {
-            #if os(iOS) || os(macOS)
             VStack(alignment: .leading, spacing: 15) {
-                photoRow(photos: properties.photos)
+                Divider()
                 description(properties: properties)
-                Divider()
-                majorProperties(properties: properties)
-                Divider()
-                if properties.orbitalElementsAvailable {
-                    orbitalProperties(properties: properties)
-                    Divider()
-                }
-                if properties.structuralElementsAvailable {
-                    structuralProperties(properties: properties)
-                    Divider()
-                }
+                majorProperties(properties: properties, large: large)
+                otherProperties(properties: properties, large: large)
+                photoRow(photos: properties.photos)
                 Footnote()
             }
             .padding(.bottom)
-            #elseif os(visionOS)
-            VStack(alignment: .leading, spacing: 15) {
-                photoRow(photos: properties.photos)
-                description(properties: properties)
-                Divider()
-                majorProperties(properties: properties, large: true)
-                Divider()
-                HStack(alignment: .top, spacing: 25) {
-                    if properties.orbitalElementsAvailable {
-                        orbitalProperties(properties: properties)
-                    }
-                    if properties.structuralElementsAvailable {
-                        structuralProperties(properties: properties)
-                    }
-                }
-                Divider()
-                Footnote()
-            }
-            .padding(.bottom)
-            #endif
-        }
-    }
-    
-    @ViewBuilder
-    private func photoRow(photos: [Photo]) -> some View {
-        if !photos.isEmpty {
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(photos, id: \.name) { photo in
-                        PhotoView(photo: photo)
-                    }
-                }
-                .padding(.vertical, 5)
-                .padding(.horizontal, -1)
-            }
-            .frame(height: 125)
+            .tint(object.color)
         }
     }
     
@@ -103,6 +63,7 @@ struct ObjectDetails: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
         }
+        Divider()
     }
     
     @ViewBuilder
@@ -112,12 +73,39 @@ struct ObjectDetails: View {
             PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
             PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod)
             PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod)
-            PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.currentDistance?.local())
-            PropertyText(type: .large, name: "Current Speed", property: properties.currentSpeed?.local())
+            PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.semimajorAxis?.local())
+            PropertyText(type: .large, name: "Average Speed", property: properties.averageSpeed?.local())
             PropertyText(type: .large, name: "Axial Tilt", property: properties.axialTilt)
             PropertyText(type: .large, name: "Temperature", property: properties.temperature)
         }
         .padding(.horizontal, -2)
+        Divider()
+    }
+    
+    @ViewBuilder
+    private func otherProperties(properties: ObjectNode.Properties, large: Bool = false) -> some View {
+        if large {
+            HStack(alignment: .top, spacing: 25) {
+                if properties.orbitalElementsAvailable {
+                    orbitalProperties(properties: properties)
+                }
+                if properties.structuralElementsAvailable {
+                    structuralProperties(properties: properties)
+                }
+            }
+            if properties.orbitalElementsAvailable || properties.structuralElementsAvailable {
+                Divider()
+            }
+        } else {
+            if properties.orbitalElementsAvailable {
+                orbitalProperties(properties: properties)
+                Divider()
+            }
+            if properties.structuralElementsAvailable {
+                structuralProperties(properties: properties)
+                Divider()
+            }
+        }
     }
     
     @ViewBuilder
@@ -145,6 +133,23 @@ struct ObjectDetails: View {
             PropertyText(type: .row, name: "Density", property: properties.density)
             PropertyText(type: .row, name: "Surface Gravity", property: properties.gravity)
             PropertyText(type: .row, name: "Escape Velocity", property: properties.escapeVelocity)
+        }
+    }
+    
+    @ViewBuilder
+    private func photoRow(photos: [Photo]) -> some View {
+        if !photos.isEmpty {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(photos, id: \.name) { photo in
+                        PhotoView(photo: photo)
+                    }
+                }
+                .padding(.vertical, 5)
+                .padding(.horizontal, -1)
+            }
+            .frame(height: 125)
+            Divider()
         }
     }
     

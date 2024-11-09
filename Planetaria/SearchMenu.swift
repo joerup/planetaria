@@ -66,14 +66,22 @@ struct SearchMenu: View {
     
     private var resultsList: some View {
         ScrollView {
-            if !results.isEmpty {
+            if results.isEmpty {
+                Text("No results")
+                    .font(.callout)
+                    .foregroundStyle(.gray)
+                    .opacity(searchText == "" ? 0 : 0.6)
+                    .padding(.bottom)
+                    .padding()
+            }
+            else {
                 VStack {
                     ForEach(results) { object in
                         Button {
                             simulation.selectObject(object)
                             dismiss()
                         } label: {
-                            SelectionRow(name: object.name, icon: object.name)
+                            SelectionRow(title: object.name, subtitle: object.subtitle, icon: object.name)
                         }
                     }
                 }

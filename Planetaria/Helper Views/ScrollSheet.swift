@@ -14,6 +14,8 @@ struct ScrollSheet<Content: View>: View {
     @Environment(\.dismiss) var dismiss
     
     var title: String
+    var subtitle: String?
+    var icon: String?
     
     var content: () -> Content
     
@@ -30,24 +32,20 @@ struct ScrollSheet<Content: View>: View {
                             .opacity(0)
                             .frame(height: 1)
                             .id(0)
-                        Text(title)
-                            .font(.system(.title, design: .default, weight: .semibold))
-                            .padding(.top, 8)
+                        header()
                             .id(1)
                         content()
                             .id(2)
                     }
                     .scrollTargetLayout()
-                    .padding(.horizontal)
+                    .safeAreaPadding(.horizontal)
                     .padding(.top)
                 }
                 .scrollPosition(id: $scrollPosition)
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(title)
-                            .font(.system(.title, design: .default, weight: .semibold))
-                            .padding(.top, 8)
+                        header()
                         content()
                     }
                     .padding(.horizontal)
@@ -83,6 +81,7 @@ struct ScrollSheet<Content: View>: View {
         #elseif os(macOS)
         NavigationStack {
             VStack(alignment: .leading) {
+                header()
                 content()
             }
             .navigationTitle(title)
@@ -97,12 +96,10 @@ struct ScrollSheet<Content: View>: View {
         ZStack(alignment: .top) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(title)
-                        .font(.system(.largeTitle, design: .default, weight: .semibold))
-                        .padding(.top, 8)
+                    header()
                     content()
                 }
-                .padding(.horizontal)
+                .safeAreaPadding(.horizontal)
                 .padding(.top)
             }
             .overlay(alignment: .topTrailing) {
@@ -112,6 +109,30 @@ struct ScrollSheet<Content: View>: View {
         }
         
         #endif
+    }
+    
+    private func header() -> some View {
+        HStack(spacing: 0) {
+            if let icon {
+                ObjectIcon(icon: icon, size: 60)
+                    .scaleEffect(1.2)
+                    .padding(.leading, -5)
+                    .padding(.trailing, 12)
+                    .offset(y: -1)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text(title)
+                    .font(.system(.title, design: .default, weight: .semibold))
+                    .padding(.top, 8)
+                    .id(1)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(.system(.body, design: .default, weight: .medium))
+                        .foregroundStyle(.secondary)
+                        .padding(.bottom)
+                }
+            }
+        }
     }
     
     private var closeButton: some View {

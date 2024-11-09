@@ -101,6 +101,7 @@ struct Navigator<Content: View>: View {
                                             .frame(maxWidth: .infinity)
                                             .padding(.top, 4)
                                     }
+                                    .padding(8)
                                 } else {
                                     HStack {
                                         objectLabel(object)
@@ -122,6 +123,7 @@ struct Navigator<Content: View>: View {
                         }
                     }
                     .preferredColorScheme(.dark)
+                    .ignoresSafeArea(.keyboard)
             }
             
             #elseif os(macOS)

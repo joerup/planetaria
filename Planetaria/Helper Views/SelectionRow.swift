@@ -10,7 +10,8 @@ import PlanetariaData
 
 struct SelectionRow: View {
     
-    var name: String
+    var title: String
+    var subtitle: String?
     var icon: String?
     
     var body: some View {
@@ -20,7 +21,7 @@ struct SelectionRow: View {
                 ObjectIcon(icon: icon, size: 30)
                     .scaleEffect(1.2)
             }
-            Text(name)
+            Text(title)
                 .font(.title3)
                 .foregroundStyle(.primary)
             Spacer()
@@ -30,29 +31,41 @@ struct SelectionRow: View {
         #else
         HStack {
             if let icon {
-                ObjectIcon(icon: icon, size: 30)
+                ObjectIcon(icon: icon, size: 36)
                     .scaleEffect(1.2)
                     .padding(.vertical, -10)
-                    .padding(.trailing, 5)
                     .offset(y: 1)
             }
-            Text(name)
-                .lineLimit(0)
-                .font(.system(.title2, weight: .semibold))
-                .foregroundStyle(.primary)
+            if let subtitle {
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .lineLimit(0)
+                        .font(.system(.headline, weight: .semibold))
+                        .foregroundStyle(.primary)
+                    Text(subtitle)
+                        .font(.system(.caption, design: .default, weight: .medium))
+                        .foregroundStyle(.secondary)
+                }
+            } else {
+                Text(title)
+                    .lineLimit(0)
+                    .font(.system(.title2, weight: .semibold))
+                    .foregroundStyle(.primary)
+            }
             Spacer()
             Image(systemName: "chevron.forward")
-                .font(.title3)
+                .font(.headline)
                 .imageScale(.small)
                 .foregroundColor(.init(white: 0.6))
                 .padding(.trailing, 5)
         }
         #if !os(visionOS)
-        .padding()
+        .padding(.horizontal, 12)
+        .padding(.vertical, subtitle == nil ? 15 : 12)
         .background(.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 15))
         #else
-        .padding(.vertical)
+        .padding(.vertical, subtitle == nil ? 16 : 0)
         #endif
         #endif
     }

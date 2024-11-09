@@ -43,7 +43,7 @@ struct SystemDetails: View {
                     simulation.selectObject(child)
                     dismiss()
                 } label: {
-                    SelectionRow(name: child.name, icon: child.name)
+                    SelectionRow(title: child.name, icon: child.name)
                 }
                 .disabled(simulation.isSelected(child))
             }
@@ -55,7 +55,7 @@ struct SystemDetails: View {
                     simulation.selectObject(child)
                     dismiss()
                 } label: {
-                    SelectionRow(name: child.name, icon: child.name)
+                    SelectionRow(title: child.name, icon: child.name)
                 }
                 .disabled(simulation.isSelected(child))
             }
@@ -68,7 +68,7 @@ struct SystemDetails: View {
                         simulation.selectObject(child)
                         dismiss()
                     } label: {
-                        SelectionRow(name: child.name, icon: child.name)
+                        SelectionRow(title: child.name, icon: child.name)
                     }
                     .disabled(simulation.isSelected(child))
                 }

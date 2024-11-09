@@ -315,7 +315,9 @@ final public class Simulation: ObservableObject {
     public func queryObjects(_ string: String) -> [ObjectNode] {
         guard !string.isEmpty else { return [] }
         let query = string.lowercased()
-        return allObjects.filter { $0.name.lowercased().starts(with: query) }
+        return allObjects.filter({ $0.name.lowercased().starts(with: query) })
+            .sorted(by: { $0.category < $1.category })
+            .sorted(by: { $0.rank > $1.rank })
     }
     
     

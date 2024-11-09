@@ -9,7 +9,7 @@ import Foundation
 
 extension Node {
     
-    public enum Category: String, Codable {
+    public enum Category: String, Codable, Equatable, Comparable {
         case system
         case star
         case planet
@@ -47,6 +47,24 @@ extension Node {
             case .planet, .asteroid, .tno, .moon:
                 return .moon
             }
+        }
+        
+        private var id: Int {
+            switch self {
+            case .system:   0
+            case .star:     1
+            case .planet:   2
+            case .asteroid: 3
+            case .tno:      4
+            case .moon:     5
+            }
+        }
+        
+        public static func == (lhs: Category, rhs: Category) -> Bool {
+            lhs.rawValue == rhs.rawValue
+        }
+        public static func < (lhs: Category, rhs: Category) -> Bool {
+            return lhs.id < rhs.id
         }
     }
 

@@ -41,6 +41,7 @@ extension ObjectNode {
         
         public var orbitalPeriod: Value<TimeU>?
         public var rotationPeriod: Value<TimeU>?
+        public var averageSpeed: Value<SpeedU>?
         public var axialTilt: Value<AngleU>?
         public var temperature: Value<TemperatureU>?
         
@@ -95,6 +96,11 @@ extension ObjectNode {
             self.escapeVelocity = Value(escapeVelocity, .km / .s)
             
             self.orbitalPeriod = Value(orbitalPeriod, .d)?.dynamic()
+            
+            if let semimajorAxis, let orbitalPeriod {
+                let speed = 2 * Double.pi * semimajorAxis / (orbitalPeriod * 86400)
+                self.averageSpeed = Value(speed, .km / .s)
+            }
             
             self.semimajorAxis = Value(semimajorAxis, .km)?.dynamicDistance(for: category)
             self.eccentricity = Value(eccentricity)

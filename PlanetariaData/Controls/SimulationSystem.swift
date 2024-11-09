@@ -90,6 +90,8 @@ class SimulationSystem: System {
                     node.rank == .primary ? 1.0 : opacitySecondary
                 } else if (noSelection || (simulation.stateSystem && simulation.isSelected((node.system ?? node).hostNode))) && simulation.isInSystem(node.system ?? node) {
                     node.rank == .primary ? 1.0 : opacitySecondary
+                } else if simulation.isSystem(node.system ?? node) {
+                    opacityPrimary
                 } else {
                     node.rank == .primary ? opacityPrimary : opacityTertiary
                 }
@@ -100,11 +102,11 @@ class SimulationSystem: System {
 
             let orbitSize = Float(scale * (node.system ?? node).position.magnitude)
             let physicalSize = Float(scale * node.size)
-            let physicalObjectSize = Float(scale * (node.object ?? node).size)
+            let physicalObjectTotalSize = Float(scale * (node.object ?? node).totalSize)
             let isCentral = node.system != nil && node.system?.orbit == nil // edge case for Sun
             
             let fadeFractionFactor: Float = simulation.viewType == .immersive ? 100 : 10
-            let fadeFraction: Float = max(0.0, min(1.0, 1.0 - (physicalObjectSize - targetSize) / (fadeFractionFactor * targetSize - targetSize)))
+            let fadeFraction: Float = max(0.0, min(1.0, 1.0 - (physicalObjectTotalSize - targetSize) / (fadeFractionFactor * targetSize - targetSize)))
             
             let bodyVisible = physicalSize >= minimumSize || (node.object?.luminosity ?? 0) > 0
             let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode
