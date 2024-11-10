@@ -63,6 +63,7 @@ public class Node: Decodable {
     internal func setState(_ state: StateVector) {
         self.position = state.position
         self.velocity = state.velocity
+        self.elapsedTime = 0
     }
     
     internal func setOrbitAndRotation(time: Date) {

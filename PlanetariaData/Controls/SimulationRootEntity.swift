@@ -67,15 +67,17 @@ class SimulationRootEntity: Entity {
     }
     
     // Set entity sizes based on view type and environment
-    func setSizes(_ size: CGSize) {
+    func setSizes(_ size: CGSize, _ dynamicType: DynamicTypeSize) {
         guard let simulation else { return }
         pixelSize = CGFloat(simulation.size) / min(size.width, size.height)
         
         switch simulation.viewType {
-        case .fixed, .augmented:
-            self.entityThickness = 4.0 / Float(size.height)
+        case .fixed:
+            self.entityThickness = dynamicType.scaleFactor * 4.0 / Float(size.height)
+        case .augmented:
+            self.entityThickness = dynamicType.scaleFactor * 0.005
         case .immersive:
-            self.entityThickness = 0.002
+            self.entityThickness = dynamicType.scaleFactor * 0.002
         }
     }
     

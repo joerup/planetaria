@@ -90,7 +90,7 @@ import RealityKit
         // Calculate the object offset (if there is one) to align the trail to the body's center
         // (skip this in certain cases, like a binary system - should align to system barycenter)
         let objectOffset: SIMD3<Float> =
-        if let object = node.object, node != object, object.orbit != nil, object.position.magnitude <= node.size {
+        if let object = node.object, node != object, object.orbit != nil, object.name == "Earth" {
             orientation.act((object.position * scale / size).toFloat())
         } else {
             .zero

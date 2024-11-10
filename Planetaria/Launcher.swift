@@ -51,6 +51,7 @@ struct Launcher: View {
             Text("Planetaria")
                 .font(.title)
                 .fontWeight(.bold)
+                .fontDesign(.rounded)
                 .padding()
             ProgressView()
         }
@@ -72,6 +73,7 @@ struct Launcher: View {
             Text("Planetaria")
                 .font(.extraLargeTitle)
                 .fontWeight(.bold)
+                .fontDesign(.rounded)
                 .padding()
             ZStack {
                 Button {
@@ -82,8 +84,10 @@ struct Launcher: View {
                     Text("Enter the Solar System")
                         .font(.title)
                         .fontWeight(.bold)
+                        .fontDesign(.rounded)
                         .padding()
                 }
+                .accessibilityLabel("Enter the Solar System")
                 .padding()
                 .opacity(simulation.isLoaded ? 1 : 0)
                 

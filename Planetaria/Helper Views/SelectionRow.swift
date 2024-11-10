@@ -41,16 +41,22 @@ struct SelectionRow: View {
                     Text(title)
                         .lineLimit(0)
                         .font(.system(.headline, weight: .semibold))
+                        .fontDesign(.rounded)
                         .foregroundStyle(.primary)
+                        .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
                     Text(subtitle)
                         .font(.system(.caption, design: .default, weight: .medium))
+                        .fontDesign(.rounded)
                         .foregroundStyle(.secondary)
+                        .dynamicTypeSize(..<DynamicTypeSize.accessibility1)
                 }
             } else {
                 Text(title)
                     .lineLimit(0)
                     .font(.system(.title2, weight: .semibold))
+                    .fontDesign(.rounded)
                     .foregroundStyle(.primary)
+                    .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
             }
             Spacer()
             Image(systemName: "chevron.forward")
@@ -58,6 +64,7 @@ struct SelectionRow: View {
                 .imageScale(.small)
                 .foregroundColor(.init(white: 0.6))
                 .padding(.trailing, 5)
+                .dynamicTypeSize(..<DynamicTypeSize.xxxLarge)
         }
         #if !os(visionOS)
         .padding(.horizontal, 12)

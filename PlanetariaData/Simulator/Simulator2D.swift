@@ -12,8 +12,11 @@ import RealityKit
 public struct Simulator: View {
     
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     
     @ObservedObject private var simulation: Simulation
+    
+    @State private var introDarkness: Double = 1.0
 
     public init(for simulation: Simulation) {
         self.simulation = simulation
@@ -36,15 +39,19 @@ public struct Simulator: View {
                 }
             }
             .onAppear {
-                simulation.rootEntity.setSizes(geometry.size)
+                simulation.rootEntity.setSizes(geometry.size, dynamicTypeSize)
                 updateAnchorScale(geometry.size)
             }
             .onChange(of: geometry.size) { size in
-                simulation.rootEntity.setSizes(size)
+                simulation.rootEntity.setSizes(size, dynamicTypeSize)
                 updateAnchorScale(size)
             }
+            .onChange(of: dynamicTypeSize) { dynamicTypeSize in
+                simulation.rootEntity.setSizes(geometry.size, dynamicTypeSize)
+                updateAnchorScale(geometry.size)
+            }
             .onChange(of: simulation.viewType) { mode in
-                simulation.rootEntity.setSizes(geometry.size)
+                simulation.rootEntity.setSizes(geometry.size, dynamicTypeSize)
                 simulation.resetPitch()
                 updateAnchorScale(geometry.size)
             }
@@ -53,6 +60,15 @@ public struct Simulator: View {
             }
         }
         .ignoresSafeArea()
+        .overlay {
+            Color.black
+                .opacity(introDarkness)
+                .onAppear {
+                    withAnimation {
+                        introDarkness = 0.0
+                    }
+                }
+        }
     }
     
     private let translationAngleFactor: CGFloat = .pi / 400

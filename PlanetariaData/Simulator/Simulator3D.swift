@@ -12,6 +12,7 @@ import RealityKit
 public struct Simulator: View {
     
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     @ObservedObject private var simulation: Simulation
 
@@ -29,7 +30,10 @@ public struct Simulator: View {
             .simultaneousGesture(zoomGesture)
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
             .onAppear {
-                simulation.rootEntity.setSizes(.init(width: 2 * geometry.size.width, height: 2 * geometry.size.height))
+                simulation.rootEntity.setSizes(.init(width: 2 * geometry.size.width, height: 2 * geometry.size.height), dynamicTypeSize)
+            }
+            .onChange(of: dynamicTypeSize) { _, dynamicTypeSize in
+                simulation.rootEntity.setSizes(.init(width: 2 * geometry.size.width, height: 2 * geometry.size.height), dynamicTypeSize)
             }
             .onChange(of: scenePhase) { _, _ in
                 Entity.registerAll()

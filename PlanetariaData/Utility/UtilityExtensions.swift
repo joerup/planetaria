@@ -174,7 +174,7 @@ public extension Sequence where Element: Hashable {
 public extension Date {
     var string: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy MMM dd HH:mm:ss"
+        formatter.dateFormat = "yyyy MMM dd HH:mm"
         return formatter.string(from: self)
     }
     
@@ -328,4 +328,37 @@ public extension SIMD3<Double> {
 
 enum GeneralError: Error {
     case somethingWentWrong
+}
+
+
+extension DynamicTypeSize {
+    /// Returns a scale factor based on the dynamic type size.
+    var scaleFactor: Float {
+        switch self {
+        case .xSmall:
+            return 0.8
+        case .small:
+            return 0.9
+        case .medium, .large:
+            return 1.0
+        case .xLarge:
+            return 1.1
+        case .xxLarge:
+            return 1.2
+        case .xxxLarge:
+            return 1.3
+        case .accessibility1:
+            return 1.4
+        case .accessibility2:
+            return 1.6
+        case .accessibility3:
+            return 1.8
+        case .accessibility4:
+            return 2.0
+        case .accessibility5:
+            return 2.2
+        @unknown default:
+            return 1.0
+        }
+    }
 }

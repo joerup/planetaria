@@ -166,7 +166,7 @@ class SimulationSystem: System {
             scale = size
             orientation = initialOrientation
             offset = initialOffset
-            center = [0,0.3,-0.6] * Float(size / initialScale)
+            center = [0,0.45,-0.9] * Float(size / initialScale)
         }
         
         return (scale, orientation, offset, center)

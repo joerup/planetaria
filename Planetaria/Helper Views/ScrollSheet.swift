@@ -39,7 +39,7 @@ struct ScrollSheet<Content: View>: View {
                     }
                     .scrollTargetLayout()
                     .safeAreaPadding(.horizontal)
-                    .padding(.top)
+                    .padding(.top, 8)
                 }
                 .scrollPosition(id: $scrollPosition)
             } else {
@@ -49,7 +49,7 @@ struct ScrollSheet<Content: View>: View {
                         content()
                     }
                     .padding(.horizontal)
-                    .padding(.top)
+                    .padding(.top, 8)
                 }
             }
             VStack(spacing: 0) {
@@ -84,11 +84,10 @@ struct ScrollSheet<Content: View>: View {
                 header()
                 content()
             }
-            .navigationTitle(title)
-            .toolbar {
-                ToolbarItem {
-                    closeButton
-                }
+            .padding()
+            .overlay(alignment: .topTrailing) {
+                closeButton
+                    .padding(8)
             }
         }
         
@@ -123,15 +122,18 @@ struct ScrollSheet<Content: View>: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
                     .font(.system(.title, design: .default, weight: .semibold))
+                    .fontDesign(.rounded)
                     .padding(.top, 8)
                     .id(1)
                 if let subtitle {
                     Text(subtitle)
                         .font(.system(.body, design: .default, weight: .medium))
+                        .fontDesign(.rounded)
                         .foregroundStyle(.secondary)
                         .padding(.bottom)
                 }
             }
+            .dynamicTypeSize(..<DynamicTypeSize.xxxLarge)
         }
     }
     
@@ -139,6 +141,7 @@ struct ScrollSheet<Content: View>: View {
         ControlButton(icon: "xmark") {
             dismiss()
         }
+        .accessibilityLabel("Close")
     }
 }
 

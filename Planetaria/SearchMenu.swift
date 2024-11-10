@@ -19,7 +19,7 @@ struct SearchMenu: View {
 
     var body: some View {
         VStack {
-            #if os(iOS)
+            #if os(iOS) || os(macOS)
             HStack(alignment: .top, spacing: 8) {
                 searchBar
                     .padding()
@@ -54,6 +54,7 @@ struct SearchMenu: View {
     
     private var searchBar: some View {
         TextField("Search for any object", text: $searchText)
+            .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
             .focused($isFocused)
             .tint(.mint)
             .onChange(of: searchText) { text in
@@ -71,6 +72,7 @@ struct SearchMenu: View {
                     .font(.callout)
                     .foregroundStyle(.gray)
                     .opacity(searchText == "" ? 0 : 0.6)
+                    .dynamicTypeSize(..<DynamicTypeSize.accessibility1)
                     .padding(.bottom)
                     .padding()
             }

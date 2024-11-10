@@ -33,15 +33,17 @@ struct Acknowledgements: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text(.init(string))
-                            .font(.system(.callout, design: .rounded))
+                            .font(.callout)
                             .foregroundColor(.white)
                             .padding(.horizontal, 2)
+                            .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
                     }
                     Spacer()
                 }
                 .padding()
             }
             .navigationTitle("Acknowledgements")
+            .tint(.mint)
             #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -57,7 +59,6 @@ struct Acknowledgements: View {
             }
             #endif
         }
-        .tint(.mint)
     }
 }
 

@@ -32,6 +32,7 @@ struct SystemDetails: View {
         ScrollSheet(title: "\(system.name) System") {
             list
         }
+        .fontDesign(.rounded)
     }
     
     private var list: some View {
@@ -85,7 +86,9 @@ struct SystemDetails: View {
         Text(title)
             .textCase(.uppercase)
             .fontWeight(.semibold)
+            .fontDesign(.rounded)
             .foregroundStyle(.secondary)
+            .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
             #if os(macOS)
             .font(.headline)
             .padding(.bottom, 5)

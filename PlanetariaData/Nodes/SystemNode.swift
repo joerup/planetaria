@@ -102,10 +102,23 @@ public class SystemNode: Node {
     }
     
     internal func setStep() {
-        let minStep = children.filter({ $0 != object }).compactMap(\.timeStep).min() ?? 1.0
+        // find the min timestep in the system
+        var minStep = children.filter({ $0 != object }).compactMap(\.timeStep).min() ?? 1.0
+        
+        // set the host object's timestep since it wasn't able to set before this
         if let object, object.timeStep == 0 {
             object.timeStep = minStep
         }
+        
+        // decrease timesteps for binary systems because they are prone to larger error
+        if children.contains(where: { object?.hostNode == $0 }) {
+            minStep /= 10
+            for child in children {
+                child.timeStep /= 10
+            }
+        }
+        
+        // set the system timestep and recursively set for sub-systems
         systemTimeStep = minStep
         for system in childSystems {
             system.setStep()

@@ -52,39 +52,38 @@ struct Navigator<Content: View>: View {
             GeometryReader { geometry in
                 content()
                     .overlay(alignment: .top) {
-                        HStack {
-                            settingsButton
-                            arButton
-                            Group {
-                                if isCompact {
+                        VStack(spacing: 0) {
+                            HStack(alignment: .top) {
+                                settingsButton
+                                arButton
+                                VStack(spacing: 0) {
                                     clock
-                                        .overlay(alignment: .top) {
-                                            if showTimeControls {
-                                                timeControls
-                                                    .padding(.horizontal)
-                                                    .background(Color(white: 0.15).opacity(0.5))
-                                                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                                                    .frame(maxWidth: .infinity)
-                                            }
-                                        }
-                                } else {
-                                    clock
-                                        .popover(isPresented: $showTimeControls) {
-                                            timeControls
-                                                .padding(.horizontal)
-                                        }
+                                    if !isCompact && showTimeControls {
+                                        timeControls
+                                            .padding(.bottom, 4)
+                                            .padding(.top, -5)
+                                    }
                                 }
+                                .padding(.horizontal)
+                                .background(Color(white: 0.15).opacity(0.5))
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                .frame(maxWidth: .infinity)
+                                if let system = simulation.selectedSystem {
+                                    listButton(system)
+                                }
+                                searchButton
                             }
-                            .padding(.horizontal)
-                            .background(Color(white: 0.15).opacity(0.5))
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                            .frame(maxWidth: .infinity)
-                            if let system = simulation.selectedSystem {
-                                listButton(system)
+                            if isCompact && showTimeControls {
+                                timeControls
+                                    .padding(.horizontal, 8)
+                                    .frame(minHeight: 40)
+                                    .background(Color(white: 0.15).opacity(0.5))
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .padding(.vertical, 8)
                             }
-                            searchButton
                         }
                         .padding(.horizontal)
+                        .padding(.top, verticalSizeClass == .regular ? 0 : 2)
                     }
                     .overlay(alignment: .bottom) {
                         if let object = simulation.selectedObject {
@@ -93,7 +92,7 @@ struct Navigator<Content: View>: View {
                                     VStack {
                                         HStack(alignment: .top) {
                                             objectLabel(object)
-                                            Spacer(minLength: 0)
+                                            Spacer(minLength: 8)
                                             infoButton(object)
                                             closeButton
                                         }
@@ -127,12 +126,40 @@ struct Navigator<Content: View>: View {
             }
             
             #elseif os(macOS)
-            GeometryReader { geometry in
-                HStack(spacing: 0) {
-                    content()
+            content()
+                .overlay(alignment: .bottom) {
+                    if let object = simulation.selectedObject {
+                        HStack {
+                            objectLabel(object)
+                            Spacer()
+                            selectorButtons()
+                            infoButton(object)
+                            closeButton
+                        }
+                        .padding(8)
+                        .padding(.horizontal, isCompact ? 0 : 8)
+                        .background(Color(white: 0.15).opacity(0.5))
+                        .clipShape(RoundedRectangle(cornerRadius: 30))
+                        .padding(.horizontal)
+                        .frame(maxWidth: 750)
+                        .padding()
+                    }
+                }
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigation) {
+                        settingsButton
+                    }
+                    ToolbarItemGroup(placement: .principal) {
+                        clock
+                    }
+                    ToolbarItemGroup(placement: .primaryAction) {
+                        if let system = simulation.selectedSystem {
+                            listButton(system)
+                        }
+                        searchButton
+                    }
                 }
                 .preferredColorScheme(.dark)
-            }
             
             #elseif os(visionOS)
             HStack {
@@ -203,6 +230,7 @@ struct Navigator<Content: View>: View {
                     .lineLimit(0)
                     .padding(.bottom, 2)
             }
+            .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
         }
     }
     
@@ -210,6 +238,7 @@ struct Navigator<Content: View>: View {
         ControlButton(icon: "info", isActive: showDetails) {
             showDetails.toggle()
         }
+        .accessibilityLabel("Show Info for \(object.name)")
         .sheet(isPresented: $showDetails) {
             ObjectDetails(object: object)
         }
@@ -219,6 +248,7 @@ struct Navigator<Content: View>: View {
         ControlButton(icon: "list.bullet", isActive: showList) {
             showList.toggle()
         }
+        .accessibilityLabel("Show Object List")
         .popover(isPresented: $showList) {
             SystemDetails(system: system)
                 .frame(minWidth: 350)
@@ -229,6 +259,7 @@ struct Navigator<Content: View>: View {
         ControlButton(icon: "magnifyingglass", isActive: showSearch) {
             showSearch.toggle()
         }
+        .accessibilityLabel("Search")
         .popover(isPresented: $showSearch) {
             SearchMenu()
                 .frame(minWidth: 350)
@@ -239,6 +270,7 @@ struct Navigator<Content: View>: View {
         ControlButton(icon: "gearshape.fill", isActive: showSettings) {
             showSettings.toggle()
         }
+        .accessibilityLabel("Settings")
         .sheet(isPresented: $showSettings) {
             Settings()
         }
@@ -251,6 +283,7 @@ struct Navigator<Content: View>: View {
                 await dismissImmersiveSpace()
             }
         }
+        .accessibilityLabel("Home")
     }
     #endif
     
@@ -259,6 +292,7 @@ struct Navigator<Content: View>: View {
         ControlButton(icon: "cube.transparent\(simulation.viewType == .augmented ? ".fill" : "")", isActive: simulation.viewType == .augmented) {
             simulation.viewType = simulation.viewType == .augmented ? .fixed : .augmented
         }
+        .accessibilityLabel("Change AR Mode")
     }
     #endif
     
@@ -266,6 +300,7 @@ struct Navigator<Content: View>: View {
         ControlButton(icon: "xmark") {
             simulation.selectObject(nil)
         }
+        .accessibilityLabel("Deselect")
     }
     
     private var clock: some View {
@@ -278,7 +313,9 @@ struct Navigator<Content: View>: View {
                 .lineLimit(0)
                 .minimumScaleFactor(0.5)
                 .foregroundColor(simulation.isRealTime ? .white : simulation.frameRatio < 0 ? .pink : .mint)
+                .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
         }
+        .accessibilityLabel(simulation.time.string)
     }
     
     private func selectorButtons(large: Bool = false) -> some View {
@@ -287,32 +324,53 @@ struct Navigator<Content: View>: View {
                 mediumButton(label: "Orbit", isActive: simulation.stateOrbit) {
                     simulation.selectOrbit()
                 }
+                .accessibilityLabel("Zoom to Orbit")
             }
             if simulation.hasSystem {
                 mediumButton(label: "System", isActive: simulation.stateSystem) {
                     simulation.selectSystem()
                 }
+                .accessibilityLabel("Zoom to System")
             }
             mediumButton(label: "Surface", isActive: simulation.stateSurface) {
                 simulation.selectSurface()
             }
+            .accessibilityLabel("Zoom to Surface")
         }
+        .fontDesign(.rounded)
         #if os(iOS)
         .background(Color.init(white: 0.15).opacity(0.5).cornerRadius(30))
         #endif
     }
     
     private var timeControls : some View {
-        HStack {
+        HStack(spacing: isCompact ? 3 : nil) {
+            simpleButton(icon: "arrow.circlepath") {
+                simulation.resetTime()
+                showTimeControls = false
+            }
+            .accessibilityLabel("Reset Time")
+            .opacity(simulation.isRealTime ? 0 : 0.5)
+            
             simpleButton(icon: "backward\(simulation.frameRatio < -1 ? ".fill" : "")") {
                 simulation.decreaseSpeed()
             }
+            .accessibilityLabel("Decrease Speed")
+            
             simpleButton(icon: "\(simulation.isPaused ? "play" : "pause").fill") {
                 simulation.pause()
             }
+            .accessibilityLabel(simulation.isPaused ? "Play" : "Pause")
+            
             simpleButton(icon: "forward\(simulation.frameRatio > 1 ? ".fill" : "")") {
                 simulation.increaseSpeed()
             }
+            .accessibilityLabel("Increase Speed")
+            
+            simpleButton(icon: "arrow.circlepath") {
+                simulation.resetTime()
+            }
+            .opacity(0)
         }
     }
     
@@ -330,23 +388,31 @@ struct Navigator<Content: View>: View {
         #if os(visionOS)
         Button(action: action) {
             Text(label)
+                .lineLimit(0)
+                .minimumScaleFactor(0.5)
                 .fontWeight(.semibold)
+                .fontDesign(.rounded)
                 .frame(minWidth: 100, minHeight: 40)
         }
         .buttonBorderShape(.capsule)
         .opacity(isActive ? 1 : 0.4)
+        .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
         
         #else
         Button(action: action) {
             Text(label)
+                .lineLimit(0)
+                .minimumScaleFactor(0.5)
                 .font(.callout)
                 .fontWeight(.semibold)
+                .fontDesign(.rounded)
                 .foregroundStyle(.white)
                 .padding(10)
                 .frame(maxWidth: 100, minHeight: 40)
                 .background(Color.init(white: isActive ? 0.3 : 0.15).opacity(0.5).cornerRadius(30))
         }
         .buttonStyle(.plain)
+        .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
         
         #endif
     }
@@ -361,6 +427,7 @@ struct Navigator<Content: View>: View {
                 .frame(minHeight: 40)
         }
         .buttonBorderShape(.capsule)
+        .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
 
         #else
         Button(action: action) {
@@ -370,6 +437,7 @@ struct Navigator<Content: View>: View {
                 .frame(minHeight: 40)
         }
         .buttonStyle(.plain)
+        .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
 
         #endif
     }

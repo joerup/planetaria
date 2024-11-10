@@ -27,6 +27,7 @@ struct ObjectDetails: View {
             ScrollSheet(title: object.name, subtitle: object.subtitle, icon: object.name) {
                 page(size: geometry.size)
             }
+            .fontDesign(.rounded)
         }
     }
     
@@ -39,7 +40,6 @@ struct ObjectDetails: View {
                 description(properties: properties)
                 majorProperties(properties: properties, large: large)
                 otherProperties(properties: properties, large: large)
-                photoRow(photos: properties.photos)
                 Footnote()
             }
             .padding(.bottom)
@@ -70,7 +70,6 @@ struct ObjectDetails: View {
     private func majorProperties(properties: ObjectNode.Properties, large: Bool = false) -> some View {
         let columns = (dynamicTypeSize >= .xxLarge ? 1 : 2) + (large ? 1 : 0)
         LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: columns), spacing: 15) {
-            PropertyText(type: .large, name: "Luminosity", property: properties.luminosity)
             PropertyText(type: .large, name: "Orbital Period", property: properties.orbitalPeriod)
             PropertyText(type: .large, name: "Rotation Period", property: properties.rotationPeriod)
             PropertyText(type: .large, name: "Distance to \((object.system ?? object).hostNode?.name ?? "Host")", property: properties.semimajorAxis?.local())
@@ -84,7 +83,7 @@ struct ObjectDetails: View {
     
     @ViewBuilder
     private func otherProperties(properties: ObjectNode.Properties, large: Bool = false) -> some View {
-        if large {
+        if large && dynamicTypeSize < .xxLarge {
             HStack(alignment: .top, spacing: 25) {
                 if properties.orbitalElementsAvailable {
                     orbitalProperties(properties: properties)

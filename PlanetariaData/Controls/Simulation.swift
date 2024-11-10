@@ -72,6 +72,10 @@ final public class Simulation: ObservableObject {
     @Published public private(set) var isPaused: Bool = false
     public private(set) var isRealTime: Bool = true
     public private(set) var maxFrameRatio: Double = 1E+7
+    private let frameRate: Double = 60
+    
+    private var ephemerideTime: Date = .now
+    private var ephemerides: [Int : StateVector] = [:]
     
     // Settings
     
@@ -115,6 +119,8 @@ final public class Simulation: ObservableObject {
     private let zoomObjectCoefficient: Double = 2.4
     private let zoomOrbitCoefficient: Double = 2.5
     
+    private let introScale: Double = 1E-4
+    
     private var transition: Transition?
     private var animationTime: Double {
         switch viewType {
@@ -124,6 +130,14 @@ final public class Simulation: ObservableObject {
             0.8
         case .immersive:
             1.0
+        }
+    }
+    private var introAnimationTime: Double {
+        switch viewType {
+        case .immersive:
+            7.0
+        default:
+            0.0
         }
     }
     
@@ -185,7 +199,8 @@ final public class Simulation: ObservableObject {
         
         // Load the ephemerides
         status = .loadingEphemerides
-        let ephemerides = try await loadEphemerides(from: ephemerisURL)
+        ephemerides = try await loadEphemerides(from: ephemerisURL)
+        ephemerideTime = time
         for node in root.tree {
             if let stateVector = ephemerides[node.id] {
                 node.setState(stateVector)
@@ -214,6 +229,12 @@ final public class Simulation: ObservableObject {
                 let matchingPhotos = photos.filter({ $0.id == object.id })
                 object.properties?.photos = matchingPhotos
             }
+        }
+        
+        // Set up the opening transition in immersive mode
+        if viewType == .immersive {
+            self.steadyScale = introScale
+            self.transition = Transition(frames: Int(introAnimationTime * frameRate), originalScale: scale, originalFocus: root, targetScale: 1.0, targetFocus: root)
         }
     }
     
@@ -285,12 +306,33 @@ final public class Simulation: ObservableObject {
         }
         // Update the system by a custom rate
         else {
-            var dt = frameRatio/60
+            var dt = frameRatio/frameRate
             dt = min(dt, -time.timeIntervalSince(.reference2050))
             dt = max(dt, -time.timeIntervalSince(.reference2000))
             self.time.addTimeInterval(dt)
             self.root?.advanceSystem(by: dt)
         }
+    }
+    
+    // Set the system to a specific timestamp
+    internal func setTimestamp(_ timestamp: Date) {
+        guard let root, timestamp >= .reference2000, timestamp <= .reference2050 else { return }
+        
+        isPaused = false
+        isRealTime = false
+        
+        // Reset ephemerides
+        for node in root.tree {
+            if let stateVector = ephemerides[node.id] {
+                node.setState(stateVector)
+            }
+            node.rotation?.set(time: ephemerideTime)
+        }
+        
+        // Advance states to the selected timestamp
+        time = timestamp
+        let dt = timestamp.timeIntervalSince(ephemerideTime)
+        root.advanceSystem(by: dt)
     }
     
     // Update the simulation transformations
@@ -330,7 +372,10 @@ final public class Simulation: ObservableObject {
     }
     
     public func increaseSpeed() {
-        isPaused = false
+        if isPaused {
+            frameRatio = 1
+            isPaused = false
+        }
         switch frameRatio {
         case 1: frameRatio = 100
         case -100: frameRatio = 1
@@ -344,7 +389,10 @@ final public class Simulation: ObservableObject {
     }
     
     public func decreaseSpeed() {
-        isPaused = false
+        if isPaused {
+            frameRatio = 1
+            isPaused = false
+        }
         switch frameRatio {
         case 1: frameRatio = -100
         case 100: frameRatio = 1
@@ -355,6 +403,17 @@ final public class Simulation: ObservableObject {
         if abs(frameRatio) >= maxFrameRatio {
             frameRatio = -maxFrameRatio
         }
+    }
+    
+    public func resetTime() {
+        setTimestamp(.now)
+        frameRatio = 1
+        isRealTime = true
+    }
+    
+    public func setTime(_ timestamp: Date) {
+        setTimestamp(timestamp)
+        frameRatio = 1
     }
     
     // Select Buttons
@@ -599,7 +658,7 @@ final public class Simulation: ObservableObject {
         }
         
         // Transition the entities
-        let frames = Int(animationTime * 60)
+        let frames = Int(animationTime * frameRate)
         self.transition = Transition(frames: frames, originalScale: originalScale, originalFocus: originalFocus, originalOffsetAmount: offsetAmount, targetScale: scale, targetFocus: focus)
         
         // Update the saved offset and scale
@@ -668,7 +727,7 @@ final public class Simulation: ObservableObject {
             completedFrames == totalFrames
         }
         
-        init(frames: Int, originalScale: Double, originalFocus: Node?, originalOffsetAmount: Double, targetScale: Double, targetFocus: Node?) {
+        init(frames: Int, originalScale: Double, originalFocus: Node?, originalOffsetAmount: Double = 1.0, targetScale: Double, targetFocus: Node?) {
             self.totalFrames = frames
             self.originalScale = originalScale
             self.originalFocus = originalFocus

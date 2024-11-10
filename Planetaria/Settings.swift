@@ -39,9 +39,6 @@ struct Settings: View {
                     } label: {
                         row("Acknowledgements")
                     }
-                    .sheet(isPresented: $presentAcknowledgements) {
-                        Acknowledgements()
-                    }
                 }
                 
                 Section {
@@ -70,9 +67,6 @@ struct Settings: View {
                     } label: {
                         row("Share the App")
                     }
-                    .sheet(isPresented: self.$presentShare, content: {
-                        ActivityViewController(activityItems: [URL(string: "https://apps.apple.com/us/app/planetaria/id1546887479")!])
-                    })
                 }
                 #endif
                 
@@ -91,18 +85,29 @@ struct Settings: View {
                 }
             }
             .tint(.mint)
+            .fontDesign(.rounded)
             .navigationTitle("Settings")
             #if os(iOS) || os(tvOS) || os(visionOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    ControlButton(icon: "xmark") {
+                    Button {
                         dismiss()
+                    } label: {
+                        Text("Done")
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.mint)
                     }
                 }
             }
             #endif
         }
+        .sheet(isPresented: $presentAcknowledgements) {
+            Acknowledgements()
+        }
+        .sheet(isPresented: self.$presentShare, content: {
+            ActivityViewController(activityItems: [URL(string: "https://apps.apple.com/us/app/planetaria/id1546887479")!])
+        })
     }
     
     private func row(_ text: String) -> some View {

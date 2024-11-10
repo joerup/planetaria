@@ -22,14 +22,27 @@ struct ControlButton: View {
                 .bold()
                 .foregroundStyle(.mint)
                 .opacity(isActive ? 0.5 : 1.0)
+                .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
         }
         .buttonBorderShape(.circle)
+        
+        #elseif os(macOS)
+        Button(action: action) {
+            Image(systemName: icon)
+                .bold()
+                .opacity(isActive ? 0.5 : 1.0)
+                .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
+                .frame(minWidth: 40, minHeight: 40)
+                .foregroundStyle(.mint)
+        }
+        .buttonStyle(.plain)
         
         #else
         Button(action: action) {
             Image(systemName: icon)
                 .bold()
                 .opacity(isActive ? 0.5 : 1.0)
+                .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
                 .frame(minWidth: 40, minHeight: 40)
                 .foregroundStyle(.mint)
                 .background(Color(white: isActive ? 0.3 : 0.15).opacity(0.5))
