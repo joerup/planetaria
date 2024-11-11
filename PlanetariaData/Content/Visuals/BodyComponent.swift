@@ -30,8 +30,17 @@ class BodyComponent: Component {
         self.name = node.name
         self.node = node
         
+        // Get the usdz filename to load from
+        let fileName: String =
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+            node.name
+        } else {
+            // use old Earth model for older versions
+            node.name == "Earth" ? node.name+"-old" : node.name
+        }
+        
         var bodyEntity: Entity
-        if let entity = try? ModelEntity.load(named: node.name) {
+        if let entity = try? ModelEntity.load(named: fileName) {
             bodyEntity = entity
         } else {
             let mesh = MeshResource.generateSphere(radius: 0.5)

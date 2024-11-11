@@ -108,6 +108,7 @@ public class SystemNode: Node {
         // set the host object's timestep since it wasn't able to set before this
         if let object, object.timeStep == 0 {
             object.timeStep = minStep
+            object.period = minStep / Self.timeStepFraction
         }
         
         // decrease timesteps for binary systems because they are prone to larger error

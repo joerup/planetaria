@@ -55,6 +55,7 @@
 		017166882B45263000A955D2 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166872B45263000A955D2 /* Launcher.swift */; };
 		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
+		01A1B22A2CE105F90012A253 /* Earth-old.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B2292CE105F90012A253 /* Earth-old.usdz */; };
 		01A1E96D2CCEC542006E0968 /* ellipse.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A1E96C2CCEC542006E0968 /* ellipse.json */; };
 		01ACBD0A2CCB4F1A00775D99 /* ScrollSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */; };
 		01B13FD92CD42CA7009E4569 /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B13FD82CD42C9E009E4569 /* ControlButton.swift */; };
@@ -145,6 +146,7 @@
 		017200B92B51E22E00B3744A /* PropertyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyText.swift; sourceTree = "<group>"; };
 		017200BA2B51E22E00B3744A /* SelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionRow.swift; sourceTree = "<group>"; };
 		017200BC2B51E22E00B3744A /* SelectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCard.swift; sourceTree = "<group>"; };
+		01A1B2292CE105F90012A253 /* Earth-old.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Earth-old.usdz"; sourceTree = "<group>"; };
 		01A1E96C2CCEC542006E0968 /* ellipse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ellipse.json; sourceTree = "<group>"; };
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
 		01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSheet.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				01255DD02B696471004BC207 /* Pluto.usdz */,
 				01255DD22B696471004BC207 /* Ganymede.usdz */,
 				01B13FEA2CD77084009E4569 /* Earth.usdz */,
+				01A1B2292CE105F90012A253 /* Earth-old.usdz */,
 				01F2B7EA2CD81C9700179385 /* Venus.usdz */,
 				01255DD32B696471004BC207 /* Eris.usdz */,
 				01255DD42B696471004BC207 /* Jupiter.usdz */,
@@ -510,6 +513,7 @@
 				01255E0D2B696471004BC207 /* Ceres.usdz in Resources */,
 				01255DFE2B696471004BC207 /* Miranda.usdz in Resources */,
 				01255DF62B696471004BC207 /* Eris.usdz in Resources */,
+				01A1B22A2CE105F90012A253 /* Earth-old.usdz in Resources */,
 				01255DF22B696471004BC207 /* Charon.usdz in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -727,7 +731,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
@@ -761,7 +765,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;

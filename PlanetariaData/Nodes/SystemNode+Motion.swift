@@ -48,7 +48,7 @@ extension SystemNode {
             node.elapsedTime = 0
         }
         
-        // Modify state by the center of mass
+        // Center position and velocity distribution at the center of mass
         // (keeps everything centered on the system and corrects for error buildup)
         let comP = self.centerOfMass
         let comV = self.centerOfMassVelocity

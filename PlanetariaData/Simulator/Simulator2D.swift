@@ -39,21 +39,16 @@ public struct Simulator: View {
                 }
             }
             .onAppear {
-                simulation.rootEntity.setSizes(geometry.size, dynamicTypeSize)
-                updateAnchorScale(geometry.size)
+                handleChange(size: geometry.size, dynamicTypeSize: dynamicTypeSize, fadeIn: true)
             }
             .onChange(of: geometry.size) { size in
-                simulation.rootEntity.setSizes(size, dynamicTypeSize)
-                updateAnchorScale(size)
+                handleChange(size: size, dynamicTypeSize: dynamicTypeSize, fadeIn: simulation.viewType == .fixed)
             }
             .onChange(of: dynamicTypeSize) { dynamicTypeSize in
-                simulation.rootEntity.setSizes(geometry.size, dynamicTypeSize)
-                updateAnchorScale(geometry.size)
+                handleChange(size: geometry.size, dynamicTypeSize: dynamicTypeSize, fadeIn: false)
             }
             .onChange(of: simulation.viewType) { mode in
-                simulation.rootEntity.setSizes(geometry.size, dynamicTypeSize)
-                simulation.resetPitch()
-                updateAnchorScale(geometry.size)
+                handleChange(size: geometry.size, dynamicTypeSize: dynamicTypeSize, fadeIn: true, resetPitch: true)
             }
             .onChange(of: scenePhase) { _ in
                 Entity.registerAll()
@@ -63,11 +58,22 @@ public struct Simulator: View {
         .overlay {
             Color.black
                 .opacity(introDarkness)
-                .onAppear {
-                    withAnimation {
-                        introDarkness = 0.0
-                    }
-                }
+        }
+    }
+    
+    private func handleChange(size: CGSize, dynamicTypeSize: DynamicTypeSize, fadeIn: Bool, resetPitch: Bool = false) {
+        if fadeIn {
+            introDarkness = 1.0
+            withAnimation(.default.delay(0.4)) {
+                introDarkness = 0.0
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            simulation.rootEntity.setSizes(size, dynamicTypeSize)
+            if resetPitch {
+                simulation.resetPitch()
+            }
+            updateAnchorScale(size)
         }
     }
     

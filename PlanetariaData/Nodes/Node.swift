@@ -30,6 +30,7 @@ public class Node: Decodable {
     }
     
     internal var elapsedTime: Double = 0
+    internal var period: Double = 0
     internal var timeStep: Double = 0
     static let timeStepFraction: Double = 0.0025
     
@@ -70,6 +71,7 @@ public class Node: Decodable {
         if let hostNode {
             let orbit = Orbit(position: position, velocity: velocity, mass: mass, size: size, hostNode: hostNode)
             self.orbit = orbit
+            self.period = orbit.period
             self.timeStep = orbit.period * Self.timeStepFraction
         }
         self.rotation?.set(time: time)
