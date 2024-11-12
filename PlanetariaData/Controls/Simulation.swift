@@ -668,14 +668,15 @@ final public class Simulation: ObservableObject {
     // Navigation changes when gestures occur
     // Controls the focus position, current reference and selected system
     private func updateAfterGesture() {
-        
         guard let focus else { return }
+        
         let orbitWeight: Double = 1.2
         let objectWeight: Double = 4.0
         
         // Set the offset amount: the percentage which the focus is offset toward the child node
         // e.g. with the Sun as the reference node but Earth selected, offsetAmount = 0.5 would place the central focus halfway between the Earth & Sun
-        let totalSize = scale * (orbitWeight * focus.position.magnitude + objectWeight * 2 * ((object ?? focus.object)?.size ?? .zero))
+        let objectSize = (object ?? focus.object)?.size ?? .zero
+        let totalSize = scale * max(orbitWeight * focus.position.magnitude, objectWeight * 2 * objectSize)
         let zoomScale = totalSize / size
         
         // Set the offset amount based on a nonlinear parameterization of the zoom scale
@@ -684,7 +685,7 @@ final public class Simulation: ObservableObject {
         
         // Focus to the child node if zoomed in enough (offset is beginning)
         if let object = object ?? focus.object, let focus = focus as? SystemNode, let childNode = focus.children.first(where: { $0.object == object }) {
-            if scale * (orbitWeight * childNode.position.magnitude + objectWeight * object.size * 2) > 0.5 * size {
+            if scale * max(orbitWeight * childNode.position.magnitude, objectWeight * 2 * object.size) > 0.5 * size {
                 setFocus(childNode)
                 updateAfterGesture()
             }
