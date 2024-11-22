@@ -18,7 +18,6 @@ struct Navigator<Content: View>: View {
     @State private var showList: Bool = false
     @State private var showSettings: Bool = false
     @State private var showSearch: Bool = false
-    @State private var showTimeControls: Bool = false
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -52,34 +51,25 @@ struct Navigator<Content: View>: View {
             GeometryReader { geometry in
                 content()
                     .overlay(alignment: .top) {
-                        VStack(spacing: 0) {
-                            HStack(alignment: .top) {
+                        HStack(alignment: .top) {
+                            VStack {
                                 settingsButton
                                 arButton
-                                VStack(spacing: 0) {
-                                    clock
-                                    if !isCompact && showTimeControls {
-                                        timeControls
-                                            .padding(.bottom, 4)
-                                            .padding(.top, -5)
-                                    }
-                                }
-                                .padding(.horizontal)
-                                .background(Color(white: 0.15).opacity(0.5))
-                                .clipShape(RoundedRectangle(cornerRadius: 20))
-                                .frame(maxWidth: .infinity)
+                            }
+                            HStack(spacing: isCompact ? 2 : 10) {
+                                slowDownButton
+                                clockDisplay
+                                speedUpButton
+                            }
+                            .padding(.horizontal, isCompact ? 4 : 10)
+                            .background(Color(white: 0.15).opacity(0.5))
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .frame(maxWidth: .infinity)
+                            VStack {
                                 if let system = simulation.selectedSystem {
                                     listButton(system)
                                 }
                                 searchButton
-                            }
-                            if isCompact && showTimeControls {
-                                timeControls
-                                    .padding(.horizontal, 8)
-                                    .frame(minHeight: 40)
-                                    .background(Color(white: 0.15).opacity(0.5))
-                                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                                    .padding(.vertical, 8)
                             }
                         }
                         .padding(.horizontal)
@@ -137,7 +127,7 @@ struct Navigator<Content: View>: View {
                             closeButton
                         }
                         .padding(8)
-                        .padding(.horizontal, isCompact ? 0 : 8)
+                        .padding(.horizontal, 8)
                         .background(Color(white: 0.15).opacity(0.5))
                         .clipShape(RoundedRectangle(cornerRadius: 30))
                         .padding(.horizontal)
@@ -150,7 +140,11 @@ struct Navigator<Content: View>: View {
                         settingsButton
                     }
                     ToolbarItemGroup(placement: .principal) {
-                        clock
+                        HStack {
+                            slowDownButton
+                            clockDisplay
+                            speedUpButton
+                        }
                     }
                     ToolbarItemGroup(placement: .primaryAction) {
                         if let system = simulation.selectedSystem {
@@ -162,39 +156,45 @@ struct Navigator<Content: View>: View {
                 .preferredColorScheme(.dark)
             
             #elseif os(visionOS)
-            HStack {
-                if let object = simulation.selectedObject {
-                    objectLabel(object, large: true)
-                    Spacer()
-                    infoButton(object)
-                    closeButton
-                } else {
-                    Text("Welcome to the Solar System")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.primary)
-                        .padding(.top)
-                }
-            }
-            .padding()
-            .padding(.horizontal)
-            .ornament(attachmentAnchor: .scene(.top)) {
-                HStack {
+            VStack {
+                HStack(alignment: .top) {
                     homeButton
                     settingsButton
-                    clock
-                        .popover(isPresented: $showTimeControls, arrowEdge: .bottom) {
-                            timeControls
-                                .padding(.horizontal)
-                        }
+                    Spacer()
+                    HStack(spacing: 12) {
+                        slowDownButton
+                        clockDisplay
+                        speedUpButton
+                    }
+                    .background(Color.init(white: 0.6).opacity(0.2))
+                    .clipShape(RoundedRectangle(cornerRadius: 30))
+                    Spacer()
                     if let system = simulation.selectedSystem {
                         listButton(system)
                     }
                     searchButton
                 }
-                .padding()
+                .padding(.horizontal, 5)
+                
+                HStack {
+                    if let object = simulation.selectedObject {
+                        objectLabel(object, large: true)
+                        Spacer()
+                        infoButton(object)
+                        closeButton
+                    } else {
+                        Text("Welcome to the Solar System")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .fontDesign(.rounded)
+                            .foregroundStyle(.primary)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.horizontal)
                 .glassBackgroundEffect()
             }
+            .padding()
             .ornament(visibility: simulation.selectedObject != nil ? .visible : .hidden, attachmentAnchor: .scene(.bottom)) {
                 selectorButtons(large: true)
                     .padding()
@@ -220,12 +220,14 @@ struct Navigator<Content: View>: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(object.name)
                     .font(large ? .largeTitle : .title3)
-                    .fontWeight(.bold)
+                    .fontWeight(.semibold)
+                    .fontDesign(.rounded)
                     .foregroundStyle(.primary)
                     .lineLimit(0)
                 Text(object.subtitle)
                     .font(large ? .headline : .caption)
                     .fontWeight(.semibold)
+                    .fontDesign(.rounded)
                     .foregroundStyle(.secondary)
                     .lineLimit(0)
                     .padding(.bottom, 2)
@@ -281,6 +283,7 @@ struct Navigator<Content: View>: View {
         ControlButton(icon: "house") {
             Task {
                 await dismissImmersiveSpace()
+                simulation.resetState()
             }
         }
         .accessibilityLabel("Home")
@@ -303,19 +306,40 @@ struct Navigator<Content: View>: View {
         .accessibilityLabel("Deselect")
     }
     
-    private var clock: some View {
-        largeButton {
-            withAnimation {
-                showTimeControls.toggle()
-            }
-        } label: {
-            Text(simulation.time.string)
-                .lineLimit(0)
-                .minimumScaleFactor(0.5)
-                .foregroundColor(simulation.isRealTime ? .white : simulation.frameRatio < 0 ? .pink : .mint)
-                .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
+    #if os(visionOS)
+    private let grayColor: Color = .white
+    #else
+    private let grayColor: Color = .init(white: 0.7)
+    #endif
+    
+    private var slowDownButton: some View {
+        simpleButton(icon: "backward\(simulation.frameRatio < -1 ? ".fill" : "")", color: simulation.frameRatio < -1 ? .mint : grayColor) {
+            simulation.decreaseSpeed()
         }
-        .accessibilityLabel(simulation.time.string)
+        .imageScale(isCompact ? .small : .medium)
+        .accessibilityLabel("Decrease Speed")
+    }
+    
+    private var speedUpButton: some View {
+        simpleButton(icon: "forward\(simulation.frameRatio > 2 ? ".fill" : "")", color: simulation.frameRatio > 2 ? .mint : grayColor) {
+            simulation.increaseSpeed()
+        }
+        .imageScale(isCompact ? .small : .medium)
+        .accessibilityLabel("Increase Speed")
+    }
+    
+    private var clockDisplay: some View {
+        Text(simulation.time.string)
+            .lineLimit(0)
+            #if os(visionOS)
+            .font(.system(.title2, design: .monospaced, weight: .bold))
+            #else
+            .font(.system(.headline, design: .monospaced, weight: .bold))
+            #endif
+            .minimumScaleFactor(0.5)
+            .foregroundColor(simulation.isRealTime ? .white : .mint)
+            .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
+            .accessibilityLabel(simulation.time.string)
     }
     
     private func selectorButtons(large: Bool = false) -> some View {
@@ -337,50 +361,31 @@ struct Navigator<Content: View>: View {
             }
             .accessibilityLabel("Zoom to Surface")
         }
-        .fontDesign(.rounded)
         #if os(iOS)
         .background(Color.init(white: 0.15).opacity(0.5).cornerRadius(30))
         #endif
     }
     
-    private var timeControls : some View {
-        HStack(spacing: isCompact ? 3 : nil) {
-            simpleButton(icon: "arrow.circlepath") {
-                simulation.resetTime()
-                showTimeControls = false
-            }
-            .accessibilityLabel("Reset Time")
-            .opacity(simulation.isRealTime ? 0 : 0.5)
-            
-            simpleButton(icon: "backward\(simulation.frameRatio < -1 ? ".fill" : "")") {
-                simulation.decreaseSpeed()
-            }
-            .accessibilityLabel("Decrease Speed")
-            
-            simpleButton(icon: "\(simulation.isPaused ? "play" : "pause").fill") {
-                simulation.pause()
-            }
-            .accessibilityLabel(simulation.isPaused ? "Play" : "Pause")
-            
-            simpleButton(icon: "forward\(simulation.frameRatio > 1 ? ".fill" : "")") {
-                simulation.increaseSpeed()
-            }
-            .accessibilityLabel("Increase Speed")
-            
-            simpleButton(icon: "arrow.circlepath") {
-                simulation.resetTime()
-            }
-            .opacity(0)
-        }
-    }
-    
-    private func simpleButton(icon: String, action: @escaping () -> Void) -> some View {
+    private func simpleButton(icon: String, color: Color, action: @escaping () -> Void) -> some View {
+        
+        #if os(visionOS)
         Button(action: action) {
             Image(systemName: icon)
-                .foregroundStyle(.white)
+                .foregroundStyle(color)
                 .bold()
                 .frame(minWidth: 40, minHeight: 40)
         }
+        .buttonBorderShape(.circle)
+        
+        #else
+        Button(action: action) {
+            Image(systemName: icon)
+                .foregroundStyle(color)
+                .bold()
+                .frame(minWidth: 40, minHeight: 40)
+        }
+        
+        #endif
     }
     
     private func mediumButton(label: String, isActive: Bool = false, action: @escaping () -> Void) -> some View {
@@ -414,31 +419,6 @@ struct Navigator<Content: View>: View {
         .buttonStyle(.plain)
         .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
         
-        #endif
-    }
-    
-    private func largeButton<Label: View>(action: @escaping () -> Void, label: @escaping () -> Label) -> some View {
-        
-        #if os(visionOS)
-        Button(action: action) {
-            label()
-                .font(.system(.title3, design: .monospaced, weight: .bold))
-                .padding(.horizontal)
-                .frame(minHeight: 40)
-        }
-        .buttonBorderShape(.capsule)
-        .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
-
-        #else
-        Button(action: action) {
-            label()
-                .font(.system(isCompact ? .callout : .body, design: .monospaced, weight: .bold))
-                .padding(.horizontal, isCompact ? 0 : 8)
-                .frame(minHeight: 40)
-        }
-        .buttonStyle(.plain)
-        .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
-
         #endif
     }
 }

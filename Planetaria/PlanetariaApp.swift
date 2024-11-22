@@ -42,7 +42,7 @@ struct PlanetariaApp: App {
             Navigator(for: simulation)
         }
         .windowStyle(.automatic)
-        .defaultSize(width: 0.5, height: 0.1, depth: 0, in: .meters)
+        .defaultSize(width: 0.5, height: 0.16, depth: 0, in: .meters)
         
         ImmersiveSpace(id: "simulator") {
             Simulator(for: simulation)

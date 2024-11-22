@@ -58,6 +58,7 @@ public struct Simulator: View {
         .overlay {
             Color.black
                 .opacity(introDarkness)
+                .ignoresSafeArea()
         }
     }
     

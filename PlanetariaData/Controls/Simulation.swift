@@ -352,6 +352,26 @@ final public class Simulation: ObservableObject {
     }
     
     
+    // MARK: - Reset
+    
+    // Reset the simulation
+    public func resetState() {
+        focus = root
+        system = root
+        
+        setTimestamp(.now)
+        frameRatio = 1
+        isRealTime = true
+        
+        offset = .zero
+        offsetAmount = 1.0
+        steadyRotation = .zero
+        gestureRotation = .zero
+        steadyScale = 1.0
+        gestureScale = 1.0
+    }
+    
+    
     // MARK: - External Queries
     
     public func queryObjects(_ string: String) -> [ObjectNode] {
@@ -405,12 +425,6 @@ final public class Simulation: ObservableObject {
         }
     }
     
-    public func resetTime() {
-        setTimestamp(.now)
-        frameRatio = 1
-        isRealTime = true
-    }
-    
     public func setTime(_ timestamp: Date) {
         setTimestamp(timestamp)
         frameRatio = 1
@@ -419,6 +433,7 @@ final public class Simulation: ObservableObject {
     // Select Buttons
     
     public func selectObject(_ node: Node?) {
+        guard transition == nil else { return }
         // Reset object
         guard let node, selectEnabled else {
             setObject(nil)
@@ -432,11 +447,6 @@ final public class Simulation: ObservableObject {
         else if let object = node.object {
             zoomToSurface(node: object)
         }
-    }
-    
-    public func selectSystem(_ node: Node?) {
-        guard let node, selectEnabled else { return }
-        zoomToSystem(node: node)
     }
     
     // Navigation Buttons

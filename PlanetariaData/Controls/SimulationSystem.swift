@@ -80,9 +80,24 @@ class SimulationSystem: System {
             let billboardOrientation = entity.billboardOrientation(position: position, cameraPosition: cameraPosition, toPoint: simulation.viewType == .augmented || simulation.viewType == .immersive)
             
             // Calculate the opacity
-            let opacityPrimary: Float = simulation.viewType == .immersive ? 0.25 : 0.25
-            let opacitySecondary: Float = simulation.viewType == .immersive ? 0.1 : 0.25
-            let opacityTertiary: Float = simulation.viewType == .immersive ? 0.05 : 0.15
+            let opacityPrimary: Float =
+                switch simulation.viewType {
+                case .fixed: 0.25
+                case .augmented: 0.8
+                case .immersive: 0.15
+                }
+            let opacitySecondary: Float =
+                switch simulation.viewType {
+                case .fixed: 0.25
+                case .augmented: 0.6
+                case .immersive: 0.1
+                }
+            let opacityTertiary: Float =
+                switch simulation.viewType {
+                case .fixed: 0.15
+                case .augmented: 0.4
+                case .immersive: 0.05
+                }
             let opacity: Float =
                 if simulation.isSelected(node) {
                     1.0

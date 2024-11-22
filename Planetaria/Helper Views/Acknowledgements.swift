@@ -79,6 +79,7 @@ struct Footnote: View {
             }
             .sheet(isPresented: $showAcknowledgements) {
                 Acknowledgements()
+                    .tint(nil)
             }
     }
 }
