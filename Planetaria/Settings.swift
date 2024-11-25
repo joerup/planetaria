@@ -105,9 +105,11 @@ struct Settings: View {
         .sheet(isPresented: $presentAcknowledgements) {
             Acknowledgements()
         }
+        #if os(iOS) || os(tvOS) || os(visionOS)
         .sheet(isPresented: self.$presentShare, content: {
             ActivityViewController(activityItems: [URL(string: "https://apps.apple.com/us/app/planetaria/id1546887479")!])
         })
+        #endif
     }
     
     private func row(_ text: String) -> some View {
