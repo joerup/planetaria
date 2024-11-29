@@ -17,9 +17,13 @@ let package = Package(
             targets: ["PlanetariaData"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/joerup/SwiftSPICE.git", from: "0.7.0")
+    ],
     targets: [
         .target(
             name: "PlanetariaData",
+            dependencies: ["SwiftSPICE"],
             path: "."
         )
     ]

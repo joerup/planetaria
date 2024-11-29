@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftspice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/joerup/SwiftSPICE.git",
+      "state" : {
+        "revision" : "76c6b5c69742bde9d1892cd62f773d91327f46bd",
+        "version" : "0.7.0"
+      }
+    }
+  ],
+  "version" : 2
+}

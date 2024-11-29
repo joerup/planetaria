@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftSPICE
 import RealityKit
 
 final public class Simulation: ObservableObject {
@@ -199,6 +200,24 @@ final public class Simulation: ObservableObject {
         
         // Load the ephemerides
         status = .loadingEphemerides
+        
+        // TEST SWIFTSPICE
+        print("Now testing SwiftSPICE")
+        guard let kernel = Bundle.main.path(forResource: fileName, ofType: "bsp") else {
+            throw SimulationError.ephemerisNotFound
+        }
+        do {
+            try SPICE.loadKernel(kernel)
+            if let state = SPICE.getState(target: 3, reference: 0, frame: "ECLIPJ2000") {
+                print(state)
+            } else {
+                print("none")
+            }
+            try SPICE.clearKernels()
+        } catch {
+            print(error)
+        }
+        
         ephemerides = try await loadEphemerides(from: ephemerisURL)
         ephemerideTime = time
         for node in root.tree {

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/joerup2004/Documents/Xcode Projects/Planetary/Planetaria.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>
