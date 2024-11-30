@@ -76,14 +76,5 @@ public class ObjectNode: Node {
         self.rotation = Rotation(rotationRef: rotationRef, rotationRate: rotationRate, poleRA: poleRA, poleDec: poleDec)
         
         self.properties = Properties(category: category, group: group, discovered: discovered, discoverer: discoverer, namesake: namesake, moons: moons, mass: mass, radius: size, density: density, semimajorAxis: semimajorAxis, eccentricity: eccentricity, inclination: inclination, orbitalPeriod: orbitalPeriod, rotationRate: rotationRate, axialTilt: axialTilt, gravity: gravity, escapeVelocity: escapeVelocity, temperature: temperature, pressure: pressure, luminosity: luminosity)
-        properties?.rotation = rotation
-    }
-    
-    override internal func setOrbitAndRotation(time: Date) {
-        super.setOrbitAndRotation(time: time)
-        properties?.host = hostNode ?? system?.hostNode
-        if system == nil, properties?.orbit == nil {
-            properties?.orbit = orbit
-        }
     }
 }

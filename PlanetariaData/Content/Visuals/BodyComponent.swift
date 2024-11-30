@@ -13,10 +13,10 @@ class BodyComponent: Component {
     
     var model: Entity
     
-    private var name: String
-    private var node: Node
-    private var diameter: Double
-    private var rotation: Node.Rotation?
+    private let name: String
+    private let node: Node
+    private let diameter: Double
+    private let rotation: Node.Rotation?
     
     private var light: Entity?
     private var lightResource: EnvironmentResource?

@@ -919,7 +919,7 @@
     },
     {
       "name": "Ceres",
-      "id": 2000001,
+      "id": 20000001,
       "category": "asteroid",
       "rank": "secondary",
       "color": "#8c76b5",
@@ -948,7 +948,7 @@
     },
     {
       "name": "Eris",
-      "id": 136199,
+      "id": 20136199,
       "category": "tno",
       "rank": "secondary",
       "color": "#7faed4",
@@ -974,7 +974,7 @@
     },
     {
       "name": "Haumea",
-      "id": 136108,
+      "id": 20136108,
       "category": "tno",
       "rank": "secondary",
       "color": "#9dd1a0",
@@ -1002,7 +1002,7 @@
     },
     {
       "name": "Makemake",
-      "id": 136472,
+      "id": 20136472,
       "category": "tno",
       "rank": "secondary",
       "color": "#ed8b80",

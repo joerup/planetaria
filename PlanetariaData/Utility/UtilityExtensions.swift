@@ -178,27 +178,16 @@ public extension Date {
         return formatter.string(from: self)
     }
     
-    static let reference2000: Date = {
+    static func year(_ year: Int) -> Date {
         var components = DateComponents()
-        components.year = 2000
+        components.year = year
         components.month = 1
         components.day = 1
         components.hour = 0
         components.minute = 0
         components.second = 0
         return Calendar(identifier: .gregorian).date(from: components)!
-    }()
-
-    static let reference2050: Date = {
-        var components = DateComponents()
-        components.year = 2050
-        components.month = 1
-        components.day = 1
-        components.hour = 0
-        components.minute = 0
-        components.second = 0
-        return Calendar(identifier: .gregorian).date(from: components)!
-    }()
+    }
 
     static let j2000ReferenceDate: Date = {
         var components = DateComponents()

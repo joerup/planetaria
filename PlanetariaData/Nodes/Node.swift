@@ -29,10 +29,13 @@ public class Node: Decodable {
         return size
     }
     
-    internal var elapsedTime: Double = 0
-    internal var period: Double = 0
-    internal var timeStep: Double = 0
-    static let timeStepFraction: Double = 0.0025
+    internal var spiceStep: Double = 0
+    internal var spiceElapsedTime: Double = 0
+    static let spiceStepFraction: Double = 0.0025
+    
+    internal var integrationStep: Double = 0
+    internal var integrationElapsedTime: Double = 0
+    static let integrationStepFraction: Double = 0.0025
     
     public var orbit: Orbit?
     public var rotation: Rotation?
@@ -56,25 +59,12 @@ public class Node: Decodable {
         guard let hostNode else { return .zero }
         return (hostNode.mass * hostNode.position + self.mass * self.position) / (hostNode.mass + self.mass)
     }
-    public var barycenterVelocity: Vector3 {
-        guard let hostNode else { return .zero }
-        return (hostNode.mass * hostNode.velocity + self.mass * self.velocity) / (hostNode.mass + self.mass)
-    }
     
-    internal func setState(_ state: StateVector) {
-        self.position = state.position
-        self.velocity = state.velocity
-        self.elapsedTime = 0
-    }
-    
-    internal func setOrbitAndRotation(time: Date) {
+    internal func setOrbit() {
         if let hostNode {
-            let orbit = Orbit(position: position, velocity: velocity, mass: mass, size: size, hostNode: hostNode)
+            let orbit = Orbit(position: position, velocity: velocity, mass: mass, hostNode: hostNode)
             self.orbit = orbit
-            self.period = orbit.period
-            self.timeStep = orbit.period * Self.timeStepFraction
         }
-        self.rotation?.set(time: time)
     }
     
     public var subtitle: String {

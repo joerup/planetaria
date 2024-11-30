@@ -12,11 +12,6 @@ import simd
 
 public typealias Vector3 = SIMD3<Double>
 
-public struct StateVector {
-    public var position: Vector3
-    public var velocity: Vector3
-}
-
 public extension Vector3 {
     
     var magnitude: Double {

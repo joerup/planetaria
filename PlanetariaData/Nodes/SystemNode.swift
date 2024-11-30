@@ -50,7 +50,7 @@ public class SystemNode: Node {
         return children.map({ $0.mass * $0.velocity }).reduce(.zero, +) / mass
     }
     
-    private(set) var systemTimeStep: Double = 1.0
+    private(set) var systemIntegrationStep: Double = 1.0
     
     override public var color: Color? {
         get { return object?.color } set { }
@@ -96,33 +96,27 @@ public class SystemNode: Node {
         }
     }
     
-    override internal func setOrbitAndRotation(time: Date) {
-        super.setOrbitAndRotation(time: time)
-        object?.properties?.orbit = orbit
-    }
-    
-    internal func setStep() {
+    internal func setIntegrationStep() {
         // find the min timestep in the system
-        var minStep = children.filter({ $0 != object }).compactMap(\.timeStep).min() ?? 1.0
+        var minStep = children.filter({ $0 != object }).compactMap(\.integrationStep).min() ?? 1.0
         
         // set the host object's timestep since it wasn't able to set before this
-        if let object, object.timeStep == 0 {
-            object.timeStep = minStep
-            object.period = minStep / Self.timeStepFraction
+        if let object, object.integrationStep == 0 {
+            object.integrationStep = minStep
         }
         
         // decrease timesteps for binary systems because they are prone to larger error
         if children.contains(where: { object?.hostNode == $0 }) {
             minStep /= 10
             for child in children {
-                child.timeStep /= 10
+                child.integrationStep /= 10
             }
         }
         
         // set the system timestep and recursively set for sub-systems
-        systemTimeStep = minStep
+        systemIntegrationStep = minStep
         for system in childSystems {
-            system.setStep()
+            system.setIntegrationStep()
         }
     }
     

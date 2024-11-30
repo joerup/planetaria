@@ -11,9 +11,7 @@ import PlanetariaData
 @main
 struct PlanetariaApp: App {
     
-    @StateObject private var simulation = Simulation(from: "Planetaria", url: Self.url)
-    
-    static let url = "https://script.google.com/macros/s/AKfycbwnEMsgrHDoboUKHZljiLycXQ-GOvHdehYHQANEftj41azbkNaeAJiIBwdORo7wUlwX/exec"
+    @StateObject private var simulation = Simulation(from: "Planetaria", updateType: .spice)
     
     #if os(visionOS)
     @Environment(\.openWindow) private var openWindow

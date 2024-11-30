@@ -13,14 +13,13 @@ import RealityKit
 final public class Simulation: ObservableObject {
     
     public let fileName: String
-    public let ephemerisURL: String?
+    public let updateType: UpdateType
+    @Published public var viewType: ViewType
     
     @Published public private(set) var status: Status = .uninitialized
     @Published public private(set) var isLoaded: Bool = false
     
     internal var rootEntity = SimulationRootEntity()
-    
-    @Published public var viewType: ViewType
     
     // Node Structure
     
@@ -29,12 +28,8 @@ final public class Simulation: ObservableObject {
     @Published private var system: SystemNode?
     @Published private var object: ObjectNode?
     
-    private var allNodes: [Node] {
-        return root?.tree ?? []
-    }
-    private var allObjects: [ObjectNode] {
-        return root?.tree.compactMap({ $0 as? ObjectNode }) ?? []
-    }
+    private var allNodes: [Node] = []
+    private var allObjects: [ObjectNode] = []
     
     public var selectedSystem: SystemNode? {
         return system
@@ -69,14 +64,17 @@ final public class Simulation: ObservableObject {
     // Timing
     
     @Published public var time: Date = .now
+    
     @Published public var frameRatio: Double = 1.0 { didSet { isRealTime = false } }
-    @Published public private(set) var isPaused: Bool = false
     public private(set) var isRealTime: Bool = true
-    public private(set) var maxFrameRatio: Double = 1E+7
+    
+    @Published public private(set) var isPaused: Bool = false
+    
+    public private(set) var maxFrameRatio: Double = 1E+10
     private let frameRate: Double = 60
     
-    private var ephemerideTime: Date = .now
-    private var ephemerides: [Int : StateVector] = [:]
+    @Published public var minTime: Date = .year(2000)
+    @Published public var maxTime: Date = .year(2050)
     
     // Settings
     
@@ -120,8 +118,6 @@ final public class Simulation: ObservableObject {
     private let zoomObjectCoefficient: Double = 2.4
     private let zoomOrbitCoefficient: Double = 2.5
     
-    private let introScale: Double = 1E-4
-    
     private var transition: Transition?
     private var animationTime: Double {
         switch viewType {
@@ -133,22 +129,14 @@ final public class Simulation: ObservableObject {
             1.0
         }
     }
-    private var introAnimationTime: Double {
-        switch viewType {
-        case .immersive:
-            7.0
-        default:
-            0.0
-        }
-    }
     
     
     // MARK: - Setup
     
     // Initialize the simulation
-    @MainActor public init(from fileName: String, url ephemerisURL: String? = nil) {
+    @MainActor public init(from fileName: String, updateType: UpdateType) {
         self.fileName = fileName
-        self.ephemerisURL = ephemerisURL
+        self.updateType = updateType
         
         #if os(iOS) || os(macOS)
         viewType = .fixed
@@ -170,7 +158,7 @@ final public class Simulation: ObservableObject {
         
         Task {
             do {
-                try await loadData(fileName: fileName, ephemerisURL: ephemerisURL)
+                try await loadData(fileName: fileName)
                 status = .loaded
                 isLoaded = true
             } catch let error as SimulationError {
@@ -184,7 +172,7 @@ final public class Simulation: ObservableObject {
     }
     
     // Load data from node file and ephemeris, then create entities
-    @MainActor private func loadData(fileName: String, ephemerisURL: String?) async throws {
+    @MainActor private func loadData(fileName: String) async throws {
         // Decode the tree from the file
         status = .decodingNodes
         guard let file = Bundle.main.path(forResource: fileName, ofType: "json"),
@@ -198,116 +186,75 @@ final public class Simulation: ObservableObject {
         self.focus = root
         self.system = root
         
+        self.allNodes = root.tree
+        self.allObjects = root.tree.compactMap({ $0 as? ObjectNode })
+        
         // Load the ephemerides
         status = .loadingEphemerides
-        
-        // TEST SWIFTSPICE
-        print("Now testing SwiftSPICE")
-        guard let kernel = Bundle.main.path(forResource: fileName, ofType: "bsp") else {
-            throw SimulationError.ephemerisNotFound
-        }
-        do {
-            try SPICE.loadKernel(kernel)
-            if let state = SPICE.getState(target: 3, reference: 0, frame: "ECLIPJ2000") {
-                print(state)
-            } else {
-                print("none")
+        switch updateType {
+        case .spice:
+            
+            // Load the SPK kernel
+            guard let kernel = Bundle.main.path(forResource: fileName, ofType: "bsp") else {
+                throw SimulationError.ephemerisNotFound
             }
-            try SPICE.clearKernels()
-        } catch {
-            print(error)
+            do {
+                try SPICE.loadKernel(kernel)
+            } catch {
+                throw SimulationError.ephemerisLoadingFailed
+            }
+            
+            // Set each node's initial state from SPICE
+            for node in allNodes {
+                node.setStateFromSPICE(to: time)
+            }
+            
+            // Set orbits for all nodes
+            for node in allNodes {
+                node.setOrbit()
+            }
+            
+            // Set SPICE timesteps for all nodes
+            for node in allNodes {
+                if let orbit = node.orbit {
+                    node.spiceStep = orbit.period * Node.spiceStepFraction
+                }
+            }
+            
+        case .integration:
+            
+            // Initial states are loaded already in decoder
+            
+            // Set orbits for all nodes
+            for node in allNodes {
+                node.setOrbit()
+            }
+            
+            // Set integration timesteps for all nodes
+            for node in allNodes {
+                if let orbit = node.orbit {
+                    node.integrationStep = orbit.period * Node.integrationStepFraction
+                }
+            }
+            
+            // Recursively set integration timesteps for the system tree
+            root.setIntegrationStep()
         }
         
-        ephemerides = try await loadEphemerides(from: ephemerisURL)
-        ephemerideTime = time
-        for node in root.tree {
-            if let stateVector = ephemerides[node.id] {
-                node.setState(stateVector)
-            }
+        // Set the rotational states
+        for node in allNodes {
+            node.rotation?.set(time: time)
         }
-        for node in root.tree {
-            node.setOrbitAndRotation(time: time)
-        }
-        root.setStep()
         
         // Set the size parameter
-        // (this sets the default scale (1.0) to represent the size of the root's primary system)
-        let distance = root.children.filter({ $0.rank == .primary }).map(\.position.magnitude).max() ?? 1
-        size = zoomOrbitCoefficient * distance
+        // (this makes the default scale (1.0) represent the size of the root's primary system)
+        size = zoomOrbitCoefficient * root.primaryScaleDistance
         
         // Load the entities
         status = .creatingEntities
-        for node in root.tree {
+        for node in allNodes {
             let _ = await SimulationEntity(node: node, size: size, root: rootEntity)
         }
-        
-        // Decode photos
-        status = .fetchingContent
-        if let photos = try? await Photo.decode(from: "\(fileName)-photos") {
-            for object in allObjects {
-                let matchingPhotos = photos.filter({ $0.id == object.id })
-                object.properties?.photos = matchingPhotos
-            }
-        }
-        
-        // Set up the opening transition in immersive mode
-        if viewType == .immersive {
-            self.steadyScale = introScale
-            self.transition = Transition(frames: Int(introAnimationTime * frameRate), originalScale: scale, originalFocus: root, targetScale: 1.0, targetFocus: root)
-        }
-    }
-    
-    // Load ephemerides via API call
-    @MainActor private func loadEphemerides(from urlStr: String?) async throws -> [Int : StateVector] {
-        guard let urlStr, let url = URL(string: urlStr) else {
-            throw SimulationError.ephemerisNoURL
-        }
-        var states: [Int : StateVector] = [:]
-        
-        // Make the API call
-        guard let (data, _) = try? await URLSession.shared.data(from: url) else {
-            throw SimulationError.ephemerisNotFound
-        }
-        
-        // Decode the data
-        let string = String(decoding: data, as: UTF8.self)
-        let ephemerides = string.split(separator: "\n")
-        guard ephemerides.count >= 2 else {
-            throw SimulationError.ephemerisDecodingFailed
-        }
-        
-        // Set the timestamp
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MMM-dd-HH:mm:ss.SSSS"
-        formatter.timeZone = .gmt
-        guard let timestamp = ephemerides[0].split(separator: ",").first, let time = formatter.date(from: String(timestamp)) else {
-            throw SimulationError.ephemerisDecodingFailed
-        }
-        print("time: \(time)")
-        self.time = time
-        
-        for i in 1 ..< ephemerides.count {
-            let ephemerisData = ephemerides[i].split(separator: ",")
-            
-            // Parse the ephemeris data
-            guard ephemerisData.count >= 8,
-              let id = Int(ephemerisData[0]),
-              let x = Double(ephemerisData[2]),
-              let y = Double(ephemerisData[3]),
-              let z = Double(ephemerisData[4]),
-              let vx = Double(ephemerisData[5]),
-              let vy = Double(ephemerisData[6]),
-              let vz = Double(ephemerisData[7])
-            else {
-                continue
-            }
-            
-            // Hash the state vector
-            let stateVector = StateVector(position: [x,y,z], velocity: [vx,vy,vz])
-            states[id] = stateVector
-        }
-        
-        return states
     }
     
     
@@ -316,46 +263,83 @@ final public class Simulation: ObservableObject {
     // Advance the system by the time interval
     internal func advance() {
         guard !isPaused else { isRealTime = false; return }
+        var dt: Double
         
-        // Update the system to match real time
+        // Advance to match real time
         if isRealTime {
-            let dt = -time.timeIntervalSinceNow
-            self.time.addTimeInterval(dt)
-            self.root?.advanceSystem(by: dt)
+            dt = -time.timeIntervalSinceNow
         }
-        // Update the system by a custom rate
+        // Advance by a custom rate
         else {
-            var dt = frameRatio/frameRate
-            dt = min(dt, -time.timeIntervalSince(.reference2050))
-            dt = max(dt, -time.timeIntervalSince(.reference2000))
-            self.time.addTimeInterval(dt)
-            self.root?.advanceSystem(by: dt)
+            dt = frameRatio/frameRate
+            
+            if dt >= -time.timeIntervalSince(maxTime) {
+                dt = -time.timeIntervalSince(maxTime)
+                frameRatio = 0.0
+            }
+            if dt <= -time.timeIntervalSince(minTime) {
+                dt = -time.timeIntervalSince(minTime)
+                frameRatio = 0.0
+            }
+        }
+        
+        // Add the time interval
+        self.time.addTimeInterval(dt)
+        
+        // Update positions and velocities
+        switch updateType {
+        case .spice:
+            // Set states from SPICE
+            // Only guarantee the update for nodes in the current system
+            for node in allNodes {
+                if let parent = node.parent, parent == system || parent == system?.parent {
+                    node.setStateFromSPICE(by: dt, to: time, guaranteedUpdate: parent == system)
+                }
+            }
+        case .integration:
+            // Recursively integrate each node's state
+            root?.integrate(by: dt)
+        }
+        
+        // Update orbit and rotation states
+        for node in allNodes {
+            node.orbit?.update(position: node.position, velocity: node.velocity)
+            node.rotation?.update(timeStep: dt)
         }
     }
     
     // Set the system to a specific timestamp
     internal func setTimestamp(_ timestamp: Date) {
-        guard let root, timestamp >= .reference2000, timestamp <= .reference2050 else { return }
+        guard let root, timestamp >= minTime, timestamp <= maxTime else { return }
         
         isPaused = false
         isRealTime = false
         
-        // Reset ephemerides
-        for node in root.tree {
-            if let stateVector = ephemerides[node.id] {
-                node.setState(stateVector)
+        // Advance states to the given timestamp
+        let dt = timestamp.timeIntervalSince(time)
+        time.addTimeInterval(dt)
+        
+        // Update positions and velocities
+        switch updateType {
+        case .spice:
+            // Set each node's state from SPICE
+            for node in allNodes {
+                node.setStateFromSPICE(by: dt, to: time)
             }
-            node.rotation?.set(time: ephemerideTime)
+        case .integration:
+            // Recursively integrate each node's state
+            root.integrate(by: dt)
         }
         
-        // Advance states to the selected timestamp
-        time = timestamp
-        let dt = timestamp.timeIntervalSince(ephemerideTime)
-        root.advanceSystem(by: dt)
+        // Update orbit and rotation states
+        for node in allNodes {
+            node.orbit?.update(position: node.position, velocity: node.velocity)
+            node.rotation?.update(timeStep: dt)
+        }
     }
     
     // Update the simulation transformations
-    func updateTransformations() {
+    internal func updateTransformations() {
         if let transition {
             transition.nextFrame()
             
@@ -391,17 +375,6 @@ final public class Simulation: ObservableObject {
     }
     
     
-    // MARK: - External Queries
-    
-    public func queryObjects(_ string: String) -> [ObjectNode] {
-        guard !string.isEmpty else { return [] }
-        let query = string.lowercased()
-        return allObjects.filter({ $0.name.lowercased().starts(with: query) })
-            .sorted(by: { $0.category < $1.category })
-            .sorted(by: { $0.rank > $1.rank })
-    }
-    
-    
     // MARK: - External Inputs
     
     // Clock Buttons
@@ -416,7 +389,7 @@ final public class Simulation: ObservableObject {
             isPaused = false
         }
         switch frameRatio {
-        case 1: frameRatio = 100
+        case 0, 1: frameRatio = 100
         case -100: frameRatio = 1
         case ...(-100): frameRatio /= 10
         case (100)...: frameRatio *= 10
@@ -433,7 +406,7 @@ final public class Simulation: ObservableObject {
             isPaused = false
         }
         switch frameRatio {
-        case 1: frameRatio = -100
+        case 0, 1: frameRatio = -100
         case 100: frameRatio = 1
         case ...(-100): frameRatio *= 10
         case (100)...: frameRatio /= 10
@@ -503,6 +476,16 @@ final public class Simulation: ObservableObject {
     }
     public var stateSurface: Bool {
         return scale * (object?.totalSize ?? 0) >= (!hasSystem ? 0.05 : 0.25) * size
+    }
+    
+    // Object Query
+    
+    public func queryObjects(_ string: String) -> [ObjectNode] {
+        guard !string.isEmpty else { return [] }
+        let query = string.lowercased()
+        return allObjects.filter({ $0.name.lowercased().starts(with: query) })
+            .sorted(by: { $0.category < $1.category })
+            .sorted(by: { $0.rank > $1.rank })
     }
     
     
@@ -604,7 +587,7 @@ final public class Simulation: ObservableObject {
     internal func resetPitch() {
         self.steadyPitch = .zero
     }
-
+    
     
     // MARK: - Private Transition Methods
     
@@ -814,6 +797,19 @@ final public class Simulation: ObservableObject {
         // billboards point toward the camera point
         // used for visionOS
         case immersive
+        
+    }
+    
+    public enum UpdateType {
+        
+        // uses SPICE to access state
+        // initial state input directly from SPICE
+        case spice
+        
+        // uses numerical n-body integration to access state
+        // initial state input from decoded json
+        case integration
+        
     }
 
     public enum Status {
@@ -847,36 +843,25 @@ final public class Simulation: ObservableObject {
     
     public enum SimulationError: Error {
         case nodeDecodingFailed
-        case ephemerisNoURL
         case ephemerisNotFound
-        case ephemerisDecodingFailed
-        case photoDecodingFailed
+        case ephemerisLoadingFailed
         case unknown
         
         public var text: String {
             switch self {
             case .nodeDecodingFailed:
                 "Error decoding nodes from file"
-            case .ephemerisNoURL:
-                "Error: bad ephemeris URL"
             case .ephemerisNotFound:
                 "Error: ephemeris not found"
-            case .ephemerisDecodingFailed:
-                "Error decoding ephemeris"
-            case .photoDecodingFailed:
-                "Error decoding photo data"
+            case .ephemerisLoadingFailed:
+                "Error loading ephemeris"
             case .unknown:
                 "An unknown error occurred"
             }
         }
         
         public var detailText: String {
-            switch self {
-            case .ephemerisNotFound:
-                "You must be connected to the Internet to use Planetaria. If the issue persists, please"
-            default:
-                "Please try again later. If the issue persists,"
-            }
+            "Please try again later. If the issue persists,"
         }
     }
 }
