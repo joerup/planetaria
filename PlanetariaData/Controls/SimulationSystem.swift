@@ -120,12 +120,16 @@ class SimulationSystem: System {
             let physicalObjectTotalSize = Float(scale * (node.object ?? node).totalSize)
             let isCentral = node.system != nil && node.system?.orbit == nil // edge case for Sun
             
+            let isGoingVeryFast = simulation.frameRatio > 2 * (node.orbit?.period ?? .infinity)
+            
             let fadeFractionFactor: Float = simulation.viewType == .immersive ? 100 : 10
             let fadeFraction: Float = max(0.0, min(1.0, 1.0 - (physicalObjectTotalSize - targetSize) / (fadeFractionFactor * targetSize - targetSize)))
             
+            let orbitAnchored: Bool = (simulation.offset - node.globalPosition).magnitude / (simulation.offset - (node.parent?.globalPosition ?? .zero)).magnitude < 0.01 || orbitSize > 1e+18
+            
             let bodyVisible = physicalSize >= minimumSize || (node.object?.luminosity ?? 0) > 0
             let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode
-            let labelVisible = simulation.showLabels && physicalSize <= 1.5 * targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode
+            let labelVisible = simulation.showLabels && physicalSize <= 1.5 * targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryFast
             let trailVisible = simulation.showOrbits && orbitSize >= minimumSize
             let interactionVisible = pointVisible || bodyVisible
             var lightsVisible = false
@@ -151,8 +155,7 @@ class SimulationSystem: System {
             }
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
                 if let orbit = entity.component(OrbitComponent.self) {
-                    orbit.update(isEnabled: trailVisible, scale: scale, orientation: orientation, opacity: opacity, fadeFraction: fadeFraction)
-                    
+                    orbit.update(isEnabled: trailVisible, scale: scale, orientation: orientation, opacity: opacity * (isGoingVeryFast ? 0.4 : 1), fadeFraction: fadeFraction, anchored: orbitAnchored)
                 }
             } else {
                 if let orbit = entity.component(OrbitComponentLegacy.self) {

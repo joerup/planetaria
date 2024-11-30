@@ -10,6 +10,7 @@ import SwiftSPICE
 
 extension Node {
     
+    // All states always from the J2000 ecliptic reference frame
     private static let frame = "ECLIPJ2000"
     
     // Get the position and velocity at the given timestamp from SPICE

@@ -22,7 +22,6 @@ import RealityKit
     
     private let node: Node
     private let size: Double
-    private let orientation: simd_quatf
     
     private var angles: [Double] = []
     
@@ -47,8 +46,6 @@ import RealityKit
         
         self.isSmallOrbit = orbit.position.magnitude < 10 * node.size
         
-        self.orientation = simd_quatf(angle: Float(orbit.orbitalInclination), axis: orbit.lineOfNodes.toFloat()) * simd_quatf(angle: Float(orbit.longitudeOfPeriapsis), axis: [0,1,0])
-        
         setAngles()
         
         do {
@@ -67,33 +64,69 @@ import RealityKit
         }
     }
     
-    func update(isEnabled: Bool, scale: Double, orientation: simd_quatf, opacity: Float, fadeFraction: Float) {
+    func update(isEnabled: Bool, scale: Double, orientation: simd_quatf, opacity: Float, fadeFraction: Float, anchored: Bool) {
         model.isEnabled = isEnabled
         guard isEnabled, let vertexBuffer, let orbit = node.orbit else { return }
-        
-        // Anchor the orbit to the object position
-        vertexBuffer[0].position = .zero
         
         // Offset the orbit by the current position
         let currentPoint = orbit.ellipsePosition(orbit.centralAnomaly) / size
         
-        // Compute segment points to define the orbit
-        for i in 1..<segments {
-            let angle = orbit.centralAnomaly - angles[i]
-            var point = orbit.ellipsePosition(angle) / size
-            
-            point -= currentPoint
-            
-            vertexBuffer[i].position = point.toFloat()
-        }
-        
-        // Calculate the object offset (if there is one) to align the trail to the body's center
-        // (skip this in certain cases, like a binary system - should align to system barycenter)
+        // Calculate the offset to align the trail to the body's center
+        // (this is really only a correction for Earth)
         let objectOffset: SIMD3<Float> =
         if let object = node.object, node != object, object.orbit != nil, object.name == "Earth" {
             orientation.act((object.position * scale / size).toFloat())
         } else {
             .zero
+        }
+        
+        // Compute the total orientation
+        let totalOrientation = orientation * simd_quatf(angle: Float(orbit.orbitalInclination), axis: orbit.lineOfNodes.toFloat()) * simd_quatf(angle: Float(orbit.longitudeOfPeriapsis), axis: [0,1,0])
+        
+        if anchored && !isSmallOrbit {
+            // The vertex buffer is given coordinates relative to the object
+            // (this is necessary to prevent floating-point precision errors when looking at a far-away object close-up)
+            // There is no need for an anchor offset because it's already anchored to the object
+             
+            // Start the trail at zero (relative to the current point)
+            vertexBuffer[0].position = .zero
+            
+            // Compute segment points to make the trail (relative to the current point)
+            for i in 1..<segments {
+                let angle = orbit.centralAnomaly - angles[i]
+                let point = orbit.ellipsePosition(angle) / size - currentPoint
+                
+                vertexBuffer[i].position = point.toFloat()
+            }
+            
+            // Apply transforms
+            model.scale = SIMD3(repeating: Float(scale))
+            model.orientation = totalOrientation
+            model.position = objectOffset
+            
+        } else {
+            // The vertex buffer is given coordinates relative to the orbit center
+            // (this is necessary to prevent jittering bug on visionOS)
+            // The model coordinates are relative to the object so the entire model is offset to correct for this
+            
+            // Start the trail at the object's current position
+            vertexBuffer[0].position = currentPoint.toFloat()
+            
+            // Compute segment points to make the trail
+            for i in 1..<segments {
+                let angle = orbit.centralAnomaly - angles[i]
+                let point = orbit.ellipsePosition(angle) / size
+                
+                vertexBuffer[i].position = point.toFloat()
+            }
+            
+            // Calculate the anchor offset to align the trail to the object
+            let anchorOffset = -totalOrientation.act(currentPoint.toFloat() * Float(scale))
+            
+            // Apply transforms
+            model.scale = SIMD3(repeating: Float(scale))
+            model.orientation = totalOrientation
+            model.position = anchorOffset + objectOffset
         }
         
         // Update the fade segments
@@ -103,11 +136,6 @@ import RealityKit
             let alpha = UInt32(255 * alphaFloat) << 24
             vertexBuffer[i].color = vertexBuffer[i].color & 0x00FFFFFF | alpha
         }
-        
-        // Apply scale and rotation
-        model.scale = SIMD3(repeating: Float(scale))
-        model.orientation = orientation * self.orientation
-        model.position = objectOffset
         
         // Apply opacity
         let opacity = isSmallOrbit ? (opacity * fadeFraction) : opacity

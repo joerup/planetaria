@@ -71,7 +71,7 @@ final public class Simulation: ObservableObject {
     @Published public private(set) var isPaused: Bool = false
     
     public private(set) var maxFrameRatio: Double = 1E+10
-    private let frameRate: Double = 60
+    internal let frameRate: Double = 60
     
     @Published public var minTime: Date = .year(2000)
     @Published public var maxTime: Date = .year(2050)
@@ -173,6 +173,7 @@ final public class Simulation: ObservableObject {
     
     // Load data from node file and ephemeris, then create entities
     @MainActor private func loadData(fileName: String) async throws {
+        
         // Decode the tree from the file
         status = .decodingNodes
         guard let file = Bundle.main.path(forResource: fileName, ofType: "json"),
@@ -182,6 +183,7 @@ final public class Simulation: ObservableObject {
         else {
             throw SimulationError.nodeDecodingFailed
         }
+        
         self.root = root
         self.focus = root
         self.system = root
@@ -223,7 +225,7 @@ final public class Simulation: ObservableObject {
             
         case .integration:
             
-            // Initial states are loaded already in decoder
+            // Initial states are loaded already via decoder
             
             // Set orbits for all nodes
             for node in allNodes {
@@ -250,7 +252,7 @@ final public class Simulation: ObservableObject {
         // (this makes the default scale (1.0) represent the size of the root's primary system)
         size = zoomOrbitCoefficient * root.primaryScaleDistance
         
-        // Load the entities
+        // Load the entities for RealityKit
         status = .creatingEntities
         for node in allNodes {
             let _ = await SimulationEntity(node: node, size: size, root: rootEntity)
@@ -292,8 +294,8 @@ final public class Simulation: ObservableObject {
             // Set states from SPICE
             // Only guarantee the update for nodes in the current system
             for node in allNodes {
-                if let parent = node.parent, parent == system || parent == system?.parent {
-                    node.setStateFromSPICE(by: dt, to: time, guaranteedUpdate: parent == system)
+                if let parent = node.parent, parent == system || parent == system?.parent || parent == transition?.originalFocus || parent == transition?.originalFocus?.parent {
+                    node.setStateFromSPICE(by: dt, to: time, guaranteedUpdate: node == system || parent == system)
                 }
             }
         case .integration:
@@ -303,7 +305,7 @@ final public class Simulation: ObservableObject {
         
         // Update orbit and rotation states
         for node in allNodes {
-            node.orbit?.update(position: node.position, velocity: node.velocity)
+            node.orbit?.update(node: node)
             node.rotation?.update(timeStep: dt)
         }
     }
@@ -333,7 +335,7 @@ final public class Simulation: ObservableObject {
         
         // Update orbit and rotation states
         for node in allNodes {
-            node.orbit?.update(position: node.position, velocity: node.velocity)
+            node.orbit?.update(node: node)
             node.rotation?.update(timeStep: dt)
         }
     }
@@ -727,11 +729,11 @@ final public class Simulation: ObservableObject {
         private let totalFrames: Int
         private var completedFrames: Int = 0
         
-        private var originalScale: Double
-        private var originalFocus: Node?
-        private var originalOffsetAmount: Double
-        private var targetScale: Double
-        private var targetFocus: Node?
+        private(set) var originalScale: Double
+        private(set) var originalFocus: Node?
+        private(set) var originalOffsetAmount: Double
+        private(set) var targetScale: Double
+        private(set) var targetFocus: Node?
         
         var scale: Double = 1.0
         var offset: Vector3 = .zero

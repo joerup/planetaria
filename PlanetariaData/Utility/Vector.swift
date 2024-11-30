@@ -85,5 +85,9 @@ public extension Vector3 {
     func toFloat() -> SIMD3<Float> {
         return [Float(x), Float(z), Float(-y)]
     }
+    
+    func isApproximately(_ other: Vector3, epsilon: Double = 1e-10) -> Bool {
+        return abs(self.x - other.x) < epsilon && abs(self.y - other.y) < epsilon && abs(self.z - other.z) < epsilon
+    }
 }
 

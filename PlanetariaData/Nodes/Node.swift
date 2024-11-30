@@ -31,7 +31,7 @@ public class Node: Decodable {
     
     internal var spiceStep: Double = 0
     internal var spiceElapsedTime: Double = 0
-    static let spiceStepFraction: Double = 0.0025
+    static let spiceStepFraction: Double = 1E-4
     
     internal var integrationStep: Double = 0
     internal var integrationElapsedTime: Double = 0
@@ -61,10 +61,7 @@ public class Node: Decodable {
     }
     
     internal func setOrbit() {
-        if let hostNode {
-            let orbit = Orbit(position: position, velocity: velocity, mass: mass, hostNode: hostNode)
-            self.orbit = orbit
-        }
+        self.orbit = Orbit(node: self)
     }
     
     public var subtitle: String {
