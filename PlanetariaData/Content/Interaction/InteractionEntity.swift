@@ -9,31 +9,33 @@ import RealityKit
 
 class InteractionEntity: Entity {
     
-    // Size of an interaction entity
-    static let size: Float = 3.0
+    let distance: Float
+    let size: Float
     
-    // All interaction entities always remain at this fixed distance from the camera
-    static let distance: Float = 10.0
+    @MainActor required init() {
+        distance = 0
+        size = 1
+    }
     
-    @MainActor required init() { }
-    
-    init(node: Node, debugMode: Bool) {
+    init(node: Node, secondary: Bool = false, debugMode: Bool) {
+        self.distance = (secondary ? 15 : 10) - Float(0.01 * log(node.object?.size ?? 1))
+        self.size = secondary ? 5 : 3
+        
         super.init()
         
-        let collisionShape = ShapeResource.generateSphere(radius: Self.size)
+        let collisionShape = ShapeResource.generateSphere(radius: size)
         components.set(CollisionComponent(shapes: [collisionShape]))
         
         // Visual for debugging
         if debugMode {
-            let sphere = MeshResource.generateSphere(radius: Self.size)
-            var material = UnlitMaterial(color: .blue)
+            let sphere = MeshResource.generateSphere(radius: size)
+            var material = UnlitMaterial(color: secondary ? .cyan : .blue)
             material.blending = .transparent(opacity: 0.3)
             components.set(ModelComponent(mesh: sphere, materials: [material]))
         }
         
         #if os(visionOS)
         components.set(InputTargetComponent())
-        components.set(HoverEffectComponent())
         #endif
     }
 }

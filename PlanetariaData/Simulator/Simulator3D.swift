@@ -22,12 +22,26 @@ public struct Simulator: View {
     
     public var body: some View {
         GeometryReader3D { geometry in
-            RealityView { content in
+            RealityView { content, attachments in
                 content.add(simulation.rootEntity)
+                if let attachment = attachments.entity(for: "attachment") {
+                    simulation.rootEntity.attachmentPoint.addChild(attachment)
+                }
+            } attachments: {
+                Attachment(id: "attachment") {
+                    Text(simulation.selectedObject?.name ?? simulation.selectedSystem?.name ?? "Nothing")
+                        .font(.largeTitle)
+                        .padding()
+                        .padding()
+                        .padding(.horizontal)
+                        .glassBackgroundEffect()
+                }
             }
             .gesture(tapGesture)
             .simultaneousGesture(panGesture)
+            .simultaneousGesture(areaPanGesture)
             .simultaneousGesture(zoomGesture)
+            .simultaneousGesture(areaZoomGesture)
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
             .onAppear {
                 simulation.rootEntity.setSizes(.init(width: 2 * geometry.size.width, height: 2 * geometry.size.height), dynamicTypeSize)
@@ -48,20 +62,32 @@ public struct Simulator: View {
                 if let node = value.entity.component(InteractionComponent.self)?.node {
                     simulation.selectObject(node)
                 }
+//                let start = sphericalCoordinates(vector: simulation.rootEntity.interactionArea.position(relativeTo: nil))
+//                let end = sphericalCoordinates(vector: value.convert(value.location3D, from: .global, to: .scene))
+//                simulation.completeRotationGesture(with: -.radians(end.azimuth - start.azimuth))
+//                simulation.completePitchGesture(with: .radians(end.elevation - start.elevation))
             }
     }
     
-    private let translationAngleFactor: CGFloat = .pi / 400
     private var panGesture: some Gesture {
         DragGesture()
             .targetedToEntity(where: .has(InteractionComponent.self))
             .onChanged { value in
-                simulation.updateRotationGesture(with: .radians(-value.translation3D.x * translationAngleFactor))
-                simulation.updatePitchGesture(with: .radians(value.translation3D.y * translationAngleFactor))
+                updateDragGesture(with: value)
             }
             .onEnded { value in
-                simulation.completeRotationGesture(with: .radians(-value.translation3D.x * translationAngleFactor))
-                simulation.completePitchGesture(with: .radians(value.translation3D.y * translationAngleFactor))
+                completeDragGesture(with: value)
+            }
+    }
+    
+    private var areaPanGesture: some Gesture {
+        DragGesture()
+            .targetedToEntity(where: .has(InteractionAreaComponent.self))
+            .onChanged { value in
+                updateDragGesture(with: value)
+            }
+            .onEnded { value in
+                completeDragGesture(with: value)
             }
     }
     
@@ -74,6 +100,52 @@ public struct Simulator: View {
             .onEnded { value in
                 simulation.completeScaleGesture(to: value.gestureValue)
             }
+    }
+    
+    private var areaZoomGesture: some Gesture {
+        MagnificationGesture()
+            .targetedToEntity(where: .has(InteractionAreaComponent.self))
+            .onChanged { value in
+                simulation.updateScaleGesture(to: value.gestureValue)
+            }
+            .onEnded { value in
+                simulation.completeScaleGesture(to: value.gestureValue)
+            }
+    }
+    
+    private func updateDragGesture(with value: EntityTargetValue<DragGesture.Value>) {
+        let start = sphericalCoordinates(vector: value.convert(value.startLocation3D, from: .global, to: .scene))
+        let end = sphericalCoordinates(vector: value.convert(value.location3D, from: .global, to: .scene))
+        
+        simulation.updateRotationGesture(with: -.radians(end.azimuth - start.azimuth))
+        simulation.updatePitchGesture(with: .radians(end.elevation - start.elevation))
+        simulation.updateScaleGesture(to: end.radius / start.radius)
+    }
+    
+    private func completeDragGesture(with value: EntityTargetValue<DragGesture.Value>) {
+        let start = sphericalCoordinates(vector: value.convert(value.startLocation3D, from: .global, to: .scene))
+        let end = sphericalCoordinates(vector: value.convert(value.location3D, from: .global, to: .scene))
+        
+        simulation.completeRotationGesture(with: -.radians(end.azimuth - start.azimuth))
+        simulation.completePitchGesture(with: .radians(end.elevation - start.elevation))
+        simulation.completeScaleGesture(to: end.radius / start.radius)
+    }
+    
+    private func sphericalCoordinates(vector: SIMD3<Float>) -> (radius: Double, azimuth: Double, elevation: Double) {
+        let x = vector.x
+        let y = vector.y
+        let z = vector.z
+
+        // Radius: r = sqrt(x^2 + y^2 + z^2)
+        let radius = sqrt(x * x + y * y + z * z)
+
+        // Azimuth: θ = atan2(x, z)
+        let azimuth = atan2(x, z)
+
+        // Elevation: φ = atan2(y, sqrt(x^2 + z^2))
+        let elevation = sqrt(x * x + z * z) != 0 ? atan2(y, sqrt(x * x + z * z)) : 0
+
+        return (Double(radius), Double(azimuth), Double(elevation))
     }
 }
 #endif

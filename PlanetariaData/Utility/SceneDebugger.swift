@@ -27,7 +27,7 @@ public struct SceneDebugger: View {
                             Text(configuration.node.name)
                                 .foregroundStyle(nameColor(configuration.node))
                             Spacer()
-                            indicator(entity.component(InteractionComponent.self)?.entity.isEnabled, letter: "I", color: .blue)
+                            indicator(entity.component(InteractionComponent.self)?.primaryEntity.isEnabled, letter: "I", color: .blue)
                             indicator(entity.component(BodyComponent.self)?.model.isEnabled, letter: "B", color: .yellow)
                             indicator(entity.component(TargetComponent.self)?.model.isEnabled, letter: "T", color: .red)
                             indicator(entity.component(LabelComponent.self)?.model.isEnabled, letter: "L", color: .orange)

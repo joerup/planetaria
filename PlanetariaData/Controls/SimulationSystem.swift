@@ -35,8 +35,13 @@ class SimulationSystem: System {
         // Update the simulation
         simulation.updateTransformations()
         
+        // Get the initial parameters
+        let initialScale = simulation.scale
+        let initialOrientation = simulation.orientation
+        let initialOffset = simulation.offset
+        
         // Adjust the parameters
-        let (scale, orientation, offset, center) = adjustParameters(scale: simulation.scale, orientation: simulation.orientation, offset: simulation.offset, size: simulation.size)
+        let (scale, orientation, offset, center) = adjustParameters(scale: initialScale, orientation: initialOrientation, offset: initialOffset, size: simulation.size)
         
         // Get the camera state
         let (cameraPosition, cameraForward) = root.cameraState
@@ -46,7 +51,9 @@ class SimulationSystem: System {
         
         // Update scene entities in the root
         root.sceneBackground.update(orientation: orientation)
-        root.cameraMarker.update(cameraPosition: cameraPosition, arMode: simulation.viewType == .augmented, debugMode: root.debugMode)
+        root.interactionArea.update(orientation: initialOrientation, cameraPosition: cameraPosition, centerPosition: center)
+        root.attachmentPoint.update(orientation: initialOrientation, cameraPosition: cameraPosition, centerPosition: center)
+        root.cameraMarker.update(cameraPosition: cameraPosition, arMode: simulation.viewType == .augmented || simulation.viewType == .immersive)
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
             root.updateLights(isEnabled: !simulation.showFloodLights)
         } else {
@@ -125,7 +132,7 @@ class SimulationSystem: System {
             let fadeFractionFactor: Float = simulation.viewType == .immersive ? 100 : 10
             let fadeFraction: Float = max(0.0, min(1.0, 1.0 - (physicalObjectTotalSize - targetSize) / (fadeFractionFactor * targetSize - targetSize)))
             
-            let orbitAnchored: Bool = (simulation.offset - node.globalPosition).magnitude / (simulation.offset - (node.parent?.globalPosition ?? .zero)).magnitude < 0.01 || orbitSize > 1e+18
+            let orbitAnchored: Bool = (initialOffset - node.globalPosition).magnitude / (initialOffset - (node.parent?.globalPosition ?? .zero)).magnitude < 0.01
             
             let bodyVisible = physicalSize >= minimumSize || (node.object?.luminosity ?? 0) > 0
             let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode
@@ -182,9 +189,9 @@ class SimulationSystem: System {
             center = .zero
         case .immersive:
             scale = size
-            orientation = initialOrientation
+            orientation = .identity
             offset = initialOffset
-            center = [0,0.45,-0.9] * Float(size / initialScale)
+            center = initialOrientation.act([0,0.45,-0.9] * Float(size / initialScale))
         }
         
         return (scale, orientation, offset, center)

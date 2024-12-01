@@ -291,30 +291,6 @@ public extension simd_quatf {
     }
 }
 
-public extension SIMD3<Double> {
-    /// Converts Cartesian coordinates to Spherical coordinates.
-    /// - Returns: A tuple (r, θ, φ) where:
-    ///   - `r`: Radius (distance from the origin)
-    ///   - `θ`: Azimuth angle in radians (angle from the positive x-axis in the xy-plane)
-    ///   - `φ`: Elevation angle in radians (angle from the xy-plane)
-    func toSphericalCoordinates() -> (radius: Double, azimuth: Double, elevation: Double) {
-        let x = self.x
-        let y = self.y
-        let z = self.z
-
-        // Radius: r = sqrt(x^2 + y^2 + z^2)
-        let radius = sqrt(x * x + y * y + z * z)
-
-        // Azimuth: θ = atan2(x, z)
-        let azimuth = atan2(x, z)
-
-        // Elevation: φ = atan2(y, sqrt(x^2 + z^2))
-        let elevation = sqrt(x * x + z * z) != 0 ? atan2(y, sqrt(x * x + z * z)) : 0
-
-        return (radius, azimuth, elevation)
-    }
-}
-
 enum GeneralError: Error {
     case somethingWentWrong
 }

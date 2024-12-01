@@ -112,7 +112,11 @@ final public class Simulation: ObservableObject {
     }
     
     internal var orientation: simd_quatf {
-        simd_quatf(angle: Float(pitch.radians), axis: [1,0,0]) * simd_quatf(angle: Float(-rotation.radians), axis: [0,1,0])
+        if viewType == .immersive {
+            simd_quatf(angle: Float(-rotation.radians), axis: [0,1,0]) * simd_quatf(angle: Float(pitch.radians), axis: [1,0,0])
+        } else {
+            simd_quatf(angle: Float(pitch.radians), axis: [1,0,0]) * simd_quatf(angle: Float(-rotation.radians), axis: [0,1,0])
+        }
     }
     
     private let zoomObjectCoefficient: Double = 2.4
@@ -632,7 +636,7 @@ final public class Simulation: ObservableObject {
     private func zoomToSurface(node: Node) {
         print("zooming to surface of \(node.name)")
         let node = node.object ?? node
-        transition(focus: node, size: zoomObjectCoefficient * node.totalSize)
+        transition(focus: node, size: zoomObjectCoefficient * (viewType == .immersive ? node.size : node.totalSize))
     }
     
     // Zoom to a node's orbital path

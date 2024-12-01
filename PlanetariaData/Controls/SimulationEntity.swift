@@ -20,9 +20,10 @@ class SimulationEntity: Entity {
         
         components.set(SimulationComponent(entity: self, node: node, size: size))
         
-        let interaction = InteractionComponent(node: node, size: size, debugMode: root.debugMode)
+        let interaction = InteractionComponent(node: node, size: size, debugMode: SimulationRootEntity.debugMode)
         components.set(interaction)
-        root.addChild(interaction.entity)
+        root.addChild(interaction.primaryEntity)
+        root.addChild(interaction.secondaryEntity)
         
         if let body = BodyComponent(node: node, size: size) {
             components.set(body)

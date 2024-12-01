@@ -136,7 +136,7 @@ private struct RealityView: UIViewRepresentable {
         
         arView.scene.anchors.append(anchor)
         
-        if root.debugMode {
+        if SimulationRootEntity.debugMode {
             arView.debugOptions.insert(.showStatistics)
         }
         

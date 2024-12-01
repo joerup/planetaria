@@ -17,11 +17,13 @@ class SimulationRootEntity: Entity {
     var simulation: Simulation?
     
     // Scene entities
-    let sceneBackground = SceneBackground()
-    let cameraMarker = CameraMarker()
+    let sceneBackground: SceneBackground
+    let interactionArea: InteractionArea
+    let attachmentPoint: AttachmentPoint
+    let cameraMarker: CameraMarker
     
     // Debug mode
-    let debugMode: Bool = false
+    static let debugMode: Bool = false
     
     // Display parameters
     private(set) var entityThickness: Float = 0.005 // apparent thickness (in meters) of a uniformly-scaled entity
@@ -50,9 +52,17 @@ class SimulationRootEntity: Entity {
     private var realisticLighting: Bool = true
     
     required init() {
+        self.sceneBackground = SceneBackground()
+        self.interactionArea = InteractionArea(debugMode: Self.debugMode)
+        self.attachmentPoint = AttachmentPoint()
+        self.cameraMarker = CameraMarker(debugMode: Self.debugMode)
+        
         super.init()
         self.name = "root"
+    
         addChild(sceneBackground)
+        addChild(interactionArea)
+        addChild(attachmentPoint)
         addChild(cameraMarker)
         
         #if os(visionOS)
@@ -90,23 +100,37 @@ class SimulationRootEntity: Entity {
         #endif
     }
     
-    // A marker to show where the camera currently is
-    // For internal use only
-    class CameraMarker: Entity {
-        required init() {
-            super.init()
-            
-            let thickness: Float = 0.05
-            let sphere = MeshResource.generateSphere(radius: thickness)
-            var material = UnlitMaterial(color: .gray)
-            material.blending = .transparent(opacity: 0.5)
-            
-            components.set(ModelComponent(mesh: sphere, materials: [material]))
+    // An attachment point for the interactive UI
+    class AttachmentPoint: Entity {
+        private let distance: Float = 1
+        private let offset: SIMD3<Float> = [0,0.5,0]
+        
+        required init() { }
+        
+        func update(orientation: simd_quatf, cameraPosition: SIMD3<Float>, centerPosition: SIMD3<Float>) {
+            self.orientation = orientation
+            self.position = cameraPosition + normalize(centerPosition - cameraPosition) * distance - offset
         }
-        func update(cameraPosition: SIMD3<Float>, arMode: Bool, debugMode: Bool) {
+    }
+    
+    // A marker to show where the camera currently is
+    class CameraMarker: Entity {
+        required init() { }
+        
+        init(debugMode: Bool) {
+            super.init()
+            if debugMode {
+                let thickness: Float = 0.05
+                let sphere = MeshResource.generateSphere(radius: thickness)
+                var material = UnlitMaterial(color: .gray)
+                material.blending = .transparent(opacity: 0.5)
+                components.set(ModelComponent(mesh: sphere, materials: [material]))
+            }
+        }
+        func update(cameraPosition: SIMD3<Float>, arMode: Bool) {
             let position = arMode ? (cameraPosition - [0,0.5,0]) : (normalize(cameraPosition) * 0.7)
             self.position = position
-            self.scale = SIMD3(repeating: debugMode && arMode ? 1.0 : 0.0)
+            self.scale = SIMD3(repeating: arMode ? 1.0 : 0.0)
             self.orientation = .identity
         }
     }
