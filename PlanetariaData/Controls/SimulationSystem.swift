@@ -127,7 +127,7 @@ class SimulationSystem: System {
             let physicalObjectTotalSize = Float(scale * (node.object ?? node).totalSize)
             let isCentral = node.system != nil && node.system?.orbit == nil // edge case for Sun
             
-            let isGoingVeryFast = simulation.frameRatio > 2 * (node.orbit?.period ?? .infinity)
+            let isGoingVeryFast = abs(simulation.frameRatio) > 2 * ((node.system ?? node).orbit?.period ?? .infinity)
             
             let fadeFractionFactor: Float = simulation.viewType == .immersive ? 100 : 10
             let fadeFraction: Float = max(0.0, min(1.0, 1.0 - (physicalObjectTotalSize - targetSize) / (fadeFractionFactor * targetSize - targetSize)))

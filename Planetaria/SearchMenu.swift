@@ -34,12 +34,12 @@ struct SearchMenu: View {
             HStack(alignment: .top, spacing: 8) {
                 searchBar
                     .padding()
-                    .frame(height: 40)
-                    .background(.background)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .frame(height: 44)
+                    .background(.thinMaterial)
+                    .clipShape(RoundedRectangle(cornerRadius: 30))
                 closeButton
             }
-            .padding(8)
+            .padding()
             
             #endif
             

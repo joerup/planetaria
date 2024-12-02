@@ -9,15 +9,18 @@ import SwiftUI
 import RealityKit
 
 #if os(visionOS)
-public struct Simulator: View {
+public struct Simulator<UI: View>: View {
     
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     @ObservedObject private var simulation: Simulation
+    
+    private var ui: () -> UI
 
-    public init(for simulation: Simulation) {
+    public init(for simulation: Simulation, ui: @escaping () -> UI) {
         self.simulation = simulation
+        self.ui = ui
     }
     
     public var body: some View {
@@ -29,12 +32,7 @@ public struct Simulator: View {
                 }
             } attachments: {
                 Attachment(id: "attachment") {
-                    Text(simulation.selectedObject?.name ?? simulation.selectedSystem?.name ?? "Nothing")
-                        .font(.largeTitle)
-                        .padding()
-                        .padding()
-                        .padding(.horizontal)
-                        .glassBackgroundEffect()
+                    ui().glassBackgroundEffect()
                 }
             }
             .gesture(tapGesture)
@@ -112,14 +110,14 @@ public struct Simulator: View {
                 simulation.completeScaleGesture(to: value.gestureValue)
             }
     }
-    
+     
     private func updateDragGesture(with value: EntityTargetValue<DragGesture.Value>) {
         let start = sphericalCoordinates(vector: value.convert(value.startLocation3D, from: .global, to: .scene))
         let end = sphericalCoordinates(vector: value.convert(value.location3D, from: .global, to: .scene))
         
         simulation.updateRotationGesture(with: -.radians(end.azimuth - start.azimuth))
         simulation.updatePitchGesture(with: .radians(end.elevation - start.elevation))
-        simulation.updateScaleGesture(to: end.radius / start.radius)
+        simulation.updateScaleGesture(to: start.radius / end.radius)
     }
     
     private func completeDragGesture(with value: EntityTargetValue<DragGesture.Value>) {
@@ -128,7 +126,7 @@ public struct Simulator: View {
         
         simulation.completeRotationGesture(with: -.radians(end.azimuth - start.azimuth))
         simulation.completePitchGesture(with: .radians(end.elevation - start.elevation))
-        simulation.completeScaleGesture(to: end.radius / start.radius)
+        simulation.completeScaleGesture(to: start.radius / end.radius)
     }
     
     private func sphericalCoordinates(vector: SIMD3<Float>) -> (radius: Double, azimuth: Double, elevation: Double) {

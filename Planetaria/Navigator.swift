@@ -12,7 +12,15 @@ struct Navigator<Content: View>: View {
     
     @ObservedObject var simulation: Simulation
     
-    @ViewBuilder var content: () -> Content
+    @ViewBuilder let content: () -> Content
+    
+    private let type: NavigatorType
+    
+    enum NavigatorType {
+        case all
+        case controls
+        case label
+    }
     
     @State private var showDetails: Bool = false
     @State private var showList: Bool = false
@@ -39,15 +47,16 @@ struct Navigator<Content: View>: View {
         verticalSizeClass == .regular && horizontalSizeClass == .compact
     }
     
-    init(for simulation: Simulation, @ViewBuilder content: @escaping () -> Content = { EmptyView() }) where Content: View {
+    init(for simulation: Simulation, @ViewBuilder content: @escaping () -> Content = { EmptyView() }, type: NavigatorType = .all) where Content: View {
         self.simulation = simulation
         self.content = content
+        self.type = type
     }
 
     var body: some View {
         Group {
             
-            #if os(iOS)
+        #if os(iOS)
             GeometryReader { geometry in
                 content()
                     .overlay(alignment: .top) {
@@ -115,7 +124,7 @@ struct Navigator<Content: View>: View {
                     .ignoresSafeArea(.keyboard)
             }
             
-            #elseif os(macOS)
+        #elseif os(macOS)
             content()
                 .overlay(alignment: .bottom) {
                     if let object = simulation.selectedObject {
@@ -155,58 +164,65 @@ struct Navigator<Content: View>: View {
                 }
                 .preferredColorScheme(.dark)
             
-            #elseif os(visionOS)
-            VStack {
-                HStack(alignment: .top) {
-                    homeButton
-                    settingsButton
-                    Spacer()
-                    HStack(spacing: 12) {
-                        slowDownButton
-                        clockDisplay
-                        speedUpButton
+        #elseif os(visionOS)
+            if type == .controls {
+                Text("")
+                    .ornament(attachmentAnchor: .scene(.bottom)) {
+                        HStack {
+                            homeButton
+                            settingsButton
+                            Spacer()
+                            HStack(spacing: 12) {
+                                slowDownButton
+                                clockDisplay
+                                speedUpButton
+                            }
+                            .background(Color.init(white: 0.6).opacity(0.2))
+                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                            Spacer()
+                            if let system = simulation.selectedSystem {
+                                listButton(system)
+                            }
+                            searchButton
+                        }
+                        .padding()
+                        .glassBackgroundEffect()
                     }
-                    .background(Color.init(white: 0.6).opacity(0.2))
-                    .clipShape(RoundedRectangle(cornerRadius: 30))
-                    Spacer()
-                    if let system = simulation.selectedSystem {
-                        listButton(system)
+                    .onChange(of: scenePhase) { _, _ in
+                        Task {
+                            await dismissImmersiveSpace()
+                        }
                     }
-                    searchButton
-                }
-                .padding(.horizontal, 5)
-                
-                HStack {
-                    if let object = simulation.selectedObject {
-                        objectLabel(object, large: true)
-                        Spacer()
-                        infoButton(object)
-                        closeButton
-                    } else {
-                        Text("Welcome to the Solar System")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .fontDesign(.rounded)
-                            .foregroundStyle(.primary)
+            } else if type == .label {
+                if let object = simulation.selectedObject {
+                    ZStack {
+                        VStack {
+                            HStack(alignment: .top) {
+                                objectLabel(object, large: true)
+                                Spacer(minLength: 8)
+                                infoButton(object)
+                                closeButton
+                            }
+                            selectorButtons()
+                                .frame(maxWidth: .infinity)
+                                .padding(.top, 4)
+                        }
+                        .padding(16)
+                        .frame(maxWidth: 500)
+                        .glassBackgroundEffect()
+                        .offset(z: showDetails ? -50 : 0)
+                        if showDetails {
+                            ObjectDetails(object: object, isActive: $showDetails)
+                                .frame(maxWidth: 500, maxHeight: 550)
+                                .glassBackgroundEffect()
+                                .offset(z: 50)
+                        }
                     }
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(.horizontal)
-                .glassBackgroundEffect()
-            }
-            .padding()
-            .ornament(visibility: simulation.selectedObject != nil ? .visible : .hidden, attachmentAnchor: .scene(.bottom)) {
-                selectorButtons(large: true)
-                    .padding()
-                    .glassBackgroundEffect()
-            }
-            .onChange(of: scenePhase) { _, _ in
-                Task {
-                    await dismissImmersiveSpace()
                 }
             }
             
-            #endif
+        #endif
+            
         }
         .environmentObject(simulation)
     }
@@ -241,9 +257,11 @@ struct Navigator<Content: View>: View {
             showDetails.toggle()
         }
         .accessibilityLabel("Show Info for \(object.name)")
+        #if !os(visionOS)
         .sheet(isPresented: $showDetails) {
-            ObjectDetails(object: object)
+            ObjectDetails(object: object, isActive: $showDetails)
         }
+        #endif
     }
     
     private func listButton(_ system: SystemNode) -> some View {
@@ -251,8 +269,8 @@ struct Navigator<Content: View>: View {
             showList.toggle()
         }
         .accessibilityLabel("Show Object List")
-        .popover(isPresented: $showList) {
-            SystemDetails(system: system)
+        .popover(isPresented: $showList, arrowEdge: .top) {
+            SystemDetails(system: system, isActive: $showList)
                 .frame(minWidth: 350)
         }
     }
@@ -262,7 +280,7 @@ struct Navigator<Content: View>: View {
             showSearch.toggle()
         }
         .accessibilityLabel("Search")
-        .popover(isPresented: $showSearch) {
+        .popover(isPresented: $showSearch, arrowEdge: .top) {
             SearchMenu()
                 .frame(minWidth: 350)
         }

@@ -114,7 +114,7 @@ import RealityKit
             
             // Compute segment points to make the trail
             for i in 1..<segments {
-                let angle = orbit.centralAnomaly - angles[i]
+                let angle = orbit.centralAnomaly - Double(i) / Double(segments) * 2 * .pi
                 let point = orbit.ellipsePosition(angle) / size
                 
                 vertexBuffer[i].position = point.toFloat()

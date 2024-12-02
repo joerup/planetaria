@@ -11,11 +11,15 @@ struct ScrollSheet<Content: View>: View {
     
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    @Environment(\.dismiss) var dismiss
     
     var title: String
     var subtitle: String?
     var icon: String?
+    
+    var backButton: String?
+    var backAction: (() -> Void)?
+    
+    @Binding var isActive: Bool
     
     var content: () -> Content
     
@@ -113,15 +117,45 @@ struct ScrollSheet<Content: View>: View {
     private func header() -> some View {
         HStack(spacing: 0) {
             if let icon {
+                #if os(visionOS)
+                ObjectIcon(icon: icon, size: 70)
+                    .scaleEffect(1.2)
+                    .padding(.trailing, 12)
+                    .offset(y: -1)
+                #else
                 ObjectIcon(icon: icon, size: 60)
                     .scaleEffect(1.2)
                     .padding(.leading, -5)
                     .padding(.trailing, 12)
                     .offset(y: -1)
+                #endif
             }
             VStack(alignment: .leading, spacing: 0) {
+                if let backButton, let backAction {
+                    Button {
+                        backAction()
+                    } label: {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                            Text(backButton)
+                                .font(.system(.headline, design: .default, weight: .semibold))
+                                .fontDesign(.rounded)
+                        }
+                        .foregroundStyle(.mint)
+                    }
+                    #if os(visionOS)
+                    .padding(.bottom, 4)
+                    #else
+                    .padding(.top, 4)
+                    .padding(.leading, -2)
+                    #endif
+                }
                 Text(title)
+                    #if os(visionOS)
+                    .font(.system(.largeTitle, design: .default, weight: .semibold))
+                    #else
                     .font(.system(.title, design: .default, weight: .semibold))
+                    #endif
                     .fontDesign(.rounded)
                     .padding(.top, 8)
                     .id(1)
@@ -139,7 +173,7 @@ struct ScrollSheet<Content: View>: View {
     
     private var closeButton: some View {
         ControlButton(icon: "xmark") {
-            dismiss()
+            isActive = false
         }
         .accessibilityLabel("Close")
     }

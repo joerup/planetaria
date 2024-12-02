@@ -10,8 +10,6 @@ import PlanetariaData
 
 struct SystemDetails: View {
     
-    @Environment(\.dismiss) var dismiss
-    
     @EnvironmentObject var simulation: Simulation
     
     private let system: SystemNode
@@ -19,9 +17,12 @@ struct SystemDetails: View {
     private let primaryObjects: [Node]
     private let secondaryObjects: [Node]
     private let dwarfPlanets: [Node]
+    
+    @Binding private var isActive: Bool
 
-    init(system: SystemNode) {
+    init(system: SystemNode, isActive: Binding<Bool>) {
         self.system = system
+        self._isActive = isActive
         
         self.primaryObjects = system.children(type: system.primaryCategory)
         self.secondaryObjects = system.children(type: system.secondaryCategory).sorted { $0.id < $1.id }
@@ -29,7 +30,7 @@ struct SystemDetails: View {
     }
     
     var body: some View {
-        ScrollSheet(title: "\(system.name) System") {
+        ScrollSheet(title: "\(system.name) System", backButton: backButton, backAction: backAction, isActive: $isActive) {
             list
         }
         .fontDesign(.rounded)
@@ -41,24 +42,26 @@ struct SystemDetails: View {
             // Primary Objects (Stars or Planets)
             ForEach(primaryObjects) { child in
                 Button {
-                    simulation.selectObject(child)
-                    dismiss()
+                    if !simulation.isSelected(child) {
+                        simulation.selectObject(child)
+                    }
+                    isActive = false
                 } label: {
                     SelectionRow(title: child.name, icon: child.name)
                 }
-                .disabled(simulation.isSelected(child))
             }
             
             // Secondary Objects (Planets or Moons)
             listSectionHeader("\(system.secondaryCategory?.text ?? "")s")
             ForEach(secondaryObjects) { child in
                 Button {
-                    simulation.selectObject(child)
-                    dismiss()
+                    if !simulation.isSelected(child) {
+                        simulation.selectObject(child)
+                    }
+                    isActive = false
                 } label: {
                     SelectionRow(title: child.name, icon: child.name)
                 }
-                .disabled(simulation.isSelected(child))
             }
             
             // Dwarf Planets
@@ -66,12 +69,13 @@ struct SystemDetails: View {
                 listSectionHeader("Dwarf Planets")
                 ForEach(dwarfPlanets) { child in
                     Button {
-                        simulation.selectObject(child)
-                        dismiss()
+                        if !simulation.isSelected(child) {
+                            simulation.selectObject(child)
+                        }
+                        isActive = false
                     } label: {
                         SelectionRow(title: child.name, icon: child.name)
                     }
-                    .disabled(simulation.isSelected(child))
                 }
             }
         }
@@ -96,5 +100,15 @@ struct SystemDetails: View {
             .font(.subheadline)
             #endif
             .padding(.horizontal)
+    }
+    
+    private var backButton: String? {
+        guard let parent = system.parent else { return nil }
+        return "\(parent.name) System"
+    }
+    
+    private var backAction: (() -> Void)? {
+        guard let _ = system.parent else { return nil }
+        return { simulation.leaveSystem() }
     }
 }
