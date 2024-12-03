@@ -27,7 +27,7 @@ struct Settings: View {
                     Toggle("Show Labels", isOn: $simulation.showLabels)
                 }
                 
-                if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+                if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *), simulation.viewType.useRealisticLighting {
                     Section {
                         Toggle("Flood Lights", isOn: $simulation.showFloodLights)
                     }
@@ -53,7 +53,7 @@ struct Settings: View {
                     }
                 }
                 
-                #if os(iOS) || os(tvOS) || os(visionOS)
+                #if os(iOS) || os(tvOS)
                 Section {
                     Button {
                         guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1546887479?action=write-review")
@@ -87,7 +87,7 @@ struct Settings: View {
             .tint(.mint)
             .fontDesign(.rounded)
             .navigationTitle("Settings")
-            #if os(iOS) || os(tvOS) || os(visionOS)
+            #if os(iOS) || os(tvOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -105,7 +105,7 @@ struct Settings: View {
         .sheet(isPresented: $presentAcknowledgements) {
             Acknowledgements()
         }
-        #if os(iOS) || os(tvOS) || os(visionOS)
+        #if os(iOS) || os(tvOS)
         .sheet(isPresented: self.$presentShare, content: {
             ActivityViewController(activityItems: [URL(string: "https://apps.apple.com/us/app/planetaria/id1546887479")!])
         })

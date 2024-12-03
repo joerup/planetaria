@@ -55,7 +55,7 @@ class SimulationSystem: System {
         root.attachmentPoint.update(orientation: initialOrientation, cameraPosition: cameraPosition, centerPosition: center)
         root.cameraMarker.update(cameraPosition: cameraPosition, arMode: simulation.viewType == .augmented || simulation.viewType == .immersive)
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
-            root.updateLights(isEnabled: !simulation.showFloodLights)
+            root.updateLights(isEnabled: !simulation.showFloodLights && simulation.viewType.useRealisticLighting)
         } else {
             root.updateLights(isEnabled: false)
         }
@@ -128,6 +128,7 @@ class SimulationSystem: System {
             let isCentral = node.system != nil && node.system?.orbit == nil // edge case for Sun
             
             let isGoingVeryFast = abs(simulation.frameRatio) > 2 * ((node.system ?? node).orbit?.period ?? .infinity)
+            let isGoingVeryVeryFast = abs(simulation.frameRatio) > 4 * ((node.system ?? node).orbit?.period ?? .infinity)
             
             let fadeFractionFactor: Float = simulation.viewType == .immersive ? 100 : 10
             let fadeFraction: Float = max(0.0, min(1.0, 1.0 - (physicalObjectTotalSize - targetSize) / (fadeFractionFactor * targetSize - targetSize)))
@@ -135,13 +136,13 @@ class SimulationSystem: System {
             let orbitAnchored: Bool = (initialOffset - node.globalPosition).magnitude / (initialOffset - (node.parent?.globalPosition ?? .zero)).magnitude < 0.01
             
             let bodyVisible = physicalSize >= minimumSize || (node.object?.luminosity ?? 0) > 0
-            let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode
+            let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryVeryFast
             let labelVisible = simulation.showLabels && physicalSize <= 1.5 * targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryFast
             let trailVisible = simulation.showOrbits && orbitSize >= minimumSize
             let interactionVisible = pointVisible || bodyVisible
             var lightsVisible = false
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
-                lightsVisible = !simulation.showFloodLights
+                lightsVisible = !simulation.showFloodLights && simulation.viewType.useRealisticLighting
             }
             
             // Update the components

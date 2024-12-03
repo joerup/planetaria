@@ -354,6 +354,7 @@ final public class Simulation: ObservableObject {
             
             if transition.isComplete {
                 self.transition = nil
+                updateAfterGesture()
             }
         } else {
             self.offset = focus?.globalPositionAtFraction(offsetAmount) ?? .zero
@@ -424,8 +425,15 @@ final public class Simulation: ObservableObject {
     }
     
     public func setTime(_ timestamp: Date) {
+        guard timestamp >= minTime, timestamp <= maxTime else { return }
         setTimestamp(timestamp)
         frameRatio = 1
+    }
+    
+    public func resetTime() {
+        setTimestamp(.now)
+        frameRatio = 1
+        isRealTime = true
     }
     
     // Select Buttons
@@ -803,6 +811,15 @@ final public class Simulation: ObservableObject {
         // billboards point toward the camera point
         // used for visionOS
         case immersive
+        
+        public var useRealisticLighting: Bool {
+            switch self {
+            case .fixed, .immersive:
+                true
+            case .augmented:
+                false
+            }
+        }
         
     }
     

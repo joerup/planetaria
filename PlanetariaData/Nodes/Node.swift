@@ -66,10 +66,10 @@ public class Node: Decodable {
     
     public var subtitle: String {
         if category == .planet, parent?.parent?.name == "Solar" {
-            return "The \((id/100).ordinalString) Planet from the Sun"
+            return "The \((id/100).ordinalString) Planet"
         }
         else if category == .planet, parent?.name == "Solar" {
-            return "The \(id.ordinalString) Planet from the Sun"
+            return "The \(id.ordinalString) Planet"
         }
         else if category == .moon, let host = hostNode {
             return "Moon of \(host.name)"

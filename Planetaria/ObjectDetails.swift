@@ -16,7 +16,7 @@ struct ObjectDetails: View {
     
     var object: ObjectNode
     
-    private var cutoffWidth: CGFloat = 400
+    private var cutoffWidth: CGFloat = 450
     
     @Binding var isActive: Bool
     

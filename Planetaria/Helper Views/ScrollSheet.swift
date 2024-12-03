@@ -146,7 +146,7 @@ struct ScrollSheet<Content: View>: View {
                     #if os(visionOS)
                     .padding(.bottom, 4)
                     #else
-                    .padding(.top, 4)
+                    .padding(.top, 8)
                     .padding(.leading, -2)
                     #endif
                 }

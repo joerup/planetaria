@@ -40,7 +40,7 @@ struct SelectionRow: View {
                 VStack(alignment: .leading) {
                     Text(title)
                         .lineLimit(0)
-                        .font(.system(.headline, weight: .semibold))
+                        .font(.system(.title3, weight: .semibold))
                         .fontDesign(.rounded)
                         .foregroundStyle(.primary)
                         .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
