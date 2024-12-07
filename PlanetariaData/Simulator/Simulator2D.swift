@@ -148,6 +148,8 @@ private struct RealityView: UIViewRepresentable {
         
         arView.scene.anchors.append(anchor)
         
+        arView.renderOptions.insert(.disableAREnvironmentLighting)
+        
         if SimulationRootEntity.debugMode {
             arView.debugOptions.insert(.showStatistics)
         }

@@ -242,7 +242,9 @@ struct Navigator<Content: View>: View {
         .accessibilityLabel("Show Info for \(object.name)")
         .sheet(isPresented: $showDetails) {
             ObjectDetails(object: object)
+                #if os(visionOS)
                 .frame(minWidth: 550, minHeight: 700)
+                #endif
         }
     }
     
@@ -275,7 +277,9 @@ struct Navigator<Content: View>: View {
         .accessibilityLabel("Settings")
         .sheet(isPresented: $showSettings) {
             Settings()
+                #if os(visionOS)
                 .frame(minWidth: 550, minHeight: 700)
+                #endif
         }
     }
     

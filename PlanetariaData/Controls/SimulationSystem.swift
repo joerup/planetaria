@@ -54,7 +54,7 @@ class SimulationSystem: System {
         root.interactionArea.update(cameraPosition: cameraPosition, centerPosition: center)
         root.cameraMarker.update(cameraPosition: cameraPosition, arMode: simulation.viewType == .augmented || simulation.viewType == .immersive)
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
-            root.updateLights(isEnabled: !simulation.showFloodLights && simulation.viewType.useRealisticLighting)
+            root.updateLights(isEnabled: !simulation.showFloodLights)
         } else {
             root.updateLights(isEnabled: false)
         }
@@ -141,7 +141,7 @@ class SimulationSystem: System {
             let interactionVisible = pointVisible || bodyVisible
             var lightsVisible = false
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
-                lightsVisible = !simulation.showFloodLights && simulation.viewType.useRealisticLighting
+                lightsVisible = !simulation.showFloodLights
             }
             
             // Update the components

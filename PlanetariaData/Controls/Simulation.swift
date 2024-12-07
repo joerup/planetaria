@@ -861,15 +861,6 @@ final public class Simulation: ObservableObject {
         // used for visionOS
         case immersive
         
-        public var useRealisticLighting: Bool {
-            switch self {
-            case .fixed, .immersive:
-                true
-            case .augmented:
-                false
-            }
-        }
-        
     }
     
     public enum UpdateType {
