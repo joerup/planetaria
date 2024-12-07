@@ -29,10 +29,12 @@ public struct Simulator: View {
                 case .fixed:
                     RealityView(root: simulation.rootEntity, size: geometry.size, arMode: false, select: simulation.selectObject(_:))
                         .simultaneousGesture(panGesture)
+                        .simultaneousGesture(turnGesture)
                         .simultaneousGesture(zoomGesture)
                 case .augmented:
                     RealityView(root: simulation.rootEntity, size: geometry.size, arMode: true, select: simulation.selectObject(_:))
                         .simultaneousGesture(panGesture)
+                        .simultaneousGesture(turnGesture)
                         .simultaneousGesture(zoomGesture)
                 case .immersive:
                     EmptyView()
@@ -88,6 +90,16 @@ public struct Simulator: View {
             .onEnded { value in
                 simulation.completeRotationGesture(with: .radians(-value.translation.width * translationAngleFactor))
                 simulation.completePitchGesture(with: .radians(value.translation.height * translationAngleFactor))
+            }
+    }
+    
+    private var turnGesture: some Gesture {
+        RotationGesture()
+            .onChanged { value in
+                simulation.updateRollGesture(with: value)
+            }
+            .onEnded { value in
+                simulation.completeRollGesture(with: value)
             }
     }
     

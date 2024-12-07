@@ -51,8 +51,7 @@ class SimulationSystem: System {
         
         // Update scene entities in the root
         root.sceneBackground.update(orientation: orientation)
-        root.interactionArea.update(orientation: initialOrientation, cameraPosition: cameraPosition, centerPosition: center)
-        root.attachmentPoint.update(orientation: initialOrientation, cameraPosition: cameraPosition, centerPosition: center)
+        root.interactionArea.update(cameraPosition: cameraPosition, centerPosition: center)
         root.cameraMarker.update(cameraPosition: cameraPosition, arMode: simulation.viewType == .augmented || simulation.viewType == .immersive)
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
             root.updateLights(isEnabled: !simulation.showFloodLights && simulation.viewType.useRealisticLighting)
@@ -190,9 +189,9 @@ class SimulationSystem: System {
             center = .zero
         case .immersive:
             scale = size
-            orientation = .identity
+            orientation = initialOrientation
             offset = initialOffset
-            center = initialOrientation.act([0,0.45,-0.9] * Float(size / initialScale))
+            center = [0,-0.4,-0.8] * Float(size / initialScale)
         }
         
         return (scale, orientation, offset, center)

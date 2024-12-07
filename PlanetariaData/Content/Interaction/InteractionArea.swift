@@ -36,8 +36,7 @@ class InteractionArea: Entity {
         #endif
     }
     
-    func update(orientation: simd_quatf, cameraPosition: SIMD3<Float>, centerPosition: SIMD3<Float>) {
-        self.orientation = orientation
+    func update(cameraPosition: SIMD3<Float>, centerPosition: SIMD3<Float>) {
         self.position = cameraPosition + normalize(centerPosition - cameraPosition) * distance
     }
 }

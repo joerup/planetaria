@@ -10,6 +10,8 @@ import PlanetariaData
 
 struct SystemDetails: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @EnvironmentObject var simulation: Simulation
     
     private let system: SystemNode
@@ -17,12 +19,9 @@ struct SystemDetails: View {
     private let primaryObjects: [Node]
     private let secondaryObjects: [Node]
     private let dwarfPlanets: [Node]
-    
-    @Binding private var isActive: Bool
 
-    init(system: SystemNode, isActive: Binding<Bool>) {
+    init(system: SystemNode) {
         self.system = system
-        self._isActive = isActive
         
         self.primaryObjects = system.children(type: system.primaryCategory)
         self.secondaryObjects = system.children(type: system.secondaryCategory).sorted { $0.id < $1.id }
@@ -30,7 +29,7 @@ struct SystemDetails: View {
     }
     
     var body: some View {
-        ScrollSheet(title: "\(system.name) System", backButton: backButton, backAction: backAction, isActive: $isActive) {
+        ScrollSheet(title: "\(system.name) System", backButton: backButton, backAction: backAction) {
             list
         }
         .fontDesign(.rounded)
@@ -45,7 +44,7 @@ struct SystemDetails: View {
                     if !simulation.isSelected(child) {
                         simulation.selectObject(child)
                     }
-                    isActive = false
+                    dismiss()
                 } label: {
                     SelectionRow(title: child.name, icon: child.name)
                 }
@@ -58,7 +57,7 @@ struct SystemDetails: View {
                     if !simulation.isSelected(child) {
                         simulation.selectObject(child)
                     }
-                    isActive = false
+                    dismiss()
                 } label: {
                     SelectionRow(title: child.name, icon: child.name)
                 }
@@ -72,7 +71,7 @@ struct SystemDetails: View {
                         if !simulation.isSelected(child) {
                             simulation.selectObject(child)
                         }
-                        isActive = false
+                        dismiss()
                     } label: {
                         SelectionRow(title: child.name, icon: child.name)
                     }

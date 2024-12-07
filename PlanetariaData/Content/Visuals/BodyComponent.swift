@@ -21,7 +21,7 @@ class BodyComponent: Component {
     private var light: Entity?
     private var lightResource: EnvironmentResource?
     private var lightEnabled: Bool = true
-    static let intensity: Float = 7E4
+    static let intensity: Float = 5E4
     static let attenuationRadius: Float = 1E+20
     
     init?(node: Node, size: Double) {

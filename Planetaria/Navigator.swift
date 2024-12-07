@@ -14,14 +14,6 @@ struct Navigator<Content: View>: View {
     
     @ViewBuilder let content: () -> Content
     
-    private let type: NavigatorType
-    
-    enum NavigatorType {
-        case all
-        case controls
-        case label
-    }
-    
     @State private var showDetails: Bool = false
     @State private var showList: Bool = false
     @State private var showSettings: Bool = false
@@ -48,10 +40,9 @@ struct Navigator<Content: View>: View {
         verticalSizeClass == .regular && horizontalSizeClass == .compact
     }
     
-    init(for simulation: Simulation, @ViewBuilder content: @escaping () -> Content = { EmptyView() }, type: NavigatorType = .all) where Content: View {
+    init(for simulation: Simulation, @ViewBuilder content: @escaping () -> Content = { EmptyView() }) where Content: View {
         self.simulation = simulation
         self.content = content
-        self.type = type
     }
 
     var body: some View {
@@ -166,59 +157,50 @@ struct Navigator<Content: View>: View {
                 .preferredColorScheme(.dark)
             
         #elseif os(visionOS)
-            if type == .controls {
-                Text("")
-                    .ornament(attachmentAnchor: .scene(.bottom)) {
-                        HStack {
-                            homeButton
-                            settingsButton
-                            Spacer()
-                            HStack(spacing: 12) {
-                                slowDownButton
-                                clockDisplay
-                                speedUpButton
-                            }
-                            .background(Color.init(white: 0.6).opacity(0.2))
-                            .clipShape(RoundedRectangle(cornerRadius: 30))
-                            Spacer()
-                            if let system = simulation.selectedSystem {
-                                listButton(system)
-                            }
-                            searchButton
-                        }
-                        .padding()
-                        .glassBackgroundEffect()
-                    }
-                    .onChange(of: scenePhase) { _, _ in
-                        Task {
-                            await dismissImmersiveSpace()
-                        }
-                    }
-            } else if type == .label {
+            ZStack {
                 if let object = simulation.selectedObject {
-                    ZStack {
-                        VStack {
-                            HStack(alignment: .top) {
-                                objectLabel(object, large: true)
-                                Spacer(minLength: 8)
-                                infoButton(object)
-                                closeButton
-                            }
-                            selectorButtons()
-                                .frame(maxWidth: .infinity)
-                                .padding(.top, 4)
+                    VStack {
+                        HStack(alignment: .top) {
+                            objectLabel(object, large: true)
+                            Spacer(minLength: 8)
+                            infoButton(object)
+                            closeButton
                         }
-                        .padding(16)
-                        .frame(maxWidth: 500)
-                        .glassBackgroundEffect()
-                        .offset(z: showDetails ? -50 : 0)
-                        if showDetails {
-                            ObjectDetails(object: object, isActive: $showDetails)
-                                .frame(maxWidth: 500, maxHeight: 550)
-                                .glassBackgroundEffect()
-                                .offset(z: 50)
-                        }
+                        selectorButtons()
+                            .frame(maxWidth: .infinity)
+                            .padding(.top, 4)
                     }
+                    .padding(16)
+                    .frame(maxWidth: 500)
+                    .glassBackgroundEffect()
+                }
+            }
+            .padding(.bottom, 50)
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .ornament(attachmentAnchor: .scene(.bottom)) {
+                HStack {
+                    homeButton
+                    settingsButton
+                    Spacer()
+                    HStack(spacing: 12) {
+                        slowDownButton
+                        clockDisplay
+                        speedUpButton
+                    }
+                    .background(Color.init(white: 0.6).opacity(0.2))
+                    .clipShape(RoundedRectangle(cornerRadius: 30))
+                    Spacer()
+                    if let system = simulation.selectedSystem {
+                        listButton(system)
+                    }
+                    searchButton
+                }
+                .padding()
+                .glassBackgroundEffect()
+            }
+            .onChange(of: scenePhase) { _, _ in
+                Task {
+                    await dismissImmersiveSpace()
                 }
             }
             
@@ -258,11 +240,10 @@ struct Navigator<Content: View>: View {
             showDetails.toggle()
         }
         .accessibilityLabel("Show Info for \(object.name)")
-        #if !os(visionOS)
         .sheet(isPresented: $showDetails) {
-            ObjectDetails(object: object, isActive: $showDetails)
+            ObjectDetails(object: object)
+                .frame(minWidth: 550, minHeight: 700)
         }
-        #endif
     }
     
     private func listButton(_ system: SystemNode) -> some View {
@@ -271,7 +252,7 @@ struct Navigator<Content: View>: View {
         }
         .accessibilityLabel("Show Object List")
         .popover(isPresented: $showList, arrowEdge: .top) {
-            SystemDetails(system: system, isActive: $showList)
+            SystemDetails(system: system)
                 .frame(minWidth: 350)
         }
     }
@@ -294,6 +275,7 @@ struct Navigator<Content: View>: View {
         .accessibilityLabel("Settings")
         .sheet(isPresented: $showSettings) {
             Settings()
+                .frame(minWidth: 550, minHeight: 700)
         }
     }
     
@@ -381,6 +363,7 @@ struct Navigator<Content: View>: View {
                 .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
                 .accessibilityLabel(simulation.time.string)
         }
+        .buttonStyle(.plain)
         .popover(isPresented: $showDatePicker, arrowEdge: .top) {
             DateMenu(showTimeHeader: isCompact)
                 #if os(visionOS)

@@ -87,7 +87,7 @@ struct Settings: View {
             .tint(.mint)
             .fontDesign(.rounded)
             .navigationTitle("Settings")
-            #if os(iOS) || os(tvOS)
+            #if os(iOS) || os(tvOS) || os(visionOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -116,6 +116,7 @@ struct Settings: View {
         NavigationLink(destination: EmptyView()) {
             HStack {
                 Text(text)
+                    .foregroundStyle(.mint)
                 Spacer()
             }
         }

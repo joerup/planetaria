@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ScrollSheet<Content: View>: View {
     
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.dismiss) private var dismiss
+    
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     
     var title: String
     var subtitle: String?
@@ -18,8 +20,6 @@ struct ScrollSheet<Content: View>: View {
     
     var backButton: String?
     var backAction: (() -> Void)?
-    
-    @Binding var isActive: Bool
     
     var content: () -> Content
     
@@ -173,7 +173,7 @@ struct ScrollSheet<Content: View>: View {
     
     private var closeButton: some View {
         ControlButton(icon: "xmark") {
-            isActive = false
+            dismiss()
         }
         .accessibilityLabel("Close")
     }

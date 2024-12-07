@@ -31,7 +31,7 @@ struct PlanetariaApp: App {
         #elseif os(visionOS)
         WindowGroup(id: "launcher") {
             if showImmersiveSpace {
-                Navigator(for: simulation, type: .controls)
+                Navigator(for: simulation)
             } else {
                 Launcher(for: simulation)
                     .glassBackgroundEffect()
@@ -40,15 +40,13 @@ struct PlanetariaApp: App {
         .windowStyle(.plain)
         
         ImmersiveSpace(id: "simulator") {
-            Simulator(for: simulation) {
-                Navigator(for: simulation, type: .label)
-            }
-            .onAppear {
-                showImmersiveSpace = true
-            }
-            .onDisappear {
-                showImmersiveSpace = false
-            }
+            Simulator(for: simulation)
+                .onAppear {
+                    showImmersiveSpace = true
+                }
+                .onDisappear {
+                    showImmersiveSpace = false
+                }
         }
         
         #endif

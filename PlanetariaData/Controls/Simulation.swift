@@ -111,12 +111,14 @@ final public class Simulation: ObservableObject {
         steadyPitch + gesturePitch
     }
     
+    @Published private var steadyRoll: Angle = .zero
+    @Published private var gestureRoll: Angle = .zero
+    internal var roll: Angle {
+        steadyRoll + gestureRoll
+    }
+    
     internal var orientation: simd_quatf {
-        if viewType == .immersive {
-            simd_quatf(angle: Float(-rotation.radians), axis: [0,1,0]) * simd_quatf(angle: Float(pitch.radians), axis: [1,0,0])
-        } else {
-            simd_quatf(angle: Float(pitch.radians), axis: [1,0,0]) * simd_quatf(angle: Float(-rotation.radians), axis: [0,1,0])
-        }
+        simd_quatf(angle: Float(pitch.radians), axis: [1,0,0]) * simd_quatf(angle: Float(-rotation.radians), axis: [0,1,0])
     }
     
     private let zoomObjectCoefficient: Double = 2.4
@@ -130,7 +132,7 @@ final public class Simulation: ObservableObject {
         case .augmented:
             0.8
         case .immersive:
-            1.0
+            1.2
         }
     }
     
@@ -551,6 +553,22 @@ final public class Simulation: ObservableObject {
             return .radians(.pi/2)
         }
     }
+    private var minRollAngle: Angle {
+        switch viewType {
+        case .fixed, .immersive:
+            return -.radians(.pi/2)
+        case .augmented:
+            return .zero
+        }
+    }
+    private var maxRollAngle: Angle {
+        switch viewType {
+        case .fixed, .immersive:
+            return .radians(.pi/2)
+        case .augmented:
+            return .zero
+        }
+    }
     
     internal func updateRotationGesture(with angle: Angle) {
         guard rotateEnabled else { return }
@@ -600,6 +618,37 @@ final public class Simulation: ObservableObject {
     }
     internal func resetPitch() {
         self.steadyPitch = .zero
+    }
+    
+    internal func updateRollGesture(with angle: Angle) {
+        guard rotateEnabled else { return }
+        
+        self.gestureRoll = angle
+        
+        if steadyRoll + gestureRoll > maxRollAngle {
+            gestureRoll = -steadyRoll + maxRollAngle
+        }
+        if steadyRoll + gestureRoll < minRollAngle {
+            gestureRoll = -steadyRoll + minRollAngle
+        }
+        updateAfterGesture()
+    }
+    internal func completeRollGesture(with angle: Angle) {
+        guard rotateEnabled else { return }
+        
+        self.steadyRoll += angle
+        self.gestureRoll = .zero
+        
+        if steadyRoll > maxRollAngle {
+            steadyRoll = maxRollAngle
+        }
+        if steadyRoll < minRollAngle {
+            steadyRoll = minRollAngle
+        }
+        updateAfterGesture()
+    }
+    internal func resetRoll() {
+        self.steadyRoll = .zero
     }
     
     

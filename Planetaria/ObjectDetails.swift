@@ -18,16 +18,13 @@ struct ObjectDetails: View {
     
     private var cutoffWidth: CGFloat = 450
     
-    @Binding var isActive: Bool
-    
-    init(object: ObjectNode, isActive: Binding<Bool>) {
+    init(object: ObjectNode) {
         self.object = object
-        self._isActive = isActive
     }
     
     var body: some View {
         GeometryReader { geometry in
-            ScrollSheet(title: object.name, subtitle: object.subtitle, icon: object.name, isActive: $isActive) {
+            ScrollSheet(title: object.name, subtitle: object.subtitle, icon: object.name) {
                 page(size: geometry.size)
             }
             .fontDesign(.rounded)

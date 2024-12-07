@@ -19,7 +19,6 @@ class SimulationRootEntity: Entity {
     // Scene entities
     let sceneBackground: SceneBackground
     let interactionArea: InteractionArea
-    let attachmentPoint: AttachmentPoint
     let cameraMarker: CameraMarker
     
     // Debug mode
@@ -54,7 +53,6 @@ class SimulationRootEntity: Entity {
     required init() {
         self.sceneBackground = SceneBackground()
         self.interactionArea = InteractionArea(debugMode: Self.debugMode)
-        self.attachmentPoint = AttachmentPoint()
         self.cameraMarker = CameraMarker(debugMode: Self.debugMode)
         
         super.init()
@@ -62,7 +60,6 @@ class SimulationRootEntity: Entity {
     
         addChild(sceneBackground)
         addChild(interactionArea)
-        addChild(attachmentPoint)
         addChild(cameraMarker)
         
         #if os(visionOS)
@@ -98,19 +95,6 @@ class SimulationRootEntity: Entity {
         #if os(iOS) || os(macOS)
         arView?.environment.lighting.resource = isEnabled ? nil : try? EnvironmentResource.load(named: "light")
         #endif
-    }
-    
-    // An attachment point for the interactive UI
-    class AttachmentPoint: Entity {
-        private let distance: Float = 1
-        private let offset: SIMD3<Float> = [0,0.5,0]
-        
-        required init() { }
-        
-        func update(orientation: simd_quatf, cameraPosition: SIMD3<Float>, centerPosition: SIMD3<Float>) {
-            self.orientation = orientation
-            self.position = cameraPosition + normalize(centerPosition - cameraPosition) * distance - offset
-        }
     }
     
     // A marker to show where the camera currently is
