@@ -55,7 +55,7 @@
 		017166882B45263000A955D2 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166872B45263000A955D2 /* Launcher.swift */; };
 		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
-		01819C842D05039100E468E1 /* Planetaria.bsp in Resources */ = {isa = PBXBuildFile; fileRef = 01819C832D05039100E468E1 /* Planetaria.bsp */; };
+		01819C882D065B3F00E468E1 /* Planetaria.bsp in Resources */ = {isa = PBXBuildFile; fileRef = 01819C872D065B3F00E468E1 /* Planetaria.bsp */; };
 		01A1B22A2CE105F90012A253 /* Earth-old.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B2292CE105F90012A253 /* Earth-old.usdz */; };
 		01A1E96D2CCEC542006E0968 /* ellipse.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A1E96C2CCEC542006E0968 /* ellipse.json */; };
 		01ACBD0A2CCB4F1A00775D99 /* ScrollSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */; };
@@ -147,7 +147,7 @@
 		017200B92B51E22E00B3744A /* PropertyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyText.swift; sourceTree = "<group>"; };
 		017200BA2B51E22E00B3744A /* SelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionRow.swift; sourceTree = "<group>"; };
 		017200BC2B51E22E00B3744A /* SelectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCard.swift; sourceTree = "<group>"; };
-		01819C832D05039100E468E1 /* Planetaria.bsp */ = {isa = PBXFileReference; lastKnownFileType = file; path = Planetaria.bsp; sourceTree = "<group>"; };
+		01819C872D065B3F00E468E1 /* Planetaria.bsp */ = {isa = PBXFileReference; lastKnownFileType = file; path = Planetaria.bsp; sourceTree = "<group>"; };
 		01A1B2292CE105F90012A253 /* Earth-old.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Earth-old.usdz"; sourceTree = "<group>"; };
 		01A1E96C2CCEC542006E0968 /* ellipse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ellipse.json; sourceTree = "<group>"; };
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
@@ -310,7 +310,7 @@
 				0109A09A2B6754C300FD18CE /* Resources */,
 				01489ED32B41F5C300E74447 /* Planetaria.json */,
 				016DCD2A2B467C6F0030B614 /* Planetaria-descriptions.strings */,
-				01819C832D05039100E468E1 /* Planetaria.bsp */,
+				01819C872D065B3F00E468E1 /* Planetaria.bsp */,
 				01FC6B1F2B67E6FF00380474 /* sample.json */,
 				01A1E96C2CCEC542006E0968 /* ellipse.json */,
 				016867422548F1BD007D1553 /* Info.plist */,
@@ -511,8 +511,8 @@
 				01255E042B696471004BC207 /* Uranus.usdz in Resources */,
 				01255DF32B696471004BC207 /* Pluto.usdz in Resources */,
 				01255E102B696471004BC207 /* Titania.usdz in Resources */,
-				01819C842D05039100E468E1 /* Planetaria.bsp in Resources */,
 				01F2B7EB2CD81C9700179385 /* Venus.usdz in Resources */,
+				01819C882D065B3F00E468E1 /* Planetaria.bsp in Resources */,
 				01255E0D2B696471004BC207 /* Ceres.usdz in Resources */,
 				01255DFE2B696471004BC207 /* Miranda.usdz in Resources */,
 				01255DF62B696471004BC207 /* Eris.usdz in Resources */,
