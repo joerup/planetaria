@@ -54,9 +54,9 @@ class SimulationSystem: System {
         root.interactionArea.update(cameraPosition: cameraPosition, centerPosition: center)
         root.cameraMarker.update(cameraPosition: cameraPosition, arMode: simulation.viewType == .augmented || simulation.viewType == .immersive)
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
-            root.updateLights(isEnabled: !simulation.showFloodLights)
+            root.updateLights(isEnabled: !simulation.showFloodLights, isArMode: simulation.viewType == .augmented)
         } else {
-            root.updateLights(isEnabled: false)
+            root.updateLights(isEnabled: false, isArMode: false)
         }
         
         // Update simulation entities

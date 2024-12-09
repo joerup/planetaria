@@ -48,8 +48,6 @@ class SimulationRootEntity: Entity {
     }
     #endif
     
-    private var realisticLighting: Bool = true
-    
     required init() {
         self.sceneBackground = SceneBackground()
         self.interactionArea = InteractionArea(debugMode: Self.debugMode)
@@ -89,9 +87,12 @@ class SimulationRootEntity: Entity {
     }
     
     // Update the lights
-    func updateLights(isEnabled: Bool) {
-        if realisticLighting == isEnabled { return }
+    private var realisticLighting: Bool = true
+    private var isArMode: Bool = false
+    func updateLights(isEnabled: Bool, isArMode: Bool) {
+        if realisticLighting == isEnabled && self.isArMode == isArMode { return }
         realisticLighting = isEnabled
+        self.isArMode = isArMode
         #if os(iOS) || os(macOS)
         arView?.environment.lighting.resource = isEnabled ? nil : try? EnvironmentResource.load(named: "light")
         #endif
