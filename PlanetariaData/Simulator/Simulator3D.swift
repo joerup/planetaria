@@ -28,6 +28,8 @@ public struct Simulator: View {
             .gesture(tapGesture)
             .simultaneousGesture(panGesture)
             .simultaneousGesture(areaPanGesture)
+            .simultaneousGesture(turnGesture)
+            .simultaneousGesture(areaTurnGesture)
             .simultaneousGesture(zoomGesture)
             .simultaneousGesture(areaZoomGesture)
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
@@ -72,6 +74,28 @@ public struct Simulator: View {
             }
             .onEnded { value in
                 completeDragGesture(with: value)
+            }
+    }
+    
+    private var turnGesture: some Gesture {
+        RotateGesture()
+            .targetedToEntity(where: .has(InteractionComponent.self))
+            .onChanged { value in
+                simulation.updateRollGesture(with: value.rotation)
+            }
+            .onEnded { value in
+                simulation.completeRollGesture(with: value.rotation)
+            }
+    }
+    
+    private var areaTurnGesture: some Gesture {
+        RotateGesture()
+            .targetedToEntity(where: .has(InteractionAreaComponent.self))
+            .onChanged { value in
+                simulation.updateRollGesture(with: value.rotation)
+            }
+            .onEnded { value in
+                simulation.completeRollGesture(with: value.rotation)
             }
     }
     

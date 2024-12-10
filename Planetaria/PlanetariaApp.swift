@@ -11,9 +11,14 @@ import PlanetariaData
 @main
 struct PlanetariaApp: App {
     
-    @StateObject private var simulation = Simulation(from: "Planetaria", updateType: .spice)
+    #if os(iOS) || os(macOS)
+    @StateObject private var simulation = Simulation(from: "Planetaria", viewType: .fixed, updateType: .spice)
     
-    @State private var showImmersiveSpace: Bool = false
+    #elseif os(visionOS)
+    @StateObject private var simulation = Simulation(from: "Planetaria", viewType: .immersive, updateType: .spice)
+    @State private var showingImmersiveSpace: Bool = false
+    
+    #endif
     
     var body: some Scene {
         
@@ -30,7 +35,7 @@ struct PlanetariaApp: App {
         
         #elseif os(visionOS)
         WindowGroup(id: "launcher") {
-            if showImmersiveSpace {
+            if showingImmersiveSpace {
                 Navigator(for: simulation)
             } else {
                 Launcher(for: simulation)
@@ -42,10 +47,10 @@ struct PlanetariaApp: App {
         ImmersiveSpace(id: "simulator") {
             Simulator(for: simulation)
                 .onAppear {
-                    showImmersiveSpace = true
+                    showingImmersiveSpace = true
                 }
                 .onDisappear {
-                    showImmersiveSpace = false
+                    showingImmersiveSpace = false
                 }
         }
         

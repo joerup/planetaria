@@ -94,7 +94,9 @@ class SimulationRootEntity: Entity {
         realisticLighting = isEnabled
         self.isArMode = isArMode
         #if os(iOS) || os(macOS)
-        arView?.environment.lighting.resource = isEnabled ? nil : try? EnvironmentResource.load(named: "light")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.arView?.environment.lighting.resource = isEnabled ? nil : try? EnvironmentResource.load(named: "light")
+        }
         #endif
     }
     
