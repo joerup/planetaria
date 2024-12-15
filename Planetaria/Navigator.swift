@@ -275,23 +275,21 @@ struct Navigator<Content: View>: View {
             showSettings.toggle()
         }
         .accessibilityLabel("Settings")
-        .sheet(isPresented: $showSettings) {
+        .popover(isPresented: $showSettings, arrowEdge: .top) {
             Settings()
-                #if os(visionOS)
-                .frame(minWidth: 550, minHeight: 700)
-                #endif
+                .frame(minWidth: 350)
         }
     }
     
     #if os(visionOS)
     private var homeButton: some View {
-        ControlButton(icon: "house") {
+        ControlButton(icon: "chevron.backward.2") {
             Task {
                 await dismissImmersiveSpace()
                 simulation.resetState()
             }
         }
-        .accessibilityLabel("Home")
+        .accessibilityLabel("Launch Screen")
     }
     #endif
     
@@ -369,7 +367,7 @@ struct Navigator<Content: View>: View {
         }
         .buttonStyle(.plain)
         .popover(isPresented: $showDatePicker, arrowEdge: .top) {
-            DateMenu(showTimeHeader: isCompact)
+            DateMenu()
                 #if os(visionOS)
                 .frame(minWidth: 500)
                 #else

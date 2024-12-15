@@ -28,36 +28,16 @@ struct Acknowledgements: View {
 //    Images are provided by [NASA Image and Video Library](https://images.nasa.gov/). Each individual image contains a link to its respective source.
     
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(.init(string))
-                            .font(.callout)
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 2)
-                            .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
-                    }
-                    Spacer()
-                }
-                .padding()
+        ScrollSheet(title: "Acknowledgements") {
+            VStack(alignment: .leading) {
+                Text(.init(string))
+                    .font(.callout)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 2)
+                    .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
+                    .tint(.mint)
             }
-            .navigationTitle("Acknowledgements")
-            .tint(.mint)
-            #if !os(macOS)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Text("Done")
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.mint)
-                    }
-                }
-            }
-            #endif
+            .padding(.vertical)
         }
     }
 }

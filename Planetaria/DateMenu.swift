@@ -15,8 +15,6 @@ struct DateMenu: View {
 
     @State private var setToNow: Bool = true
     @State private var selectedTime: Date = .now
-    
-    var showTimeHeader: Bool
 
     var body: some View {
         VStack(spacing: 0) {
@@ -37,9 +35,6 @@ struct DateMenu: View {
             #endif
             ScrollView {
                 VStack {
-                    if showTimeHeader {
-                        timeHeader
-                    }
                     datePicker
                 }
             }
@@ -62,21 +57,6 @@ struct DateMenu: View {
                 }
                 setToNow = false
             }
-    }
-    
-    private var timeHeader: some View {
-        Text(simulation.time.string)
-            .lineLimit(0)
-            .textCase(nil)
-            .font(.system(.headline, design: .monospaced, weight: .bold))
-            .minimumScaleFactor(0.5)
-            .foregroundColor(simulation.isRealTime ? .white : .mint)
-            .dynamicTypeSize(..<DynamicTypeSize.accessibility2)
-            .accessibilityLabel(simulation.time.string)
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
-            .background(.thinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 30))
     }
     
     private var resetButton: some View {

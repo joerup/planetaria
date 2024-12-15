@@ -14,98 +14,17 @@ struct Settings: View {
     
     @Environment(\.dismiss) var dismiss
     
-    #if os(iOS) || os(macOS)
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-    #endif
     
     @State private var presentShare: Bool = false
     @State private var presentAcknowledgements: Bool = false
     
     var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    Toggle("Show Orbits", isOn: $simulation.showOrbits)
-                    Toggle("Show Labels", isOn: $simulation.showLabels)
-                }
-                
-                if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
-                    Section {
-                        Toggle("Flood Lights", isOn: $simulation.showFloodLights)
-                    }
-                }
-                
-                Section {
-                    Button {
-                        self.presentAcknowledgements.toggle()
-                    } label: {
-                        row("Acknowledgements")
-                    }
-                }
-                
-                Section {
-                    Link(destination: URL(string: "https://www.joerup.com/planetaria")!) {
-                        row("Website")
-                    }
-                    Link(destination: URL(string: "https://www.joerup.com/planetaria/support")!) {
-                        row("Support")
-                    }
-                    Link(destination: URL(string: "https://www.joerup.com/planetaria/privacy")!) {
-                        row("Privacy Policy")
-                    }
-                }
-                
-                #if os(iOS) || os(tvOS)
-                Section {
-                    Button {
-                        guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1546887479?action=write-review")
-                            else { fatalError("Expected a valid URL") }
-                        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-                    } label: {
-                        row("Rate the App")
-                    }
-                    Button {
-                        self.presentShare.toggle()
-                    } label: {
-                        row("Share the App")
-                    }
-                }
-                #endif
-                
-                #if os(iOS) || os(macOS)
-                Section {} header: {
-                    VStack {
-                        Text("Planetaria")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .foregroundColor(.mint)
-                        Text("Version \(appVersion ?? "")")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .textCase(nil)
-                }
-                #endif
-            }
-            .tint(.mint)
-            .fontDesign(.rounded)
-            .navigationTitle("Settings")
-            #if os(iOS) || os(tvOS) || os(visionOS)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Text("Done")
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.mint)
-                    }
-                }
-            }
-            #endif
+        ScrollSheet(title: "Settings") {
+            settingsList
         }
+        .foregroundStyle(.white)
+        .fontDesign(.rounded)
         .sheet(isPresented: $presentAcknowledgements) {
             Acknowledgements()
         }
@@ -116,13 +35,110 @@ struct Settings: View {
         #endif
     }
     
-    private func row(_ text: String) -> some View {
-        NavigationLink(destination: EmptyView()) {
-            HStack {
-                Text(text)
-                    .foregroundStyle(.mint)
-                Spacer()
+    private var settingsList: some View {
+        ScrollView {
+            VStack {
+                item {
+                    Toggle("Show Orbits", isOn: $simulation.showOrbits)
+                }
+                item {
+                    Toggle("Show Labels", isOn: $simulation.showLabels)
+                }
+                
+                if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+                    item {
+                        Toggle("Flood Lights", isOn: $simulation.showFloodLights)
+                    }
+                }
+                
+                #if os(iOS) || os(tvOS)
+                HStack {
+                    Text("Links")
+                        .foregroundStyle(.gray)
+                    Spacer()
+                }
+                .padding([.top, .leading], 10)
+                
+                Link(destination: URL(string: "https://www.joerup.com/planetaria")!) {
+                    item {
+                        row("Website")
+                    }
+                }
+                Link(destination: URL(string: "https://www.joerup.com/planetaria/support")!) {
+                    item {
+                        row("Support")
+                    }
+                }
+                Link(destination: URL(string: "https://www.joerup.com/planetaria/privacy")!) {
+                    item {
+                        row("Privacy Policy")
+                    }
+                }
+                
+                Button {
+                    guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1546887479?action=write-review")
+                    else { fatalError("Expected a valid URL") }
+                    UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+                } label: {
+                    item {
+                        row("Rate the App")
+                    }
+                }
+                
+                Button {
+                    self.presentShare.toggle()
+                } label: {
+                    item {
+                        row("Share the App")
+                    }
+                }
+                
+                Button {
+                    self.presentAcknowledgements.toggle()
+                } label: {
+                    item {
+                        row("Acknowledgements")
+                            #if os(visionOS)
+                            .padding(.vertical, 5)
+                            #endif
+                    }
+                }
+                .buttonStyle(.plain)
+                #endif
+                
+                Text("Version \(appVersion ?? "")")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity)
+                    .textCase(nil)
+                    .padding(.top)
+                    .padding(.bottom, 8)
             }
+            .padding(.vertical)
+        }
+        .tint(.mint)
+        .fontDesign(.rounded)
+    }
+    
+    private func item<Content: View>(_ content: @escaping () -> Content) -> some View {
+        content()
+            .padding()
+            .background(.thinMaterial)
+            #if os(visionOS)
+            .clipShape(RoundedRectangle(cornerRadius: 50))
+            #else
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+            #endif
+    }
+    
+    private func row(_ text: String) -> some View {
+        HStack {
+            Text(text)
+                .foregroundStyle(.mint)
+            Spacer()
+            Image(systemName: "chevron.forward")
+                .imageScale(.small)
+                .foregroundStyle(.gray)
         }
     }
 }
