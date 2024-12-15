@@ -14,7 +14,9 @@ struct Settings: View {
     
     @Environment(\.dismiss) var dismiss
     
+    #if os(iOS) || os(macOS)
     private let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    #endif
     
     @State private var presentShare: Bool = false
     @State private var presentAcknowledgements: Bool = false
@@ -70,6 +72,7 @@ struct Settings: View {
                 }
                 #endif
                 
+                #if os(iOS) || os(macOS)
                 Section {} header: {
                     VStack {
                         Text("Planetaria")
@@ -83,6 +86,7 @@ struct Settings: View {
                     .frame(maxWidth: .infinity)
                     .textCase(nil)
                 }
+                #endif
             }
             .tint(.mint)
             .fontDesign(.rounded)
