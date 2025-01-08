@@ -54,7 +54,7 @@ public extension SIMD3<Float> {
         let scaleLimit = SceneBackground.scaleLimit
         let maxDistance = SceneBackground.maxDistance
         
-        if length(self) <= scaleLimit {
+        if length(self) <= scaleLimit || true {
             return 1.0
         } else {
             return scaleLimit/length(self) * (1 + log(length(self) / scaleLimit) / log(maxDistance / scaleLimit))
@@ -64,7 +64,7 @@ public extension SIMD3<Float> {
         let scaleLimit = SceneBackground.scaleLimit / scale
         let maxDistance = SceneBackground.maxDistance / scale
         
-        if length(self) <= scaleLimit {
+        if length(self) <= scaleLimit || true {
             return 1.0
         } else {
             return scaleLimit/length(self) * (1 + log(length(self) / scaleLimit) / log(maxDistance / scaleLimit))

@@ -1,5 +1,5 @@
 //
-//  Properties.swift
+//  Node+Properties.swift
 //  PlanetariaData
 //
 //  Created by Joe Rupertus on 8/14/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension ObjectNode {
+extension Node {
     
     public class Properties {
         

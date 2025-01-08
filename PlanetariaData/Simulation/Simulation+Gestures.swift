@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import simd
 
 extension Simulation {
     
@@ -17,7 +18,7 @@ extension Simulation {
     public func updateScaleGesture(to value: CGFloat) {
         guard zoomEnabled else { return }
         
-        self.gestureScale = value
+        self.gestureScale = pow(value, 2.0)
         
         if let focus, 1.1 * scale * focus.size > size {
             self.gestureScale *= size / (1.1 * scale * focus.size)
@@ -28,7 +29,7 @@ extension Simulation {
     public func completeScaleGesture(to value: CGFloat) {
         guard zoomEnabled else { return }
         
-        self.steadyScale *= value
+        self.steadyScale *= pow(value, 2.0)
         self.gestureScale = 1.0
         
         if let focus, 1.1 * scale * focus.size > size {
@@ -143,11 +144,10 @@ extension Simulation {
         // Set the offset amount: the percentage which the focus is offset toward the child node
         // e.g. with the Sun as the reference node but Earth selected, offsetAmount = 0.5 would place the central focus halfway between the Earth & Sun
         let objectSize = (object ?? focus.object)?.size ?? .zero
-        let totalSize = scale * max(orbitWeight * focus.position.magnitude, objectWeight * 2 * objectSize)
-        let zoomScale = totalSize / size
+        let zoomScale = scale / size * max(orbitWeight * focus.position.magnitude, objectWeight * 2 * objectSize)
         
         // Set the offset amount based on a nonlinear parameterization of the zoom scale
-        let t = min(1, max(0, (zoomScale*2 - 1)))
+        let t = min(1, max(0, (zoomScale * 2 - 1)))
         offsetAmount = 1 - pow(1 - t, 4)
         
         // Focus to the child node if zoomed in enough (offset is beginning)
@@ -171,6 +171,14 @@ extension Simulation {
         if let system, let parentSystem = system.parent, scale * system.scaleDistance < 0.05 * size && scale * system.primaryScaleDistance < 0.01 * size {
             setSystem(parentSystem)
         }
+    }
+    
+    private func viewDirection(rotation: Angle, pitch: Angle) -> Vector3 {
+        let x = cos(pitch.radians + .pi/2) * cos(rotation.radians)
+        let y = cos(pitch.radians + .pi/2) * sin(rotation.radians)
+        let z = sin(pitch.radians + .pi/2)
+        
+        return Vector3(x, y, z)
     }
     
     // Angle Constraints

@@ -12,11 +12,12 @@ import PlanetariaData
 struct PlanetariaApp: App {
     
     #if os(iOS) || os(macOS)
-    @StateObject private var simulation = Simulation(from: "Planetaria", viewType: .fixed, updateType: .spice)
+    @StateObject private var simulation = Simulation(from: "Planetaria", viewType: .fixed)
     
     #elseif os(visionOS)
-    @StateObject private var simulation = Simulation(from: "Planetaria", viewType: .immersive, updateType: .spice)
+    @StateObject private var simulation = Simulation(from: "Planetaria", viewType: .immersive)
     @State private var showingImmersiveSpace: Bool = false
+    @State private var immersionStyle: ImmersionStyle = .full
     
     #endif
     
@@ -53,6 +54,7 @@ struct PlanetariaApp: App {
                     showingImmersiveSpace = false
                 }
         }
+//        .immersionStyle(selection: $immersionStyle, in: .full)
         
         #endif
     }

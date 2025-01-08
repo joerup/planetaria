@@ -1,5 +1,5 @@
 //
-//  SystemNode+SPICE.swift
+//  Node+State.swift
 //  PlanetariaData
 //
 //  Created by Joe Rupertus on 11/29/24.
@@ -14,7 +14,7 @@ extension Node {
     private static let frame = "ECLIPJ2000"
     
     // Get the position and velocity at the given timestamp from SPICE
-    internal func setStateFromSPICE(by dt: Double = 0, to time: Date, guaranteedUpdate: Bool = true) {
+    internal func setState(to time: Date, guaranteedUpdate: Bool = true) {
         guard let parent else { return }
         
         // If `guaranteedUpdate`, this node will definitely update
@@ -22,14 +22,20 @@ extension Node {
         // Otherwise, it will only update when its time step has elapsed, to save time
         
         // Once the timestep is reached, or if update is guaranteed, proceed
-        self.spiceElapsedTime += dt
-        guard guaranteedUpdate || spiceElapsedTime >= spiceStep else { return }
-        spiceElapsedTime = 0
+        let timestamp = time.timeIntervalSince1970
+        guard guaranteedUpdate || abs(lastUpdateTimestamp - timestamp) >= updateStep else { return }
+        lastUpdateTimestamp = timestamp
+        updateStep = velocity.magnitude == 0 ? 0 : Node.stepFraction * position.magnitude / velocity.magnitude
         
         // Get the current state of this node from SPICE
         if let state = SPICE.getState(target: self.id, reference: parent.id, time: time, frame: Self.frame) {
-            self.position = [state.x, state.y, state.z]
-            self.velocity = [state.vx, state.vy, state.vz]
+            position = [state.x, state.y, state.z]
+            velocity = [state.vx, state.vy, state.vz]
+            isOrbitSuspended = false
+            isOutOfTimeRange = false
+        } else {
+            isOrbitSuspended = true
+            isOutOfTimeRange = true
         }
     }
 }

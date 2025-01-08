@@ -40,7 +40,7 @@
 "Ceres is the largest asteroid in the Solar System, orbiting between Mars and Jupiter in the Asteroid Belt. It's considered a dwarf planet – the only one in the inner Solar System. The surface of Ceres is heavily cratered, and its shape is not quite spherical. Ceres also rotates relatively quickly.";
 
 "Eris" =
-"Eris is a large dwarf planet that orbits very far away. This icy world lives in the far reaches of the Kuiper Belt and the scattered disk. Eris is noteworthy for its highly elliptical orbit, bringing it closer to the Sun at times and then taking it much farther away. It also has one known moon.";
+"Eris is a large dwarf planet that orbits far away. This icy world lives in the far reaches of the Kuiper Belt and the scattered disk. Eris is noteworthy for its elliptical orbit, bringing it closer to the Sun at times and then taking it much farther away. It also has one known moon.";
 
 "Haumea" =
 "Haumea is a dwarf planet in the Kuiper Belt, known for its rapid rotation that gives it an elongated, egg-like shape. It has a sharply inclined orbit, two small moons, and is the only dwarf planet with a confirmed ring system.";
@@ -110,3 +110,37 @@
 
 "Charon" =
 "Charon is the largest Plutonian moon, and the largest moon among the dwarf planets. It is so large that it is gravitationally locked to Pluto, and the two objects seem to be in a binary system, facing each other at all times. Charon's surface contains mountains, craters, and mysterious dark spots.";
+
+"Pallas" =
+"Pallas is one of the largest asteroids in the Asteroid Belt, with a heavily cratered surface and irregular shape. Its high orbital inclination distinguishes it from many other asteroids.";
+
+"Juno" =
+"Juno is a large asteroid in the Asteroid Belt, known for its reflective surface and numerous craters. Its relatively high density suggests a stony composition, likely with traces of metal.";
+
+"Vesta" =
+"Vesta is one of the largest and brightest bodies in the Asteroid Belt, with a rocky surface rich in basalt. A large impact basin near its south pole reveals material from its interior.";
+
+"Eros" =
+"Eros is a near-Earth asteroid with a distinctive elongated shape and a rocky surface marked by boulders and craters. Its orbit brings it close to Earth.";
+
+"Sedna" =
+"Sedna is a distant object with an extremely elongated orbit, taking it far beyond the Kuiper Belt. Its icy, reddish surface is likely composed of frozen methane, water, and nitrogen, making it one of the coldest known objects.";
+
+"Itokawa" =
+"Itokawa is a small near-Earth asteroid with an irregular, elongated shape. Its surface is covered in loose rocks and boulders, suggesting it is a rubble pile rather than a solid body.";
+
+"Quaoar" =
+"Quaoar is a large trans-Neptunian object with a relatively circular orbit. Its surface is composed of ice, and it is large enough to have attained a nearly spherical shape.";
+
+"Orcus" =
+"Orcus is a dwarf planet in the Kuiper belt with a bright, icy surface. Its similar size and orbit to Pluto have earned it the nickname 'anti-Pluto.'";
+
+"Gonggong" =
+"Gonggong is a large trans-Neptunian object with a reddish, icy surface. It has a highly inclined orbit and likely formed in the early history of the Solar System.";
+
+"Salacia" =
+"Salacia is a large trans-Neptunian object with a dark, icy surface. It has a relatively circular orbit and a large moon.";
+
+"Arrokoth" =
+"Arrokoth is a small trans-Neptunian object with a smooth, reddish surface. It is considered a contact binary, composed of two lobes.";
+

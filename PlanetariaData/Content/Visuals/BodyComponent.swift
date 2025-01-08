@@ -44,7 +44,7 @@ class BodyComponent: Component {
             bodyEntity = entity
         } else {
             let mesh = MeshResource.generateSphere(radius: 0.5)
-            let material = UnlitMaterial(color: ColorType(node.color ?? .gray))
+            let material = SimpleMaterial(color: ColorType(node.color ?? .init(white: 0.2)), roughness: .float(1), isMetallic: false)
             bodyEntity = ModelEntity(mesh: mesh, materials: [material])
         }
         self.model = bodyEntity
@@ -82,7 +82,7 @@ class BodyComponent: Component {
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *), name == "Earth", let orbit = node.parent?.orbit {
             if lightEnabled {
                 let totalRotation = simd_quatf(angle: .pi/2, axis: [0,1,0]) * bodyOrientation.inverse
-                model.setSunPosition(totalRotation.act(orbit.position.unitVector.toFloat()))
+                model.setSunPosition(totalRotation.act(node.position.unitVector.toFloat()))
             } else {
                 model.setSunPosition(.zero)
             }

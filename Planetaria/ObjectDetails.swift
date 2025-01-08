@@ -49,10 +49,8 @@ struct ObjectDetails: View {
     
     @ViewBuilder 
     private func description(properties: ObjectNode.Properties) -> some View {
-        if object.rank == .primary || object.rank == .secondary {
-            Text(NSLocalizedString(object.name, tableName: "\(simulation.fileName)-descriptions", comment: ""))
-                .fixedSize(horizontal: false, vertical: true)
-        }
+        Text(NSLocalizedString(object.name, tableName: "\(simulation.fileName)-descriptions", comment: ""))
+            .fixedSize(horizontal: false, vertical: true)
         if let discoverer = properties.discoverer, let discovered = properties.discovered {
             Text("Discovered by \(discoverer) in \(String(discovered)).")
                 .foregroundStyle(.secondary)

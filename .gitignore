@@ -1,0 +1,5 @@
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/
+!*.xcodeproj/*.pbxproj
+
+*.bsp

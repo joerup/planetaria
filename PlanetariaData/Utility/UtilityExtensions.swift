@@ -235,8 +235,7 @@ public extension Color {
     }
     
     var hex: UInt32 {
-        // Convert SwiftUI Color to UIColor
-        let uiColor = ColorType(self)
+        let color = ColorType(self)
 
         // Extract RGBA components
         var red: CGFloat = 0
@@ -245,9 +244,11 @@ public extension Color {
         var alpha: CGFloat = 0
 
         #if os(macOS)
-        uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        if let resolvedColor = color.usingColorSpace(.deviceRGB) {
+            resolvedColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        }
         #else
-        guard uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
+        guard color.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
             return 0
         }
         #endif

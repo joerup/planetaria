@@ -29,13 +29,16 @@ public class Node: Decodable {
         return size
     }
     
-    internal var spiceStep: Double = 0
-    internal var spiceElapsedTime: Double = 0
-    static let spiceStepFraction: Double = 1E-4
+    // ------
+     
+    internal var updateStep: Double = 0
+    internal var lastUpdateTimestamp: Double = 0
+    static let stepFraction: Double = 1E-3
     
-    internal var integrationStep: Double = 0
-    internal var integrationElapsedTime: Double = 0
-    static let integrationStepFraction: Double = 0.0025
+    internal var isOrbitSuspended: Bool = false
+    internal var isOutOfTimeRange: Bool = false
+    
+    // -----
     
     public var orbit: Orbit?
     public var rotation: Rotation?
@@ -58,10 +61,6 @@ public class Node: Decodable {
     public var barycenterPosition: Vector3 {
         guard let hostNode else { return .zero }
         return (hostNode.mass * hostNode.position + self.mass * self.position) / (hostNode.mass + self.mass)
-    }
-    
-    internal func setOrbit() {
-        self.orbit = Orbit(node: self)
     }
     
     public var subtitle: String {

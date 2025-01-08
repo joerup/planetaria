@@ -1,5 +1,5 @@
 //
-//  Simulator2D.swift
+//  Simulator-iOS.swift
 //  PlanetariaData
 //
 //  Created by Joe Rupertus on 1/7/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import RealityKit
 
-#if os(iOS) || os(macOS)
+#if os(iOS)
 public struct Simulator: View {
     
     @Environment(\.scenePhase) var scenePhase
@@ -119,9 +119,7 @@ public struct Simulator: View {
         }
     }
 }
-#endif
 
-#if os(iOS)
 private struct RealityView: UIViewRepresentable {
     
     let anchor = AnchorEntity()
@@ -176,59 +174,6 @@ private struct RealityView: UIViewRepresentable {
         }
         
         @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
-            guard let view = self.view else { return }
-            
-            let tapLocation = recognizer.location(in: view)
-            
-            if let entity = view.entity(at: tapLocation), let node = entity.component(InteractionComponent.self)?.node {
-                select(node)
-            }
-        }
-    }
-}
-#elseif os(macOS)
-private struct RealityView: NSViewRepresentable {
-    
-    let anchor = AnchorEntity()
-    var root: SimulationRootEntity
-    
-    var size: CGSize
-    var arMode: Bool
-    var select: (Node?) -> Void
-    
-    func makeNSView(context: Context) -> ARView {
-        let arView = ARView(frame: .zero)
-        root.arView = arView
-        anchor.addChild(root)
-        
-        anchor.orientation = simd_quatf(angle: .pi/2, axis: SIMD3(1,0,0))
-        
-        context.coordinator.view = arView
-        arView.addGestureRecognizer(NSClickGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleClick)))
-        
-        arView.scene.anchors.append(anchor)
-        return arView
-    }
-    
-    func updateNSView(_ arView: ARView, context: Context) {
-        
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(select: select)
-    }
-    
-    class Coordinator: NSObject {
-        
-        weak var view: ARView?
-        var select: (Node?) -> Void
-        
-        init(view: ARView? = nil, select: @escaping (Node?) -> Void) {
-            self.view = view
-            self.select = select
-        }
-        
-        @objc func handleClick(_ recognizer: NSClickGestureRecognizer) {
             guard let view = self.view else { return }
             
             let tapLocation = recognizer.location(in: view)

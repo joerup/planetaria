@@ -22,29 +22,37 @@ import RealityKit
     
     private let node: Node
     private let size: Double
+    private let color: UInt32
     
     private var angles: [Double] = []
     
-    private var fadeSegments: Int = 20
-    private var segments: Int = 150
-    
-    private var fadeAlphas: [Float] = []
+    private var fadeSegments: Int = 16
+    private var segments: Int = 100
     
     private var opacity: Float = 1.0
     
     private var isSmallOrbit: Bool
     
+    private var hasBeenSetOnce: Bool = false
+    private var lastUpdateWasSuspended: Bool = true
+    private var lastUpdateWasAnchored: Bool = true
+    private var lastUpdateEccentricAnomaly: Double = 0
+    private let minimumAngleDiffToUpdate: Double = 0.1
+    
+    private var flashState: Int = 0
+    
     fileprivate var vertexBuffer: UnsafeMutableBufferPointer<OrbitVertex>?
     
     init?(node: Node, size: Double, type: TrailType) {
-        guard let orbit = node.orbit, orbit.position.magnitude > node.size else { return nil }
+        guard node.orbit != nil, node.position.magnitude > node.size else { return nil }
         
         self.model = Entity()
         self.type = type
         self.node = node
         self.size = size
+        self.color = (node.color ?? .gray).hex
         
-        self.isSmallOrbit = orbit.position.magnitude < 10 * node.size
+        self.isSmallOrbit = node.position.magnitude < 10 * node.size
         
         setAngles()
         
@@ -64,12 +72,21 @@ import RealityKit
         }
     }
     
-    func update(isEnabled: Bool, scale: Double, orientation: simd_quatf, opacity: Float, fadeFraction: Float, anchored: Bool) {
+    func update(isEnabled: Bool, isSuspended: Bool, scale: Double, orientation: simd_quatf, opacity: Float, fadeFraction: Float, anchored: Bool) {
         model.isEnabled = isEnabled
         guard isEnabled, let vertexBuffer, let orbit = node.orbit else { return }
         
-        // Offset the orbit by the current position
-        let currentPoint = orbit.ellipsePosition(orbit.centralAnomaly) / size
+        // Find the current point
+        let currentPoint = orbit.ellipsePosition(orbit.eccentricAnomaly) / size
+        
+        // Determine whether to update the entire trail buffer
+        let updateTrail = !hasBeenSetOnce || anchored || lastUpdateWasAnchored || (lastUpdateWasSuspended && !isSuspended) || (abs(orbit.eccentricAnomaly - lastUpdateEccentricAnomaly) >= (2 * .pi)/Double(segments))
+        hasBeenSetOnce = true
+        if updateTrail {
+            lastUpdateWasSuspended = isSuspended
+            lastUpdateWasAnchored = anchored
+            lastUpdateEccentricAnomaly = orbit.eccentricAnomaly
+        }
         
         // Calculate the offset to align the trail to the body's center
         // (this is really only a correction for Earth)
@@ -93,7 +110,7 @@ import RealityKit
             
             // Compute segment points to make the trail (relative to the current point)
             for i in 1..<segments {
-                let angle = orbit.centralAnomaly - angles[i]
+                let angle = orbit.eccentricAnomaly - angles[i]
                 let point = orbit.ellipsePosition(angle) / size - currentPoint
                 
                 vertexBuffer[i].position = point.toFloat()
@@ -103,7 +120,6 @@ import RealityKit
             model.scale = SIMD3(repeating: Float(scale))
             model.orientation = totalOrientation
             model.position = objectOffset
-            
         } else {
             // The vertex buffer is given coordinates relative to the orbit center
             // (this is necessary to prevent jittering bug on visionOS)
@@ -113,11 +129,13 @@ import RealityKit
             vertexBuffer[0].position = currentPoint.toFloat()
             
             // Compute segment points to make the trail
-            for i in 1..<segments {
-                let angle = orbit.centralAnomaly - Double(i) / Double(segments) * 2 * .pi
-                let point = orbit.ellipsePosition(angle) / size
-                
-                vertexBuffer[i].position = point.toFloat()
+            if updateTrail {
+                for i in 1..<segments {
+                    let angle = orbit.eccentricAnomaly - Double(i) / Double(segments-1) * 2 * .pi
+                    let point = orbit.ellipsePosition(angle) / size
+                    
+                    vertexBuffer[i].position = point.toFloat()
+                }
             }
             
             // Calculate the anchor offset to align the trail to the object
@@ -129,16 +147,46 @@ import RealityKit
             model.position = anchorOffset + objectOffset
         }
         
-        // Update the fade segments
-        for i in 0..<fadeSegments {
-            // fadeFraction ranges from 0.0 (when object is large) to 1.0 (when object is small)
-            let alphaFloat = fadeAlphas[i] * (1-fadeFraction) + fadeFraction * (type == .partial ? 0.5 : 1.0)
-            let alpha = UInt32(255 * alphaFloat) << 24
-            vertexBuffer[i].color = vertexBuffer[i].color & 0x00FFFFFF | alpha
+        // Set colors of each segment
+        if updateTrail {
+            if isSuspended {
+                for i in 0..<segments {
+                    vertexBuffer[i].color = color
+                }
+                flashState = flashState + 1
+                if flashState >= 6 {
+                    flashState = 0
+                }
+            }
+            else if anchored && !isSmallOrbit {
+                for i in 0..<fadeSegments {
+                    let fadeAlpha = pow(Float(i) / Float(fadeSegments), 2.0) * (type == .partial ? 0.5 : 1.0)
+                    // fadeFraction ranges from 0.0 (when object is large) to 1.0 (when object is small)
+                    let alphaFloat = fadeAlpha * (1-fadeFraction) + fadeFraction * (type == .partial ? 0.5 : 1.0)
+                    let alpha = UInt32(255 * alphaFloat) << 24
+                    vertexBuffer[i].color = color & 0x00FFFFFF | alpha
+                }
+                for i in fadeSegments..<segments {
+                    let fraction = (1 - Float(i) / Float(segments)) * (type == .partial ? 0.5 : 1.0)
+                    let alpha = UInt32(255 * fraction) << 24
+                    vertexBuffer[i].color = color & 0x00FFFFFF | alpha
+                }
+            }
+            else {
+                for i in 0..<segments {
+                    let fraction = (1 - Float(i) / Float(segments)) * (type == .partial ? 0.5 : 1.0)
+                    let alpha = UInt32(255 * fraction) << 24
+                    vertexBuffer[i].color = color & 0x00FFFFFF | alpha
+                }
+            }
         }
         
         // Apply opacity
-        let opacity = isSmallOrbit ? (opacity * fadeFraction) : opacity
+        let opacity = if isSuspended {
+            node.isOutOfTimeRange ? 0.1 * opacity : (flashState >= 3 ? 0.5 : 0.1) * opacity
+        } else {
+            isSmallOrbit ? (opacity * fadeFraction) : opacity
+        }
         if self.opacity != opacity {
             self.opacity = opacity
             model.components.remove(OpacityComponent.self)
@@ -153,25 +201,6 @@ import RealityKit
 
         let mesh = try LowLevelMesh(descriptor: desc)
         
-        let hex = color.hex
-        
-        // Fill vertex data to create gradient
-        mesh.withUnsafeMutableBytes(bufferIndex: 0) { rawBytes in
-            let vertices = rawBytes.bindMemory(to: OrbitVertex.self)
-            
-            for i in 0..<fadeSegments {
-                let fraction = pow(Float(i) / Float(fadeSegments), 2.0) * (type == .partial ? 0.5 : 1.0)
-                self.fadeAlphas.append(fraction)
-                let alpha = UInt32(255 * fraction) << 24
-                vertices[i].color = hex & 0x00FFFFFF | alpha
-            }
-            for i in fadeSegments..<segments {
-                let fraction = (1 - Float(i) / Float(segments)) * (type == .partial ? 0.5 : 1.0)
-                let alpha = UInt32(255 * fraction) << 24
-                vertices[i].color = hex & 0x00FFFFFF | alpha
-            }
-        }
-
         // Fill index data to connect points in a line
         mesh.withUnsafeMutableIndices { rawIndices in
             let indices = rawIndices.bindMemory(to: UInt32.self)
@@ -268,7 +297,7 @@ class OrbitComponentLegacy: Component {
     var model: Entity
     
     init?(node: Node, size: Double) {
-        guard let orbit = node.orbit, orbit.position.magnitude > node.size, node.rank == .primary else { return nil }
+        guard let orbit = node.orbit, node.position.magnitude > node.size, node.rank == .primary else { return nil }
           
         self.node = node
         self.size = size

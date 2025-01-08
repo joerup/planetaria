@@ -126,8 +126,10 @@ class SimulationSystem: System {
             let physicalObjectTotalSize = Float(scale * (node.object ?? node).totalSize)
             let isCentral = node.system != nil && node.system?.orbit == nil // edge case for Sun
             
-            let isGoingVeryFast = abs(simulation.frameRatio) > 2 * ((node.system ?? node).orbit?.period ?? .infinity)
-            let isGoingVeryVeryFast = abs(simulation.frameRatio) > 4 * ((node.system ?? node).orbit?.period ?? .infinity)
+            let speedRatio = (node.system ?? node).orbit?.speedRatio ?? 0
+            let isGoingVeryFast = speedRatio > 2
+            let isGoingVeryVeryFast = speedRatio > 4
+            let isSuspended = (node.system ?? node).orbit != nil && (node.system ?? node).isOrbitSuspended
             
             let fadeFractionFactor: Float = simulation.viewType == .immersive ? 100 : 10
             let fadeFraction: Float = max(0.0, min(1.0, 1.0 - (physicalObjectTotalSize - targetSize) / (fadeFractionFactor * targetSize - targetSize)))
@@ -135,10 +137,10 @@ class SimulationSystem: System {
             let orbitAnchored: Bool = (initialOffset - node.globalPosition).magnitude / (initialOffset - (node.parent?.globalPosition ?? .zero)).magnitude < 0.01
             
             let bodyVisible = physicalSize >= minimumSize || (node.object?.luminosity ?? 0) > 0
-            let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryVeryFast
-            let labelVisible = simulation.showLabels && physicalSize <= 1.5 * targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryFast
+            let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryVeryFast && !isSuspended
+            let labelVisible = simulation.showLabels && physicalSize <= 1.5 * targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryFast && !isSuspended
             let trailVisible = simulation.showOrbits && orbitSize >= minimumSize
-            let interactionVisible = pointVisible || bodyVisible
+            let interactionVisible = (pointVisible || bodyVisible) && !isSuspended
             var lightsVisible = false
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
                 lightsVisible = !simulation.showFloodLights
@@ -162,7 +164,7 @@ class SimulationSystem: System {
             }
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
                 if let orbit = entity.component(OrbitComponent.self) {
-                    orbit.update(isEnabled: trailVisible, scale: scale, orientation: orientation, opacity: opacity * (isGoingVeryFast ? 0.4 : 1), fadeFraction: fadeFraction, anchored: orbitAnchored)
+                    orbit.update(isEnabled: trailVisible, isSuspended: isSuspended, scale: scale, orientation: orientation, opacity: opacity * (isGoingVeryFast ? 0.4 : 1), fadeFraction: fadeFraction, anchored: orbitAnchored)
                 }
             } else {
                 if let orbit = entity.component(OrbitComponentLegacy.self) {

@@ -13,7 +13,6 @@ import RealityKit
 final public class Simulation: ObservableObject {
     
     public let fileName: String
-    public let updateType: UpdateType
     @Published public var viewType: ViewType
     
     @Published public private(set) var status: Status = .uninitialized
@@ -70,11 +69,11 @@ final public class Simulation: ObservableObject {
     
     @Published public internal(set) var isPaused: Bool = false
     
-    public private(set) var maxFrameRatio: Double = 1E+10
+    public private(set) var maxFrameRatio: Double = 1E+9
     internal let frameRate: Double = 60
     
-    @Published public var minTime: Date = .year(2000)
-    @Published public var maxTime: Date = .year(2050)
+    @Published public var minTime: Date = .year(1900)
+    @Published public var maxTime: Date = .year(2400)
     
     // Settings
     
@@ -140,10 +139,9 @@ final public class Simulation: ObservableObject {
     // MARK: - Setup
     
     // Initialize the simulation
-    @MainActor public init(from fileName: String, viewType: ViewType, updateType: UpdateType) {
+    @MainActor public init(from fileName: String, viewType: ViewType) {
         self.fileName = fileName
         self.viewType = viewType
-        self.updateType = updateType
         
         load()
         
@@ -194,58 +192,25 @@ final public class Simulation: ObservableObject {
         
         // Load the ephemerides
         status = .loadingEphemerides
-        switch updateType {
-        case .spice:
             
-            // Load the SPK kernel
-            guard let kernel = Bundle.main.path(forResource: fileName, ofType: "bsp") else {
-                throw SimulationError.ephemerisNotFound
-            }
-            do {
-                try SPICE.loadKernel(kernel)
-            } catch {
-                throw SimulationError.ephemerisLoadingFailed
-            }
-            
-            // Set each node's initial state from SPICE
-            for node in allNodes {
-                node.setStateFromSPICE(to: time)
-            }
-            
-            // Set orbits for all nodes
-            for node in allNodes {
-                node.setOrbit()
-            }
-            
-            // Set SPICE timesteps for all nodes
-            for node in allNodes {
-                if let orbit = node.orbit {
-                    node.spiceStep = orbit.period * Node.spiceStepFraction
-                }
-            }
-            
-        case .integration:
-            
-            // Initial states are loaded already via decoder
-            
-            // Set orbits for all nodes
-            for node in allNodes {
-                node.setOrbit()
-            }
-            
-            // Set integration timesteps for all nodes
-            for node in allNodes {
-                if let orbit = node.orbit {
-                    node.integrationStep = orbit.period * Node.integrationStepFraction
-                }
-            }
-            
-            // Recursively set integration timesteps for the system tree
-            root.setIntegrationStep()
+        // Load the SPK kernel
+        guard let kernel = Bundle.main.path(forResource: fileName, ofType: "bsp") else {
+            throw SimulationError.ephemerisNotFound
+        }
+        do {
+            try SPICE.loadKernel(kernel)
+        } catch {
+            throw SimulationError.ephemerisLoadingFailed
         }
         
-        // Set the rotational states
+        // Set each node's initial state
         for node in allNodes {
+            node.setState(to: time)
+        }
+            
+        // Set the orbit and rotational states
+        for node in allNodes {
+            node.orbit = Node.Orbit(node: node, time: time)
             node.rotation?.set(time: time)
         }
         
@@ -289,54 +254,70 @@ final public class Simulation: ObservableObject {
         // Add the time interval
         self.time.addTimeInterval(dt)
         
-        // Update positions and velocities
-        switch updateType {
-        case .spice:
-            // Set states from SPICE
-            // Only guarantee the update for nodes in the current system
-            for node in allNodes {
-                if let parent = node.parent, parent == system || parent == system?.parent || parent == transition?.originalFocus || parent == transition?.originalFocus?.parent {
-                    node.setStateFromSPICE(by: dt, to: time, guaranteedUpdate: node == system || parent == system)
-                }
+        // Set states
+        // Only guarantee the update for nodes in the current system
+        for node in allNodes {
+            if let parent = node.parent, parent == system || parent == system?.parent || parent == transition?.originalFocus || parent == transition?.originalFocus?.parent {
+                node.setState(to: time, guaranteedUpdate: node == system || node == object)
+            } else {
+                node.isOrbitSuspended = true
             }
-        case .integration:
-            // Recursively integrate each node's state
-            root?.integrate(by: dt)
+        }
+        
+        // Deal with suspended nodes
+        for node in allNodes {
+            guard let orbit = node.orbit else { continue }
+            orbit.speedRatio = abs(frameRatio) / ((node.system ?? node).orbit?.period ?? .infinity)
+            // Also suspend nodes that are moving too fast
+            if orbit.speedRatio > 10 {
+                node.isOrbitSuspended = true
+            }
+            // Eject the user from selecting a suspended node
+            if isSelected(node.system ?? node) && (node.system ?? node).isOrbitSuspended {
+                setObject(nil)
+            }
         }
         
         // Update orbit and rotation states
         for node in allNodes {
-            node.orbit?.update(node: node)
+            node.orbit?.update(node: node, time: time)
             node.rotation?.update(timeStep: dt)
+        }
+    }
+    
+    // Set all states in the current system
+    func setSystemStates() {
+        guard let system else { return }
+        
+        system.setState(to: time, guaranteedUpdate: true)
+        system.orbit?.update(node: system, time: time)
+        
+        // Update all child nodes in the system
+        for node in system.children {
+            node.setState(to: time, guaranteedUpdate: true)
+            node.orbit?.update(node: node, time: time)
         }
     }
     
     // Set the system to a specific timestamp
     func setTimestamp(_ timestamp: Date) {
-        guard let root, timestamp >= minTime, timestamp <= maxTime else { return }
+        guard timestamp >= minTime, timestamp <= maxTime else { return }
         
         isPaused = false
         isRealTime = false
         
-        // Advance states to the given timestamp
+        // Advance to the given timestamp
         let dt = timestamp.timeIntervalSince(time)
         time.addTimeInterval(dt)
         
-        // Update positions and velocities
-        switch updateType {
-        case .spice:
-            // Set each node's state from SPICE
-            for node in allNodes {
-                node.setStateFromSPICE(by: dt, to: time)
-            }
-        case .integration:
-            // Recursively integrate each node's state
-            root.integrate(by: dt)
+        // Set each node's state
+        for node in allNodes {
+            node.setState(to: time)
         }
         
         // Update orbit and rotation states
         for node in allNodes {
-            node.orbit?.update(node: node)
+            node.orbit?.update(node: node, time: time)
             node.rotation?.update(timeStep: dt)
         }
     }
@@ -356,6 +337,7 @@ final public class Simulation: ObservableObject {
                 updateAfterGesture()
             }
         } else {
+            updateAfterGesture()
             self.offset = focus?.globalPositionAtFraction(offsetAmount) ?? .zero
         }
     }

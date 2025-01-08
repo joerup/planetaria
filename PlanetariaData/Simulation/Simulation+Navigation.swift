@@ -79,6 +79,7 @@ extension Simulation {
         if let system, let object, !system.children.map(\.object).contains(object) {
             setObject(nil)
         }
+        setSystemStates()
     }
     
     // Change the object node

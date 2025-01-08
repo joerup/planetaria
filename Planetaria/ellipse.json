@@ -24,8 +24,24 @@
             "luminosity": 3.83E+26
         },
         {
+          "name": "Pallas",
+          "id": 20000002,
+          "category": "asteroid",
+          "rank": "tertiary",
+          "discovered": 1802,
+          "discoverer": "Heinrich Wilhelm Olbers",
+          "namesake": "an epithet of the Greek goddess Athena",
+          "mass": 2.04E+20,
+          "size": 256,
+          "semimajorAxis": 414523370,
+          "rotationRef": 38,
+          "rotationRate": 1105.8036,
+          "poleRA": 33,
+          "poleDec": -3
+        },
+        {
             "name": "Eris",
-            "id": 136199,
+            "id": 20136199,
             "category": "tno",
             "rank": "primary",
             "color": "#7faed4",
@@ -48,6 +64,25 @@
             "escapeVelocity": 1.4,
             "temperature": -230,
             "moons": 1
-        }
+        },
+        {
+          "name": "Sedna",
+          "id": 20090377,
+          "category": "tno",
+          "rank": "tertiary",
+          "discovered": 2003,
+          "discoverer": "Michael E. Brown, Chad Trujillo, David Rabinowitz",
+          "namesake": "the Inuit goddess of the sea and marine animals",
+          "mass": 2.00E+21,
+          "size": 1000,
+          "semimajorAxis": 75696522570,
+          "eccentricity": 0.8496,
+          "inclination": 11.9307,
+          "longitudeOfPeriapsis": 311.352,
+          "longitudeOfAscendingNode": 144.248,
+          "meanAnomaly": 358.117,
+          "orbitalPeriod": 4160200,
+          "temperature": -261
+        },
     ]
 }

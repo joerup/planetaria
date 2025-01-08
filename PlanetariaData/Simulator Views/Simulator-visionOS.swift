@@ -1,5 +1,5 @@
 //
-//  Simulator3D.swift
+//  Simulator-visionOS.swift
 //  PlanetariaData
 //
 //  Created by Joe Rupertus on 11/8/23.

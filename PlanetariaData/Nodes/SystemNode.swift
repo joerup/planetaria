@@ -96,30 +96,6 @@ public class SystemNode: Node {
         }
     }
     
-    internal func setIntegrationStep() {
-        // find the min timestep in the system
-        var minStep = children.filter({ $0 != object }).compactMap(\.integrationStep).min() ?? 1.0
-        
-        // set the host object's timestep since it wasn't able to set before this
-        if let object, object.integrationStep == 0 {
-            object.integrationStep = minStep
-        }
-        
-        // decrease timesteps for binary systems because they are prone to larger error
-        if children.contains(where: { object?.hostNode == $0 }) {
-            minStep /= 10
-            for child in children {
-                child.integrationStep /= 10
-            }
-        }
-        
-        // set the system timestep and recursively set for sub-systems
-        systemIntegrationStep = minStep
-        for system in childSystems {
-            system.setIntegrationStep()
-        }
-    }
-    
     public var totalEnergy: Double {
         return childSystems.map(\.totalEnergy).reduce(0, +) + childObjects.map(objectEnergy(_:)).reduce(0, +)
     }
