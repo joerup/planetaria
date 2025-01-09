@@ -5,10 +5,10 @@
 //  Created by Joe Rupertus on 11/8/23.
 //
 
+#if os(visionOS)
 import SwiftUI
 import RealityKit
 
-#if os(visionOS)
 public struct Simulator: View {
     
     @Environment(\.scenePhase) var scenePhase

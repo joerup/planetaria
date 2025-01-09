@@ -11,7 +11,7 @@ import SwiftSPICE
 extension Node {
     
     // All states always from the J2000 ecliptic reference frame
-    private static let frame = "ECLIPJ2000"
+    private static let frame: SPICE.ReferenceFrame = .eclipticJ2000
     
     // Get the position and velocity at the given timestamp from SPICE
     internal func setState(to time: Date, guaranteedUpdate: Bool = true) {
@@ -28,7 +28,7 @@ extension Node {
         updateStep = velocity.magnitude == 0 ? 0 : Node.stepFraction * position.magnitude / velocity.magnitude
         
         // Get the current state of this node from SPICE
-        if let state = SPICE.getState(target: self.id, reference: parent.id, time: time, frame: Self.frame) {
+        if let (state, _) = try? SPICE.getState(target: self.id, reference: parent.id, time: time, frame: Self.frame) {
             position = [state.x, state.y, state.z]
             velocity = [state.vx, state.vy, state.vz]
             isOrbitSuspended = false

@@ -193,12 +193,15 @@ final public class Simulation: ObservableObject {
         // Load the ephemerides
         status = .loadingEphemerides
             
-        // Load the SPK kernel
-        guard let kernel = Bundle.main.path(forResource: fileName, ofType: "bsp") else {
+        // Load the SPK kernel and leapseconds kernel
+        guard let kernel = Bundle.main.path(forResource: fileName, ofType: "bsp"),
+              let leapsecondsKernel = Bundle.main.path(forResource: "naif0012", ofType: "tls")
+        else {
             throw SimulationError.ephemerisNotFound
         }
         do {
             try SPICE.loadKernel(kernel)
+            try SPICE.loadKernel(leapsecondsKernel)
         } catch {
             throw SimulationError.ephemerisLoadingFailed
         }
