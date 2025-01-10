@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/joerup/SwiftSPICE.git",
       "state" : {
-        "revision" : "745ccd438e77262f82a318c71475747b9420e7ce",
-        "version" : "2.0.0"
+        "revision" : "a9ba88a97b148cdbd88506ee9574b8011cbdf5df",
+        "version" : "2.0.1"
       }
     }
   ],

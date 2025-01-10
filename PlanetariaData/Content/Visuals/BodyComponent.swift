@@ -79,10 +79,10 @@ class BodyComponent: Component {
         if self.lightEnabled != lightEnabled {
             setLighting(enabled: lightEnabled)
         }
-        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *), name == "Earth", let orbit = node.parent?.orbit {
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *), name == "Earth", let system = node.system {
             if lightEnabled {
                 let totalRotation = simd_quatf(angle: .pi/2, axis: [0,1,0]) * bodyOrientation.inverse
-                model.setSunPosition(totalRotation.act(node.position.unitVector.toFloat()))
+                model.setSunPosition(totalRotation.act(system.position.unitVector.toFloat()))
             } else {
                 model.setSunPosition(.zero)
             }
