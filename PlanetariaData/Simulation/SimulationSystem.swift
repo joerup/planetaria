@@ -138,8 +138,8 @@ class SimulationSystem: System {
             
             let bodyVisible = physicalSize >= minimumSize || (node.object?.luminosity ?? 0) > 0
             let pointVisible = physicalSize <= targetSize && (orbitSize >= 2 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryVeryFast && !isSuspended
-            let labelVisible = simulation.showLabels && physicalSize <= 1.5 * targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryFast && !isSuspended
-            let trailVisible = simulation.showOrbits && orbitSize >= minimumSize
+            let labelVisible = simulation.showLabels && physicalSize <= 1.5 * targetSize && (orbitSize >= 4 * targetSize || isSelected || isCentral) && node is ObjectNode && !isGoingVeryFast && !isSuspended && (node.rank >= .tertiary || isSelected)
+            let trailVisible = simulation.showOrbits && orbitSize >= minimumSize && (node.rank >= .tertiary || isSelected)
             let interactionVisible = (pointVisible || bodyVisible) && !isSuspended
             var lightsVisible = false
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {

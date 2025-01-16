@@ -2,5 +2,5 @@
 *.xcodeproj/project.xcworkspace/
 !*.xcodeproj/*.pbxproj
 
-*.bsp
-*.tls
+**/*.bsp
+**/*.tls
