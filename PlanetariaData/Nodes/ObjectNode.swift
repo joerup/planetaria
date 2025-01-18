@@ -77,4 +77,35 @@ public class ObjectNode: Node {
         
         self.properties = Properties(category: category, group: group, discovered: discovered, discoverer: discoverer, namesake: namesake, moons: moons, mass: mass, radius: size, density: density, semimajorAxis: semimajorAxis, eccentricity: eccentricity, inclination: inclination, orbitalPeriod: orbitalPeriod, rotationRate: rotationRate, axialTilt: axialTilt, gravity: gravity, escapeVelocity: escapeVelocity, temperature: temperature, pressure: pressure, luminosity: luminosity)
     }
+    
+    override public init?(from csvRow: [String]) {
+        guard csvRow.count == 18,
+            let eccentricity = Double(csvRow[10]),
+            let semimajorAxisAU = Double(csvRow[11]),
+            let inclination = Double(csvRow[12]),
+            let orbitalPeriod = Double(csvRow[16])
+        else {
+            return nil
+        }
+        let satellites = Int(csvRow[5]) ?? 0
+        let diameter = Double(csvRow[6]) ?? 0
+        let rotationPeriodHr = Double(csvRow[8]) ?? 0
+        let GM = Double(csvRow[9]) ?? 0
+        
+        let category: Category = .asteroid
+        let mass = GM / G * 1e+9
+        let radius = diameter / 2
+        
+        let rotationPeriod = rotationPeriodHr / 24
+        let rotationRate = 360 / rotationPeriod
+        
+        let semimajorAxis = semimajorAxisAU * 1.496e+8
+        
+        self.ringSize = 0
+        self.luminosity = 0
+         
+        super.init(from: csvRow)
+        
+        self.properties = Properties(category: category, group: nil, discovered: nil, discoverer: nil, namesake: nil, moons: satellites, mass: mass, radius: radius, density: nil, semimajorAxis: semimajorAxis, eccentricity: eccentricity, inclination: inclination, orbitalPeriod: orbitalPeriod, rotationRate: rotationRate, axialTilt: nil, gravity: nil, escapeVelocity: nil, temperature: nil, pressure: nil, luminosity: nil)
+    }
 }

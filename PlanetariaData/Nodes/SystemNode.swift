@@ -10,9 +10,9 @@ import SwiftUI
 
 public class SystemNode: Node {
     
-    public let childSystems: [SystemNode]
-    public let childObjects: [ObjectNode]
-    public let children: [Node]
+    public private(set) var childSystems: [SystemNode]
+    public private(set) var childObjects: [ObjectNode]
+    public private(set) var children: [Node]
     
     public var tree: [Node] {
         [self] + subtree
@@ -101,5 +101,20 @@ public class SystemNode: Node {
     }
     private func objectEnergy(_ object: ObjectNode) -> Double {
         1/2 * object.mass * pow(object.velocity.magnitude, 2) - G * (object.hostNode?.mass ?? 1) * object.mass / object.position.magnitude
+    }
+        
+    internal func addChild(_ child: ObjectNode) {
+        children.append(child)
+        childObjects.append(child)
+        
+        child.parent = self
+        child.hostNode = object
+    }
+    internal func addChild(_ child: SystemNode) {
+        children.append(child)
+        childSystems.append(child)
+        
+        child.parent = self
+        child.hostNode = object
     }
 }

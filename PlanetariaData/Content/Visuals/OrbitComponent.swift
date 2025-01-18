@@ -297,7 +297,7 @@ class OrbitComponentLegacy: Component {
     var model: Entity
     
     init?(node: Node, size: Double) {
-        guard let orbit = node.orbit, node.position.magnitude > node.size, node.rank == .primary else { return nil }
+        guard node.orbit != nil, node.position.magnitude > node.size, node.rank == .primary else { return nil }
           
         self.node = node
         self.size = size

@@ -61,6 +61,8 @@
 		017166882B45263000A955D2 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166872B45263000A955D2 /* Launcher.swift */; };
 		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
+		0197E0AF2D3B2AA400E1F446 /* Planetaria.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0197E0AE2D3B2AA400E1F446 /* Planetaria.csv */; };
+		0197E0BD2D3B8A7000E1F446 /* Planetaria.bsp in Resources */ = {isa = PBXBuildFile; fileRef = 0197E0BC2D3B8A7000E1F446 /* Planetaria.bsp */; };
 		01A1B22A2CE105F90012A253 /* Earth-old.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B2292CE105F90012A253 /* Earth-old.usdz */; };
 		01A1E96D2CCEC542006E0968 /* ellipse.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A1E96C2CCEC542006E0968 /* ellipse.json */; };
 		01ACBD0A2CCB4F1A00775D99 /* ScrollSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */; };
@@ -69,7 +71,6 @@
 		01B1642D2CBCF0A900CA663B /* ColorMaterialScene.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01B1642C2CBCF0A900CA663B /* ColorMaterialScene.usdz */; };
 		01B540E02B43929D00D5AF51 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B540DF2B43929D00D5AF51 /* Planetaria.json */; };
 		01B9BB0C2B5CA95800933E60 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B9BB0B2B5CA95800933E60 /* PhotoView.swift */; };
-		01C365E52D38C6DB00F8A969 /* Planetaria.bsp in Resources */ = {isa = PBXBuildFile; fileRef = 01C365E42D38C6DA00F8A969 /* Planetaria.bsp */; };
 		01C7BE7B2A8C64F80021D753 /* PlanetariaData in Frameworks */ = {isa = PBXBuildFile; productRef = 01C7BE7A2A8C64F80021D753 /* PlanetariaData */; };
 		01D4C7972A8C8EE5000F59B7 /* PlanetariaWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D4C7962A8C8EE5000F59B7 /* PlanetariaWatchApp.swift */; };
 		01D4C79B2A8C8EE6000F59B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01D4C79A2A8C8EE6000F59B7 /* Assets.xcassets */; };
@@ -160,6 +161,8 @@
 		017200B92B51E22E00B3744A /* PropertyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyText.swift; sourceTree = "<group>"; };
 		017200BA2B51E22E00B3744A /* SelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionRow.swift; sourceTree = "<group>"; };
 		017200BC2B51E22E00B3744A /* SelectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCard.swift; sourceTree = "<group>"; };
+		0197E0AE2D3B2AA400E1F446 /* Planetaria.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = Planetaria.csv; sourceTree = "<group>"; };
+		0197E0BC2D3B8A7000E1F446 /* Planetaria.bsp */ = {isa = PBXFileReference; lastKnownFileType = file; path = Planetaria.bsp; sourceTree = "<group>"; };
 		01A1B2292CE105F90012A253 /* Earth-old.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Earth-old.usdz"; sourceTree = "<group>"; };
 		01A1E96C2CCEC542006E0968 /* ellipse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ellipse.json; sourceTree = "<group>"; };
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
@@ -169,7 +172,6 @@
 		01B1642C2CBCF0A900CA663B /* ColorMaterialScene.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = ColorMaterialScene.usdz; sourceTree = "<group>"; };
 		01B540DF2B43929D00D5AF51 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
 		01B9BB0B2B5CA95800933E60 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
-		01C365E42D38C6DA00F8A969 /* Planetaria.bsp */ = {isa = PBXFileReference; lastKnownFileType = file; path = Planetaria.bsp; sourceTree = "<group>"; };
 		01D4C7942A8C8EE5000F59B7 /* PlanetariaWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PlanetariaWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D4C7962A8C8EE5000F59B7 /* PlanetariaWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetariaWatchApp.swift; sourceTree = "<group>"; };
 		01D4C79A2A8C8EE6000F59B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -329,8 +331,9 @@
 				0140923A2B630E100001E631 /* Helper Views */,
 				0109A09A2B6754C300FD18CE /* Resources */,
 				01489ED32B41F5C300E74447 /* Planetaria.json */,
+				0197E0AE2D3B2AA400E1F446 /* Planetaria.csv */,
 				016DCD2A2B467C6F0030B614 /* Planetaria-descriptions.strings */,
-				01C365E42D38C6DA00F8A969 /* Planetaria.bsp */,
+				0197E0BC2D3B8A7000E1F446 /* Planetaria.bsp */,
 				01F1118C2D2F831100E418E7 /* naif0012.tls */,
 				01FC6B1F2B67E6FF00380474 /* sample.json */,
 				01A1E96C2CCEC542006E0968 /* ellipse.json */,
@@ -523,6 +526,7 @@
 				01255E0E2B696471004BC207 /* Rhea.usdz in Resources */,
 				01255DF12B696471004BC207 /* Enceladus.usdz in Resources */,
 				01255E0A2B696471004BC207 /* Mars.usdz in Resources */,
+				0197E0AF2D3B2AA400E1F446 /* Planetaria.csv in Resources */,
 				01255DFF2B696471004BC207 /* Phobos.usdz in Resources */,
 				01255DF72B696471004BC207 /* Jupiter.usdz in Resources */,
 				01B1642D2CBCF0A900CA663B /* ColorMaterialScene.usdz in Resources */,
@@ -535,7 +539,7 @@
 				015250042D2BB944004C6B93 /* Arrokoth.usdz in Resources */,
 				015250052D2BB944004C6B93 /* Bennu.usdz in Resources */,
 				015250062D2BB944004C6B93 /* Itokawa.usdz in Resources */,
-				01C365E52D38C6DB00F8A969 /* Planetaria.bsp in Resources */,
+				0197E0BD2D3B8A7000E1F446 /* Planetaria.bsp in Resources */,
 				01F1118D2D2F831100E418E7 /* naif0012.tls in Resources */,
 				015250072D2BB944004C6B93 /* Eros.usdz in Resources */,
 				015250082D2BB944004C6B93 /* Hyperion.usdz in Resources */,

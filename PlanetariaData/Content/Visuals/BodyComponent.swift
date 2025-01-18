@@ -49,7 +49,7 @@ class BodyComponent: Component {
         }
         self.model = bodyEntity
         
-        self.diameter = 2 * body.totalSize / size
+        self.diameter = (body.size == 0 ? 100 : 2 * body.totalSize) / size
         self.rotation = body.rotation
         
         // Light it up

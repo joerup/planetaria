@@ -21,6 +21,7 @@ class InteractionArea: Entity {
         super.init()
         components.set(InteractionAreaComponent())
         
+        #if os(visionOS)
         let collisionShape = ShapeResource.generateBox(width: size, height: size, depth: depth)
         components.set(CollisionComponent(shapes: [collisionShape]))
         
@@ -31,7 +32,6 @@ class InteractionArea: Entity {
             components.set(ModelComponent(mesh: box, materials: [material]))
         }
         
-        #if os(visionOS)
         components.set(InputTargetComponent())
         #endif
     }

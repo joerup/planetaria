@@ -34,7 +34,7 @@ extension Node {
         
         public var speedRatio: Double = 0
         private var lastUpdateTimestamp: Double = 0
-        private var orbitsBeforeElementUpdate: Double = 10
+        private let orbitsBeforeElementUpdate: Double = 10
          
         init?(node: Node, time: Date) {
             guard let hostNode = node.hostNode else { return nil }

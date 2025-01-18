@@ -173,10 +173,10 @@ final public class Simulation: ObservableObject {
     // Load data from node file and ephemeris, then create entities
     @MainActor private func loadData(fileName: String) async throws {
         
-        // Decode the tree from the file
+        // Decode the tree from the main body JSON file
         status = .decodingNodes
-        guard let file = Bundle.main.path(forResource: fileName, ofType: "json"),
-              let json = try? String(contentsOfFile: file),
+        guard let jsonFile = Bundle.main.path(forResource: fileName, ofType: "json"),
+              let json = try? String(contentsOfFile: jsonFile),
               let data = json.data(using: .utf8),
               let root = try? JSONDecoder().decode(SystemNode.self, from: data)
         else {
@@ -187,6 +187,30 @@ final public class Simulation: ObservableObject {
         self.focus = root
         self.system = root
         
+        // Append the small bodies from the CSV file
+        if let csvFile = Bundle.main.path(forResource: fileName, ofType: "csv"),
+           let csvString = try? String(contentsOfFile: csvFile) {
+            
+            var lines = csvString.split(separator: "\n")
+            lines.removeFirst()
+            var csvData: [[String]] = []
+            for line in lines {
+                let trimmedLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !trimmedLine.isEmpty {
+                    let values = trimmedLine.split(separator: ",", omittingEmptySubsequences: false).map { String($0) }
+                    csvData.append(values)
+                }
+            }
+            // Append new nodes
+            let ids = Set(root.tree.map(\.id))
+            for data in csvData {
+                if let object = ObjectNode(from: data), !ids.contains(object.id) {
+                    root.addChild(object)
+                }
+            }
+        }
+        
+        // Set references to nodes and objects
         self.allNodes = root.tree
         self.allObjects = root.tree.compactMap({ $0 as? ObjectNode })
         

@@ -12,7 +12,7 @@ class PointComponent: Component {
     
     var model: ModelEntity
     
-    static let radius: Float = 0.2
+    static let radius: Float = 0.4
     
     private var opacity: Float = 1.0
     

@@ -77,13 +77,13 @@ extension Node {
             
             self.moons = IntValue(moons)
             
-            self.mass = Value(mass, .kg)
-            self.radius = Value(radius, .km)
+            self.mass = mass == 0 ? nil : Value(mass, .kg)
+            self.radius = radius == 0 ? nil : Value(radius, .km)
             self.density = Value(density, .g / Cube(.cm))
             self.gravity = Value(gravity, .m / Square(.s))
             self.escapeVelocity = Value(escapeVelocity, .km / .s)
             
-            self.orbitalPeriod = Value(orbitalPeriod, .d)?.dynamic()
+            self.orbitalPeriod = orbitalPeriod == 0 ? nil : Value(orbitalPeriod, .d)?.dynamic()
             
             if let semimajorAxis, let orbitalPeriod {
                 let speed = 2 * Double.pi * semimajorAxis / (orbitalPeriod * 86400)
@@ -101,7 +101,7 @@ extension Node {
             
             if let rotationRate {
                 let rotationPeriod = abs(360 / rotationRate)
-                self.rotationPeriod = Value(rotationPeriod, .d)?.dynamic()
+                self.rotationPeriod = !rotationRate.isFinite ? nil : Value(rotationPeriod, .d)?.dynamic()
             }
             self.axialTilt = Value(axialTilt, .deg)
             
