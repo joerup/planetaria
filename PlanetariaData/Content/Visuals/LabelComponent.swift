@@ -46,6 +46,8 @@ class LabelComponent: Component {
     
     func update(isEnabled: Bool, scale: Float, orientation: simd_quatf, opacity: Float) {
         model.isEnabled = isEnabled
+        guard isEnabled else { return }
+        
         model.scale = SIMD3(repeating: 2.5 * scale)
         model.orientation = orientation
         

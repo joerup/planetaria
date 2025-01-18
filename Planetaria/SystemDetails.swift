@@ -25,7 +25,7 @@ struct SystemDetails: View {
         
         self.primaryObjects = system.children(type: system.primaryCategory)
         self.secondaryObjects = system.children(type: system.secondaryCategory).sorted { $0.id < $1.id }
-        self.dwarfPlanets = system.children(types: [.asteroid, .tno]).filter { $0.category != system.primaryCategory }
+        self.dwarfPlanets = system.children(type: .minor).filter { $0.rank >= .secondary && $0.category != system.primaryCategory }
     }
     
     var body: some View {

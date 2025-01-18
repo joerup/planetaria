@@ -23,8 +23,12 @@ class InteractionEntity: Entity {
         
         super.init()
         
+        let tappableGroup = CollisionGroup(rawValue: 1 << 0) // Group 0
+        let nonTappableGroups = CollisionGroup.all.subtracting(tappableGroup)
+        
         let collisionShape = ShapeResource.generateSphere(radius: size)
-        components.set(CollisionComponent(shapes: [collisionShape]))
+        let collisionFilter = CollisionFilter(group: tappableGroup, mask: nonTappableGroups)
+        components.set(CollisionComponent(shapes: [collisionShape], mode: .default, filter: collisionFilter))
         
         // Visual for debugging
         if debugMode {

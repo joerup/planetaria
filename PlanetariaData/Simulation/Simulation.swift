@@ -37,27 +37,14 @@ final public class Simulation: ObservableObject {
         return object
     }
     
+    public func isSelected(_ node: Node?) -> Bool {
+        return node?.object == object
+    }
     public var hasSelection: Bool {
         return object != nil
     }
     public var noSelection: Bool {
         return object == nil
-    }
-    
-    public func isSelected(_ node: Node?) -> Bool {
-        return node?.object == object
-    }
-    internal func isSystem(_ node: Node?) -> Bool {
-        return node == system
-    }
-    internal func isFocus(_ node: Node?) -> Bool {
-        return node == focus
-    }
-    internal func isInSystem(_ node: Node?) -> Bool {
-        return node == system || node?.parent == system
-    }
-    internal func isInFocus(_ node: Node?) -> Bool {
-        return node == focus || node?.parent == focus || node?.parent?.object == focus
     }
     
     // Clock
@@ -187,7 +174,7 @@ final public class Simulation: ObservableObject {
         self.focus = root
         self.system = root
         
-        // Append the small bodies from the CSV file
+        // Add the small bodies from the CSV file
         if let csvFile = Bundle.main.path(forResource: fileName, ofType: "csv"),
            let csvString = try? String(contentsOfFile: csvFile) {
             
@@ -281,10 +268,17 @@ final public class Simulation: ObservableObject {
         // Add the time interval
         self.time.addTimeInterval(dt)
         
+        // Get some properties from the simulation
+        let time = self.time
+        let frameRatio = self.frameRatio
+        let object = self.object
+        let system = self.system
+        let originalFocus = transition?.originalFocus
+        
         // Set states
         // Only guarantee the update for nodes in the current system
         for node in allNodes {
-            if let parent = node.parent, parent == system || parent == system?.parent || parent == transition?.originalFocus || parent == transition?.originalFocus?.parent {
+            if let parent = node.parent, parent == system || parent == system?.parent || parent == originalFocus || parent == originalFocus?.parent {
                 node.setState(to: time, guaranteedUpdate: node == system || node == object)
             } else {
                 node.isOrbitSuspended = true
@@ -300,7 +294,7 @@ final public class Simulation: ObservableObject {
                 node.isOrbitSuspended = true
             }
             // Eject the user from selecting a suspended node
-            if isSelected(node.system ?? node) && (node.system ?? node).isOrbitSuspended {
+            if node.object == object && (node.system ?? node).isOrbitSuspended {
                 setObject(nil)
             }
         }
@@ -316,12 +310,12 @@ final public class Simulation: ObservableObject {
     func setSystemStates() {
         guard let system else { return }
         
-        system.setState(to: time, guaranteedUpdate: true)
+        system.setState(to: time)
         system.orbit?.update(node: system, time: time)
         
         // Update all child nodes in the system
         for node in system.children {
-            node.setState(to: time, guaranteedUpdate: true)
+            node.setState(to: time)
             node.orbit?.update(node: node, time: time)
         }
     }

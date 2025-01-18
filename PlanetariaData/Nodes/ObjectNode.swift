@@ -87,12 +87,12 @@ public class ObjectNode: Node {
         else {
             return nil
         }
-        let satellites = Int(csvRow[5]) ?? 0
-        let diameter = Double(csvRow[6]) ?? 0
+        let satellites = Int(csvRow[6]) ?? 0
+        let diameter = Double(csvRow[7]) ?? 0
         let rotationPeriodHr = Double(csvRow[8]) ?? 0
         let GM = Double(csvRow[9]) ?? 0
         
-        let category: Category = .asteroid
+        let category: Category = .minor
         let mass = GM / G * 1e+9
         let radius = diameter / 2
         

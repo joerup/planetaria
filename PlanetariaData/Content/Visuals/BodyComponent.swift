@@ -70,9 +70,11 @@ class BodyComponent: Component {
     }
     
     func update(isEnabled: Bool, scale: Double, orientation: simd_quatf, lightEnabled: Bool) {
+        model.isEnabled = isEnabled
+        guard isEnabled else { return }
+        
         let bodyOrientation = self.orientation(rotation)
         
-        model.isEnabled = isEnabled
         model.scale = SIMD3(repeating: Float(diameter * scale))
         model.orientation = orientation * bodyOrientation
         

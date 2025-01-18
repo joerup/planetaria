@@ -115,10 +115,10 @@ public class Property<ValueType: Equatable, UnitType: Unit>: Equatable {
 
     public func dynamicDistance(for category: Node.Category) -> Property<ValueType, UnitType> where ValueType == Double, UnitType == DistanceU {
         switch category {
-        case .star, .planet, .asteroid, .tno, .system:
-            return self[.AU]
         case .moon:
             return self[.km]
+        default:
+            return self[.AU]
         }
     }
 

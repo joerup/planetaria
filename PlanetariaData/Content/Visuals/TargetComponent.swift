@@ -48,9 +48,10 @@ class TargetComponent: Component {
         }
     }
 
-    
     func update(isEnabled: Bool, scale: Float, orientation: simd_quatf, opacity: Float) {
         model.isEnabled = isEnabled
+        guard isEnabled else { return }
+        
         model.scale = SIMD3(repeating: scale)
         model.orientation = orientation
         

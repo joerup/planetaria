@@ -13,39 +13,33 @@ extension Node {
         case system
         case star
         case planet
-        case asteroid
-        case tno
+        case minor
         case moon
         
         public static var allCases: [Self] {
-            return [.star, .planet, .asteroid, .tno, .moon]
+            return [.star, .planet, .minor, .moon]
         }
         
         public var text: String {
             switch self {
             case .system:
-                return "System"
+                "System"
             case .star:
-                return "Star"
+                "Star"
             case .planet:
-                return "Planet"
+                "Planet"
             case .moon:
-                return "Moon"
-            case .asteroid:
-                return "Asteroid"
-            case .tno:
-                return "Trans-Neptunian Object"
+                "Moon"
+            case .minor:
+                "Minor Planet"
             }
         }
         
         public var orbiterCategory: Category {
             switch self {
-            case .system:
-                return .star
-            case .star:
-                return .planet
-            case .planet, .asteroid, .tno, .moon:
-                return .moon
+            case .system: .star
+            case .star: .planet
+            default: .moon
             }
         }
         
@@ -54,9 +48,8 @@ extension Node {
             case .system:   0
             case .star:     1
             case .planet:   2
-            case .asteroid: 3
-            case .tno:      4
-            case .moon:     5
+            case .minor:    3
+            case .moon:     4
             }
         }
         
@@ -64,7 +57,27 @@ extension Node {
             lhs.rawValue == rhs.rawValue
         }
         public static func < (lhs: Category, rhs: Category) -> Bool {
-            return lhs.id < rhs.id
+            lhs.id < rhs.id
+        }
+    }
+    
+    public enum MinorCategory: String, Codable, Equatable {
+        case asteroid
+        case tno
+        case centaur
+        case jupiterTrojan
+        
+        public var text: String {
+            switch self {
+            case .asteroid:
+                "Asteroid"
+            case .tno:
+                "Trans-Neptunian Object"
+            case .centaur:
+                "Centaur"
+            case .jupiterTrojan:
+                "Jupiter Trojan"
+            }
         }
     }
 
@@ -88,10 +101,10 @@ extension Node {
         }
         
         public static func == (lhs: Rank, rhs: Rank) -> Bool {
-            return lhs.priorityValue == rhs.priorityValue
+            lhs.priorityValue == rhs.priorityValue
         }
         public static func < (lhs: Rank, rhs: Rank) -> Bool {
-            return lhs.priorityValue > rhs.priorityValue
+            lhs.priorityValue > rhs.priorityValue
         }
         // 1 is highest, 4 is lowest
     }

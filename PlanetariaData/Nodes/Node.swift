@@ -19,6 +19,9 @@ public class Node: Decodable {
     public var rank: Rank
     public var color: Color?
     
+    public var minorPlanetNumber: Int?
+    public var minorPlanetCategory: MinorCategory?
+    
     public var position: Vector3
     public var velocity: Vector3
     
@@ -73,8 +76,8 @@ public class Node: Decodable {
         else if category == .moon, let host = hostNode {
             return "Moon of \(host.name)"
         }
-        else if rank == .primary || rank == .secondary, category == .tno || category == .asteroid {
-            return "Dwarf Planet"
+        else if category == .minor, let minorPlanetCategory {
+            return rank >= .secondary ? "Dwarf Planet" : minorPlanetCategory.text
         }
         else {
             return "\(category.text)"
@@ -96,6 +99,8 @@ public class Node: Decodable {
         if let hex = try? container.decode(String.self, forKey: .color) {
             self.color = Color(hex: hex)
         }
+        self.minorPlanetCategory = category != .minor ? nil : (self.name == "Ceres" ? .asteroid : .tno)
+        self.minorPlanetNumber = category != .minor || name == "Pluto" ? nil : self.id % 20000000
         
         self.mass = (try? container.decode(Double.self, forKey: .mass)) ?? 0
         self.size = (try? container.decode(Double.self, forKey: .size)) ?? 0
@@ -111,16 +116,26 @@ public class Node: Decodable {
         else {
             return nil
         }
-        let pdName = csvRow[2]
+        let designation = csvRow[2]
         let iauName = csvRow[3]
-        let diameter = Double(csvRow[6]) ?? 0
+        let objectClass = csvRow[4]
+        let diameter = Double(csvRow[7]) ?? 0
         let GM = Double(csvRow[9]) ?? 0
         
         self.id = spkID
-        self.name = !iauName.isEmpty ? iauName : pdName
+        self.name = !iauName.isEmpty ? iauName : designation
         
-        self.category = .asteroid
-        self.rank = absoluteMagnitude < 6.0 ? .tertiary : .quaternary
+        self.category = .minor
+        self.rank = absoluteMagnitude < 5.0 ? .tertiary : .quaternary
+        
+        self.minorPlanetNumber = Int(designation)
+        self.minorPlanetCategory = switch objectClass {
+        case "MBA", "OMB": .asteroid
+        case "TJN": .jupiterTrojan
+        case "CEN": .centaur
+        case "TNO": .tno
+        default: .asteroid
+        }
         
         self.mass = GM / G * 1e+9
         self.size = max(1.0, diameter / 2)

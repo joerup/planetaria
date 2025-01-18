@@ -46,8 +46,6 @@ public struct SceneDebugger: View {
     private func nameColor(_ node: Node) -> some ShapeStyle {
         if simulation.isSelected(node) {
             return .mint
-        } else if simulation.isInSystem(node) {
-            return .white
         } else {
             return .gray
         }

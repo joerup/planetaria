@@ -29,12 +29,15 @@ class InteractionComponent: Component {
     }
     
     func update(isEnabled: Bool, scale: Double, thickness: Float, modelPosition: SIMD3<Float>, cameraPosition: SIMD3<Float>) {
+        guard Double.random(in: 0..<1) < 0.1 else { return }
+        
         updateEntity(entity: primaryEntity, isEnabled: isEnabled, scale: scale, thickness: thickness, modelPosition: modelPosition, cameraPosition: cameraPosition)
         updateEntity(entity: secondaryEntity, isEnabled: isEnabled, scale: scale, thickness: thickness, modelPosition: modelPosition, cameraPosition: cameraPosition)
     }
     
     private func updateEntity(entity: InteractionEntity, isEnabled: Bool, scale: Double, thickness: Float, modelPosition: SIMD3<Float>, cameraPosition: SIMD3<Float>) {
         entity.isEnabled = isEnabled
+        guard isEnabled else { return }
         
         let sizeScale = Float(node.size * scale / size) / distance(modelPosition, cameraPosition) * entity.distance / entity.size
         let thicknessScale = 2 * thickness * entity.distance

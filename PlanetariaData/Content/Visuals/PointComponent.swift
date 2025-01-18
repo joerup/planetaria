@@ -27,6 +27,8 @@ class PointComponent: Component {
     
     func update(isEnabled: Bool, scale: Float, opacity: Float) {
         model.isEnabled = isEnabled
+        guard isEnabled else { return }
+        
         model.scale = SIMD3(repeating: scale)
         
         // Apply opacity
