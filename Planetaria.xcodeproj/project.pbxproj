@@ -43,7 +43,7 @@
 		01255E112B696471004BC207 /* Tethys.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DEE2B696471004BC207 /* Tethys.usdz */; };
 		01255E122B696471004BC207 /* Makemake.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01255DEF2B696471004BC207 /* Makemake.usdz */; };
 		012FB4B22D0751FD00004EAB /* MotionGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB4B12D0751E700004EAB /* MotionGuide.swift */; };
-		01489ED42B41F5C300E74447 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 01489ED32B41F5C300E74447 /* Planetaria.json */; };
+		013D83CB2D3F69CB0074E048 /* Planetaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 013D83CA2D3F69CB0074E048 /* Planetaria.json */; };
 		014DBF452B64E91300ECF79A /* ObjectIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014DBF442B64E91300ECF79A /* ObjectIcon.swift */; };
 		015250042D2BB944004C6B93 /* Arrokoth.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01524FFF2D2BB944004C6B93 /* Arrokoth.usdz */; };
 		015250052D2BB944004C6B93 /* Bennu.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 015250002D2BB944004C6B93 /* Bennu.usdz */; };
@@ -62,7 +62,7 @@
 		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
 		0197E0AF2D3B2AA400E1F446 /* Planetaria.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0197E0AE2D3B2AA400E1F446 /* Planetaria.csv */; };
-		0197E0BF2D3C34C500E1F446 /* Planetaria.bsp in Resources */ = {isa = PBXBuildFile; fileRef = 0197E0BE2D3C34C500E1F446 /* Planetaria.bsp */; };
+		0197E0D02D3D8C8E00E1F446 /* Planetaria.bsp in Resources */ = {isa = PBXBuildFile; fileRef = 0197E0CF2D3D8C8E00E1F446 /* Planetaria.bsp */; };
 		01A1B22A2CE105F90012A253 /* Earth-old.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B2292CE105F90012A253 /* Earth-old.usdz */; };
 		01A1E96D2CCEC542006E0968 /* ellipse.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A1E96C2CCEC542006E0968 /* ellipse.json */; };
 		01ACBD0A2CCB4F1A00775D99 /* ScrollSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */; };
@@ -139,7 +139,7 @@
 		01255DEF2B696471004BC207 /* Makemake.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Makemake.usdz; sourceTree = "<group>"; };
 		012BD6CE2A8C6332009907CC /* PlanetariaData */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PlanetariaData; sourceTree = "<group>"; };
 		012FB4B12D0751E700004EAB /* MotionGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionGuide.swift; sourceTree = "<group>"; };
-		01489ED32B41F5C300E74447 /* Planetaria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
+		013D83CA2D3F69CB0074E048 /* Planetaria.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Planetaria.json; sourceTree = "<group>"; };
 		014DBF442B64E91300ECF79A /* ObjectIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectIcon.swift; sourceTree = "<group>"; };
 		01524FFF2D2BB944004C6B93 /* Arrokoth.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arrokoth.usdz; sourceTree = "<group>"; };
 		015250002D2BB944004C6B93 /* Bennu.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Bennu.usdz; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 		017200BA2B51E22E00B3744A /* SelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionRow.swift; sourceTree = "<group>"; };
 		017200BC2B51E22E00B3744A /* SelectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCard.swift; sourceTree = "<group>"; };
 		0197E0AE2D3B2AA400E1F446 /* Planetaria.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = Planetaria.csv; sourceTree = "<group>"; };
-		0197E0BE2D3C34C500E1F446 /* Planetaria.bsp */ = {isa = PBXFileReference; lastKnownFileType = file; path = Planetaria.bsp; sourceTree = "<group>"; };
+		0197E0CF2D3D8C8E00E1F446 /* Planetaria.bsp */ = {isa = PBXFileReference; lastKnownFileType = file; path = Planetaria.bsp; sourceTree = "<group>"; };
 		01A1B2292CE105F90012A253 /* Earth-old.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Earth-old.usdz"; sourceTree = "<group>"; };
 		01A1E96C2CCEC542006E0968 /* ellipse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ellipse.json; sourceTree = "<group>"; };
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
@@ -330,10 +330,10 @@
 				012FB4B12D0751E700004EAB /* MotionGuide.swift */,
 				0140923A2B630E100001E631 /* Helper Views */,
 				0109A09A2B6754C300FD18CE /* Resources */,
-				01489ED32B41F5C300E74447 /* Planetaria.json */,
+				013D83CA2D3F69CB0074E048 /* Planetaria.json */,
 				0197E0AE2D3B2AA400E1F446 /* Planetaria.csv */,
 				016DCD2A2B467C6F0030B614 /* Planetaria-descriptions.strings */,
-				0197E0BE2D3C34C500E1F446 /* Planetaria.bsp */,
+				0197E0CF2D3D8C8E00E1F446 /* Planetaria.bsp */,
 				01F1118C2D2F831100E418E7 /* naif0012.tls */,
 				01FC6B1F2B67E6FF00380474 /* sample.json */,
 				01A1E96C2CCEC542006E0968 /* ellipse.json */,
@@ -506,6 +506,7 @@
 				01255E0C2B696471004BC207 /* Ariel.usdz in Resources */,
 				01255E0B2B696471004BC207 /* Iapetus.usdz in Resources */,
 				01255DF82B696471004BC207 /* Callisto.usdz in Resources */,
+				013D83CB2D3F69CB0074E048 /* Planetaria.json in Resources */,
 				01FC6B202B67E6FF00380474 /* sample.json in Resources */,
 				01255DFC2B696471004BC207 /* Haumea.usdz in Resources */,
 				01255E022B696471004BC207 /* Deimos.usdz in Resources */,
@@ -532,14 +533,13 @@
 				01B1642D2CBCF0A900CA663B /* ColorMaterialScene.usdz in Resources */,
 				01255DF92B696471004BC207 /* Europa.usdz in Resources */,
 				01255E012B696471004BC207 /* Sun.usdz in Resources */,
-				01489ED42B41F5C300E74447 /* Planetaria.json in Resources */,
 				01255E042B696471004BC207 /* Uranus.usdz in Resources */,
 				01255DF32B696471004BC207 /* Pluto.usdz in Resources */,
 				01255E102B696471004BC207 /* Titania.usdz in Resources */,
 				015250042D2BB944004C6B93 /* Arrokoth.usdz in Resources */,
 				015250052D2BB944004C6B93 /* Bennu.usdz in Resources */,
 				015250062D2BB944004C6B93 /* Itokawa.usdz in Resources */,
-				0197E0BF2D3C34C500E1F446 /* Planetaria.bsp in Resources */,
+				0197E0D02D3D8C8E00E1F446 /* Planetaria.bsp in Resources */,
 				01F1118D2D2F831100E418E7 /* naif0012.tls in Resources */,
 				015250072D2BB944004C6B93 /* Eros.usdz in Resources */,
 				015250082D2BB944004C6B93 /* Hyperion.usdz in Resources */,

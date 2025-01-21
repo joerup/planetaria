@@ -51,7 +51,7 @@ class SimulationSystem: System {
         
         // Update scene entities in the root
         root.sceneBackground.update(orientation: orientation)
-        root.interactionArea.update(cameraPosition: cameraPosition, centerPosition: center)
+        root.interactionCube.update(cameraPosition: cameraPosition, centerPosition: center)
         root.cameraMarker.update(cameraPosition: cameraPosition, arMode: simulation.viewType == .augmented || simulation.viewType == .immersive)
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
             root.updateLights(isEnabled: !simulation.showFloodLights, isArMode: simulation.viewType == .augmented)
@@ -87,7 +87,7 @@ class SimulationSystem: System {
             let isSelected = selectedObject == node.object
             let noSelection = selectedObject == nil
             if isSelected, !configuration.isSelected {
-                configuration.entity.select()
+                configuration.entity.select(size: size)
             }
             else if !isSelected, configuration.isSelected {
                 configuration.entity.deselect()
@@ -96,7 +96,7 @@ class SimulationSystem: System {
             
             // Calculate the billboard scale and orientation
             let billboardScale = entity.distanceScale(position: position, cameraPosition: cameraPosition, cameraForward: cameraForward) * entityThickness
-            let billboardOrientation = node.rank >= .tertiary || isSelected ? entity.billboardOrientation(position: position, cameraPosition: cameraPosition, toPoint: viewType == .augmented || viewType == .immersive) : .identity
+            let billboardOrientation = entity.billboardOrientation(position: position, cameraPosition: cameraPosition, toPoint: viewType == .augmented || viewType == .immersive)
             
             // Calculate the opacity
             let opacityPrimary: Float =
@@ -158,6 +158,7 @@ class SimulationSystem: System {
             let labelVisible = simShowLabels
                 && physicalSize <= 1.5 * targetSize
                 && (orbitSize >= (node.rank > .tertiary ? 4 : 16) * targetSize || isSelected || isCentral)
+                && (orbitSize <= (node.rank > .tertiary ? .infinity : 4 * Float(size)))
                 && node is ObjectNode
                 && !isGoingVeryFast
                 && !isSuspended
@@ -165,24 +166,17 @@ class SimulationSystem: System {
             let trailVisible = simShowOrbits
                 && orbitSize >= minimumSize
                 && (node.rank >= .tertiary || isSelected)
-            let interactionVisible = (pointVisible || bodyVisible)
-                && !isSuspended
-                && (orbitSize >= (node.rank > .tertiary ? 4 : 16) * targetSize || isSelected || isCentral)
-//                && (node.rank >= .tertiary || isSelected)
             var lightsVisible = false
             if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
                 lightsVisible = !simShowFloodLights
             }
             
             // Update the components
-            if let interaction = entity.component(InteractionComponent.self) {
-                interaction.update(isEnabled: interactionVisible, scale: scale, thickness: entityThickness, modelPosition: position, cameraPosition: cameraPosition)
-            }
             if let body = entity.component(BodyComponent.self) {
                 body.update(isEnabled: bodyVisible, scale: scale, orientation: orientation, lightEnabled: lightsVisible)
             }
             if let point = entity.component(PointComponent.self) {
-                point.update(isEnabled: pointVisible, scale: billboardScale, opacity: opacity)
+                point.update(isEnabled: pointVisible, scale: billboardScale, orientation: billboardOrientation, opacity: opacity)
             }
             if let target = entity.component(TargetComponent.self) {
                 target.update(isEnabled: pointVisible, scale: billboardScale, orientation: billboardOrientation, opacity: opacity)

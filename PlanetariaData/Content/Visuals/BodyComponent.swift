@@ -19,10 +19,11 @@ class BodyComponent: Component {
     private let rotation: Node.Rotation?
     
     private var light: Entity?
-    private var lightResource: EnvironmentResource?
     private var lightEnabled: Bool = true
     static let intensity: Float = 5E4
     static let attenuationRadius: Float = 1E+20
+    
+    private static let defaultModel = makeDefaultModel()
     
     init?(node: Node, size: Double) {
         guard let body = node as? ObjectNode else { return nil }
@@ -43,9 +44,7 @@ class BodyComponent: Component {
         if let entity = try? ModelEntity.load(named: fileName) {
             bodyEntity = entity
         } else {
-            let mesh = MeshResource.generateSphere(radius: 0.5)
-            let material = SimpleMaterial(color: ColorType(node.color ?? .init(white: 0.2)), roughness: .float(1), isMetallic: false)
-            bodyEntity = ModelEntity(mesh: mesh, materials: [material])
+            bodyEntity = ModelEntity(components: [Self.defaultModel])
         }
         self.model = bodyEntity
         
@@ -53,11 +52,6 @@ class BodyComponent: Component {
         self.rotation = body.rotation
         
         // Light it up
-        #if os(visionOS)
-        Task {
-            self.lightResource = try? await EnvironmentResource(named: "light")
-        }
-        #endif
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
             if body.luminosity > 0 {
                 let lightComponent = PointLightComponent(color: .white, intensity: Self.intensity, attenuationRadius: Self.attenuationRadius, attenuationFalloffExponent: 0)
@@ -78,9 +72,11 @@ class BodyComponent: Component {
         model.scale = SIMD3(repeating: Float(diameter * scale))
         model.orientation = orientation * bodyOrientation
         
+        #if os(visionOS)
         if self.lightEnabled != lightEnabled {
             setLighting(enabled: lightEnabled)
         }
+        #endif
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *), name == "Earth", let system = node.system {
             if lightEnabled {
                 let totalRotation = simd_quatf(angle: .pi/2, axis: [0,1,0]) * bodyOrientation.inverse
@@ -117,14 +113,24 @@ class BodyComponent: Component {
         }
     }
     
+    private static func makeDefaultModel() -> ModelComponent {
+        let mesh = MeshResource.generateSphere(radius: 0.5)
+        let material = SimpleMaterial(color: ColorType(.init(white: 0.2)), roughness: .float(1), isMetallic: false)
+        return ModelComponent(mesh: mesh, materials: [material])
+    }
+    
+    #if os(visionOS)
     private func setLighting(enabled: Bool) {
         lightEnabled = enabled
         light?.isEnabled = enabled
         
         // Flood lights
-        #if os(visionOS)
         if !enabled {
             Task {
+                var lightResource = Self.lightResource
+                if lightResource == nil {
+                    lightResource = await Self.getEnvironmentResource()
+                }
                 guard let lightResource else { return }
                 await model.components.set(ImageBasedLightComponent(source: .single(lightResource), intensityExponent: 0))
                 await model.components.set(ImageBasedLightReceiverComponent(imageBasedLight: model))
@@ -133,6 +139,10 @@ class BodyComponent: Component {
             model.components.remove(ImageBasedLightComponent.self)
             model.components.remove(ImageBasedLightReceiverComponent.self)
         }
-        #endif
     }
+    private static let lightResource: EnvironmentResource? = nil
+    private static func getEnvironmentResource() async -> EnvironmentResource? {
+        return try? await EnvironmentResource(named: "light")
+    }
+    #endif
 }

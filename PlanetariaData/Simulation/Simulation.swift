@@ -277,9 +277,10 @@ final public class Simulation: ObservableObject {
         
         // Set states
         // Only guarantee the update for nodes in the current system
+        let ephemerisEpoch = (try? SPICE.convertToEphemerisTime(time)) ?? 0
         for node in allNodes {
             if let parent = node.parent, parent == system || parent == system?.parent || parent == originalFocus || parent == originalFocus?.parent {
-                node.setState(to: time, guaranteedUpdate: node == system || node == object)
+                node.setState(to: ephemerisEpoch, guaranteedUpdate: node == system || node == object)
             } else {
                 node.isOrbitSuspended = true
             }

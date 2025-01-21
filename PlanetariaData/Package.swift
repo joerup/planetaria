@@ -18,7 +18,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/joerup/SwiftSPICE.git", from: "2.0.0")
+        .package(url: "https://github.com/joerup/SwiftSPICE.git", from: "2.1.1")
     ],
     targets: [
         .target(

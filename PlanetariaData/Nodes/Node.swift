@@ -35,7 +35,7 @@ public class Node: Decodable {
     // ------
      
     internal var updateStep: Double = 0
-    internal var lastUpdateTimestamp: Double = 0
+    internal var lastUpdateEpoch: Double = 0
     static let stepFraction: Double = 1E-3
     
     internal var isOrbitSuspended: Bool = false
@@ -103,7 +103,7 @@ public class Node: Decodable {
         self.minorPlanetNumber = category != .minor || name == "Pluto" ? nil : self.id % 20000000
         
         self.mass = (try? container.decode(Double.self, forKey: .mass)) ?? 0
-        self.size = (try? container.decode(Double.self, forKey: .size)) ?? 0
+        self.size = (try? container.decode(Double.self, forKey: .size)) ?? 1
         
         self.position = (try? container.decode(Vector3.self, forKey: .position)) ?? .zero
         self.velocity = (try? container.decode(Vector3.self, forKey: .velocity)) ?? .zero

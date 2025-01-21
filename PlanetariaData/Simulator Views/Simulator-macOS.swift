@@ -160,24 +160,29 @@ private struct RealityView: NSViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(select: select)
+        Coordinator { origin, direction in
+            if let node = root.queryTap(origin: origin, direction: direction) {
+                select(node)
+            }
+        }
     }
     
     class Coordinator: NSObject {
         
         weak var view: ARView?
-        var select: (Node?) -> Void
+        var select: (_ origin: SIMD3<Float>, _ direction: SIMD3<Float>) -> Void
         
-        init(select: @escaping (Node?) -> Void) {
+        init(select: @escaping (_ origin: SIMD3<Float>, _ direction: SIMD3<Float>) -> Void) {
             self.select = select
         }
         
         @objc func handleClick(_ recognizer: NSClickGestureRecognizer) {
             guard let view = self.view as? CustomARView else { return }
+            
             let tapLocation = recognizer.location(in: view)
-            if let entity = view.entity(at: tapLocation),
-               let node = entity.component(InteractionComponent.self)?.node {
-                select(node)
+            
+            if let (origin, direction) = view.ray(through: tapLocation) {
+                select(origin, direction)
             }
         }
     }

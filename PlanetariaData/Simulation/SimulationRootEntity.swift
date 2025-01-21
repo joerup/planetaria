@@ -18,7 +18,7 @@ class SimulationRootEntity: Entity {
     
     // Scene entities
     let sceneBackground: SceneBackground
-    let interactionArea: InteractionArea
+    let interactionCube: InteractionCube
     let cameraMarker: CameraMarker
     
     // Debug mode
@@ -50,14 +50,14 @@ class SimulationRootEntity: Entity {
     
     required init() {
         self.sceneBackground = SceneBackground()
-        self.interactionArea = InteractionArea(debugMode: Self.debugMode)
+        self.interactionCube = InteractionCube(debugMode: Self.debugMode)
         self.cameraMarker = CameraMarker(debugMode: Self.debugMode)
         
         super.init()
         self.name = "root"
     
         addChild(sceneBackground)
-        addChild(interactionArea)
+        addChild(interactionCube)
         addChild(cameraMarker)
         
         #if os(visionOS)
@@ -69,6 +69,34 @@ class SimulationRootEntity: Entity {
             }
         }
         #endif
+    } 
+    
+    // Query a tap
+    func queryTap(origin: SIMD3<Float>, direction: SIMD3<Float>) -> Node? {
+        print("from \(origin) to \(direction)")
+        let children = self.children.filter { $0.isEnabled && $0.component(SimulationComponent.self) != nil }
+        
+        var closestNode: Node?
+        var highestScore: Float = -.infinity
+        for child in children {
+            guard let node = child.component(SimulationComponent.self)?.node else { continue }
+            let vector = child.position(relativeTo: nil) - origin
+            let dotp = dot(normalize(direction), normalize(vector))
+            
+            let rankScore: Float = 1 - Float(node.rank.priorityValue) / 4
+            let alignmentScore: Float = (dotp - 0.99) * 100
+            
+            let totalScore = rankScore + alignmentScore
+            
+            if dotp > 0.99, totalScore > highestScore {
+                guard simulation?.selectedSystem == node.parent || simulation?.selectedSystem?.parent == node.parent else { continue }
+                
+                closestNode = node
+                highestScore = totalScore
+            }
+        }
+        
+        return closestNode
     }
     
     // Set entity sizes based on view type and environment

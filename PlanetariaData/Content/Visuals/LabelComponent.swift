@@ -18,12 +18,14 @@ class LabelComponent: Component {
     private var width: Float
     private var opacity: Float = 1.0
     
+    private static let labelMaterial = UnlitMaterial(color: .white)
+    
     init?(node: Node) {
         let text = node.object?.name ?? node.name
         let font: FontType = .systemFont(ofSize: 1.0, weight: .medium)
         
         let labelMesh = MeshResource.generateText(text, extrusionDepth: 0.01, font: font)
-        let labelEntity = ModelEntity(mesh: labelMesh, materials: [UnlitMaterial(color: .white)])
+        let labelEntity = ModelEntity(mesh: labelMesh, materials: [Self.labelMaterial])
         self.label = labelEntity
         self.model = Entity()
         model.addChild(labelEntity)

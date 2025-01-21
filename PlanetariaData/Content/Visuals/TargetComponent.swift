@@ -17,10 +17,33 @@ class TargetComponent: Component {
     
     private var opacity: Float = 1.0
     
+    private static let targetModel = makeTargetModel()
+    
     init?(node: Node) {
-        self.model = ModelEntity()
+        self.model = Self.targetModel
+    }
 
-        let color = ColorType(node.color?.lighter().lighter().lighter() ?? .gray)
+    func update(isEnabled: Bool, scale: Float, orientation: simd_quatf, opacity: Float) {
+        model.isEnabled = isEnabled
+        guard isEnabled else { return }
+        
+        model.scale = SIMD3(repeating: scale)
+        model.orientation = orientation
+        
+        // Apply opacity
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+            if self.opacity != opacity {
+                self.opacity = opacity
+                model.components.remove(OpacityComponent.self)
+                model.components.set(OpacityComponent(opacity: opacity))
+            }
+        }
+    }
+    
+    private static func makeTargetModel() -> ModelEntity {
+        let model = ModelEntity()
+
+        let color = ColorType(.white)
         let material = UnlitMaterial(color: color)
 
         let ringRadius: Float = Self.radius
@@ -46,22 +69,7 @@ class TargetComponent: Component {
             
             model.addChild(boxEntity)
         }
-    }
-
-    func update(isEnabled: Bool, scale: Float, orientation: simd_quatf, opacity: Float) {
-        model.isEnabled = isEnabled
-        guard isEnabled else { return }
         
-        model.scale = SIMD3(repeating: scale)
-        model.orientation = orientation
-        
-        // Apply opacity
-        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
-            if self.opacity != opacity {
-                self.opacity = opacity
-                model.components.remove(OpacityComponent.self)
-                model.components.set(OpacityComponent(opacity: opacity))
-            }
-        }
+        return model
     }
 }

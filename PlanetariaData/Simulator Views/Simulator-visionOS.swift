@@ -27,11 +27,8 @@ public struct Simulator: View {
             }
             .gesture(tapGesture)
             .simultaneousGesture(panGesture)
-            .simultaneousGesture(areaPanGesture)
             .simultaneousGesture(turnGesture)
-            .simultaneousGesture(areaTurnGesture)
             .simultaneousGesture(zoomGesture)
-            .simultaneousGesture(areaZoomGesture)
             .frame(width: geometry.size.width, height: geometry.size.height).frame(depth: geometry.size.depth)
             .onAppear {
                 simulation.rootEntity.setSizes(.init(width: 2 * geometry.size.width, height: 2 * geometry.size.height), dynamicTypeSize)
@@ -49,7 +46,11 @@ public struct Simulator: View {
         SpatialTapGesture()
             .targetedToEntity(where: .has(InteractionComponent.self))
             .onEnded { value in
-                if let node = value.entity.component(InteractionComponent.self)?.node {
+                let point = value.convert(value.location3D, from: .global, to: .scene)
+                guard let origin = value.entity.parent?.position else { return }
+                let direction = point - origin
+                
+                if let node = simulation.rootEntity.queryTap(origin: origin, direction: direction) {
                     simulation.selectObject(node)
                 }
             }
@@ -58,17 +59,6 @@ public struct Simulator: View {
     private var panGesture: some Gesture {
         DragGesture()
             .targetedToEntity(where: .has(InteractionComponent.self))
-            .onChanged { value in
-                updateDragGesture(with: value)
-            }
-            .onEnded { value in
-                completeDragGesture(with: value)
-            }
-    }
-    
-    private var areaPanGesture: some Gesture {
-        DragGesture()
-            .targetedToEntity(where: .has(InteractionAreaComponent.self))
             .onChanged { value in
                 updateDragGesture(with: value)
             }
@@ -88,31 +78,9 @@ public struct Simulator: View {
             }
     }
     
-    private var areaTurnGesture: some Gesture {
-        RotateGesture()
-            .targetedToEntity(where: .has(InteractionAreaComponent.self))
-            .onChanged { value in
-                simulation.updateRollGesture(with: value.rotation)
-            }
-            .onEnded { value in
-                simulation.completeRollGesture(with: value.rotation)
-            }
-    }
-    
     private var zoomGesture: some Gesture {
         MagnificationGesture()
             .targetedToEntity(where: .has(InteractionComponent.self))
-            .onChanged { value in
-                simulation.updateScaleGesture(to: value.gestureValue)
-            }
-            .onEnded { value in
-                simulation.completeScaleGesture(to: value.gestureValue)
-            }
-    }
-    
-    private var areaZoomGesture: some Gesture {
-        MagnificationGesture()
-            .targetedToEntity(where: .has(InteractionAreaComponent.self))
             .onChanged { value in
                 simulation.updateScaleGesture(to: value.gestureValue)
             }

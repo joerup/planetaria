@@ -20,11 +20,6 @@ class SimulationEntity: Entity {
         
         components.set(SimulationComponent(entity: self, node: node, size: size))
         
-        let interaction = InteractionComponent(node: node, size: size, debugMode: SimulationRootEntity.debugMode)
-        components.set(interaction)
-        root.addChild(interaction.primaryEntity)
-        root.addChild(interaction.secondaryEntity)
-        
         if let body = BodyComponent(node: node, size: size) {
             components.set(body)
             addChild(body.model)
@@ -33,6 +28,9 @@ class SimulationEntity: Entity {
             components.set(point)
             addChild(point.model)
         }
+        
+        guard node.rank >= .tertiary else { return }
+        
         if let label = LabelComponent(node: node) {
             components.set(label)
             addChild(label.model)
@@ -51,7 +49,7 @@ class SimulationEntity: Entity {
     }
     
     // Update entity in response to being selected
-    func select() {
+    func select(size: Double) {
         guard let configuration = component(SimulationComponent.self) else { return }
         configuration.isSelected = true
         
@@ -61,6 +59,20 @@ class SimulationEntity: Entity {
         }
         if let label = component(LabelComponent.self) {
             label.select()
+        }
+        
+        guard configuration.node.rank < .tertiary else { return }
+        
+        if let label = LabelComponent(node: configuration.node) {
+            components.set(label)
+            addChild(label.model)
+            label.select()
+        }
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+            if let orbit = OrbitComponent(node: configuration.node, size: size, type: .partial) {
+                components.set(orbit)
+                addChild(orbit.model)
+            }
         }
     }
     
@@ -75,6 +87,19 @@ class SimulationEntity: Entity {
         }
         if let label = component(LabelComponent.self) {
             label.deselect()
+        }
+        
+        guard configuration.node.rank < .tertiary else { return }
+        
+        if let label = component(LabelComponent.self) {
+            components.remove(LabelComponent.self)
+            removeChild(label.model)
+        }
+        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+            if let orbit = component(OrbitComponent.self) {
+                components.remove(OrbitComponent.self)
+                removeChild(orbit.model)
+            }
         }
     }
 }

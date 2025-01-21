@@ -53,7 +53,6 @@ extension Entity {
         SimulationComponent.registerComponent()
         SimulationSystem.registerSystem()
         
-        InteractionComponent.registerComponent()
         BodyComponent.registerComponent()
         PointComponent.registerComponent()
         TargetComponent.registerComponent()

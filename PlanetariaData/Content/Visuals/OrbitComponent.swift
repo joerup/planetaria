@@ -26,8 +26,9 @@ import RealityKit
     
     private var angles: [Double] = []
     
-    private var fadeSegments: Int = 16
-    private var segments: Int = 100
+    private var fadeSegments: Int = 20
+    private var segments: Int = 150
+    // if you ever change this, make sure it still shows on visionOS
     
     private var opacity: Float = 1.0
     
