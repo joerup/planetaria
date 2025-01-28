@@ -8,7 +8,7 @@
 import RealityKit
 import SwiftUI
 
-// A huge hitbox at the center of the scene
+// A huge hitbox that surrounds the user on visionOS
 class InteractionCube: Entity {
     
     private static let size: Float = 30

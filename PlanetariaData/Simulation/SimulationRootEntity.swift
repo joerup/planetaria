@@ -84,11 +84,11 @@ class SimulationRootEntity: Entity {
             let dotp = dot(normalize(direction), normalize(vector))
             
             let rankScore: Float = 1 - Float(node.rank.priorityValue) / 4
-            let alignmentScore: Float = (dotp - 0.99) * 100
+            let alignmentScore: Float = (dotp - 0.999) * 100
             
             let totalScore = rankScore + alignmentScore
             
-            if dotp > 0.99, totalScore > highestScore {
+            if dotp > 0.999, totalScore > highestScore {
                 guard simulation?.selectedSystem == node.parent || simulation?.selectedSystem?.parent == node.parent else { continue }
                 
                 closestNode = node

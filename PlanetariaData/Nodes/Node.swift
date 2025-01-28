@@ -17,6 +17,7 @@ public class Node: Decodable {
     
     public var category: Category
     public var rank: Rank
+    public var group: String?
     public var color: Color?
     
     public var minorPlanetNumber: Int?
@@ -85,7 +86,7 @@ public class Node: Decodable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case id, name, category, rank, color, mass, size, position, velocity
+        case id, name, category, rank, group, color, mass, size, position, velocity
     }
 
     public required init(from decoder: Decoder) throws {
@@ -96,6 +97,7 @@ public class Node: Decodable {
         
         self.category = try container.decode(Category.self, forKey: .category)
         self.rank = try container.decode(Rank.self, forKey: .rank)
+        self.group = try? container.decode(String.self, forKey: .group)
         if let hex = try? container.decode(String.self, forKey: .color) {
             self.color = Color(hex: hex)
         }

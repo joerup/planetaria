@@ -62,7 +62,6 @@
 		0171668A2B45B1A600A955D2 /* ObjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017166892B45B1A600A955D2 /* ObjectDetails.swift */; };
 		0171668C2B45B1AB00A955D2 /* SystemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171668B2B45B1AB00A955D2 /* SystemDetails.swift */; };
 		0197E0AF2D3B2AA400E1F446 /* Planetaria.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0197E0AE2D3B2AA400E1F446 /* Planetaria.csv */; };
-		0197E0D02D3D8C8E00E1F446 /* Planetaria.bsp in Resources */ = {isa = PBXBuildFile; fileRef = 0197E0CF2D3D8C8E00E1F446 /* Planetaria.bsp */; };
 		01A1B22A2CE105F90012A253 /* Earth-old.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 01A1B2292CE105F90012A253 /* Earth-old.usdz */; };
 		01A1E96D2CCEC542006E0968 /* ellipse.json in Resources */ = {isa = PBXBuildFile; fileRef = 01A1E96C2CCEC542006E0968 /* ellipse.json */; };
 		01ACBD0A2CCB4F1A00775D99 /* ScrollSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ACBD092CCB4F1500775D99 /* ScrollSheet.swift */; };
@@ -162,7 +161,6 @@
 		017200BA2B51E22E00B3744A /* SelectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionRow.swift; sourceTree = "<group>"; };
 		017200BC2B51E22E00B3744A /* SelectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCard.swift; sourceTree = "<group>"; };
 		0197E0AE2D3B2AA400E1F446 /* Planetaria.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = Planetaria.csv; sourceTree = "<group>"; };
-		0197E0CF2D3D8C8E00E1F446 /* Planetaria.bsp */ = {isa = PBXFileReference; lastKnownFileType = file; path = Planetaria.bsp; sourceTree = "<group>"; };
 		01A1B2292CE105F90012A253 /* Earth-old.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Earth-old.usdz"; sourceTree = "<group>"; };
 		01A1E96C2CCEC542006E0968 /* ellipse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ellipse.json; sourceTree = "<group>"; };
 		01ABDCF625D4CA0E003828F3 /* Planetaria.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Planetaria.entitlements; sourceTree = "<group>"; };
@@ -333,7 +331,6 @@
 				013D83CA2D3F69CB0074E048 /* Planetaria.json */,
 				0197E0AE2D3B2AA400E1F446 /* Planetaria.csv */,
 				016DCD2A2B467C6F0030B614 /* Planetaria-descriptions.strings */,
-				0197E0CF2D3D8C8E00E1F446 /* Planetaria.bsp */,
 				01F1118C2D2F831100E418E7 /* naif0012.tls */,
 				01FC6B1F2B67E6FF00380474 /* sample.json */,
 				01A1E96C2CCEC542006E0968 /* ellipse.json */,
@@ -539,7 +536,6 @@
 				015250042D2BB944004C6B93 /* Arrokoth.usdz in Resources */,
 				015250052D2BB944004C6B93 /* Bennu.usdz in Resources */,
 				015250062D2BB944004C6B93 /* Itokawa.usdz in Resources */,
-				0197E0D02D3D8C8E00E1F446 /* Planetaria.bsp in Resources */,
 				01F1118D2D2F831100E418E7 /* naif0012.tls in Resources */,
 				015250072D2BB944004C6B93 /* Eros.usdz in Resources */,
 				015250082D2BB944004C6B93 /* Hyperion.usdz in Resources */,
@@ -767,7 +763,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
@@ -778,7 +774,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rupertusapps.Planetaria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;
@@ -801,7 +797,7 @@
 				CODE_SIGN_ENTITLEMENTS = Planetaria/Planetaria.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Planetaria/Preview Content\"";
 				DEVELOPMENT_TEAM = 52RCCS37U6;
 				ENABLE_PREVIEWS = YES;
@@ -812,7 +808,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.rupertusapps.Planetaria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = xros;

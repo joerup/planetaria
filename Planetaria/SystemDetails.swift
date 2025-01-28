@@ -19,13 +19,23 @@ struct SystemDetails: View {
     private let primaryObjects: [Node]
     private let secondaryObjects: [Node]
     private let dwarfPlanets: [Node]
+    
+    private let groups: [String:[Node]]
 
     init(system: SystemNode) {
         self.system = system
         
         self.primaryObjects = system.children(type: system.primaryCategory)
-        self.secondaryObjects = system.children(type: system.secondaryCategory).sorted { $0.id < $1.id }
+        self.secondaryObjects = system.children(type: system.secondaryCategory).filter({ $0.rank >= .secondary }).sorted { $0.id < $1.id }
         self.dwarfPlanets = system.children(type: .minor).filter { $0.rank >= .secondary && $0.category != system.primaryCategory }
+        
+        var groups: [String:[Node]] = [:]
+        for child in system.children.filter({ $0.rank < .secondary }) {
+            if let group = child.group {
+                groups[group, default: []].append(child)
+            }
+        }
+        self.groups = groups
     }
     
     var body: some View {
@@ -74,6 +84,18 @@ struct SystemDetails: View {
                         dismiss()
                     } label: {
                         SelectionRow(title: child.name, icon: child.name)
+                    }
+                }
+            }
+            
+            // Other Groups
+            if !groups.isEmpty {
+                listSectionHeader("Other Objects")
+                ForEach(groups.sorted(by: { $0.value.count > $1.value.count }), id: \.key) { group in
+                    Button {
+                        dismiss()
+                    } label: {
+                        SelectionRow(title: group.key, icon: "")
                     }
                 }
             }
