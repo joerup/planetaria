@@ -17,10 +17,8 @@ struct SelectionRow: View {
     var body: some View {
         #if os(macOS)
         HStack {
-            if let icon {
-                ObjectIcon(icon: icon, size: 30)
-                    .scaleEffect(1.2)
-            }
+            ObjectIcon(icon: icon, size: 30)
+                .scaleEffect(1.2)
             Text(title)
                 .font(.title3)
                 .foregroundStyle(.primary)
@@ -30,12 +28,10 @@ struct SelectionRow: View {
         }
         #else
         HStack {
-            if let icon {
-                ObjectIcon(icon: icon, size: 36)
-                    .scaleEffect(1.2)
-                    .padding(.vertical, -10)
-                    .offset(y: 1)
-            }
+            ObjectIcon(icon: icon, size: 36)
+                .scaleEffect(1.2)
+                .padding(.vertical, -10)
+                .offset(y: 1)
             if let subtitle {
                 VStack(alignment: .leading) {
                     Text(title)

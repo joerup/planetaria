@@ -56,7 +56,7 @@ struct SystemDetails: View {
                     }
                     dismiss()
                 } label: {
-                    SelectionRow(title: child.name, icon: child.name)
+                    SelectionRow(title: child.name, icon: child.rank >= .tertiary ? child.name : nil)
                 }
             }
             
@@ -69,7 +69,7 @@ struct SystemDetails: View {
                     }
                     dismiss()
                 } label: {
-                    SelectionRow(title: child.name, icon: child.name)
+                    SelectionRow(title: child.name, icon: child.rank >= .tertiary ? child.name : nil)
                 }
             }
             
@@ -83,7 +83,7 @@ struct SystemDetails: View {
                         }
                         dismiss()
                     } label: {
-                        SelectionRow(title: child.name, icon: child.name)
+                        SelectionRow(title: child.name, icon: child.rank >= .tertiary ? child.name : nil)
                     }
                 }
             }

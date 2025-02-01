@@ -77,8 +77,8 @@ public class Node: Decodable {
         else if category == .moon, let host = hostNode {
             return "Moon of \(host.name)"
         }
-        else if category == .minor, let minorPlanetCategory {
-            return rank >= .secondary ? "Dwarf Planet" : minorPlanetCategory.text
+        else if category == .minor {
+            return rank >= .secondary ? "Dwarf Planet" : minorPlanetCategory?.text ?? "Minor Planet"
         }
         else {
             return "\(category.text)"
@@ -86,7 +86,7 @@ public class Node: Decodable {
     }
     
     private enum CodingKeys: String, CodingKey {
-        case id, name, category, rank, group, color, mass, size, position, velocity
+        case id, name, category, rank, group, color, mass, size, position, velocity, minorType
     }
 
     public required init(from decoder: Decoder) throws {
@@ -101,7 +101,8 @@ public class Node: Decodable {
         if let hex = try? container.decode(String.self, forKey: .color) {
             self.color = Color(hex: hex)
         }
-        self.minorPlanetCategory = category != .minor ? nil : (self.name == "Ceres" ? .asteroid : .tno)
+        let minorType = try? container.decode(String.self, forKey: .minorType)
+        self.minorPlanetCategory = category != .minor ? nil : MinorCategory.minorCategory(from: minorType ?? "")
         self.minorPlanetNumber = category != .minor || name == "Pluto" ? nil : self.id % 20000000
         
         self.mass = (try? container.decode(Double.self, forKey: .mass)) ?? 0

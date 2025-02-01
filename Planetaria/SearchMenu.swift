@@ -83,7 +83,7 @@ struct SearchMenu: View {
                             simulation.selectObject(object)
                             dismiss()
                         } label: {
-                            SelectionRow(title: object.name, subtitle: object.subtitle, icon: object.name)
+                            SelectionRow(title: object.name, subtitle: object.subtitle, icon: object.rank >= .tertiary ? object.name : nil)
                         }
                     }
                 }

@@ -24,7 +24,7 @@ struct ObjectDetails: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ScrollSheet(title: object.name, subtitle: object.subtitle, icon: object.name) {
+            ScrollSheet(title: object.name, subtitle: object.subtitle, icon: object.rank >= .tertiary ? object.name : nil) {
                 page(size: geometry.size)
             }
             .fontDesign(.rounded)
@@ -36,7 +36,6 @@ struct ObjectDetails: View {
         let large = size.width > cutoffWidth
         if let properties = object.properties {
             VStack(alignment: .leading, spacing: 15) {
-                Divider()
                 description(properties: properties)
                 majorProperties(properties: properties, large: large)
                 otherProperties(properties: properties, large: large)
@@ -49,8 +48,11 @@ struct ObjectDetails: View {
     
     @ViewBuilder 
     private func description(properties: ObjectNode.Properties) -> some View {
-        Text(NSLocalizedString(object.name, tableName: "\(simulation.fileName)-descriptions", comment: ""))
-            .fixedSize(horizontal: false, vertical: true)
+        if object.rank >= .secondary {
+            Divider()
+            Text(NSLocalizedString(object.name, tableName: "\(simulation.fileName)-descriptions", comment: ""))
+                .fixedSize(horizontal: false, vertical: true)
+        }
         if let discoverer = properties.discoverer, let discovered = properties.discovered {
             Text("Discovered by \(discoverer) in \(String(discovered)).")
                 .foregroundStyle(.secondary)

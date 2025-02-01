@@ -32,8 +32,10 @@ class BodyComponent: Component {
         self.node = node
         
         // Get the usdz filename to load from
-        let fileName: String =
-        if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
+        let fileName: String? =
+        if node.rank < .tertiary {
+            nil
+        } else if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
             node.name
         } else {
             // use old Earth model for older versions
@@ -41,7 +43,7 @@ class BodyComponent: Component {
         }
         
         var bodyEntity: Entity
-        if let entity = try? ModelEntity.load(named: fileName) {
+        if let fileName, let entity = try? ModelEntity.load(named: fileName) {
             bodyEntity = entity
         } else {
             bodyEntity = ModelEntity(components: [Self.defaultModel])

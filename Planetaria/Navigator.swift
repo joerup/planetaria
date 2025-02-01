@@ -212,7 +212,7 @@ struct Navigator<Content: View>: View {
     
     private func objectLabel(_ object: ObjectNode, large: Bool = false) -> some View {
         HStack {
-            ObjectIcon(icon: object.name, size: large ? 70 : verticalSizeClass == .regular ? 48 : 40)
+            ObjectIcon(icon: object.rank >= .tertiary ? object.name : nil, size: large ? 70 : verticalSizeClass == .regular ? 48 : 40)
                 .scaleEffect(large ? 1.1 : isCompact ? 1.4 : 1.3)
                 .offset(y: 1)
                 .padding(.trailing, large ? 4 : verticalSizeClass == .regular ? 2 : 0)

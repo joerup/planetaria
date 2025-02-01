@@ -79,6 +79,21 @@ extension Node {
                 "Jupiter Trojan"
             }
         }
+        
+        public static func minorCategory(from iauCode: String) -> MinorCategory? {
+            switch iauCode.uppercased() {
+            case "MBA", "OMB":
+                return .asteroid
+            case "TNO":
+                return .tno
+            case "CEN":
+                return .centaur
+            case "TJN":
+                return .jupiterTrojan
+            default:
+                return nil
+            }
+        }
     }
 
     public enum Rank: String, Codable, CaseIterable, Equatable, Comparable {
