@@ -12,7 +12,7 @@ extension Node {
     public class Properties {
         
         public var group: String?
-        public var discovered: Int?
+        public var discovered: String?
         public var discoverer: String?
         public var namesake: String?
         
@@ -51,7 +51,7 @@ extension Node {
         public init(
             category: Node.Category,
             group: String?,
-            discovered: Int?,
+            discovered: String?,
             discoverer: String?,
             namesake: String?,
             moons: Int?,

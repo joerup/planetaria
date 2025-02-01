@@ -174,29 +174,6 @@ final public class Simulation: ObservableObject {
         self.focus = root
         self.system = root
         
-        // Add the small bodies from the CSV file
-        if let csvFile = Bundle.main.path(forResource: fileName, ofType: "csv"),
-           let csvString = try? String(contentsOfFile: csvFile) {
-            
-            var lines = csvString.split(separator: "\n")
-            lines.removeFirst()
-            var csvData: [[String]] = []
-            for line in lines {
-                let trimmedLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
-                if !trimmedLine.isEmpty {
-                    let values = trimmedLine.split(separator: ",", omittingEmptySubsequences: false).map { String($0) }
-                    csvData.append(values)
-                }
-            }
-            // Append new nodes
-            let ids = Set(root.tree.map(\.id))
-            for data in csvData {
-                if let object = ObjectNode(from: data), !ids.contains(object.id) {
-                    root.addChild(object)
-                }
-            }
-        }
-        
         // Set references to nodes and objects
         self.allNodes = root.tree
         self.allObjects = root.tree.compactMap({ $0 as? ObjectNode })

@@ -110,41 +110,6 @@ public class Node: Decodable {
         self.position = (try? container.decode(Vector3.self, forKey: .position)) ?? .zero
         self.velocity = (try? container.decode(Vector3.self, forKey: .velocity)) ?? .zero
     }
-    
-    public init?(from csvRow: [String]) {
-        guard csvRow.count == 18,
-              let spkID = Int(csvRow[0]),
-              let absoluteMagnitude = Double(csvRow[17])
-        else {
-            return nil
-        }
-        let designation = csvRow[2]
-        let iauName = csvRow[3]
-        let objectClass = csvRow[4]
-        let diameter = Double(csvRow[7]) ?? 0
-        let GM = Double(csvRow[9]) ?? 0
-        
-        self.id = spkID
-        self.name = !iauName.isEmpty ? iauName : designation
-        
-        self.category = .minor
-        self.rank = absoluteMagnitude < 5.0 ? .tertiary : .quaternary
-        
-        self.minorPlanetNumber = Int(designation)
-        self.minorPlanetCategory = switch objectClass {
-        case "MBA", "OMB": .asteroid
-        case "TJN": .jupiterTrojan
-        case "CEN": .centaur
-        case "TNO": .tno
-        default: .asteroid
-        }
-        
-        self.mass = GM / G * 1e+9
-        self.size = max(1.0, diameter / 2)
-        
-        self.position = .zero
-        self.velocity = .zero
-    }
 }
 
 extension Node: Identifiable, Equatable, Hashable {
