@@ -76,7 +76,9 @@ class SimulationRootEntity: Entity {
         print("from \(origin) to \(direction)")
         let children = self.children.filter { $0.isEnabled && $0.component(SimulationComponent.self) != nil }
         
-        var closestNode: Node?
+        // Rank points based on querying an open field
+        var currentNode: Node?
+        var currentDist: Float = .infinity
         var highestScore: Float = -.infinity
         for child in children {
             guard let node = child.component(SimulationComponent.self)?.node else { continue }
@@ -91,12 +93,32 @@ class SimulationRootEntity: Entity {
             if dotp > 0.999, totalScore > highestScore {
                 guard simulation?.selectedSystem == node.parent || simulation?.selectedSystem?.parent == node.parent else { continue }
                 
-                closestNode = node
+                currentNode = node
+                currentDist = length(vector)
                 highestScore = totalScore
             }
         }
         
-        return closestNode
+        // Override by interaction with a physical body
+        for child in children {
+            guard let node = child.component(SimulationComponent.self)?.node else { continue }
+            guard let body = child.component(BodyComponent.self), body.model.isEnabled else { continue }
+            
+            let bodyRadius = body.model.visualBounds(relativeTo: nil).boundingRadius / 2 * Float(node.size/node.totalSize)
+            
+            let vector = child.position(relativeTo: nil) - origin
+            let maxBodyAngle = atan(bodyRadius / length(vector))
+            let bodyDotp = cos(maxBodyAngle)
+            let distance = length(vector)
+            
+            let dotp = dot(normalize(direction), normalize(vector))
+            if dotp >= bodyDotp, distance < currentDist {
+                currentNode = node
+                currentDist = distance
+            }
+        }
+        
+        return currentNode
     }
     
     // Set entity sizes based on view type and environment

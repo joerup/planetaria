@@ -3,4 +3,4 @@
 !*.xcodeproj/*.pbxproj
 
 Planetaria/*.bsp
-Planetaria/*.tls
+Planetaria/*.tlsPlanetaria.bsp
