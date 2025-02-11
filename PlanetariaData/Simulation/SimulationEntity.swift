@@ -36,7 +36,7 @@ class SimulationEntity: Entity {
             addChild(label.model)
         }
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
-            if let orbit = OrbitComponent(node: node, size: size, type: node.rank == .primary ? .full : .partial) {
+            if let orbit = OrbitComponent(node: node, size: size, type: node.rank == .primary ? .full : .faded) {
                 components.set(orbit)
                 addChild(orbit.model)
             }
@@ -69,7 +69,7 @@ class SimulationEntity: Entity {
             label.select()
         }
         if #available(iOS 18.0, macOS 15.0, visionOS 2.0, *) {
-            if let orbit = OrbitComponent(node: configuration.node, size: size, type: .partial) {
+            if let orbit = OrbitComponent(node: configuration.node, size: size, type: .faded) {
                 components.set(orbit)
                 addChild(orbit.model)
             }

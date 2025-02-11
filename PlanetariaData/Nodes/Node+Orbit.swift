@@ -34,7 +34,7 @@ extension Node {
         
         public var speedRatio: Double = 0
         private var lastUpdateTimestamp: Double = 0
-        private let orbitsBeforeElementUpdate: Double = 10
+        private let orbitsBeforeElementUpdate: Double = 1
          
         init?(node: Node, time: Date) {
             guard let hostNode = node.hostNode else { return nil }
@@ -67,9 +67,16 @@ extension Node {
         // Calculate the keplerian elements (and associated quantities)
         // Done regularly (but not every frame) as elements will change with time
         private func calculateKeplerianElements(node: Node, hostNode: Node) {
-            let μ = G * (node.mass + hostNode.mass)
-            let r = (node.position - hostNode.position) * 1000
-            let v = (node.velocity - hostNode.velocity) * 1000
+            var μ = G * (node.mass + hostNode.mass)
+            var r = (node.position - hostNode.position) * 1000
+            var v = (node.velocity - hostNode.velocity) * 1000
+            
+            // special case for Pluto's small moons b/c of binary system
+            if hostNode.name == "Pluto" && node.mass < 1e+21, let system = hostNode.parent {
+                μ = G * system.mass
+                r = node.position * 1000
+                v = node.velocity * 1000
+            }
             
             let totalSemimajorAxis = μ / (2 * μ / r.magnitude - pow(v.magnitude, 2)) / 1000
             self.semimajorAxis = totalSemimajorAxis * hostNode.mass / (hostNode.mass + node.mass)

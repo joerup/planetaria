@@ -13,8 +13,8 @@ import RealityKit
 @MainActor class OrbitComponent: Component {
     
     enum TrailType {
-        case partial
         case full
+        case faded
     }
     
     let model: Entity
@@ -161,21 +161,21 @@ import RealityKit
             }
             else if anchored && !isSmallOrbit {
                 for i in 0..<fadeSegments {
-                    let fadeAlpha = pow(Float(i) / Float(fadeSegments), 2.0) * (type == .partial ? 0.5 : 1.0)
+                    let fadeAlpha = pow(Float(i) / Float(fadeSegments), 2.0) * (type == .full ? 1.0 : 0.5)
                     // fadeFraction ranges from 0.0 (when object is large) to 1.0 (when object is small)
-                    let alphaFloat = fadeAlpha * (1-fadeFraction) + fadeFraction * (type == .partial ? 0.5 : 1.0)
+                    let alphaFloat = fadeAlpha * (1-fadeFraction) + fadeFraction * (type == .full ? 1.0 : 0.5)
                     let alpha = UInt32(255 * alphaFloat) << 24
                     vertexBuffer[i].color = color & 0x00FFFFFF | alpha
                 }
                 for i in fadeSegments..<segments {
-                    let fraction = (1 - Float(i) / Float(segments)) * (type == .partial ? 0.5 : 1.0)
+                    let fraction = (1 - Float(i) / Float(segments)) * (type == .full ? 1.0 : 0.5)
                     let alpha = UInt32(255 * fraction) << 24
                     vertexBuffer[i].color = color & 0x00FFFFFF | alpha
                 }
             }
             else {
                 for i in 0..<segments {
-                    let fraction = (1 - Float(i) / Float(segments)) * (type == .partial ? 0.5 : 1.0)
+                    let fraction = (1 - Float(i) / Float(segments)) * (type == .full ? 1.0 : 0.5)
                     let alpha = UInt32(255 * fraction) << 24
                     vertexBuffer[i].color = color & 0x00FFFFFF | alpha
                 }
