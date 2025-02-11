@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PlanetariaData
+import StoreKit
 
 struct Navigator<Content: View>: View {
     
@@ -208,6 +209,7 @@ struct Navigator<Content: View>: View {
             
         }
         .environmentObject(simulation)
+        .requestReview()
     }
     
     private func objectLabel(_ object: ObjectNode, large: Bool = false) -> some View {
@@ -454,5 +456,25 @@ struct Navigator<Content: View>: View {
         .dynamicTypeSize(..<DynamicTypeSize.xxLarge)
         
         #endif
+    }
+}
+
+struct RequestReviewModifier: ViewModifier {
+    @Environment(\.requestReview) private var requestReview
+    @AppStorage("reviewOpens") private var reviewOpens: Int = 0
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                reviewOpens += 1
+                if reviewOpens % 5 == 0 {
+                    requestReview()
+                }
+            }
+    }
+}
+extension View {
+    func requestReview() -> some View {
+        modifier(RequestReviewModifier())
     }
 }
