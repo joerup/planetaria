@@ -42,7 +42,7 @@ struct ObjectDetails: View {
                 Footnote()
             }
             .padding(.bottom)
-            .tint(object.color)
+            .tint(object.color ?? .white)
         }
     }
     

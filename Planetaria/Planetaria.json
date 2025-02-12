@@ -45,6 +45,7 @@
           "semimajorAxis": 384400,
           "eccentricity": 0.0554,
           "inclination": 5.16,
+          "orbitalPeriod": 27.322,
           "mass": 7.346E+22,
           "size": 1737.4,
           "density": 3.344,
@@ -100,6 +101,7 @@
           "semimajorAxis": 9400,
           "eccentricity": 0.015,
           "inclination": 1.1,
+          "orbitalPeriod": 0.319033,
           "mass": 1.06E+16,
           "size": 11.167,
           "density": 1.872,
@@ -123,6 +125,7 @@
           "semimajorAxis": 23500,
           "eccentricity": 0,
           "inclination": 1.8,
+          "orbitalPeriod": 1.262361,
           "mass": 2.4E+15,
           "size": 6.3,
           "density": 1.471,
@@ -180,6 +183,7 @@
           "semimajorAxis": 421800,
           "eccentricity": 0.004,
           "inclination": 0,
+          "orbitalPeriod": 1.762732,
           "mass": 8.932E+22,
           "size": 1821.49,
           "density": 3.5276,
@@ -204,6 +208,7 @@
           "semimajorAxis": 671100,
           "eccentricity": 0.009,
           "inclination": 0.5,
+          "orbitalPeriod": 3.525463,
           "mass": 4.8E+22,
           "size": 1560.8,
           "density": 3.013,
@@ -228,6 +233,7 @@
           "semimajorAxis": 1070400,
           "eccentricity": 0.001,
           "inclination": 0.2,
+          "orbitalPeriod": 7.155588,
           "mass": 1.4819E+23,
           "size": 2631.2,
           "density": 1.9416,
@@ -252,6 +258,7 @@
           "semimajorAxis": 1882700,
           "eccentricity": 0.007,
           "inclination": 0.3,
+          "orbitalPeriod": 16.69044,
           "mass": 1.0759E+23,
           "size": 2410.3,
           "density": 1.834,
@@ -276,6 +283,7 @@
           "semimajorAxis": 181400,
           "eccentricity": 0.003,
           "inclination": 0.4,
+          "orbitalPeriod": 0.499918,
           "mass": 7.50E+18,
           "size": 87.33,
           "density": 1.0111,
@@ -292,6 +300,7 @@
           "semimajorAxis": 221900,
           "eccentricity": 0.018,
           "inclination": 1.1,
+          "orbitalPeriod": 0.676105,
           "mass": 8.00E+17,
           "size": 49.67,
           "density": 0.9,
@@ -308,6 +317,7 @@
           "semimajorAxis": 129000,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.29826,
           "mass": 2.00E+16,
           "size": 8.33,
           "density": 0.9018,
@@ -324,6 +334,7 @@
           "semimajorAxis": 128000,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.294779,
           "mass": 1.00E+17,
           "size": 22.33,
           "density": 0.9002,
@@ -340,6 +351,7 @@
           "semimajorAxis": 11440600,
           "eccentricity": 0.16,
           "inclination": 28.1,
+          "orbitalPeriod": 250.56221,
           "mass": 9.50E+18,
           "size": 85,
           "density": 0.8827,
@@ -356,6 +368,7 @@
           "semimajorAxis": 11712300,
           "eccentricity": 0.211,
           "inclination": 27.9,
+          "orbitalPeriod": 259.639884,
           "mass": 8.00E+17,
           "size": 40,
           "group": "Himalia Group",
@@ -371,6 +384,7 @@
           "semimajorAxis": 23468200,
           "eccentricity": 0.412,
           "inclination": 148.4,
+          "orbitalPeriod": 743.612321,
           "mass": 3.00E+17,
           "size": 18,
           "group": "Pasiphae Group",
@@ -386,6 +400,7 @@
           "semimajorAxis": 23683900,
           "eccentricity": 0.264,
           "inclination": 157.3,
+          "orbitalPeriod": 758.849903,
           "mass": 8.00E+16,
           "size": 14,
           "group": "Pasiphae Group",
@@ -401,6 +416,7 @@
           "semimajorAxis": 11700800,
           "eccentricity": 0.117,
           "inclination": 27.2,
+          "orbitalPeriod": 259.198081,
           "mass": 8.00E+16,
           "size": 12,
           "group": "Himalia Group",
@@ -416,6 +432,7 @@
           "semimajorAxis": 23144400,
           "eccentricity": 0.256,
           "inclination": 164.6,
+          "orbitalPeriod": 734.18528,
           "mass": 1.00E+17,
           "size": 15,
           "group": "Carme Group",
@@ -431,6 +448,7 @@
           "semimajorAxis": 21034500,
           "eccentricity": 0.237,
           "inclination": 147.6,
+          "orbitalPeriod": 629.791691,
           "mass": 4.00E+16,
           "size": 10,
           "group": "Ananke Group",
@@ -446,6 +464,7 @@
           "semimajorAxis": 11146400,
           "eccentricity": 0.162,
           "inclination": 28.6,
+          "orbitalPeriod": 240.926609,
           "mass": 6.00E+15,
           "size": 5,
           "group": "Himalia Group",
@@ -461,6 +480,7 @@
           "semimajorAxis": 23795500,
           "eccentricity": 0.297,
           "inclination": 145.1,
+          "orbitalPeriod": 758.860222,
           "group": "Pasiphae Group",
           "discovered": "1999",
           "discoverer": "J.V. Scotti, T.B. Spahr, R.S. McMillan, J.A. Larsen, J. Montani, A.E. Gleason, T. Gehrels"
@@ -473,6 +493,7 @@
           "semimajorAxis": 7398500,
           "eccentricity": 0.34,
           "inclination": 43.8,
+          "orbitalPeriod": 130.028096,
           "group": "Themisto Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -485,6 +506,7 @@
           "semimajorAxis": 23644600,
           "eccentricity": 0.421,
           "inclination": 149.8,
+          "orbitalPeriod": 752.861984,
           "group": "Pasiphae Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -497,6 +519,7 @@
           "semimajorAxis": 23108000,
           "eccentricity": 0.253,
           "inclination": 164.7,
+          "orbitalPeriod": 732.451194,
           "group": "Carme Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -509,6 +532,7 @@
           "semimajorAxis": 22930500,
           "eccentricity": 0.265,
           "inclination": 164.7,
+          "orbitalPeriod": 723.712689,
           "group": "Carme Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -521,6 +545,7 @@
           "semimajorAxis": 20892100,
           "eccentricity": 0.232,
           "inclination": 147.7,
+          "orbitalPeriod": 623.316099,
           "group": "Ananke Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -533,6 +558,7 @@
           "semimajorAxis": 23302600,
           "eccentricity": 0.26,
           "inclination": 164.8,
+          "orbitalPeriod": 742.015252,
           "group": "Carme Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -545,6 +571,7 @@
           "semimajorAxis": 21066700,
           "eccentricity": 0.227,
           "inclination": 148.8,
+          "orbitalPeriod": 631.593822,
           "group": "Ananke Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -557,6 +584,7 @@
           "semimajorAxis": 23032900,
           "eccentricity": 0.276,
           "inclination": 164.4,
+          "orbitalPeriod": 728.482799,
           "group": "Carme Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -569,6 +597,7 @@
           "semimajorAxis": 22981300,
           "eccentricity": 0.249,
           "inclination": 164.8,
+          "orbitalPeriod": 726.273223,
           "group": "Carme Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -581,6 +610,7 @@
           "semimajorAxis": 20935400,
           "eccentricity": 0.246,
           "inclination": 148.3,
+          "orbitalPeriod": 625.389698,
           "group": "Ananke Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -593,6 +623,7 @@
           "semimajorAxis": 23792500,
           "eccentricity": 0.33,
           "inclination": 150.8,
+          "orbitalPeriod": 761.001946,
           "group": "Pasiphae Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -605,6 +636,7 @@
           "semimajorAxis": 20978000,
           "eccentricity": 0.233,
           "inclination": 147.5,
+          "orbitalPeriod": 627.175794,
           "group": "Ananke Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -617,6 +649,7 @@
           "semimajorAxis": 21108500,
           "eccentricity": 0.219,
           "inclination": 150.2,
+          "orbitalPeriod": 633.904723,
           "group": "Ananke Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -629,6 +662,7 @@
           "semimajorAxis": 23064400,
           "eccentricity": 0.277,
           "inclination": 164.6,
+          "orbitalPeriod": 730.10012,
           "group": "Carme Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -641,6 +675,7 @@
           "semimajorAxis": 22899000,
           "eccentricity": 0.294,
           "inclination": 149.1,
+          "orbitalPeriod": 717.308142,
           "group": "Pasiphae Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -653,6 +688,7 @@
           "semimajorAxis": 20827000,
           "eccentricity": 0.239,
           "inclination": 148,
+          "orbitalPeriod": 620.437937,
           "group": "Ananke Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -665,6 +701,7 @@
           "semimajorAxis": 19265800,
           "eccentricity": 0.148,
           "inclination": 145.7,
+          "orbitalPeriod": 550.686793,
           "group": "Ananke Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -677,6 +714,7 @@
           "semimajorAxis": 20901000,
           "eccentricity": 0.299,
           "inclination": 144.3,
+          "orbitalPeriod": 622.585958,
           "group": "Ananke Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -689,6 +727,7 @@
           "semimajorAxis": 23543300,
           "eccentricity": 0.322,
           "inclination": 149.3,
+          "orbitalPeriod": 748.294484,
           "group": "Pasiphae Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -701,6 +740,7 @@
           "semimajorAxis": 23052600,
           "eccentricity": 0.262,
           "inclination": 164.6,
+          "orbitalPeriod": 729.64267,
           "group": "Carme Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -713,6 +753,7 @@
           "semimajorAxis": 22846700,
           "eccentricity": 0.27,
           "inclination": 164.6,
+          "orbitalPeriod": 719.465077,
           "group": "Carme Group",
           "discovered": "2001",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -725,6 +766,7 @@
           "semimajorAxis": 23348700,
           "eccentricity": 0.358,
           "inclination": 152.6,
+          "orbitalPeriod": 739.80682,
           "group": "Pasiphae Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -737,6 +779,7 @@
           "semimajorAxis": 20821000,
           "eccentricity": 0.247,
           "inclination": 148,
+          "orbitalPeriod": 620.068159,
           "group": "Ananke Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard, B. Gladman"
@@ -749,6 +792,7 @@
           "semimajorAxis": 23778200,
           "eccentricity": 0.436,
           "inclination": 155.7,
+          "orbitalPeriod": 761.464554,
           "group": "Pasiphae Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -761,6 +805,7 @@
           "semimajorAxis": 20976000,
           "eccentricity": 0.228,
           "inclination": 150.6,
+          "orbitalPeriod": 628.025732,
           "group": "Ananke Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard, B. Gladman"
@@ -773,6 +818,7 @@
           "semimajorAxis": 23097800,
           "eccentricity": 0.261,
           "inclination": 164.6,
+          "orbitalPeriod": 731.879533,
           "group": "Carme Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -785,6 +831,7 @@
           "semimajorAxis": 23021800,
           "eccentricity": 0.252,
           "inclination": 164.8,
+          "orbitalPeriod": 728.259347,
           "group": "Carme Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -797,6 +844,7 @@
           "semimajorAxis": 20915700,
           "eccentricity": 0.153,
           "inclination": 154.4,
+          "orbitalPeriod": 626.325893,
           "group": "Ananke Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -809,6 +857,7 @@
           "semimajorAxis": 17042300,
           "eccentricity": 0.416,
           "inclination": 53.2,
+          "orbitalPeriod": 456.286617,
           "group": "Carpo Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -821,6 +870,7 @@
           "semimajorAxis": 23067400,
           "eccentricity": 0.277,
           "inclination": 164.6,
+          "orbitalPeriod": 730.301672,
           "group": "Carme Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -833,6 +883,7 @@
           "semimajorAxis": 23654700,
           "eccentricity": 0.419,
           "inclination": 146.8,
+          "orbitalPeriod": 751.974673,
           "group": "Pasiphae Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -845,6 +896,7 @@
           "semimajorAxis": 24205200,
           "eccentricity": 0.328,
           "inclination": 141.5,
+          "orbitalPeriod": 776.763241,
           "group": "Pasiphae Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -857,6 +909,7 @@
           "semimajorAxis": 23150500,
           "eccentricity": 0.262,
           "inclination": 164.4,
+          "orbitalPeriod": 734.522343,
           "group": "Carme Group",
           "discovered": "2003",
           "discoverer": "B. Gladman"
@@ -869,6 +922,7 @@
           "semimajorAxis": 23189800,
           "eccentricity": 0.252,
           "inclination": 164.5,
+          "orbitalPeriod": 736.512347,
           "group": "Carme Group"
         },
         {
@@ -879,6 +933,7 @@
           "semimajorAxis": 20793000,
           "eccentricity": 0.248,
           "inclination": 148.1,
+          "orbitalPeriod": 618.841217,
           "group": "Ananke Group"
         },
         {
@@ -889,6 +944,7 @@
           "semimajorAxis": 12260300,
           "eccentricity": 0.232,
           "inclination": 29,
+          "orbitalPeriod": 278.212821,
           "group": "Himalia Group",
           "discovered": "2000",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, Y. Fernandez, G. Magnier"
@@ -901,6 +957,7 @@
           "semimajorAxis": 20802600,
           "eccentricity": 0.232,
           "inclination": 144.7,
+          "orbitalPeriod": 618.491978,
           "group": "Ananke Group"
         },
         {
@@ -911,6 +968,7 @@
           "semimajorAxis": 20336300,
           "eccentricity": 0.09,
           "inclination": 145.3,
+          "orbitalPeriod": 598.121316,
           "group": "Ananke Group"
         },
         {
@@ -921,6 +979,7 @@
           "semimajorAxis": 22909200,
           "eccentricity": 0.355,
           "inclination": 151.9,
+          "orbitalPeriod": 718.316562,
           "group": "Pasiphae Group"
         },
         {
@@ -931,6 +990,7 @@
           "semimajorAxis": 23055800,
           "eccentricity": 0.258,
           "inclination": 164.6,
+          "orbitalPeriod": 729.84767,
           "group": "Carme Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -943,6 +1003,7 @@
           "semimajorAxis": 22604600,
           "eccentricity": 0.229,
           "inclination": 146.3,
+          "orbitalPeriod": 702.535939,
           "group": "Pasiphae Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -955,6 +1016,7 @@
           "semimajorAxis": 23744800,
           "eccentricity": 0.328,
           "inclination": 145.8,
+          "orbitalPeriod": 756.406342,
           "group": "Pasiphae Group"
         },
         {
@@ -965,6 +1027,7 @@
           "semimajorAxis": 20768600,
           "eccentricity": 0.241,
           "inclination": 148,
+          "orbitalPeriod": 617.726175,
           "group": "Ananke Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -977,6 +1040,7 @@
           "semimajorAxis": 23156400,
           "eccentricity": 0.265,
           "inclination": 164.7,
+          "orbitalPeriod": 734.778675,
           "group": "Carme Group"
         },
         {
@@ -987,6 +1051,7 @@
           "semimajorAxis": 18694200,
           "eccentricity": 0.217,
           "inclination": 34.5,
+          "orbitalPeriod": 527.606246,
           "group": "Valetudo Group",
           "discovered": "2016",
           "discoverer": "S.S. Sheppard"
@@ -999,6 +1064,7 @@
           "semimajorAxis": 22953200,
           "eccentricity": 0.272,
           "inclination": 164.5,
+          "orbitalPeriod": 724.709424,
           "group": "Carme Group"
         },
         {
@@ -1009,6 +1075,7 @@
           "semimajorAxis": 20941000,
           "eccentricity": 0.231,
           "inclination": 147.9,
+          "orbitalPeriod": 625.601566,
           "group": "Ananke Group"
         },
         {
@@ -1019,6 +1086,7 @@
           "semimajorAxis": 11481000,
           "eccentricity": 0.179,
           "inclination": 29,
+          "orbitalPeriod": 251.911064,
           "group": "Himalia Group",
           "discovered": "2017",
           "discoverer": "S.S. Sheppard"
@@ -1031,6 +1099,7 @@
           "semimajorAxis": 23206200,
           "eccentricity": 0.257,
           "inclination": 164.8,
+          "orbitalPeriod": 737.284766,
           "group": "Carme Group"
         },
         {
@@ -1041,6 +1110,7 @@
           "semimajorAxis": 23245300,
           "eccentricity": 0.336,
           "inclination": 149.7,
+          "orbitalPeriod": 733.993348,
           "group": "Pasiphae Group"
         },
         {
@@ -1051,6 +1121,7 @@
           "semimajorAxis": 20964800,
           "eccentricity": 0.233,
           "inclination": 147.3,
+          "orbitalPeriod": 626.562241,
           "group": "Ananke Group"
         },
         {
@@ -1061,6 +1132,7 @@
           "semimajorAxis": 22849500,
           "eccentricity": 0.255,
           "inclination": 164.8,
+          "orbitalPeriod": 719.760404,
           "group": "Carme Group"
         },
         {
@@ -1071,6 +1143,7 @@
           "semimajorAxis": 21768700,
           "eccentricity": 0.2,
           "inclination": 155.5,
+          "orbitalPeriod": 666.110044,
           "group": "Ananke Group"
         },
         {
@@ -1081,6 +1154,7 @@
           "semimajorAxis": 11401000,
           "eccentricity": 0.116,
           "inclination": 29.1,
+          "orbitalPeriod": 249.228928,
           "group": "Himalia Group",
           "discovered": "2018",
           "discoverer": "S.S. Sheppard"
@@ -1093,6 +1167,7 @@
           "semimajorAxis": 23124500,
           "eccentricity": 0.271,
           "inclination": 164.6,
+          "orbitalPeriod": 733.20626,
           "group": "Carme Group"
         },
         {
@@ -1103,6 +1178,7 @@
           "semimajorAxis": 20997700,
           "eccentricity": 0.225,
           "inclination": 150.2,
+          "orbitalPeriod": 628.78946,
           "group": "Ananke Group"
         },
         {
@@ -1113,6 +1189,7 @@
           "semimajorAxis": 22926500,
           "eccentricity": 0.328,
           "inclination": 148.2,
+          "orbitalPeriod": 718.095543,
           "group": "Pasiphae Group"
         },
         {
@@ -1123,6 +1200,7 @@
           "semimajorAxis": 23199400,
           "eccentricity": 0.263,
           "inclination": 164.8,
+          "orbitalPeriod": 736.861154,
           "group": "Carme Group"
         },
         {
@@ -1133,6 +1211,7 @@
           "semimajorAxis": 23576300,
           "eccentricity": 0.264,
           "inclination": 164.4,
+          "orbitalPeriod": 755.429041,
           "group": "Carme Group"
         },
         {
@@ -1143,6 +1222,7 @@
           "semimajorAxis": 20963100,
           "eccentricity": 0.235,
           "inclination": 150,
+          "orbitalPeriod": 627.243242,
           "group": "Ananke Group"
         },
         {
@@ -1153,6 +1233,7 @@
           "semimajorAxis": 20882600,
           "eccentricity": 0.243,
           "inclination": 148,
+          "orbitalPeriod": 622.876561,
           "group": "Ananke Group"
         },
         {
@@ -1163,6 +1244,7 @@
           "semimajorAxis": 23829300,
           "eccentricity": 0.313,
           "inclination": 144.7,
+          "orbitalPeriod": 760.000608,
           "group": "Pasiphae Group"
         },
         {
@@ -1173,6 +1255,7 @@
           "semimajorAxis": 22887400,
           "eccentricity": 0.259,
           "inclination": 164.5,
+          "orbitalPeriod": 721.603536,
           "group": "Carme Group"
         },
         {
@@ -1183,6 +1266,7 @@
           "semimajorAxis": 11716800,
           "eccentricity": 0.192,
           "inclination": 27.6,
+          "orbitalPeriod": 259.836323,
           "group": "Himalia Group"
         },
         {
@@ -1193,6 +1277,7 @@
           "semimajorAxis": 11419700,
           "eccentricity": 0.152,
           "inclination": 28.3,
+          "orbitalPeriod": 249.923847,
           "group": "Himalia Group"
         },
         {
@@ -1203,6 +1288,7 @@
           "semimajorAxis": 23400300,
           "eccentricity": 0.268,
           "inclination": 164.9,
+          "orbitalPeriod": 747.024566,
           "group": "Carme Group"
         },
         {
@@ -1213,6 +1299,7 @@
           "semimajorAxis": 20954700,
           "eccentricity": 0.228,
           "inclination": 150.5,
+          "orbitalPeriod": 627.143382,
           "group": "Ananke Group"
         },
         {
@@ -1223,6 +1310,7 @@
           "semimajorAxis": 20926600,
           "eccentricity": 0.242,
           "inclination": 148.1,
+          "orbitalPeriod": 625.13919,
           "group": "Ananke Group"
         },
         {
@@ -1233,6 +1321,7 @@
           "semimajorAxis": 20776700,
           "eccentricity": 0.239,
           "inclination": 147.9,
+          "orbitalPeriod": 618.332595,
           "group": "Ananke Group"
         },
         {
@@ -1243,6 +1332,7 @@
           "semimajorAxis": 23019700,
           "eccentricity": 0.265,
           "inclination": 164.6,
+          "orbitalPeriod": 728.278426,
           "group": "Carme Group"
         },
         {
@@ -1253,6 +1343,7 @@
           "semimajorAxis": 23414600,
           "eccentricity": 0.272,
           "inclination": 164.9,
+          "orbitalPeriod": 747.735358,
           "group": "Carme Group"
         },
         {
@@ -1263,6 +1354,7 @@
           "semimajorAxis": 22870300,
           "eccentricity": 0.271,
           "inclination": 164.9,
+          "orbitalPeriod": 720.968561,
           "group": "Carme Group"
         },
         {
@@ -1273,6 +1365,7 @@
           "semimajorAxis": 22719300,
           "eccentricity": 0.251,
           "inclination": 164.6,
+          "orbitalPeriod": 713.641308,
           "group": "Carme Group"
         },
         {
@@ -1283,6 +1376,7 @@
           "semimajorAxis": 23113800,
           "eccentricity": 0.294,
           "inclination": 147.1,
+          "orbitalPeriod": 727.010204,
           "group": "Pasiphae Group"
         },
         {
@@ -1293,6 +1387,7 @@
           "semimajorAxis": 16328500,
           "eccentricity": 0.177,
           "inclination": 50.2,
+          "orbitalPeriod": 427.63107,
           "group": "Carpo Group"
         },
         {
@@ -1303,6 +1398,7 @@
           "semimajorAxis": 22725200,
           "eccentricity": 0.257,
           "inclination": 164.5,
+          "orbitalPeriod": 738.334157,
           "group": "Carme Group"
         },
         {
@@ -1313,6 +1409,7 @@
           "semimajorAxis": 23013800,
           "eccentricity": 0.265,
           "inclination": 164.7,
+          "orbitalPeriod": 781.562507,
           "group": "Carme Group"
         },
         {
@@ -1323,6 +1420,7 @@
           "semimajorAxis": 21047700,
           "eccentricity": 0.249,
           "inclination": 148.2,
+          "orbitalPeriod": 630.673027,
           "group": "Ananke Group"
         }
       ]
@@ -1368,6 +1466,7 @@
           "semimajorAxis": 186000,
           "eccentricity": 0.02,
           "inclination": 1.6,
+          "orbitalPeriod": 0.942422,
           "mass": 3.79E+19,
           "size": 198.2,
           "density": 1.1501,
@@ -1392,6 +1491,7 @@
           "semimajorAxis": 238400,
           "eccentricity": 0.005,
           "inclination": 0,
+          "orbitalPeriod": 1.370218,
           "mass": 1.08E+20,
           "size": 252.1,
           "density": 1.6097,
@@ -1416,6 +1516,7 @@
           "semimajorAxis": 295000,
           "eccentricity": 0.001,
           "inclination": 1.1,
+          "orbitalPeriod": 1.887802,
           "mass": 6.18E+20,
           "size": 531.1,
           "density": 0.984,
@@ -1440,6 +1541,7 @@
           "semimajorAxis": 377700,
           "eccentricity": 0.002,
           "inclination": 0,
+          "orbitalPeriod": 2.736916,
           "mass": 1.1E+21,
           "size": 561.4,
           "density": 1.4781,
@@ -1464,6 +1566,7 @@
           "semimajorAxis": 527200,
           "eccentricity": 0.001,
           "inclination": 0.3,
+          "orbitalPeriod": 4.517503,
           "mass": 2.31E+21,
           "size": 763.5,
           "density": 1.2372,
@@ -1488,6 +1591,7 @@
           "semimajorAxis": 1221900,
           "eccentricity": 0.029,
           "inclination": 0.3,
+          "orbitalPeriod": 15.945448,
           "mass": 1.3455E+23,
           "size": 2574.76,
           "density": 1.8814,
@@ -1512,6 +1616,7 @@
           "semimajorAxis": 1481500,
           "eccentricity": 0.105,
           "inclination": 0.6,
+          "orbitalPeriod": 21.276658,
           "mass": 5.6E+18,
           "size": 135,
           "density": 0.5386,
@@ -1533,6 +1638,7 @@
           "semimajorAxis": 3561700,
           "eccentricity": 0.028,
           "inclination": 7.6,
+          "orbitalPeriod": 79.331002,
           "mass": 1.81E+21,
           "size": 734.3,
           "density": 1.0887,
@@ -1557,6 +1663,7 @@
           "semimajorAxis": 12929400,
           "eccentricity": 0.164,
           "inclination": 175.2,
+          "orbitalPeriod": 550.30391,
           "mass": 8.30E+18,
           "size": 106.5,
           "density": 1.6428,
@@ -1573,6 +1680,7 @@
           "semimajorAxis": 377600,
           "eccentricity": 0.007,
           "inclination": 0.2,
+          "orbitalPeriod": 2.736916,
           "mass": 3.00E+16,
           "size": 18,
           "density": 0.2918,
@@ -1589,6 +1697,7 @@
           "semimajorAxis": 295000,
           "eccentricity": 0.001,
           "inclination": 1.2,
+          "orbitalPeriod": 1.887802,
           "mass": 7.00E+15,
           "size": 12.66666667,
           "group": "Regular Moons",
@@ -1604,6 +1713,7 @@
           "semimajorAxis": 295000,
           "eccentricity": 0.001,
           "inclination": 1.5,
+          "orbitalPeriod": 1.887803,
           "mass": 4.00E+15,
           "size": 11.33333333,
           "group": "Regular Moons",
@@ -1619,6 +1729,7 @@
           "semimajorAxis": 194700,
           "eccentricity": 0.002,
           "inclination": 0,
+          "orbitalPeriod": 1.009549,
           "group": "Regular Moons",
           "discovered": "2004",
           "discoverer": "Cassini Imaging Science Team"
@@ -1631,6 +1742,7 @@
           "semimajorAxis": 377600,
           "eccentricity": 0.019,
           "inclination": 0.2,
+          "orbitalPeriod": 2.736916,
           "group": "Regular Moons",
           "discovered": "2004",
           "discoverer": "Cassini Imaging Science Team"
@@ -1643,6 +1755,7 @@
           "semimajorAxis": 151500,
           "eccentricity": 0.007,
           "inclination": 0.2,
+          "orbitalPeriod": 0.697353,
           "mass": 1.90E+18,
           "size": 89.2,
           "group": "Regular Moons",
@@ -1658,6 +1771,7 @@
           "semimajorAxis": 151400,
           "eccentricity": 0.02,
           "inclination": 0.3,
+          "orbitalPeriod": 0.697012,
           "mass": 5.30E+17,
           "size": 58.2,
           "density": 0.6375,
@@ -1674,6 +1788,7 @@
           "semimajorAxis": 137700,
           "eccentricity": 0.001,
           "inclination": 0,
+          "orbitalPeriod": 0.604602,
           "mass": 7.00E+15,
           "size": 15.1,
           "density": 0.385,
@@ -1690,6 +1805,7 @@
           "semimajorAxis": 139400,
           "eccentricity": 0.002,
           "inclination": 0,
+          "orbitalPeriod": 0.615878,
           "mass": 1.60E+17,
           "size": 43.1,
           "density": 0.4784,
@@ -1706,6 +1822,7 @@
           "semimajorAxis": 141700,
           "eccentricity": 0.004,
           "inclination": 0,
+          "orbitalPeriod": 0.631369,
           "mass": 1.40E+17,
           "size": 40.6,
           "density": 0.4948,
@@ -1722,6 +1839,7 @@
           "semimajorAxis": 133600,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.575051,
           "mass": 5.00E+15,
           "size": 14,
           "density": 0.365,
@@ -1738,6 +1856,7 @@
           "semimajorAxis": 212300,
           "eccentricity": 0.004,
           "inclination": 0.2,
+          "orbitalPeriod": 1.156059,
           "group": "Regular Moons",
           "discovered": "2004",
           "discoverer": "Cassini Imaging Science Team"
@@ -1750,6 +1869,7 @@
           "semimajorAxis": 136500,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.59408,
           "group": "Regular Moons",
           "discovered": "2005",
           "discoverer": "Cassini Imaging Science Team"
@@ -1762,6 +1882,7 @@
           "semimajorAxis": 198100,
           "eccentricity": 0.002,
           "inclination": 0,
+          "orbitalPeriod": 1.038898,
           "group": "Regular Moons",
           "discovered": "2007",
           "discoverer": "Cassini Imaging Science Team"
@@ -1774,6 +1895,7 @@
           "semimajorAxis": 167500,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.808115,
           "group": "Regular Moons",
           "discovered": "2008",
           "discoverer": "Cassini Imaging Science Team"
@@ -1786,6 +1908,7 @@
           "semimajorAxis": 22954500,
           "eccentricity": 0.338,
           "inclination": 172.3,
+          "orbitalPeriod": 1315.07801,
           "group": "Norse Group",
           "discovered": "2000",
           "discoverer": "B. Gladman"
@@ -1798,6 +1921,7 @@
           "semimajorAxis": 14997900,
           "eccentricity": 0.378,
           "inclination": 48.5,
+          "orbitalPeriod": 686.937962,
           "group": "Inuit Group",
           "discovered": "2000",
           "discoverer": "B. Gladman"
@@ -1810,6 +1934,7 @@
           "semimajorAxis": 18215600,
           "eccentricity": 0.522,
           "inclination": 37.8,
+          "orbitalPeriod": 926.425784,
           "group": "Gallic Group",
           "discovered": "2000",
           "discoverer": "J.J. Kavelaars, B. Gladman"
@@ -1822,6 +1947,7 @@
           "semimajorAxis": 11344600,
           "eccentricity": 0.293,
           "inclination": 49.2,
+          "orbitalPeriod": 451.428063,
           "group": "Inuit Group",
           "discovered": "2000",
           "discoverer": "J.J. Kavelaars, B. Gladman"
@@ -1834,6 +1960,7 @@
           "semimajorAxis": 19392000,
           "eccentricity": 0.116,
           "inclination": 175.7,
+          "orbitalPeriod": 1016.697887,
           "group": "Norse Group",
           "discovered": "2000",
           "discoverer": "B. Gladman, J.J. Kavelaars"
@@ -1846,6 +1973,7 @@
           "semimajorAxis": 11307500,
           "eccentricity": 0.275,
           "inclination": 48,
+          "orbitalPeriod": 449.172103,
           "group": "Inuit Group",
           "discovered": "2000",
           "discoverer": "B. Gladman"
@@ -1858,6 +1986,7 @@
           "semimajorAxis": 18588100,
           "eccentricity": 0.212,
           "inclination": 167.1,
+          "orbitalPeriod": 952.858247,
           "group": "Norse Group",
           "discovered": "2000",
           "discoverer": "B. Gladman, J.J. Kavelaars"
@@ -1870,6 +1999,7 @@
           "semimajorAxis": 16329100,
           "eccentricity": 0.482,
           "inclination": 36.8,
+          "orbitalPeriod": 783.459219,
           "group": "Gallic Group",
           "discovered": "2000",
           "discoverer": "M. Holman, T.B. Spahr"
@@ -1882,6 +2012,7 @@
           "semimajorAxis": 15575400,
           "eccentricity": 0.281,
           "inclination": 151.6,
+          "orbitalPeriod": 728.088602,
           "group": "Norse Group",
           "discovered": "2000",
           "discoverer": "J.J. Kavelaars, B. Gladman"
@@ -1894,6 +2025,7 @@
           "semimajorAxis": 17507000,
           "eccentricity": 0.476,
           "inclination": 37.1,
+          "orbitalPeriod": 871.092737,
           "group": "Gallic Group",
           "discovered": "2000",
           "discoverer": "J.J. Kavelaars, B. Gladman"
@@ -1906,6 +2038,7 @@
           "semimajorAxis": 17881100,
           "eccentricity": 0.309,
           "inclination": 47.8,
+          "orbitalPeriod": 895.577261,
           "group": "Inuit Group",
           "discovered": "2000",
           "discoverer": "B. Gladman, J.J. Kavelaars"
@@ -1918,6 +2051,7 @@
           "semimajorAxis": 20330900,
           "eccentricity": 0.467,
           "inclination": 175,
+          "orbitalPeriod": 1092.170793,
           "group": "Norse Group",
           "discovered": "2000",
           "discoverer": "B. Gladman, J.J. Kavelaars"
@@ -1930,6 +2064,7 @@
           "semimajorAxis": 19285600,
           "eccentricity": 0.441,
           "inclination": 142.2,
+          "orbitalPeriod": 1003.946106,
           "group": "Norse Group",
           "discovered": "2003",
           "discoverer": "S.S. Sheppard"
@@ -1942,6 +2077,7 @@
           "semimajorAxis": 20664700,
           "eccentricity": 0.255,
           "inclination": 166.1,
+          "orbitalPeriod": 1119.336994,
           "group": "Norse Group",
           "discovered": "2005",
           "discoverer": "D. Jewitt, S. Sheppard, J. Kleyna"
@@ -1954,6 +2090,7 @@
           "semimajorAxis": 17027200,
           "eccentricity": 0.459,
           "inclination": 38.5,
+          "orbitalPeriod": 834.848338,
           "group": "Gallic Group",
           "discovered": "2005",
           "discoverer": "D. Jewitt, S. Sheppard, J. Kleyna"
@@ -1966,6 +2103,7 @@
           "semimajorAxis": 19268400,
           "eccentricity": 0.145,
           "inclination": 158.8,
+          "orbitalPeriod": 1005.53083,
           "group": "Norse Group",
           "discovered": "2005",
           "discoverer": "D. Jewitt, S. Sheppard, J. Kleyna"
@@ -1978,6 +2116,7 @@
           "semimajorAxis": 20338300,
           "eccentricity": 0.486,
           "inclination": 138.3,
+          "orbitalPeriod": 1087.172365,
           "group": "Norse Group",
           "discovered": "2005",
           "discoverer": "D. Jewitt, S. Sheppard, J. Kleyna"
@@ -1990,6 +2129,7 @@
           "semimajorAxis": 20290500,
           "eccentricity": 0.249,
           "inclination": 156.2,
+          "orbitalPeriod": 1087.261627,
           "group": "Norse Group",
           "discovered": "2005",
           "discoverer": "D. Jewitt, S. Sheppard, J. Kleyna"
@@ -2002,6 +2142,7 @@
           "semimajorAxis": 22330000,
           "eccentricity": 0.137,
           "inclination": 164.5,
+          "orbitalPeriod": 1260.193443,
           "group": "Norse Group",
           "discovered": "2005",
           "discoverer": "D. Jewitt, S. Sheppard, J. Kleyna"
@@ -2014,6 +2155,7 @@
           "semimajorAxis": 24936700,
           "eccentricity": 0.213,
           "inclination": 170,
+          "orbitalPeriod": 1494.105551,
           "group": "Norse Group",
           "discovered": "2005",
           "discoverer": "D. Jewitt, S. Sheppard, J. Kleyna"
@@ -2026,6 +2168,7 @@
           "semimajorAxis": 19695400,
           "eccentricity": 0.372,
           "inclination": 165.4,
+          "orbitalPeriod": 1040.051211,
           "group": "Norse Group",
           "discovered": "2005",
           "discoverer": "D. Jewitt, S. Sheppard, J. Kleyna"
@@ -2038,6 +2181,7 @@
           "semimajorAxis": 18341000,
           "eccentricity": 0.336,
           "inclination": 149.9,
+          "orbitalPeriod": 931.900309,
           "group": "Norse Group",
           "discovered": "2006",
           "discoverer": "S. Sheppard, D. Jewitt, J. Kleyna"
@@ -2050,6 +2194,7 @@
           "semimajorAxis": 22032800,
           "eccentricity": 0.469,
           "inclination": 153,
+          "orbitalPeriod": 1231.189968,
           "group": "Norse Group",
           "discovered": "2006",
           "discoverer": "S. Sheppard, D. Jewitt, J. Kleyna"
@@ -2062,6 +2207,7 @@
           "semimajorAxis": 22919200,
           "eccentricity": 0.191,
           "inclination": 168.1,
+          "orbitalPeriod": 1311.79803,
           "group": "Norse Group",
           "discovered": "2006",
           "discoverer": "S. Sheppard, D. Jewitt, J. Kleyna"
@@ -2074,6 +2220,7 @@
           "semimajorAxis": 17623700,
           "eccentricity": 0.463,
           "inclination": 159.4,
+          "orbitalPeriod": 878.37584,
           "group": "Norse Group",
           "discovered": "2006",
           "discoverer": "S. Sheppard, D. Jewitt, J. Kleyna"
@@ -2086,6 +2233,7 @@
           "semimajorAxis": 22745700,
           "eccentricity": 0.448,
           "inclination": 168.4,
+          "orbitalPeriod": 1295.595736,
           "group": "Norse Group",
           "discovered": "2006",
           "discoverer": "S. Sheppard, D. Jewitt, J. Kleyna"
@@ -2098,6 +2246,7 @@
           "semimajorAxis": 19273200,
           "eccentricity": 0.218,
           "inclination": 163,
+          "orbitalPeriod": 1006.46334,
           "group": "Norse Group",
           "discovered": "2006",
           "discoverer": "S. Sheppard, D. Jewitt, J. Kleyna"
@@ -2110,6 +2259,7 @@
           "semimajorAxis": 18379800,
           "eccentricity": 0.317,
           "inclination": 174.2,
+          "orbitalPeriod": 937.004967,
           "group": "Norse Group",
           "discovered": "2006",
           "discoverer": "S. Sheppard, D. Jewitt, J. Kleyna"
@@ -2122,6 +2272,7 @@
           "semimajorAxis": 17751000,
           "eccentricity": 0.143,
           "inclination": 48.7,
+          "orbitalPeriod": 884.988724,
           "group": "Inuit Group",
           "discovered": "2007",
           "discoverer": "S. Sheppard, D. Jewitt, J. Kleyna"
@@ -2134,6 +2285,7 @@
           "semimajorAxis": 19250900,
           "eccentricity": 0.187,
           "inclination": 163.9,
+          "orbitalPeriod": 1004.748101,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2146,6 +2298,7 @@
           "semimajorAxis": 20591200,
           "eccentricity": 0.216,
           "inclination": 177.7,
+          "orbitalPeriod": 1114.059593,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2158,6 +2311,7 @@
           "semimajorAxis": 21447600,
           "eccentricity": 0.437,
           "inclination": 175.6,
+          "orbitalPeriod": 1185.102733,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2170,6 +2324,7 @@
           "semimajorAxis": 20948500,
           "eccentricity": 0.518,
           "inclination": 174.4,
+          "orbitalPeriod": 1142.966402,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2182,6 +2337,7 @@
           "semimajorAxis": 26098700,
           "eccentricity": 0.147,
           "inclination": 173,
+          "orbitalPeriod": 1603.992038,
           "group": "Norse Group"
         },
         {
@@ -2192,6 +2348,7 @@
           "semimajorAxis": 19843900,
           "eccentricity": 0.157,
           "inclination": 165,
+          "orbitalPeriod": 1052.323857,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2204,6 +2361,7 @@
           "semimajorAxis": 17064100,
           "eccentricity": 0.485,
           "inclination": 38.6,
+          "orbitalPeriod": 837.78045,
           "group": "Norse Group"
         },
         {
@@ -2214,6 +2372,7 @@
           "semimajorAxis": 20703800,
           "eccentricity": 0.087,
           "inclination": 158.9,
+          "orbitalPeriod": 1121.744245,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2226,6 +2385,7 @@
           "semimajorAxis": 21141100,
           "eccentricity": 0.251,
           "inclination": 160.3,
+          "orbitalPeriod": 1157.969293,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2238,6 +2398,7 @@
           "semimajorAxis": 23579000,
           "eccentricity": 0.512,
           "inclination": 158.8,
+          "orbitalPeriod": 1366.691228,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2250,6 +2411,7 @@
           "semimajorAxis": 24144900,
           "eccentricity": 0.28,
           "inclination": 168.3,
+          "orbitalPeriod": 1420.795938,
           "group": "Inuit Group"
         },
         {
@@ -2260,6 +2422,7 @@
           "semimajorAxis": 21994200,
           "eccentricity": 0.238,
           "inclination": 177.4,
+          "orbitalPeriod": 1232.184588,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2272,6 +2435,7 @@
           "semimajorAxis": 22260000,
           "eccentricity": 0.539,
           "inclination": 154.3,
+          "orbitalPeriod": 1251.149838,
           "group": "Norse Group",
           "discovered": "2004",
           "discoverer": "S.S. Sheppard, D.C. Jewitt, J. Kleyna"
@@ -2284,6 +2448,7 @@
           "semimajorAxis": 17497200,
           "eccentricity": 0.159,
           "inclination": 48.1,
+          "orbitalPeriod": 866.090744,
           "group": "Gallic Group"
         },
         {
@@ -2294,6 +2459,7 @@
           "semimajorAxis": 23339000,
           "eccentricity": 0.071,
           "inclination": 37.4,
+          "orbitalPeriod": 1341.344873,
           "group": "Outlier Moons"
         },
         {
@@ -2304,6 +2470,7 @@
           "semimajorAxis": 21865900,
           "eccentricity": 0.159,
           "inclination": 167.9,
+          "orbitalPeriod": 1220.685137,
           "group": "Norse Group"
         },
         {
@@ -2314,6 +2481,7 @@
           "semimajorAxis": 23159300,
           "eccentricity": 0.394,
           "inclination": 153.2,
+          "orbitalPeriod": 1328.583935,
           "group": "Norse Group"
         },
         {
@@ -2324,6 +2492,7 @@
           "semimajorAxis": 23390300,
           "eccentricity": 0.625,
           "inclination": 153.3,
+          "orbitalPeriod": 1349.370782,
           "group": "Norse Group"
         },
         {
@@ -2334,6 +2503,7 @@
           "semimajorAxis": 15956500,
           "eccentricity": 0.448,
           "inclination": 158.2,
+          "orbitalPeriod": 755.634901,
           "group": "Norse Group"
         },
         {
@@ -2344,6 +2514,7 @@
           "semimajorAxis": 23192200,
           "eccentricity": 0.101,
           "inclination": 165.9,
+          "orbitalPeriod": 1335.882236,
           "group": "Norse Group"
         },
         {
@@ -2354,6 +2525,7 @@
           "semimajorAxis": 21328200,
           "eccentricity": 0.511,
           "inclination": 164.9,
+          "orbitalPeriod": 1173.927204,
           "group": "Norse Group"
         },
         {
@@ -2364,6 +2536,7 @@
           "semimajorAxis": 19801200,
           "eccentricity": 0.337,
           "inclination": 164.7,
+          "orbitalPeriod": 1048.568818,
           "group": "Norse Group"
         },
         {
@@ -2374,6 +2547,7 @@
           "semimajorAxis": 18453300,
           "eccentricity": 0.265,
           "inclination": 169,
+          "orbitalPeriod": 942.566739,
           "group": "Norse Group"
         },
         {
@@ -2384,6 +2558,7 @@
           "semimajorAxis": 19699300,
           "eccentricity": 0.162,
           "inclination": 167.9,
+          "orbitalPeriod": 1040.857137,
           "group": "Norse Group"
         },
         {
@@ -2394,6 +2569,7 @@
           "semimajorAxis": 18746200,
           "eccentricity": 0.105,
           "inclination": 156,
+          "orbitalPeriod": 964.238364,
           "group": "Norse Group"
         },
         {
@@ -2404,6 +2580,7 @@
           "semimajorAxis": 21353300,
           "eccentricity": 0.432,
           "inclination": 156.1,
+          "orbitalPeriod": 1174.784401,
           "group": "Norse Group"
         },
         {
@@ -2414,6 +2591,7 @@
           "semimajorAxis": 15939100,
           "eccentricity": 0.232,
           "inclination": 174,
+          "orbitalPeriod": 754.907597,
           "group": "Norse Group"
         },
         {
@@ -2424,6 +2602,7 @@
           "semimajorAxis": 19614000,
           "eccentricity": 0.15,
           "inclination": 173.8,
+          "orbitalPeriod": 1034.449032,
           "group": "Norse Group"
         },
         {
@@ -2434,6 +2613,7 @@
           "semimajorAxis": 11245400,
           "eccentricity": 0.384,
           "inclination": 49.5,
+          "orbitalPeriod": 445.514188,
           "group": "Inuit Group"
         },
         {
@@ -2444,6 +2624,7 @@
           "semimajorAxis": 16560200,
           "eccentricity": 0.279,
           "inclination": 173.3,
+          "orbitalPeriod": 799.84852,
           "group": "Norse Group"
         },
         {
@@ -2454,6 +2635,7 @@
           "semimajorAxis": 17077100,
           "eccentricity": 0.249,
           "inclination": 166.9,
+          "orbitalPeriod": 837.74243,
           "group": "Norse Group"
         },
         {
@@ -2464,6 +2646,7 @@
           "semimajorAxis": 11338600,
           "eccentricity": 0.337,
           "inclination": 48.2,
+          "orbitalPeriod": 451.09517,
           "group": "Inuit Group"
         },
         {
@@ -2474,6 +2657,7 @@
           "semimajorAxis": 17869000,
           "eccentricity": 0.152,
           "inclination": 170.7,
+          "orbitalPeriod": 897.58814,
           "group": "Norse Group"
         },
         {
@@ -2484,6 +2668,7 @@
           "semimajorAxis": 16075600,
           "eccentricity": 0.297,
           "inclination": 169.2,
+          "orbitalPeriod": 764.6038,
           "group": "Norse Group"
         },
         {
@@ -2494,6 +2679,7 @@
           "semimajorAxis": 14406600,
           "eccentricity": 0.248,
           "inclination": 173,
+          "orbitalPeriod": 647.89256,
           "group": "Norse Group"
         },
         {
@@ -2504,6 +2690,7 @@
           "semimajorAxis": 15835700,
           "eccentricity": 0.104,
           "inclination": 158.4,
+          "orbitalPeriod": 746.878764,
           "group": "Norse Group"
         },
         {
@@ -2514,6 +2701,7 @@
           "semimajorAxis": 18057200,
           "eccentricity": 0.142,
           "inclination": 46,
+          "orbitalPeriod": 908.186488,
           "group": "Inuit Group"
         },
         {
@@ -2524,6 +2712,7 @@
           "semimajorAxis": 17951800,
           "eccentricity": 0.408,
           "inclination": 170.1,
+          "orbitalPeriod": 903.892615,
           "group": "Norse Group"
         },
         {
@@ -2534,6 +2723,7 @@
           "semimajorAxis": 18095000,
           "eccentricity": 0.301,
           "inclination": 165.7,
+          "orbitalPeriod": 914.618048,
           "group": "Norse Group"
         },
         {
@@ -2544,6 +2734,7 @@
           "semimajorAxis": 18236000,
           "eccentricity": 0.495,
           "inclination": 40.1,
+          "orbitalPeriod": 926.962759,
           "group": "Gallic Group"
         },
         {
@@ -2554,6 +2745,7 @@
           "semimajorAxis": 18391400,
           "eccentricity": 0.22,
           "inclination": 48.2,
+          "orbitalPeriod": 933.894069,
           "group": "Inuit Group"
         },
         {
@@ -2564,6 +2756,7 @@
           "semimajorAxis": 18544900,
           "eccentricity": 0.169,
           "inclination": 166.5,
+          "orbitalPeriod": 949.496194,
           "group": "Norse Group"
         },
         {
@@ -2574,6 +2767,7 @@
           "semimajorAxis": 18240800,
           "eccentricity": 0.157,
           "inclination": 165.7,
+          "orbitalPeriod": 925.912112,
           "group": "Norse Group"
         },
         {
@@ -2584,6 +2778,7 @@
           "semimajorAxis": 18979900,
           "eccentricity": 0.151,
           "inclination": 161.6,
+          "orbitalPeriod": 983.139254,
           "group": "Norse Group"
         },
         {
@@ -2594,6 +2789,7 @@
           "semimajorAxis": 19090400,
           "eccentricity": 0.216,
           "inclination": 158.8,
+          "orbitalPeriod": 991.43779,
           "group": "Norse Group"
         },
         {
@@ -2604,6 +2800,7 @@
           "semimajorAxis": 18935000,
           "eccentricity": 0.432,
           "inclination": 171.1,
+          "orbitalPeriod": 980.080472,
           "group": "Norse Group"
         },
         {
@@ -2614,6 +2811,7 @@
           "semimajorAxis": 19515400,
           "eccentricity": 0.129,
           "inclination": 167.7,
+          "orbitalPeriod": 1026.158033,
           "group": "Norse Group"
         },
         {
@@ -2624,6 +2822,7 @@
           "semimajorAxis": 19693600,
           "eccentricity": 0.551,
           "inclination": 154,
+          "orbitalPeriod": 1038.696711,
           "group": "Norse Group"
         },
         {
@@ -2634,6 +2833,7 @@
           "semimajorAxis": 19711900,
           "eccentricity": 0.143,
           "inclination": 174.1,
+          "orbitalPeriod": 1042.285109,
           "group": "Norse Group"
         },
         {
@@ -2644,6 +2844,7 @@
           "semimajorAxis": 19569800,
           "eccentricity": 0.542,
           "inclination": 38.6,
+          "orbitalPeriod": 1035.055387,
           "group": "Norse Group"
         },
         {
@@ -2654,6 +2855,7 @@
           "semimajorAxis": 18205500,
           "eccentricity": 0.12,
           "inclination": 46.4,
+          "orbitalPeriod": 919.705829,
           "group": "Inuit Group"
         },
         {
@@ -2664,6 +2866,7 @@
           "semimajorAxis": 19953800,
           "eccentricity": 0.313,
           "inclination": 162,
+          "orbitalPeriod": 1060.627398,
           "group": "Outlier Moons"
         },
         {
@@ -2674,6 +2877,7 @@
           "semimajorAxis": 20184900,
           "eccentricity": 0.232,
           "inclination": 174.2,
+          "orbitalPeriod": 1080.584698,
           "group": "Norse Group"
         },
         {
@@ -2684,6 +2888,7 @@
           "semimajorAxis": 20286700,
           "eccentricity": 0.311,
           "inclination": 172.8,
+          "orbitalPeriod": 1088.869492,
           "group": "Norse Group"
         },
         {
@@ -2694,6 +2899,7 @@
           "semimajorAxis": 20358800,
           "eccentricity": 0.433,
           "inclination": 159.5,
+          "orbitalPeriod": 1093.091083,
           "group": "Norse Group"
         },
         {
@@ -2704,6 +2910,7 @@
           "semimajorAxis": 20513100,
           "eccentricity": 0.249,
           "inclination": 177.2,
+          "orbitalPeriod": 1107.588858,
           "group": "Norse Group"
         },
         {
@@ -2714,6 +2921,7 @@
           "semimajorAxis": 20700500,
           "eccentricity": 0.248,
           "inclination": 163.9,
+          "orbitalPeriod": 1121.990703,
           "group": "Norse Group"
         },
         {
@@ -2724,6 +2932,7 @@
           "semimajorAxis": 16050700,
           "eccentricity": 0.291,
           "inclination": 160.9,
+          "orbitalPeriod": 762.493185,
           "group": "Norse Group"
         },
         {
@@ -2734,6 +2943,7 @@
           "semimajorAxis": 20663600,
           "eccentricity": 0.513,
           "inclination": 144.6,
+          "orbitalPeriod": 1114.995357,
           "group": "Norse Group"
         },
         {
@@ -2744,6 +2954,7 @@
           "semimajorAxis": 21062100,
           "eccentricity": 0.06,
           "inclination": 166.7,
+          "orbitalPeriod": 1152.673943,
           "group": "Norse Group"
         },
         {
@@ -2754,6 +2965,7 @@
           "semimajorAxis": 20894700,
           "eccentricity": 0.475,
           "inclination": 167.1,
+          "orbitalPeriod": 1138.01906,
           "group": "Norse Group"
         },
         {
@@ -2764,6 +2976,7 @@
           "semimajorAxis": 21254200,
           "eccentricity": 0.48,
           "inclination": 166.9,
+          "orbitalPeriod": 1167.944497,
           "group": "Norse Group"
         },
         {
@@ -2774,6 +2987,7 @@
           "semimajorAxis": 20964300,
           "eccentricity": 0.318,
           "inclination": 177.3,
+          "orbitalPeriod": 1144.78626,
           "group": "Norse Group"
         },
         {
@@ -2784,6 +2998,7 @@
           "semimajorAxis": 11324500,
           "eccentricity": 0.315,
           "inclination": 48,
+          "orbitalPeriod": 450.220076,
           "group": "Norse Group"
         },
         {
@@ -2794,6 +3009,7 @@
           "semimajorAxis": 15931600,
           "eccentricity": 0.217,
           "inclination": 169.2,
+          "orbitalPeriod": 754.285806,
           "group": "Norse Group"
         },
         {
@@ -2804,6 +3020,7 @@
           "semimajorAxis": 17049000,
           "eccentricity": 0.49,
           "inclination": 36.2,
+          "orbitalPeriod": 836.899542,
           "group": "Gallic Group"
         },
         {
@@ -2814,6 +3031,7 @@
           "semimajorAxis": 17394000,
           "eccentricity": 0.5,
           "inclination": 161.4,
+          "orbitalPeriod": 861.2483,
           "group": "Norse Group"
         },
         {
@@ -2824,6 +3042,7 @@
           "semimajorAxis": 17853200,
           "eccentricity": 0.172,
           "inclination": 46.2,
+          "orbitalPeriod": 893.151832,
           "group": "Inuit Group"
         },
         {
@@ -2834,6 +3053,7 @@
           "semimajorAxis": 21190300,
           "eccentricity": 0.257,
           "inclination": 157.8,
+          "orbitalPeriod": 1161.596437,
           "group": "Norse Group"
         },
         {
@@ -2844,6 +3064,7 @@
           "semimajorAxis": 21366100,
           "eccentricity": 0.588,
           "inclination": 169.5,
+          "orbitalPeriod": 1177.822674,
           "group": "Inuit Group"
         },
         {
@@ -2854,6 +3075,7 @@
           "semimajorAxis": 21799400,
           "eccentricity": 0.117,
           "inclination": 161.1,
+          "orbitalPeriod": 1213.963208,
           "group": "Norse Group"
         },
         {
@@ -2864,6 +3086,7 @@
           "semimajorAxis": 21720600,
           "eccentricity": 0.204,
           "inclination": 164.1,
+          "orbitalPeriod": 1207.520293,
           "group": "Norse Group"
         },
         {
@@ -2874,6 +3097,7 @@
           "semimajorAxis": 22384100,
           "eccentricity": 0.425,
           "inclination": 168.7,
+          "orbitalPeriod": 1264.512047,
           "group": "Norse Group"
         },
         {
@@ -2884,6 +3108,7 @@
           "semimajorAxis": 22136800,
           "eccentricity": 0.374,
           "inclination": 161.9,
+          "orbitalPeriod": 1242.40527,
           "group": "Norse Group"
         },
         {
@@ -2894,6 +3119,7 @@
           "semimajorAxis": 21966600,
           "eccentricity": 0.252,
           "inclination": 161.8,
+          "orbitalPeriod": 1228.110579,
           "group": "Norse Group"
         },
         {
@@ -2904,6 +3130,7 @@
           "semimajorAxis": 22399800,
           "eccentricity": 0.453,
           "inclination": 159.7,
+          "orbitalPeriod": 1264.250853,
           "group": "Norse Group"
         },
         {
@@ -2914,6 +3141,7 @@
           "semimajorAxis": 22346000,
           "eccentricity": 0.45,
           "inclination": 164,
+          "orbitalPeriod": 1260.442849,
           "group": "Norse Group"
         },
         {
@@ -2924,6 +3152,7 @@
           "semimajorAxis": 22760700,
           "eccentricity": 0.131,
           "inclination": 169.5,
+          "orbitalPeriod": 1298.396815,
           "group": "Norse Group"
         },
         {
@@ -2934,6 +3163,7 @@
           "semimajorAxis": 23264100,
           "eccentricity": 0.25,
           "inclination": 162,
+          "orbitalPeriod": 1340.931763,
           "group": "Norse Group"
         },
         {
@@ -2944,6 +3174,7 @@
           "semimajorAxis": 22724000,
           "eccentricity": 0.546,
           "inclination": 155.5,
+          "orbitalPeriod": 1291.386404,
           "group": "Norse Group"
         },
         {
@@ -2954,6 +3185,7 @@
           "semimajorAxis": 23140700,
           "eccentricity": 0.509,
           "inclination": 154.6,
+          "orbitalPeriod": 1327.060729,
           "group": "Norse Group"
         },
         {
@@ -2964,6 +3196,7 @@
           "semimajorAxis": 23044700,
           "eccentricity": 0.458,
           "inclination": 151.8,
+          "orbitalPeriod": 1317.829992,
           "group": "Norse Group"
         },
         {
@@ -2974,6 +3207,7 @@
           "semimajorAxis": 23679600,
           "eccentricity": 0.354,
           "inclination": 156.1,
+          "orbitalPeriod": 1375.531571,
           "group": "Norse Group"
         },
         {
@@ -2984,6 +3218,7 @@
           "semimajorAxis": 23801100,
           "eccentricity": 0.467,
           "inclination": 175.5,
+          "orbitalPeriod": 1389.33335,
           "group": "Norse Group"
         },
         {
@@ -2994,6 +3229,7 @@
           "semimajorAxis": 25208000,
           "eccentricity": 0.201,
           "inclination": 171.2,
+          "orbitalPeriod": 1519.410709,
           "group": "Norse Group"
         },
         {
@@ -3004,6 +3240,7 @@
           "semimajorAxis": 25408500,
           "eccentricity": 0.531,
           "inclination": 161.4,
+          "orbitalPeriod": 1532.64621,
           "group": "Norse Group"
         },
         {
@@ -3014,6 +3251,7 @@
           "semimajorAxis": 26446800,
           "eccentricity": 0.292,
           "inclination": 165.3,
+          "orbitalPeriod": 1633.866991,
           "group": "Norse Group"
         },
         {
@@ -3024,6 +3262,7 @@
           "semimajorAxis": 20174600,
           "eccentricity": 0.36,
           "inclination": 159.3,
+          "orbitalPeriod": 1078.067217,
           "group": "Norse Group"
         },
         {
@@ -3034,6 +3273,7 @@
           "semimajorAxis": 23279800,
           "eccentricity": 0.24,
           "inclination": 162.6,
+          "orbitalPeriod": 1342.435676,
           "group": "Norse Group"
         },
         {
@@ -3044,6 +3284,7 @@
           "semimajorAxis": 25314700,
           "eccentricity": 0.296,
           "inclination": 165.6,
+          "orbitalPeriod": 1527.208982,
           "group": "Norse Group"
         },
         {
@@ -3054,6 +3295,7 @@
           "semimajorAxis": 26439500,
           "eccentricity": 0.155,
           "inclination": 171.9,
+          "orbitalPeriod": 1636.368262,
           "group": "Norse Group"
         },
         {
@@ -3064,6 +3306,7 @@
           "semimajorAxis": 13193700,
           "eccentricity": 0.206,
           "inclination": 173.1,
+          "orbitalPeriod": 567.265764,
           "group": "Norse Group"
         }
       ]
@@ -3110,6 +3353,7 @@
           "semimajorAxis": 190900,
           "eccentricity": 0.001,
           "inclination": 0,
+          "orbitalPeriod": 2.52068,
           "mass": 1.29E+21,
           "size": 578.9,
           "density": 1.539,
@@ -3134,6 +3378,7 @@
           "semimajorAxis": 266000,
           "eccentricity": 0.004,
           "inclination": 0.1,
+          "orbitalPeriod": 4.144548,
           "mass": 1.22E+21,
           "size": 584.7,
           "density": 1.523,
@@ -3158,6 +3403,7 @@
           "semimajorAxis": 436300,
           "eccentricity": 0.001,
           "inclination": 0.1,
+          "orbitalPeriod": 8.706444,
           "mass": 3.42E+21,
           "size": 788.9,
           "density": 1.653,
@@ -3182,6 +3428,7 @@
           "semimajorAxis": 583400,
           "eccentricity": 0.001,
           "inclination": 0.1,
+          "orbitalPeriod": 13.463606,
           "mass": 2.88E+21,
           "size": 761.4,
           "density": 1.664,
@@ -3206,6 +3453,7 @@
           "semimajorAxis": 129900,
           "eccentricity": 0.001,
           "inclination": 4.4,
+          "orbitalPeriod": 1.413784,
           "mass": 6.6E+19,
           "size": 235.8,
           "density": 1.178,
@@ -3230,6 +3478,7 @@
           "semimajorAxis": 86000,
           "eccentricity": 0,
           "inclination": 0.4,
+          "orbitalPeriod": 0.761476,
           "size": 81,
           "group": "Inner Moons",
           "discovered": "1985",
@@ -3243,6 +3492,7 @@
           "semimajorAxis": 49800,
           "eccentricity": 0,
           "inclination": 0.2,
+          "orbitalPeriod": 0.334569,
           "size": 20,
           "group": "Inner Moons",
           "namesake": "the youngest daughter of Lear in Shakespeare's King Lear",
@@ -3257,6 +3507,7 @@
           "semimajorAxis": 53800,
           "eccentricity": 0.011,
           "inclination": 0.1,
+          "orbitalPeriod": 0.376855,
           "size": 21,
           "group": "Inner Moons",
           "namesake": "the daughter of Polonius in Shakespeare's Hamlet",
@@ -3271,6 +3522,7 @@
           "semimajorAxis": 59200,
           "eccentricity": 0.001,
           "inclination": 0.1,
+          "orbitalPeriod": 0.435007,
           "size": 27,
           "group": "Inner Moons",
           "discovered": "1986",
@@ -3284,6 +3536,7 @@
           "semimajorAxis": 61800,
           "eccentricity": 0,
           "inclination": 0.1,
+          "orbitalPeriod": 0.463154,
           "size": 41,
           "group": "Inner Moons",
           "discovered": "1986",
@@ -3297,6 +3550,7 @@
           "semimajorAxis": 62700,
           "eccentricity": 0,
           "inclination": 0.1,
+          "orbitalPeriod": 0.473228,
           "size": 35,
           "group": "Inner Moons",
           "discovered": "1986",
@@ -3310,6 +3564,7 @@
           "semimajorAxis": 64400,
           "eccentricity": 0.001,
           "inclination": 0,
+          "orbitalPeriod": 0.493479,
           "size": 53,
           "group": "Inner Moons",
           "discovered": "1986",
@@ -3323,6 +3578,7 @@
           "semimajorAxis": 66100,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.513196,
           "size": 70,
           "group": "Inner Moons",
           "discovered": "1986",
@@ -3336,6 +3592,7 @@
           "semimajorAxis": 69900,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.558459,
           "size": 36,
           "group": "Inner Moons",
           "discovered": "1986",
@@ -3349,6 +3606,7 @@
           "semimajorAxis": 75300,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.623527,
           "size": 45,
           "group": "Inner Moons",
           "discovered": "1986",
@@ -3362,6 +3620,7 @@
           "semimajorAxis": 76400,
           "eccentricity": 0.002,
           "inclination": 0,
+          "orbitalPeriod": 0.638411,
           "size": 13,
           "group": "Inner Moons",
           "discovered": "1999",
@@ -3375,6 +3634,7 @@
           "semimajorAxis": 97700,
           "eccentricity": 0.003,
           "inclination": 0.1,
+          "orbitalPeriod": 0.923293,
           "size": 12,
           "group": "Inner Moons",
           "discovered": "2003",
@@ -3388,6 +3648,7 @@
           "semimajorAxis": 74400,
           "eccentricity": 0.005,
           "inclination": 0.1,
+          "orbitalPeriod": 0.613168,
           "size": 9,
           "group": "Inner Moons",
           "discovered": "2003",
@@ -3401,6 +3662,7 @@
           "semimajorAxis": 7167000,
           "eccentricity": 0.2,
           "inclination": 141.4,
+          "orbitalPeriod": 580,
           "size": 36,
           "group": "Irregular Moons",
           "discovered": "1997",
@@ -3414,6 +3676,7 @@
           "semimajorAxis": 12193200,
           "eccentricity": 0.52,
           "inclination": 157,
+          "orbitalPeriod": 1286,
           "size": 75,
           "group": "Irregular Moons",
           "discovered": "1997",
@@ -3427,6 +3690,7 @@
           "semimajorAxis": 16221000,
           "eccentricity": 0.441,
           "inclination": 149.4,
+          "orbitalPeriod": 1974,
           "size": 25,
           "group": "Irregular Moons",
           "discovered": "1999",
@@ -3440,6 +3704,7 @@
           "semimajorAxis": 17519800,
           "eccentricity": 0.579,
           "inclination": 153.9,
+          "orbitalPeriod": 2215,
           "size": 24,
           "group": "Irregular Moons",
           "discovered": "1999",
@@ -3453,6 +3718,7 @@
           "semimajorAxis": 7951400,
           "eccentricity": 0.235,
           "inclination": 143.6,
+          "orbitalPeriod": 677,
           "size": 16,
           "group": "Irregular Moons",
           "discovered": "1999",
@@ -3466,6 +3732,7 @@
           "semimajorAxis": 8502600,
           "eccentricity": 0.22,
           "inclination": 167.1,
+          "orbitalPeriod": 749,
           "size": 9,
           "group": "Irregular Moons",
           "discovered": "2001",
@@ -3479,6 +3746,7 @@
           "semimajorAxis": 4275700,
           "eccentricity": 0.144,
           "inclination": 146.8,
+          "orbitalPeriod": 267,
           "size": 11,
           "group": "Irregular Moons",
           "discovered": "2001",
@@ -3492,6 +3760,7 @@
           "semimajorAxis": 14425000,
           "eccentricity": 0.642,
           "inclination": 60.5,
+          "orbitalPeriod": 1655,
           "size": 10,
           "group": "Irregular Moons",
           "discovered": "2003",
@@ -3505,6 +3774,7 @@
           "semimajorAxis": 20421400,
           "eccentricity": 0.395,
           "inclination": 169.2,
+          "orbitalPeriod": 2788,
           "size": 10,
           "group": "Irregular Moons",
           "discovered": "2001",
@@ -3518,6 +3788,7 @@
           "semimajorAxis": 7976600,
           "eccentricity": 0.25,
           "inclination": 143.9,
+          "orbitalPeriod": 681,
           "group": "Irregular Moons",
           "discovered": "2023",
           "discoverer": "S.S. Sheppard"
@@ -3566,6 +3837,7 @@
           "semimajorAxis": 354800,
           "eccentricity": 0,
           "inclination": 157.3,
+          "orbitalPeriod": 5.876994,
           "mass": 2.14E+22,
           "size": 1352.6,
           "density": 2.0649,
@@ -3590,6 +3862,7 @@
           "semimajorAxis": 48200,
           "eccentricity": 0,
           "inclination": 4.7,
+          "orbitalPeriod": 0.29398,
           "mass": 2.00E+17,
           "size": 29,
           "density": 1.2511,
@@ -3606,6 +3879,7 @@
           "semimajorAxis": 50100,
           "eccentricity": 0,
           "inclination": 0.2,
+          "orbitalPeriod": 0.311078,
           "mass": 4.00E+17,
           "size": 40,
           "density": 1.3184,
@@ -3622,6 +3896,7 @@
           "semimajorAxis": 52500,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.334656,
           "mass": 2.00E+18,
           "size": 74,
           "density": 1.0304,
@@ -3638,6 +3913,7 @@
           "semimajorAxis": 62000,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 0.428744,
           "mass": 4.00E+18,
           "size": 79,
           "density": 1.3777,
@@ -3654,6 +3930,7 @@
           "semimajorAxis": 73500,
           "eccentricity": 0.001,
           "inclination": 0.2,
+          "orbitalPeriod": 0.554989,
           "mass": 5.00E+18,
           "size": 96,
           "density": 1.0303,
@@ -3670,6 +3947,7 @@
           "semimajorAxis": 117600,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 1.122315,
           "mass": 5.00E+19,
           "size": 208,
           "density": 1.0269,
@@ -3686,6 +3964,7 @@
           "semimajorAxis": 105300,
           "eccentricity": 0.001,
           "inclination": 0.3,
+          "orbitalPeriod": 0.95039,
           "mass": 3.00E+16,
           "size": 17,
           "group": "Regular Moons",
@@ -3700,6 +3979,7 @@
           "semimajorAxis": 5513900,
           "eccentricity": 0.751,
           "inclination": 5.1,
+          "orbitalPeriod": 360.133039,
           "mass": 3.00E+19,
           "size": 170,
           "group": "Irregular Moons",
@@ -3715,6 +3995,7 @@
           "semimajorAxis": 16590500,
           "eccentricity": 0.521,
           "inclination": 119.6,
+          "orbitalPeriod": 1879,
           "mass": 2.00E+17,
           "size": 30,
           "group": "Irregular Moons",
@@ -3729,6 +4010,7 @@
           "semimajorAxis": 47646600,
           "eccentricity": 0.413,
           "inclination": 127.8,
+          "orbitalPeriod": 9149,
           "mass": 2.00E+16,
           "size": 20,
           "group": "Irregular Moons",
@@ -3743,6 +4025,7 @@
           "semimajorAxis": 22239900,
           "eccentricity": 0.296,
           "inclination": 50.2,
+          "orbitalPeriod": 2919,
           "mass": 1.00E+17,
           "size": 20,
           "group": "Irregular Moons",
@@ -3757,6 +4040,7 @@
           "semimajorAxis": 23499900,
           "eccentricity": 0.419,
           "inclination": 36.9,
+          "orbitalPeriod": 3168,
           "mass": 1.00E+17,
           "size": 20,
           "group": "Irregular Moons",
@@ -3771,6 +4055,7 @@
           "semimajorAxis": 49897800,
           "eccentricity": 0.455,
           "inclination": 128.4,
+          "orbitalPeriod": 9805,
           "mass": 2.00E+17,
           "size": 30,
           "group": "Irregular Moons",
@@ -3785,6 +4070,7 @@
           "semimajorAxis": 23414700,
           "eccentricity": 0.433,
           "inclination": 46.3,
+          "orbitalPeriod": 3151,
           "group": "Irregular Moons",
           "discovered": "2002",
           "discoverer": "M. Holman, J.J. Kavelaars, T. Grav, W. Fraser"
@@ -3797,6 +4083,7 @@
           "semimajorAxis": 50700200,
           "eccentricity": 0.503,
           "inclination": 135.2,
+          "orbitalPeriod": 10043,
           "group": "Irregular Moons",
           "discovered": "2021",
           "discoverer": "S.S. Sheppard, D.J. Tholen, C. Trujillo, P.S. Lykawka"
@@ -3845,6 +4132,7 @@
           "semimajorAxis": 19600,
           "eccentricity": 0,
           "inclination": 0,
+          "orbitalPeriod": 6.387222,
           "mass": 1.586E+21,
           "size": 606,
           "density": 1.7018,
@@ -3868,6 +4156,7 @@
           "semimajorAxis": 43200,
           "eccentricity": 0.025,
           "inclination": 0,
+          "orbitalPeriod": 20.16,
           "size": 5.2,
           "namesake": "the river that forms the boundary between Earth and the underworld in Greek mythology",
           "discovered": "2012",
@@ -3881,6 +4170,7 @@
           "semimajorAxis": 49300,
           "eccentricity": 0.015,
           "inclination": 0,
+          "orbitalPeriod": 24.85,
           "size": 18,
           "density": 1.84,
           "namesake": "the Greek goddess of the night",
@@ -3895,6 +4185,7 @@
           "semimajorAxis": 58300,
           "eccentricity": 0.01,
           "inclination": 0.4,
+          "orbitalPeriod": 32.17,
           "size": 6,
           "namesake": "Cerberus, the three-headed guard dog of Hades (Pluto) and the underworld",
           "discovered": "2011",
@@ -3908,6 +4199,7 @@
           "semimajorAxis": 65200,
           "eccentricity": 0.009,
           "inclination": 0.3,
+          "orbitalPeriod": 38.2,
           "size": 18.5,
           "density": 1.8078,
           "namesake": "the nine-headed underworld serpent from Greek mythology",
@@ -4103,9 +4395,12 @@
       "rank": "tertiary",
       "minorType": "MBA",
       "mass": 2.04216E+20,
+      "size": 256.5,
       "semimajorAxis": 4.14386E+8,
       "eccentricity": 0.2304,
-      "inclination": 34.92
+      "inclination": 34.92,
+      "orbitalPeriod": 1.68E+3,
+      "rotationPeriod": 7.8132214
     },
     {
       "name": "Juno",
@@ -4113,9 +4408,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 123.298,
       "semimajorAxis": 3.99426E+8,
       "eccentricity": 0.2561,
-      "inclination": 12.99
+      "inclination": 12.99,
+      "orbitalPeriod": 1.59E+3,
+      "rotationPeriod": 7.21
     },
     {
       "name": "Vesta",
@@ -4124,9 +4422,12 @@
       "rank": "tertiary",
       "minorType": "MBA",
       "mass": 2.59027E+20,
+      "size": 262.7,
       "semimajorAxis": 3.53201E+8,
       "eccentricity": 0.0900,
-      "inclination": 7.14
+      "inclination": 7.14,
+      "orbitalPeriod": 1.33E+3,
+      "rotationPeriod": 5.34212766
     },
     {
       "name": "Astraea",
@@ -4134,9 +4435,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 53.3495,
       "semimajorAxis": 3.85364E+8,
       "eccentricity": 0.1873,
-      "inclination": 5.36
+      "inclination": 5.36,
+      "orbitalPeriod": 1.51E+3,
+      "rotationPeriod": 16.806
     },
     {
       "name": "Hebe",
@@ -4144,9 +4448,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 92.59,
       "semimajorAxis": 3.62924E+8,
       "eccentricity": 0.2024,
-      "inclination": 14.73
+      "inclination": 14.73,
+      "orbitalPeriod": 1.38E+3,
+      "rotationPeriod": 7.2745
     },
     {
       "name": "Iris",
@@ -4154,9 +4461,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 99.915,
       "semimajorAxis": 3.56941E+8,
       "eccentricity": 0.2299,
-      "inclination": 5.52
+      "inclination": 5.52,
+      "orbitalPeriod": 1.35E+3,
+      "rotationPeriod": 7.139
     },
     {
       "name": "Flora",
@@ -4164,9 +4474,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 73.7455,
       "semimajorAxis": 3.29265E+8,
       "eccentricity": 0.1566,
-      "inclination": 5.89
+      "inclination": 5.89,
+      "orbitalPeriod": 1.19E+3,
+      "rotationPeriod": 12.865
     },
     {
       "name": "Metis",
@@ -4174,9 +4487,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 95,
       "semimajorAxis": 3.56941E+8,
       "eccentricity": 0.1228,
-      "inclination": 5.58
+      "inclination": 5.58,
+      "orbitalPeriod": 1.35E+3,
+      "rotationPeriod": 5.079
     },
     {
       "name": "Hygiea",
@@ -4185,9 +4501,12 @@
       "rank": "quaternary",
       "minorType": "MBA",
       "mass": "7.",
+      "size": 203.56,
       "semimajorAxis": 4.69887E+8,
       "eccentricity": 0.1104,
-      "inclination": 3.83
+      "inclination": 3.83,
+      "orbitalPeriod": 2.03E+3,
+      "rotationPeriod": 13.828
     },
     {
       "name": "Parthenope",
@@ -4195,9 +4514,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 71.4435,
       "semimajorAxis": 3.66964E+8,
       "eccentricity": 0.0994,
-      "inclination": 4.63
+      "inclination": 4.63,
+      "orbitalPeriod": 1.4E+3,
+      "rotationPeriod": 13.7204
     },
     {
       "name": "Victoria",
@@ -4205,9 +4527,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 57.5435,
       "semimajorAxis": 3.49161E+8,
       "eccentricity": 0.2201,
-      "inclination": 8.37
+      "inclination": 8.37,
+      "orbitalPeriod": 1.3E+3,
+      "rotationPeriod": 8.6599
     },
     {
       "name": "Egeria",
@@ -4215,9 +4540,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 101.318,
       "semimajorAxis": 3.85663E+8,
       "eccentricity": 0.0854,
-      "inclination": 16.53
+      "inclination": 16.53,
+      "orbitalPeriod": 1.51E+3,
+      "rotationPeriod": 7.045
     },
     {
       "name": "Irene",
@@ -4225,9 +4553,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 76,
       "semimajorAxis": 3.87458E+8,
       "eccentricity": 0.1630,
-      "inclination": 9.13
+      "inclination": 9.13,
+      "orbitalPeriod": 1.52E+3,
+      "rotationPeriod": 15.028
     },
     {
       "name": "Eunomia",
@@ -4235,9 +4566,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 115.844,
       "semimajorAxis": 3.95537E+8,
       "eccentricity": 0.1876,
-      "inclination": 11.76
+      "inclination": 11.76,
+      "orbitalPeriod": 1.57E+3,
+      "rotationPeriod": 6.083
     },
     {
       "name": "Psyche",
@@ -4246,9 +4580,12 @@
       "rank": "quaternary",
       "minorType": "MBA",
       "mass": 2.29238E+19,
+      "size": 111,
       "semimajorAxis": 4.37125E+8,
       "eccentricity": 0.1341,
-      "inclination": 3.10
+      "inclination": 3.10,
+      "orbitalPeriod": 1.82E+3,
+      "rotationPeriod": 4.196
     },
     {
       "name": "Thetis",
@@ -4256,9 +4593,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 42.4495,
       "semimajorAxis": 3.69656E+8,
       "eccentricity": 0.1322,
-      "inclination": 5.59
+      "inclination": 5.59,
+      "orbitalPeriod": 1.42E+3,
+      "rotationPeriod": 12.27048
     },
     {
       "name": "Melpomene",
@@ -4266,9 +4606,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 69.797,
       "semimajorAxis": 3.43327E+8,
       "eccentricity": 0.2183,
-      "inclination": 10.13
+      "inclination": 10.13,
+      "orbitalPeriod": 1.27E+3,
+      "rotationPeriod": 11.57
     },
     {
       "name": "Fortuna",
@@ -4276,9 +4619,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 100,
       "semimajorAxis": 3.65318E+8,
       "eccentricity": 0.1575,
-      "inclination": 1.57
+      "inclination": 1.57,
+      "orbitalPeriod": 1.39E+3,
+      "rotationPeriod": 7.4432
     },
     {
       "name": "Massalia",
@@ -4286,9 +4632,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 67.84,
       "semimajorAxis": 3.60232E+8,
       "eccentricity": 0.1437,
-      "inclination": 0.71
+      "inclination": 0.71,
+      "orbitalPeriod": 1.36E+3,
+      "rotationPeriod": 8.098
     },
     {
       "name": "Lutetia",
@@ -4296,9 +4645,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 47.88,
       "semimajorAxis": 3.64121E+8,
       "eccentricity": 0.1647,
-      "inclination": 3.06
+      "inclination": 3.06,
+      "orbitalPeriod": 1.39E+3,
+      "rotationPeriod": 8.1655
     },
     {
       "name": "Kalliope",
@@ -4307,9 +4659,12 @@
       "rank": "quaternary",
       "minorType": "MBA",
       "mass": 7.35658E+18,
+      "size": 83.768,
       "semimajorAxis": 4.35479E+8,
       "eccentricity": 0.0989,
-      "inclination": 13.70
+      "inclination": 13.70,
+      "orbitalPeriod": 1.81E+3,
+      "rotationPeriod": 4.1483
     },
     {
       "name": "Thalia",
@@ -4317,9 +4672,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 53.765,
       "semimajorAxis": 3.93293E+8,
       "eccentricity": 0.2311,
-      "inclination": 10.11
+      "inclination": 10.11,
+      "orbitalPeriod": 1.56E+3,
+      "rotationPeriod": 12.312
     },
     {
       "name": "Themis",
@@ -4327,9 +4685,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 99,
       "semimajorAxis": 4.70186E+8,
       "eccentricity": 0.1153,
-      "inclination": 0.74
+      "inclination": 0.74,
+      "orbitalPeriod": 2.04E+3,
+      "rotationPeriod": 8.374
     },
     {
       "name": "Phocaea",
@@ -4337,9 +4698,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 30.527,
       "semimajorAxis": 3.59035E+8,
       "eccentricity": 0.2542,
-      "inclination": 21.61
+      "inclination": 21.61,
+      "orbitalPeriod": 1.36E+3,
+      "rotationPeriod": 9.9341
     },
     {
       "name": "Proserpina",
@@ -4347,9 +4711,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 47.4,
       "semimajorAxis": 3.97631E+8,
       "eccentricity": 0.0882,
-      "inclination": 3.56
+      "inclination": 3.56,
+      "orbitalPeriod": 1.58E+3,
+      "rotationPeriod": 13.11
     },
     {
       "name": "Euterpe",
@@ -4357,9 +4724,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 48,
       "semimajorAxis": 3.51256E+8,
       "eccentricity": 0.1714,
-      "inclination": 1.58
+      "inclination": 1.58,
+      "orbitalPeriod": 1.31E+3,
+      "rotationPeriod": 10.4082
     },
     {
       "name": "Bellona",
@@ -4367,9 +4737,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 60.45,
       "semimajorAxis": 4.15583E+8,
       "eccentricity": 0.1493,
-      "inclination": 9.42
+      "inclination": 9.42,
+      "orbitalPeriod": 1.69E+3,
+      "rotationPeriod": 15.706
     },
     {
       "name": "Amphitrite",
@@ -4377,9 +4750,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 94.7795,
       "semimajorAxis": 3.82073E+8,
       "eccentricity": 0.0736,
-      "inclination": 6.08
+      "inclination": 6.08,
+      "orbitalPeriod": 1.49E+3,
+      "rotationPeriod": 5.3921
     },
     {
       "name": "Urania",
@@ -4387,9 +4763,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 46.3935,
       "semimajorAxis": 3.53949E+8,
       "eccentricity": 0.1269,
-      "inclination": 2.09
+      "inclination": 2.09,
+      "orbitalPeriod": 1.33E+3,
+      "rotationPeriod": 13.686
     },
     {
       "name": "Euphrosyne",
@@ -4397,9 +4776,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 133.54,
       "semimajorAxis": 4.72729E+8,
       "eccentricity": 0.2160,
-      "inclination": 26.32
+      "inclination": 26.32,
+      "orbitalPeriod": 2.05E+3,
+      "rotationPeriod": 5.53
     },
     {
       "name": "Pomona",
@@ -4407,9 +4789,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 40.38,
       "semimajorAxis": 3.8701E+8,
       "eccentricity": 0.0816,
-      "inclination": 5.52
+      "inclination": 5.52,
+      "orbitalPeriod": 1.52E+3,
+      "rotationPeriod": 9.448
     },
     {
       "name": "Fides",
@@ -4417,9 +4802,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 54.175,
       "semimajorAxis": 3.95238E+8,
       "eccentricity": 0.1750,
-      "inclination": 3.07
+      "inclination": 3.07,
+      "orbitalPeriod": 1.57E+3,
+      "rotationPeriod": 7.3335
     },
     {
       "name": "Leda",
@@ -4427,9 +4815,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 46.1275,
       "semimajorAxis": 4.10197E+8,
       "eccentricity": 0.1509,
-      "inclination": 6.95
+      "inclination": 6.95,
+      "orbitalPeriod": 1.66E+3,
+      "rotationPeriod": 12.838
     },
     {
       "name": "Laetitia",
@@ -4437,9 +4828,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 89.742,
       "semimajorAxis": 4.14087E+8,
       "eccentricity": 0.1120,
-      "inclination": 10.37
+      "inclination": 10.37,
+      "orbitalPeriod": 1.68E+3,
+      "rotationPeriod": 5.138
     },
     {
       "name": "Harmonia",
@@ -4447,9 +4841,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 55.6255,
       "semimajorAxis": 3.39138E+8,
       "eccentricity": 0.0461,
-      "inclination": 4.26
+      "inclination": 4.26,
+      "orbitalPeriod": 1.25E+3,
+      "rotationPeriod": 8.91
     },
     {
       "name": "Daphne",
@@ -4457,9 +4854,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 102.748,
       "semimajorAxis": 4.14237E+8,
       "eccentricity": 0.2717,
-      "inclination": 15.74
+      "inclination": 15.74,
+      "orbitalPeriod": 1.68E+3,
+      "rotationPeriod": 5.988
     },
     {
       "name": "Isis",
@@ -4467,9 +4867,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 55.4985,
       "semimajorAxis": 3.65468E+8,
       "eccentricity": 0.2220,
-      "inclination": 8.51
+      "inclination": 8.51,
+      "orbitalPeriod": 1.39E+3,
+      "rotationPeriod": 13.59
     },
     {
       "name": "Ariadne",
@@ -4477,9 +4880,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 35.67,
       "semimajorAxis": 3.29564E+8,
       "eccentricity": 0.1685,
-      "inclination": 3.47
+      "inclination": 3.47,
+      "orbitalPeriod": 1.19E+3,
+      "rotationPeriod": 5.76218
     },
     {
       "name": "Nysa",
@@ -4487,9 +4893,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 35.32,
       "semimajorAxis": 3.62326E+8,
       "eccentricity": 0.1496,
-      "inclination": 3.71
+      "inclination": 3.71,
+      "orbitalPeriod": 1.38E+3,
+      "rotationPeriod": 6.422
     },
     {
       "name": "Eugenia",
@@ -4497,9 +4906,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 101.163,
       "semimajorAxis": 4.06906E+8,
       "eccentricity": 0.0830,
-      "inclination": 6.61
+      "inclination": 6.61,
+      "orbitalPeriod": 1.64E+3,
+      "rotationPeriod": 5.699
     },
     {
       "name": "Aglaja",
@@ -4507,9 +4919,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 84.087,
       "semimajorAxis": 4.3159E+8,
       "eccentricity": 0.1310,
-      "inclination": 4.97
+      "inclination": 4.97,
+      "orbitalPeriod": 1.79E+3,
+      "rotationPeriod": 13.178
     },
     {
       "name": "Doris",
@@ -4517,9 +4932,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 108.237,
       "semimajorAxis": 4.65549E+8,
       "eccentricity": 0.0665,
-      "inclination": 6.56
+      "inclination": 6.56,
+      "orbitalPeriod": 2E+3,
+      "rotationPeriod": 11.89
     },
     {
       "name": "Pales",
@@ -4527,9 +4945,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 83.126,
       "semimajorAxis": 4.63604E+8,
       "eccentricity": 0.2216,
-      "inclination": 3.20
+      "inclination": 3.20,
+      "orbitalPeriod": 1.99E+3,
+      "rotationPeriod": 20.705
     },
     {
       "name": "Nemausa",
@@ -4537,9 +4958,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 69.0795,
       "semimajorAxis": 3.53949E+8,
       "eccentricity": 0.0661,
-      "inclination": 9.97
+      "inclination": 9.97,
+      "orbitalPeriod": 1.33E+3,
+      "rotationPeriod": 7.783
     },
     {
       "name": "Europa",
@@ -4547,9 +4971,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 151.959,
       "semimajorAxis": 4.62557E+8,
       "eccentricity": 0.1117,
-      "inclination": 7.48
+      "inclination": 7.48,
+      "orbitalPeriod": 1.99E+3,
+      "rotationPeriod": 5.6304
     },
     {
       "name": "Alexandra",
@@ -4557,9 +4984,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 80.06,
       "semimajorAxis": 4.05859E+8,
       "eccentricity": 0.1969,
-      "inclination": 11.80
+      "inclination": 11.80,
+      "orbitalPeriod": 1.63E+3,
+      "rotationPeriod": 7.024
     },
     {
       "name": "Pandora",
@@ -4567,9 +4997,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 42.397,
       "semimajorAxis": 4.12741E+8,
       "eccentricity": 0.1450,
-      "inclination": 7.18
+      "inclination": 7.18,
+      "orbitalPeriod": 1.67E+3,
+      "rotationPeriod": 4.804
     },
     {
       "name": "Mnemosyne",
@@ -4577,9 +5010,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 56.295,
       "semimajorAxis": 4.71981E+8,
       "eccentricity": 0.1084,
-      "inclination": 15.24
+      "inclination": 15.24,
+      "orbitalPeriod": 2.05E+3,
+      "rotationPeriod": 25.324
     },
     {
       "name": "Elpis",
@@ -4587,9 +5023,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 82.5595,
       "semimajorAxis": 4.06009E+8,
       "eccentricity": 0.1168,
-      "inclination": 8.65
+      "inclination": 8.65,
+      "orbitalPeriod": 1.63E+3,
+      "rotationPeriod": 13.671
     },
     {
       "name": "Danae",
@@ -4597,9 +5036,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 42.9685,
       "semimajorAxis": 4.46699E+8,
       "eccentricity": 0.1641,
-      "inclination": 18.20
+      "inclination": 18.20,
+      "orbitalPeriod": 1.88E+3,
+      "rotationPeriod": 11.45
     },
     {
       "name": "Ausonia",
@@ -4607,9 +5049,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 58.022,
       "semimajorAxis": 3.58287E+8,
       "eccentricity": 0.1282,
-      "inclination": 5.77
+      "inclination": 5.77,
+      "orbitalPeriod": 1.35E+3,
+      "rotationPeriod": 9.298
     },
     {
       "name": "Angelina",
@@ -4617,9 +5062,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 29.146,
       "semimajorAxis": 4.01221E+8,
       "eccentricity": 0.1263,
-      "inclination": 1.31
+      "inclination": 1.31,
+      "orbitalPeriod": 1.6E+3,
+      "rotationPeriod": 8.752
     },
     {
       "name": "Cybele",
@@ -4627,9 +5075,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 118.63,
       "semimajorAxis": 5.10578E+8,
       "eccentricity": 0.1265,
-      "inclination": 3.56
+      "inclination": 3.56,
+      "orbitalPeriod": 2.3E+3,
+      "rotationPeriod": 6.0814
     },
     {
       "name": "Asia",
@@ -4637,9 +5088,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 28.1545,
       "semimajorAxis": 3.62476E+8,
       "eccentricity": 0.1846,
-      "inclination": 6.03
+      "inclination": 6.03,
+      "orbitalPeriod": 1.38E+3,
+      "rotationPeriod": 15.853
     },
     {
       "name": "Leto",
@@ -4647,9 +5101,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 61.2545,
       "semimajorAxis": 4.16331E+8,
       "eccentricity": 0.1845,
-      "inclination": 7.96
+      "inclination": 7.96,
+      "orbitalPeriod": 1.7E+3,
+      "rotationPeriod": 14.848
     },
     {
       "name": "Hesperia",
@@ -4657,9 +5114,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 69.065,
       "semimajorAxis": 4.45802E+8,
       "eccentricity": 0.1698,
-      "inclination": 8.59
+      "inclination": 8.59,
+      "orbitalPeriod": 1.88E+3,
+      "rotationPeriod": 5.655
     },
     {
       "name": "Panopaea",
@@ -4667,9 +5127,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 63.9555,
       "semimajorAxis": 3.91049E+8,
       "eccentricity": 0.1827,
-      "inclination": 11.60
+      "inclination": 11.60,
+      "orbitalPeriod": 1.54E+3,
+      "rotationPeriod": 15.8052
     },
     {
       "name": "Niobe",
@@ -4677,9 +5140,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 41.71,
       "semimajorAxis": 4.11993E+8,
       "eccentricity": 0.1768,
-      "inclination": 23.24
+      "inclination": 23.24,
+      "orbitalPeriod": 1.67E+3,
+      "rotationPeriod": 35.864
     },
     {
       "name": "Freia",
@@ -4687,9 +5153,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 72.7115,
       "semimajorAxis": 5.10129E+8,
       "eccentricity": 0.1675,
-      "inclination": 2.12
+      "inclination": 2.12,
+      "orbitalPeriod": 2.3E+3,
+      "rotationPeriod": 9.973
     },
     {
       "name": "Diana",
@@ -4697,9 +5166,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 60.3,
       "semimajorAxis": 3.92246E+8,
       "eccentricity": 0.2034,
-      "inclination": 8.68
+      "inclination": 8.68,
+      "orbitalPeriod": 1.55E+3,
+      "rotationPeriod": 7.2991
     },
     {
       "name": "Eurynome",
@@ -4707,9 +5179,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 31.7395,
       "semimajorAxis": 3.65767E+8,
       "eccentricity": 0.1912,
-      "inclination": 4.61
+      "inclination": 4.61,
+      "orbitalPeriod": 1.4E+3,
+      "rotationPeriod": 5.978
     },
     {
       "name": "Sappho",
@@ -4717,9 +5192,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 34.2815,
       "semimajorAxis": 3.43477E+8,
       "eccentricity": 0.1997,
-      "inclination": 8.68
+      "inclination": 8.68,
+      "orbitalPeriod": 1.27E+3,
+      "rotationPeriod": 14.03
     },
     {
       "name": "Alkmene",
@@ -4727,9 +5205,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 28.8105,
       "semimajorAxis": 4.13189E+8,
       "eccentricity": 0.2209,
-      "inclination": 2.83
+      "inclination": 2.83,
+      "orbitalPeriod": 1.68E+3,
+      "rotationPeriod": 12.999
     },
     {
       "name": "Io",
@@ -4737,9 +5218,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 77.395,
       "semimajorAxis": 3.97033E+8,
       "eccentricity": 0.1934,
-      "inclination": 11.96
+      "inclination": 11.96,
+      "orbitalPeriod": 1.58E+3,
+      "rotationPeriod": 6.875
     },
     {
       "name": "Sylvia",
@@ -4747,9 +5231,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 126.525,
       "semimajorAxis": 5.20152E+8,
       "eccentricity": 0.0939,
-      "inclination": 10.88
+      "inclination": 10.88,
+      "orbitalPeriod": 2.37E+3,
+      "rotationPeriod": 5.184
     },
     {
       "name": "Thisbe",
@@ -4757,9 +5244,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 116,
       "semimajorAxis": 4.14536E+8,
       "eccentricity": 0.1634,
-      "inclination": 5.22
+      "inclination": 5.22,
+      "orbitalPeriod": 1.69E+3,
+      "rotationPeriod": 6.042
     },
     {
       "name": "Julia",
@@ -4767,9 +5257,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 72.7415,
       "semimajorAxis": 3.81624E+8,
       "eccentricity": 0.1840,
-      "inclination": 16.12
+      "inclination": 16.12,
+      "orbitalPeriod": 1.49E+3,
+      "rotationPeriod": 11.387
     },
     {
       "name": "Antiope",
@@ -4777,9 +5270,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 57.987,
       "semimajorAxis": 4.70485E+8,
       "eccentricity": 0.1711,
-      "inclination": 2.21
+      "inclination": 2.21,
+      "orbitalPeriod": 2.04E+3,
+      "rotationPeriod": 16.509
     },
     {
       "name": "Undina",
@@ -4787,9 +5283,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 63.21,
       "semimajorAxis": 4.7632E+8,
       "eccentricity": 0.1051,
-      "inclination": 9.92
+      "inclination": 9.92,
+      "orbitalPeriod": 2.08E+3,
+      "rotationPeriod": 15.941
     },
     {
       "name": "Minerva",
@@ -4797,9 +5296,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 77.0775,
       "semimajorAxis": 4.12142E+8,
       "eccentricity": 0.1422,
-      "inclination": 8.54
+      "inclination": 8.54,
+      "orbitalPeriod": 1.67E+3,
+      "rotationPeriod": 5.982
     },
     {
       "name": "Aurora",
@@ -4807,9 +5309,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 102.445,
       "semimajorAxis": 4.71832E+8,
       "eccentricity": 0.0957,
-      "inclination": 7.97
+      "inclination": 7.97,
+      "orbitalPeriod": 2.05E+3,
+      "rotationPeriod": 7.22
     },
     {
       "name": "Arethusa",
@@ -4817,9 +5322,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 73.9845,
       "semimajorAxis": 4.58368E+8,
       "eccentricity": 0.1530,
-      "inclination": 13.01
+      "inclination": 13.01,
+      "orbitalPeriod": 1.96E+3,
+      "rotationPeriod": 8.705
     },
     {
       "name": "Aegle",
@@ -4827,9 +5335,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 88.887,
       "semimajorAxis": 4.56274E+8,
       "eccentricity": 0.1419,
-      "inclination": 15.98
+      "inclination": 15.98,
+      "orbitalPeriod": 1.95E+3,
+      "rotationPeriod": 13.868
     },
     {
       "name": "Klotho",
@@ -4837,9 +5348,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 50.3585,
       "semimajorAxis": 3.99127E+8,
       "eccentricity": 0.2578,
-      "inclination": 11.78
+      "inclination": 11.78,
+      "orbitalPeriod": 1.59E+3,
+      "rotationPeriod": 35.15
     },
     {
       "name": "Hekate",
@@ -4847,9 +5361,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 42.867,
       "semimajorAxis": 4.62108E+8,
       "eccentricity": 0.1681,
-      "inclination": 6.43
+      "inclination": 6.43,
+      "orbitalPeriod": 1.98E+3,
+      "rotationPeriod": 27.066
     },
     {
       "name": "Helena",
@@ -4857,9 +5374,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 32.92,
       "semimajorAxis": 3.86411E+8,
       "eccentricity": 0.1407,
-      "inclination": 10.19
+      "inclination": 10.19,
+      "orbitalPeriod": 1.52E+3,
+      "rotationPeriod": 23.08
     },
     {
       "name": "Hera",
@@ -4867,9 +5387,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 41.954,
       "semimajorAxis": 4.04513E+8,
       "eccentricity": 0.0796,
-      "inclination": 5.42
+      "inclination": 5.42,
+      "orbitalPeriod": 1.62E+3,
+      "rotationPeriod": 23.74
     },
     {
       "name": "Dione",
@@ -4877,9 +5400,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 103.934,
       "semimajorAxis": 4.7617E+8,
       "eccentricity": 0.1591,
-      "inclination": 4.58
+      "inclination": 4.58,
+      "orbitalPeriod": 2.07E+3,
+      "rotationPeriod": 16.21
     },
     {
       "name": "Camilla",
@@ -4888,9 +5414,12 @@
       "rank": "quaternary",
       "minorType": "OMB",
       "mass": 1.11997E+19,
+      "size": 105.185,
       "semimajorAxis": 5.21648E+8,
       "eccentricity": 0.0655,
-      "inclination": 10.00
+      "inclination": 10.00,
+      "orbitalPeriod": 2.38E+3,
+      "rotationPeriod": 4.844
     },
     {
       "name": "Hecuba",
@@ -4898,9 +5427,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 37.749,
       "semimajorAxis": 4.83351E+8,
       "eccentricity": 0.0630,
-      "inclination": 4.21
+      "inclination": 4.21,
+      "orbitalPeriod": 2.12E+3,
+      "rotationPeriod": 14.256
     },
     {
       "name": "Lydia",
@@ -4908,9 +5440,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 43.045,
       "semimajorAxis": 4.08851E+8,
       "eccentricity": 0.0794,
-      "inclination": 5.96
+      "inclination": 5.96,
+      "orbitalPeriod": 1.65E+3,
+      "rotationPeriod": 10.927
     },
     {
       "name": "Ate",
@@ -4918,9 +5453,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 63.172,
       "semimajorAxis": 3.88057E+8,
       "eccentricity": 0.1032,
-      "inclination": 4.93
+      "inclination": 4.93,
+      "orbitalPeriod": 1.53E+3,
+      "rotationPeriod": 22.072
     },
     {
       "name": "Kassandra",
@@ -4928,9 +5466,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 47.089,
       "semimajorAxis": 4.00324E+8,
       "eccentricity": 0.1386,
-      "inclination": 4.94
+      "inclination": 4.94,
+      "orbitalPeriod": 1.6E+3,
+      "rotationPeriod": 10.7431
     },
     {
       "name": "Thyra",
@@ -4938,9 +5479,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 39.915,
       "semimajorAxis": 3.56043E+8,
       "eccentricity": 0.1925,
-      "inclination": 11.59
+      "inclination": 11.59,
+      "orbitalPeriod": 1.34E+3,
+      "rotationPeriod": 7.241
     },
     {
       "name": "Sirona",
@@ -4948,9 +5492,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 35.85,
       "semimajorAxis": 4.14536E+8,
       "eccentricity": 0.1390,
-      "inclination": 3.56
+      "inclination": 3.56,
+      "orbitalPeriod": 1.68E+3,
+      "rotationPeriod": 12.028
     },
     {
       "name": "Lomia",
@@ -4958,9 +5505,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 104.487,
       "semimajorAxis": 4.47447E+8,
       "eccentricity": 0.0232,
-      "inclination": 14.92
+      "inclination": 14.92,
+      "orbitalPeriod": 1.89E+3,
+      "rotationPeriod": 9.127
     },
     {
       "name": "Althaea",
@@ -4968,9 +5518,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 28.65,
       "semimajorAxis": 3.86112E+8,
       "eccentricity": 0.0821,
-      "inclination": 5.79
+      "inclination": 5.79,
+      "orbitalPeriod": 1.51E+3,
+      "rotationPeriod": 11.484
     },
     {
       "name": "Lachesis",
@@ -4978,9 +5531,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 77.566,
       "semimajorAxis": 4.67643E+8,
       "eccentricity": 0.0488,
-      "inclination": 6.93
+      "inclination": 6.93,
+      "orbitalPeriod": 2.02E+3,
+      "rotationPeriod": 46.551
     },
     {
       "name": "Hermione",
@@ -4988,9 +5544,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 104.5,
       "semimajorAxis": 5.16861E+8,
       "eccentricity": 0.1252,
-      "inclination": 7.57
+      "inclination": 7.57,
+      "orbitalPeriod": 2.35E+3,
+      "rotationPeriod": 5.55128
     },
     {
       "name": "Gerda",
@@ -4998,9 +5557,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 35.338,
       "semimajorAxis": 4.83351E+8,
       "eccentricity": 0.0244,
-      "inclination": 1.64
+      "inclination": 1.64,
+      "orbitalPeriod": 2.12E+3,
+      "rotationPeriod": 10.685
     },
     {
       "name": "Alkeste",
@@ -5008,9 +5570,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 44.324,
       "semimajorAxis": 3.93293E+8,
       "eccentricity": 0.0783,
-      "inclination": 2.96
+      "inclination": 2.96,
+      "orbitalPeriod": 1.56E+3,
+      "rotationPeriod": 9.906
     },
     {
       "name": "Nemesis",
@@ -5018,9 +5583,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 81.2575,
       "semimajorAxis": 4.11245E+8,
       "eccentricity": 0.1274,
-      "inclination": 6.25
+      "inclination": 6.25,
+      "orbitalPeriod": 1.66E+3,
+      "rotationPeriod": 38.9325
     },
     {
       "name": "Antigone",
@@ -5028,9 +5596,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 56.5,
       "semimajorAxis": 4.29196E+8,
       "eccentricity": 0.2130,
-      "inclination": 12.27
+      "inclination": 12.27,
+      "orbitalPeriod": 1.77E+3,
+      "rotationPeriod": 4.9572
     },
     {
       "name": "Elektra",
@@ -5038,9 +5609,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 90.326,
       "semimajorAxis": 4.67493E+8,
       "eccentricity": 0.2096,
-      "inclination": 22.78
+      "inclination": 22.78,
+      "orbitalPeriod": 2.02E+3,
+      "rotationPeriod": 5.225
     },
     {
       "name": "Cyrene",
@@ -5048,9 +5622,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 36.0875,
       "semimajorAxis": 4.58667E+8,
       "eccentricity": 0.1334,
-      "inclination": 7.21
+      "inclination": 7.21,
+      "orbitalPeriod": 1.96E+3,
+      "rotationPeriod": 12.708
     },
     {
       "name": "Hertha",
@@ -5058,9 +5635,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 39.62,
       "semimajorAxis": 3.63074E+8,
       "eccentricity": 0.2081,
-      "inclination": 2.30
+      "inclination": 2.30,
+      "orbitalPeriod": 1.38E+3,
+      "rotationPeriod": 8.403
     },
     {
       "name": "Meliboea",
@@ -5068,9 +5648,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 64.339,
       "semimajorAxis": 4.67194E+8,
       "eccentricity": 0.2110,
-      "inclination": 13.43
+      "inclination": 13.43,
+      "orbitalPeriod": 2.02E+3,
+      "rotationPeriod": 25.676
     },
     {
       "name": "Juewa",
@@ -5078,9 +5661,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 75.558,
       "semimajorAxis": 4.1663E+8,
       "eccentricity": 0.1701,
-      "inclination": 10.87
+      "inclination": 10.87,
+      "orbitalPeriod": 1.7E+3,
+      "rotationPeriod": 20.991
     },
     {
       "name": "Siwa",
@@ -5088,9 +5674,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 54.895,
       "semimajorAxis": 4.09001E+8,
       "eccentricity": 0.2162,
-      "inclination": 3.19
+      "inclination": 3.19,
+      "orbitalPeriod": 1.65E+3,
+      "rotationPeriod": 34.445
     },
     {
       "name": "Lumen",
@@ -5098,9 +5687,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 58.958,
       "semimajorAxis": 3.98978E+8,
       "eccentricity": 0.2132,
-      "inclination": 11.89
+      "inclination": 11.89,
+      "orbitalPeriod": 1.59E+3,
+      "rotationPeriod": 19.87
     },
     {
       "name": "Vibilia",
@@ -5108,9 +5700,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 71.19,
       "semimajorAxis": 3.96883E+8,
       "eccentricity": 0.2358,
-      "inclination": 4.82
+      "inclination": 4.82,
+      "orbitalPeriod": 1.58E+3,
+      "rotationPeriod": 13.819
     },
     {
       "name": "Adeona",
@@ -5118,9 +5713,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 63.8915,
       "semimajorAxis": 3.99726E+8,
       "eccentricity": 0.1472,
-      "inclination": 12.62
+      "inclination": 12.62,
+      "orbitalPeriod": 1.59E+3,
+      "rotationPeriod": 15.071
     },
     {
       "name": "Gallia",
@@ -5128,9 +5726,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 48.875,
       "semimajorAxis": 4.14386E+8,
       "eccentricity": 0.1882,
-      "inclination": 25.29
+      "inclination": 25.29,
+      "orbitalPeriod": 1.68E+3,
+      "rotationPeriod": 20.664
     },
     {
       "name": "Atala",
@@ -5138,9 +5739,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 29.482,
       "semimajorAxis": 4.69289E+8,
       "eccentricity": 0.0825,
-      "inclination": 12.12
+      "inclination": 12.12,
+      "orbitalPeriod": 2.03E+3,
+      "rotationPeriod": 6.246
     },
     {
       "name": "Hilda",
@@ -5148,9 +5752,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 85.315,
       "semimajorAxis": 5.94053E+8,
       "eccentricity": 0.1387,
-      "inclination": 7.83
+      "inclination": 7.83,
+      "orbitalPeriod": 2.89E+3,
+      "rotationPeriod": 5.9585
     },
     {
       "name": "Bertha",
@@ -5158,9 +5765,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 96.3055,
       "semimajorAxis": 4.77816E+8,
       "eccentricity": 0.0769,
-      "inclination": 21.02
+      "inclination": 21.02,
+      "orbitalPeriod": 2.09E+3,
+      "rotationPeriod": 25.224
     },
     {
       "name": "Aemilia",
@@ -5168,9 +5778,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 62.618,
       "semimajorAxis": 4.64801E+8,
       "eccentricity": 0.0994,
-      "inclination": 6.11
+      "inclination": 6.11,
+      "orbitalPeriod": 2E+3,
+      "rotationPeriod": 24.476
     },
     {
       "name": "Loreley",
@@ -5178,9 +5791,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 90.0415,
       "semimajorAxis": 4.67793E+8,
       "eccentricity": 0.0836,
-      "inclination": 11.23
+      "inclination": 11.23,
+      "orbitalPeriod": 2.02E+3,
+      "rotationPeriod": 7.226
     },
     {
       "name": "Sibylla",
@@ -5188,9 +5804,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 72.683,
       "semimajorAxis": 5.04743E+8,
       "eccentricity": 0.0748,
-      "inclination": 4.67
+      "inclination": 4.67,
+      "orbitalPeriod": 2.26E+3,
+      "rotationPeriod": 47.009
     },
     {
       "name": "Ino",
@@ -5198,9 +5817,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 62.9105,
       "semimajorAxis": 4.10048E+8,
       "eccentricity": 0.2098,
-      "inclination": 14.20
+      "inclination": 14.20,
+      "orbitalPeriod": 1.66E+3,
+      "rotationPeriod": 6.15
     },
     {
       "name": "Phaedra",
@@ -5208,9 +5830,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 32.4245,
       "semimajorAxis": 4.2785E+8,
       "eccentricity": 0.1449,
-      "inclination": 12.10
+      "inclination": 12.10,
+      "orbitalPeriod": 1.77E+3,
+      "rotationPeriod": 5.744
     },
     {
       "name": "Iduna",
@@ -5218,9 +5843,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 53.488,
       "semimajorAxis": 4.75572E+8,
       "eccentricity": 0.1719,
-      "inclination": 22.68
+      "inclination": 22.68,
+      "orbitalPeriod": 2.07E+3,
+      "rotationPeriod": 11.2877
     },
     {
       "name": "Klytaemnestra",
@@ -5228,9 +5856,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 34.973,
       "semimajorAxis": 4.44904E+8,
       "eccentricity": 0.1096,
-      "inclination": 7.82
+      "inclination": 7.82,
+      "orbitalPeriod": 1.87E+3,
+      "rotationPeriod": 11.173
     },
     {
       "name": "Eucharis",
@@ -5238,9 +5869,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 57.6915,
       "semimajorAxis": 4.67493E+8,
       "eccentricity": 0.2082,
-      "inclination": 18.90
+      "inclination": 18.90,
+      "orbitalPeriod": 2.02E+3,
+      "rotationPeriod": 52.23
     },
     {
       "name": "Dejopeja",
@@ -5248,9 +5882,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 31.2415,
       "semimajorAxis": 4.78115E+8,
       "eccentricity": 0.0595,
-      "inclination": 1.13
+      "inclination": 1.13,
+      "orbitalPeriod": 2.09E+3,
+      "rotationPeriod": 6.4416
     },
     {
       "name": "Eunike",
@@ -5258,9 +5895,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 80.232,
       "semimajorAxis": 4.09749E+8,
       "eccentricity": 0.1271,
-      "inclination": 23.25
+      "inclination": 23.25,
+      "orbitalPeriod": 1.66E+3,
+      "rotationPeriod": 21.797
     },
     {
       "name": "Lamberta",
@@ -5268,9 +5908,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 73.647,
       "semimajorAxis": 4.08103E+8,
       "eccentricity": 0.2400,
-      "inclination": 10.58
+      "inclination": 10.58,
+      "orbitalPeriod": 1.65E+3,
+      "rotationPeriod": 10.67
     },
     {
       "name": "Ismene",
@@ -5278,9 +5921,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 79.5,
       "semimajorAxis": 5.97643E+8,
       "eccentricity": 0.1683,
-      "inclination": 6.17
+      "inclination": 6.17,
+      "orbitalPeriod": 2.92E+3,
+      "rotationPeriod": 6.521
     },
     {
       "name": "Nausikaa",
@@ -5288,9 +5934,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 49.388,
       "semimajorAxis": 3.59484E+8,
       "eccentricity": 0.2456,
-      "inclination": 6.80
+      "inclination": 6.80,
+      "orbitalPeriod": 1.36E+3,
+      "rotationPeriod": 13.625
     },
     {
       "name": "Prokne",
@@ -5298,9 +5947,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 80.8335,
       "semimajorAxis": 3.91348E+8,
       "eccentricity": 0.2371,
-      "inclination": 18.51
+      "inclination": 18.51,
+      "orbitalPeriod": 1.55E+3,
+      "rotationPeriod": 15.679
     },
     {
       "name": "Philomela",
@@ -5308,9 +5960,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 72.313,
       "semimajorAxis": 4.65549E+8,
       "eccentricity": 0.0144,
-      "inclination": 7.26
+      "inclination": 7.26,
+      "orbitalPeriod": 2.01E+3,
+      "rotationPeriod": 8.334
     },
     {
       "name": "Dynamene",
@@ -5318,9 +5973,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 64.1505,
       "semimajorAxis": 4.09449E+8,
       "eccentricity": 0.1331,
-      "inclination": 6.90
+      "inclination": 6.90,
+      "orbitalPeriod": 1.65E+3,
+      "rotationPeriod": 37.394
     },
     {
       "name": "Chryseis",
@@ -5328,9 +5986,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 43.075,
       "semimajorAxis": 4.58966E+8,
       "eccentricity": 0.1048,
-      "inclination": 8.85
+      "inclination": 8.85,
+      "orbitalPeriod": 1.96E+3,
+      "rotationPeriod": 23.67
     },
     {
       "name": "Dido",
@@ -5338,9 +5999,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 89.504,
       "semimajorAxis": 4.70635E+8,
       "eccentricity": 0.0546,
-      "inclination": 7.17
+      "inclination": 7.17,
+      "orbitalPeriod": 2.04E+3,
+      "rotationPeriod": 5.7366
     },
     {
       "name": "Isolda",
@@ -5348,9 +6012,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 70.5625,
       "semimajorAxis": 4.55825E+8,
       "eccentricity": 0.1548,
-      "inclination": 3.87
+      "inclination": 3.87,
+      "orbitalPeriod": 1.94E+3,
+      "rotationPeriod": 18.365
     },
     {
       "name": "Kleopatra",
@@ -5358,9 +6025,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 61,
       "semimajorAxis": 4.17976E+8,
       "eccentricity": 0.2508,
-      "inclination": 13.12
+      "inclination": 13.12,
+      "orbitalPeriod": 1.71E+3,
+      "rotationPeriod": 5.385
     },
     {
       "name": "Eos",
@@ -5368,9 +6038,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 47.7345,
       "semimajorAxis": 4.50738E+8,
       "eccentricity": 0.1013,
-      "inclination": 10.89
+      "inclination": 10.89,
+      "orbitalPeriod": 1.91E+3,
+      "rotationPeriod": 10.443
     },
     {
       "name": "Athamantis",
@@ -5378,9 +6051,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 55.666,
       "semimajorAxis": 3.56342E+8,
       "eccentricity": 0.0613,
-      "inclination": 9.46
+      "inclination": 9.46,
+      "orbitalPeriod": 1.34E+3,
+      "rotationPeriod": 24.0055
     },
     {
       "name": "Asterope",
@@ -5388,9 +6064,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 49.836,
       "semimajorAxis": 3.9808E+8,
       "eccentricity": 0.1012,
-      "inclination": 7.69
+      "inclination": 7.69,
+      "orbitalPeriod": 1.59E+3,
+      "rotationPeriod": 19.694
     },
     {
       "name": "Honoria",
@@ -5398,9 +6077,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 38.854,
       "semimajorAxis": 4.18724E+8,
       "eccentricity": 0.1900,
-      "inclination": 7.70
+      "inclination": 7.70,
+      "orbitalPeriod": 1.71E+3,
+      "rotationPeriod": 12.338
     },
     {
       "name": "Hypatia",
@@ -5408,9 +6090,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 77.8295,
       "semimajorAxis": 4.35031E+8,
       "eccentricity": 0.0919,
-      "inclination": 12.40
+      "inclination": 12.40,
+      "orbitalPeriod": 1.81E+3,
+      "rotationPeriod": 8.8749
     },
     {
       "name": "Germania",
@@ -5418,9 +6103,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 84.45,
       "semimajorAxis": 4.55825E+8,
       "eccentricity": 0.1060,
-      "inclination": 5.52
+      "inclination": 5.52,
+      "orbitalPeriod": 1.94E+3,
+      "rotationPeriod": 15.51
     },
     {
       "name": "Vera",
@@ -5428,9 +6116,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 37.9745,
       "semimajorAxis": 4.63155E+8,
       "eccentricity": 0.1976,
-      "inclination": 5.18
+      "inclination": 5.18,
+      "orbitalPeriod": 1.99E+3,
+      "rotationPeriod": 14.38
     },
     {
       "name": "Eukrate",
@@ -5438,9 +6129,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 65.4675,
       "semimajorAxis": 4.09898E+8,
       "eccentricity": 0.2466,
-      "inclination": 24.95
+      "inclination": 24.95,
+      "orbitalPeriod": 1.66E+3,
+      "rotationPeriod": 12.093
     },
     {
       "name": "Bettina",
@@ -5448,9 +6142,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 60.4975,
       "semimajorAxis": 4.70186E+8,
       "eccentricity": 0.1368,
-      "inclination": 12.82
+      "inclination": 12.82,
+      "orbitalPeriod": 2.03E+3,
+      "rotationPeriod": 5.0545
     },
     {
       "name": "Tyche",
@@ -5458,9 +6155,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 32.39,
       "semimajorAxis": 3.91049E+8,
       "eccentricity": 0.2052,
-      "inclination": 14.33
+      "inclination": 14.33,
+      "orbitalPeriod": 1.54E+3,
+      "rotationPeriod": 10.041
     },
     {
       "name": "Aletheia",
@@ -5468,9 +6168,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 87.159,
       "semimajorAxis": 4.6869E+8,
       "eccentricity": 0.1298,
-      "inclination": 10.81
+      "inclination": 10.81,
+      "orbitalPeriod": 2.03E+3,
+      "rotationPeriod": 8.143
     },
     {
       "name": "Libussa",
@@ -5478,9 +6181,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 31.4845,
       "semimajorAxis": 4.18575E+8,
       "eccentricity": 0.1354,
-      "inclination": 10.43
+      "inclination": 10.43,
+      "orbitalPeriod": 1.71E+3,
+      "rotationPeriod": 9.2276
     },
     {
       "name": "Nephthys",
@@ -5488,9 +6194,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 29.8075,
       "semimajorAxis": 3.52004E+8,
       "eccentricity": 0.0235,
-      "inclination": 10.03
+      "inclination": 10.03,
+      "orbitalPeriod": 1.32E+3,
+      "rotationPeriod": 7.605
     },
     {
       "name": "Polyxo",
@@ -5498,9 +6207,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 64.289,
       "semimajorAxis": 4.11394E+8,
       "eccentricity": 0.0387,
-      "inclination": 4.36
+      "inclination": 4.36,
+      "orbitalPeriod": 1.67E+3,
+      "rotationPeriod": 12.031
     },
     {
       "name": "Bamberga",
@@ -5508,9 +6220,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 110.346,
       "semimajorAxis": 4.01221E+8,
       "eccentricity": 0.3408,
-      "inclination": 11.10
+      "inclination": 11.10,
+      "orbitalPeriod": 1.6E+3,
+      "rotationPeriod": 29.43
     },
     {
       "name": "Chicago",
@@ -5518,9 +6233,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 99.385,
       "semimajorAxis": 5.86424E+8,
       "eccentricity": 0.0251,
-      "inclination": 4.64
+      "inclination": 4.64,
+      "orbitalPeriod": 2.84E+3,
+      "rotationPeriod": 7.361
     },
     {
       "name": "Desiderata",
@@ -5528,9 +6246,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 62.0905,
       "semimajorAxis": 3.88356E+8,
       "eccentricity": 0.3138,
-      "inclination": 18.35
+      "inclination": 18.35,
+      "orbitalPeriod": 1.53E+3,
+      "rotationPeriod": 10.747
     },
     {
       "name": "Hermentaria",
@@ -5538,9 +6259,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 43.2235,
       "semimajorAxis": 4.18126E+8,
       "eccentricity": 0.1030,
-      "inclination": 8.76
+      "inclination": 8.76,
+      "orbitalPeriod": 1.71E+3,
+      "rotationPeriod": 28.523
     },
     {
       "name": "Dembowska",
@@ -5548,9 +6272,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 69.885,
       "semimajorAxis": 4.37574E+8,
       "eccentricity": 0.0889,
-      "inclination": 8.25
+      "inclination": 8.25,
+      "orbitalPeriod": 1.83E+3,
+      "rotationPeriod": 4.701
     },
     {
       "name": "Ornamenta",
@@ -5558,9 +6285,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 64.3645,
       "semimajorAxis": 4.65399E+8,
       "eccentricity": 0.1611,
-      "inclination": 24.90
+      "inclination": 24.90,
+      "orbitalPeriod": 2E+3,
+      "rotationPeriod": 9.178
     },
     {
       "name": "Eleonora",
@@ -5568,9 +6298,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 74.485,
       "semimajorAxis": 4.18874E+8,
       "eccentricity": 0.1116,
-      "inclination": 18.36
+      "inclination": 18.36,
+      "orbitalPeriod": 1.71E+3,
+      "rotationPeriod": 4.277
     },
     {
       "name": "Liguria",
@@ -5578,9 +6311,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 72.7515,
       "semimajorAxis": 4.11993E+8,
       "eccentricity": 0.2418,
-      "inclination": 8.21
+      "inclination": 8.21,
+      "orbitalPeriod": 1.67E+3,
+      "rotationPeriod": 31.701
     },
     {
       "name": "Bononia",
@@ -5588,9 +6324,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 77.167,
       "semimajorAxis": 5.96148E+8,
       "eccentricity": 0.2119,
-      "inclination": 12.59
+      "inclination": 12.59,
+      "orbitalPeriod": 2.91E+3,
+      "rotationPeriod": 13.835
     },
     {
       "name": "Palma",
@@ -5598,9 +6337,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 86.821,
       "semimajorAxis": 4.72879E+8,
       "eccentricity": 0.2527,
-      "inclination": 23.78
+      "inclination": 23.78,
+      "orbitalPeriod": 2.05E+3,
+      "rotationPeriod": 8.567
     },
     {
       "name": "Ursula",
@@ -5608,9 +6350,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 108,
       "semimajorAxis": 4.67942E+8,
       "eccentricity": 0.1026,
-      "inclination": 15.94
+      "inclination": 15.94,
+      "orbitalPeriod": 2.02E+3,
+      "rotationPeriod": 16.899
     },
     {
       "name": "Myrrha",
@@ -5618,9 +6363,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 63.8195,
       "semimajorAxis": 4.83201E+8,
       "eccentricity": 0.0889,
-      "inclination": 12.56
+      "inclination": 12.56,
+      "orbitalPeriod": 2.12E+3,
+      "rotationPeriod": 6.572
     },
     {
       "name": "Ilmatar",
@@ -5628,9 +6376,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 42.9185,
       "semimajorAxis": 4.26055E+8,
       "eccentricity": 0.1267,
-      "inclination": 13.58
+      "inclination": 13.58,
+      "orbitalPeriod": 1.76E+3,
+      "rotationPeriod": 62.35
     },
     {
       "name": "Siegena",
@@ -5638,9 +6389,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 82.505,
       "semimajorAxis": 4.33535E+8,
       "eccentricity": 0.1693,
-      "inclination": 20.22
+      "inclination": 20.22,
+      "orbitalPeriod": 1.8E+3,
+      "rotationPeriod": 9.763
     },
     {
       "name": "Aquitania",
@@ -5648,9 +6402,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 50.255,
       "semimajorAxis": 4.09749E+8,
       "eccentricity": 0.2373,
-      "inclination": 18.14
+      "inclination": 18.14,
+      "orbitalPeriod": 1.66E+3,
+      "rotationPeriod": 24.144
     },
     {
       "name": "Industria",
@@ -5658,9 +6415,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 37.189,
       "semimajorAxis": 3.90151E+8,
       "eccentricity": 0.0661,
-      "inclination": 8.12
+      "inclination": 8.12,
+      "orbitalPeriod": 1.54E+3,
+      "rotationPeriod": 8.4973
     },
     {
       "name": "Lampetia",
@@ -5668,9 +6428,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 58.0955,
       "semimajorAxis": 4.16331E+8,
       "eccentricity": 0.3306,
-      "inclination": 14.86
+      "inclination": 14.86,
+      "orbitalPeriod": 1.7E+3,
+      "rotationPeriod": 38.455
     },
     {
       "name": "Aspasia",
@@ -5678,9 +6441,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 85.506,
       "semimajorAxis": 3.85215E+8,
       "eccentricity": 0.0731,
-      "inclination": 11.29
+      "inclination": 11.29,
+      "orbitalPeriod": 1.51E+3,
+      "rotationPeriod": 9.022
     },
     {
       "name": "Chloris",
@@ -5688,9 +6454,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 59.4645,
       "semimajorAxis": 4.07505E+8,
       "eccentricity": 0.2407,
-      "inclination": 10.96
+      "inclination": 10.96,
+      "orbitalPeriod": 1.64E+3,
+      "rotationPeriod": 32.5
     },
     {
       "name": "Vaticana",
@@ -5698,9 +6467,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 42.735,
       "semimajorAxis": 4.18575E+8,
       "eccentricity": 0.2181,
-      "inclination": 12.86
+      "inclination": 12.86,
+      "orbitalPeriod": 1.71E+3,
+      "rotationPeriod": 5.372
     },
     {
       "name": "Bertholda",
@@ -5708,9 +6480,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 69.3495,
       "semimajorAxis": 5.12672E+8,
       "eccentricity": 0.0232,
-      "inclination": 6.72
+      "inclination": 6.72,
+      "orbitalPeriod": 2.32E+3,
+      "rotationPeriod": 10.987
     },
     {
       "name": "Diotima",
@@ -5718,9 +6493,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 87.9295,
       "semimajorAxis": 4.58817E+8,
       "eccentricity": 0.0342,
-      "inclination": 11.24
+      "inclination": 11.24,
+      "orbitalPeriod": 1.96E+3,
+      "rotationPeriod": 4.775
     },
     {
       "name": "Gyptis",
@@ -5728,9 +6506,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 79.6655,
       "semimajorAxis": 4.14685E+8,
       "eccentricity": 0.1737,
-      "inclination": 10.27
+      "inclination": 10.27,
+      "orbitalPeriod": 1.69E+3,
+      "rotationPeriod": 6.214
     },
     {
       "name": "Patientia",
@@ -5738,9 +6519,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 126.95,
       "semimajorAxis": 4.58218E+8,
       "eccentricity": 0.0700,
-      "inclination": 15.21
+      "inclination": 15.21,
+      "orbitalPeriod": 1.96E+3,
+      "rotationPeriod": 9.727
     },
     {
       "name": "Tisiphone",
@@ -5748,9 +6532,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 47.7475,
       "semimajorAxis": 5.01302E+8,
       "eccentricity": 0.0969,
-      "inclination": 19.02
+      "inclination": 19.02,
+      "orbitalPeriod": 2.24E+3,
+      "rotationPeriod": 8.834
     },
     {
       "name": "Papagena",
@@ -5758,9 +6545,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 74.064,
       "semimajorAxis": 4.32188E+8,
       "eccentricity": 0.2291,
-      "inclination": 15.02
+      "inclination": 15.02,
+      "orbitalPeriod": 1.79E+3,
+      "rotationPeriod": 7.113
     },
     {
       "name": "Tergeste",
@@ -5768,9 +6558,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 40.369,
       "semimajorAxis": 4.51486E+8,
       "eccentricity": 0.0807,
-      "inclination": 13.18
+      "inclination": 13.18,
+      "orbitalPeriod": 1.91E+3,
+      "rotationPeriod": 16.11
     },
     {
       "name": "Hansa",
@@ -5778,9 +6571,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 28.11,
       "semimajorAxis": 3.95387E+8,
       "eccentricity": 0.0445,
-      "inclination": 21.33
+      "inclination": 21.33,
+      "orbitalPeriod": 1.57E+3,
+      "rotationPeriod": 16.19
     },
     {
       "name": "Seppina",
@@ -5788,9 +6584,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 33.429,
       "semimajorAxis": 5.12522E+8,
       "eccentricity": 0.0506,
-      "inclination": 18.75
+      "inclination": 18.75,
+      "orbitalPeriod": 2.32E+3,
+      "rotationPeriod": 12.727
     },
     {
       "name": "Genua",
@@ -5798,9 +6597,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 31.94,
       "semimajorAxis": 4.11394E+8,
       "eccentricity": 0.1894,
-      "inclination": 13.87
+      "inclination": 13.87,
+      "orbitalPeriod": 1.67E+3,
+      "rotationPeriod": 17.59
     },
     {
       "name": "Venetia",
@@ -5808,9 +6610,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 29.523,
       "semimajorAxis": 3.99426E+8,
       "eccentricity": 0.0863,
-      "inclination": 10.25
+      "inclination": 10.25,
+      "orbitalPeriod": 1.59E+3,
+      "rotationPeriod": 13.34
     },
     {
       "name": "Kreusa",
@@ -5818,9 +6623,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 84.0585,
       "semimajorAxis": 4.73627E+8,
       "eccentricity": 0.1581,
-      "inclination": 11.48
+      "inclination": 11.48,
+      "orbitalPeriod": 2.06E+3,
+      "rotationPeriod": 32.645
     },
     {
       "name": "Princetonia",
@@ -5828,9 +6636,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 58.6205,
       "semimajorAxis": 4.74225E+8,
       "eccentricity": 0.0072,
-      "inclination": 13.32
+      "inclination": 13.32,
+      "orbitalPeriod": 2.06E+3,
+      "rotationPeriod": 52.8
     },
     {
       "name": "Iolanda",
@@ -5838,9 +6649,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 25.946,
       "semimajorAxis": 4.58218E+8,
       "eccentricity": 0.0980,
-      "inclination": 15.41
+      "inclination": 15.41,
+      "orbitalPeriod": 1.96E+3,
+      "rotationPeriod": 12.306
     },
     {
       "name": "Davida",
@@ -5848,9 +6662,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 135.163,
       "semimajorAxis": 4.73178E+8,
       "eccentricity": 0.1894,
-      "inclination": 15.94
+      "inclination": 15.94,
+      "orbitalPeriod": 2.05E+3,
+      "rotationPeriod": 5.1297
     },
     {
       "name": "Amherstia",
@@ -5858,9 +6675,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 32.572,
       "semimajorAxis": 4.00473E+8,
       "eccentricity": 0.2755,
-      "inclination": 12.95
+      "inclination": 12.95,
+      "orbitalPeriod": 1.6E+3,
+      "rotationPeriod": 7.4842
     },
     {
       "name": "Herculina",
@@ -5868,9 +6688,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 83.8955,
       "semimajorAxis": 4.14386E+8,
       "eccentricity": 0.1799,
-      "inclination": 16.30
+      "inclination": 16.30,
+      "orbitalPeriod": 1.68E+3,
+      "rotationPeriod": 9.405
     },
     {
       "name": "Merapi",
@@ -5878,9 +6701,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 73.533,
       "semimajorAxis": 5.23144E+8,
       "eccentricity": 0.0883,
-      "inclination": 19.43
+      "inclination": 19.43,
+      "orbitalPeriod": 2.39E+3,
+      "rotationPeriod": 8.791
     },
     {
       "name": "Suleika",
@@ -5888,9 +6714,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 26.645,
       "semimajorAxis": 4.0556E+8,
       "eccentricity": 0.2366,
-      "inclination": 10.25
+      "inclination": 10.25,
+      "orbitalPeriod": 1.63E+3,
+      "rotationPeriod": 5.69
     },
     {
       "name": "Stereoskopia",
@@ -5898,9 +6727,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 83.6905,
       "semimajorAxis": 5.05192E+8,
       "eccentricity": 0.1204,
-      "inclination": 4.89
+      "inclination": 4.89,
+      "orbitalPeriod": 2.27E+3,
+      "rotationPeriod": 12.103
     },
     {
       "name": "Sidonia",
@@ -5908,9 +6740,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 42.785,
       "semimajorAxis": 4.50738E+8,
       "eccentricity": 0.0765,
-      "inclination": 11.02
+      "inclination": 11.02,
+      "orbitalPeriod": 1.91E+3,
+      "rotationPeriod": 16.29
     },
     {
       "name": "Semiramis",
@@ -5918,9 +6753,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 27.005,
       "semimajorAxis": 3.55145E+8,
       "eccentricity": 0.2333,
-      "inclination": 10.72
+      "inclination": 10.72,
+      "orbitalPeriod": 1.34E+3,
+      "rotationPeriod": 5.068
     },
     {
       "name": "Achilles",
@@ -5928,9 +6766,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 65.0495,
       "semimajorAxis": 7.79704E+8,
       "eccentricity": 0.1485,
-      "inclination": 10.32
+      "inclination": 10.32,
+      "orbitalPeriod": 4.35E+3,
+      "rotationPeriod": 7.306
     },
     {
       "name": "Polyxena",
@@ -5938,9 +6779,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 45.3235,
       "semimajorAxis": 4.80209E+8,
       "eccentricity": 0.0692,
-      "inclination": 17.78
+      "inclination": 17.78,
+      "orbitalPeriod": 2.1E+3,
+      "rotationPeriod": 11.801
     },
     {
       "name": "Patroclus",
@@ -5948,9 +6792,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 70.181,
       "semimajorAxis": 7.78956E+8,
       "eccentricity": 0.1397,
-      "inclination": 22.06
+      "inclination": 22.06,
+      "orbitalPeriod": 4.34E+3,
+      "rotationPeriod": 102.8
     },
     {
       "name": "Hektor",
@@ -5958,9 +6805,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 112.5,
       "semimajorAxis": 7.88979E+8,
       "eccentricity": 0.0239,
-      "inclination": 18.15
+      "inclination": 18.15,
+      "orbitalPeriod": 4.42E+3,
+      "rotationPeriod": 6.924
     },
     {
       "name": "Latona",
@@ -5968,9 +6818,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 39.2545,
       "semimajorAxis": 4.51337E+8,
       "eccentricity": 0.1100,
-      "inclination": 8.57
+      "inclination": 8.57,
+      "orbitalPeriod": 1.91E+3,
+      "rotationPeriod": 6.193
     },
     {
       "name": "Rachele",
@@ -5978,9 +6831,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 48.0855,
       "semimajorAxis": 4.37424E+8,
       "eccentricity": 0.1932,
-      "inclination": 13.51
+      "inclination": 13.51,
+      "orbitalPeriod": 1.83E+3,
+      "rotationPeriod": 30.982
     },
     {
       "name": "Ludmilla",
@@ -5988,9 +6844,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 38,
       "semimajorAxis": 4.14237E+8,
       "eccentricity": 0.2053,
-      "inclination": 9.81
+      "inclination": 9.81,
+      "orbitalPeriod": 1.68E+3,
+      "rotationPeriod": 7.717
     },
     {
       "name": "Wratislavia",
@@ -5998,9 +6857,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 67.325,
       "semimajorAxis": 4.71532E+8,
       "eccentricity": 0.1762,
-      "inclination": 11.25
+      "inclination": 11.25,
+      "orbitalPeriod": 2.04E+3,
+      "rotationPeriod": 8.64
     },
     {
       "name": "Alauda",
@@ -6008,9 +6870,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 95.49,
       "semimajorAxis": 4.77666E+8,
       "eccentricity": 0.0157,
-      "inclination": 20.60
+      "inclination": 20.60,
+      "orbitalPeriod": 2.08E+3,
+      "rotationPeriod": 16.7072
     },
     {
       "name": "Interamnia",
@@ -6019,9 +6884,12 @@
       "rank": "quaternary",
       "minorType": "MBA",
       "mass": "5.",
+      "size": 153.156,
       "semimajorAxis": 4.57171E+8,
       "eccentricity": 0.1556,
-      "inclination": 17.32
+      "inclination": 17.32,
+      "orbitalPeriod": 1.95E+3,
+      "rotationPeriod": 8.727
     },
     {
       "name": "Erminia",
@@ -6029,9 +6897,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 66.1305,
       "semimajorAxis": 4.37275E+8,
       "eccentricity": 0.0516,
-      "inclination": 25.02
+      "inclination": 25.02,
+      "orbitalPeriod": 1.82E+3,
+      "rotationPeriod": 53.68
     },
     {
       "name": "Winchester",
@@ -6039,9 +6910,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 85.855,
       "semimajorAxis": 4.48794E+8,
       "eccentricity": 0.3398,
-      "inclination": 18.22
+      "inclination": 18.22,
+      "orbitalPeriod": 1.9E+3,
+      "rotationPeriod": 9.4146
     },
     {
       "name": "Mancunia",
@@ -6049,9 +6923,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 44.4925,
       "semimajorAxis": 4.77217E+8,
       "eccentricity": 0.1485,
-      "inclination": 5.61
+      "inclination": 5.61,
+      "orbitalPeriod": 2.08E+3,
+      "rotationPeriod": 12.7253
     },
     {
       "name": "Massinga",
@@ -6059,9 +6936,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 35.645,
       "semimajorAxis": 4.70934E+8,
       "eccentricity": 0.2341,
-      "inclination": 12.54
+      "inclination": 12.54,
+      "orbitalPeriod": 2.04E+3,
+      "rotationPeriod": 10.72
     },
     {
       "name": "Pulcova",
@@ -6069,9 +6949,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 73.6715,
       "semimajorAxis": 4.71832E+8,
       "eccentricity": 0.1074,
-      "inclination": 13.10
+      "inclination": 13.10,
+      "orbitalPeriod": 2.05E+3,
+      "rotationPeriod": 5.839
     },
     {
       "name": "Tanete",
@@ -6079,9 +6962,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 63.2365,
       "semimajorAxis": 4.48794E+8,
       "eccentricity": 0.0951,
-      "inclination": 28.84
+      "inclination": 28.84,
+      "orbitalPeriod": 1.9E+3,
+      "rotationPeriod": 17.258
     },
     {
       "name": "Berbericia",
@@ -6089,9 +6975,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 75.8555,
       "semimajorAxis": 4.38172E+8,
       "eccentricity": 0.1656,
-      "inclination": 18.25
+      "inclination": 18.25,
+      "orbitalPeriod": 1.83E+3,
+      "rotationPeriod": 7.668
     },
     {
       "name": "Nina",
@@ -6099,9 +6988,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 40.286,
       "semimajorAxis": 3.98678E+8,
       "eccentricity": 0.2265,
-      "inclination": 14.57
+      "inclination": 14.57,
+      "orbitalPeriod": 1.59E+3,
+      "rotationPeriod": 11.186
     },
     {
       "name": "Pretoria",
@@ -6109,9 +7001,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 85.185,
       "semimajorAxis": 5.08782E+8,
       "eccentricity": 0.1559,
-      "inclination": 20.57
+      "inclination": 20.57,
+      "orbitalPeriod": 2.29E+3,
+      "rotationPeriod": 10.37
     },
     {
       "name": "Hispania",
@@ -6119,9 +7014,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 68.976,
       "semimajorAxis": 4.2426E+8,
       "eccentricity": 0.1418,
-      "inclination": 15.39
+      "inclination": 15.39,
+      "orbitalPeriod": 1.74E+3,
+      "rotationPeriod": 14.845
     },
     {
       "name": "Ara",
@@ -6129,9 +7027,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 40.378,
       "semimajorAxis": 4.70485E+8,
       "eccentricity": 0.2008,
-      "inclination": 19.54
+      "inclination": 19.54,
+      "orbitalPeriod": 2.04E+3,
+      "rotationPeriod": 4.116
     },
     {
       "name": "Helio",
@@ -6139,9 +7040,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "OMB",
+      "size": 54.784,
       "semimajorAxis": 4.79162E+8,
       "eccentricity": 0.1428,
-      "inclination": 26.09
+      "inclination": 26.09,
+      "orbitalPeriod": 2.09E+3,
+      "rotationPeriod": 9.347
     },
     {
       "name": "Agamemnon",
@@ -6149,9 +7053,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 65.519,
       "semimajorAxis": 7.90625E+8,
       "eccentricity": 0.0674,
-      "inclination": 21.76
+      "inclination": 21.76,
+      "orbitalPeriod": 4.44E+3,
+      "rotationPeriod": 6.592
     },
     {
       "name": "Anacostia",
@@ -6159,9 +7066,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "MBA",
+      "size": 37.3395,
       "semimajorAxis": 4.10197E+8,
       "eccentricity": 0.2018,
-      "inclination": 15.90
+      "inclination": 15.90,
+      "orbitalPeriod": 1.66E+3,
+      "rotationPeriod": 20.117
     },
     {
       "name": "Odysseus",
@@ -6169,9 +7079,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 57.312,
       "semimajorAxis": 7.82397E+8,
       "eccentricity": 0.0908,
-      "inclination": 3.14
+      "inclination": 3.14,
+      "orbitalPeriod": 4.37E+3,
+      "rotationPeriod": 10.114
     },
     {
       "name": "Aneas",
@@ -6179,9 +7092,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 59.01,
       "semimajorAxis": 7.83294E+8,
       "eccentricity": 0.1063,
-      "inclination": 16.66
+      "inclination": 16.66,
+      "orbitalPeriod": 4.38E+3,
+      "rotationPeriod": 8.705
     },
     {
       "name": "Diomedes",
@@ -6189,9 +7105,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 58.893,
       "semimajorAxis": 7.8135E+8,
       "eccentricity": 0.0463,
-      "inclination": 20.46
+      "inclination": 20.46,
+      "orbitalPeriod": 4.36E+3,
+      "rotationPeriod": 24.49
     },
     {
       "name": "Deiphobus",
@@ -6199,9 +7118,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 59.11,
       "semimajorAxis": 7.68185E+8,
       "eccentricity": 0.0454,
-      "inclination": 26.90
+      "inclination": 26.90,
+      "orbitalPeriod": 4.25E+3,
+      "rotationPeriod": 58.66
     },
     {
       "name": "Chiron",
@@ -6209,9 +7131,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "CEN",
+      "size": 83,
       "semimajorAxis": 2.05099E+9,
       "eccentricity": 0.3774,
-      "inclination": 6.92
+      "inclination": 6.92,
+      "orbitalPeriod": 1.85E+4,
+      "rotationPeriod": 5.918
     },
     {
       "name": "Paris",
@@ -6219,9 +7144,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 59.395,
       "semimajorAxis": 7.82247E+8,
       "eccentricity": 0.1283,
-      "inclination": 27.85
+      "inclination": 27.85,
+      "orbitalPeriod": 4.37E+3,
+      "rotationPeriod": 7.0812
     },
     {
       "name": "Mentor",
@@ -6229,9 +7157,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TJN",
+      "size": 63.144,
       "semimajorAxis": 7.76413E+8,
       "eccentricity": 0.0756,
-      "inclination": 24.59
+      "inclination": 24.59,
+      "orbitalPeriod": 4.32E+3,
+      "rotationPeriod": 7.702
     },
     {
       "name": "Pholus",
@@ -6239,9 +7170,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "CEN",
+      "size": 95,
       "semimajorAxis": 3.03384E+9,
       "eccentricity": 0.5742,
-      "inclination": 24.73
+      "inclination": 24.73,
+      "orbitalPeriod": 3.34E+4,
+      "rotationPeriod": 9.98
     },
     {
       "name": "Chariklo",
@@ -6249,9 +7183,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "CEN",
+      "size": 151,
       "semimajorAxis": 2.35766E+9,
       "eccentricity": 0.1689,
-      "inclination": 23.42
+      "inclination": 23.42,
+      "orbitalPeriod": 2.29E+4,
+      "rotationPeriod": 7.004
     },
     {
       "name": "Hylonome",
@@ -6261,7 +7198,8 @@
       "minorType": "CEN",
       "semimajorAxis": 3.73546E+9,
       "eccentricity": 0.2448,
-      "inclination": 4.14
+      "inclination": 4.14,
+      "orbitalPeriod": 4.56E+4
     },
     {
       "name": "Albion",
@@ -6271,7 +7209,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.62719E+9,
       "eccentricity": 0.0750,
-      "inclination": 2.18
+      "inclination": 2.18,
+      "orbitalPeriod": 1.08E+5
     },
     {
       "name": "Arawn",
@@ -6281,7 +7220,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.8762E+9,
       "eccentricity": 0.1143,
-      "inclination": 3.80
+      "inclination": 3.80,
+      "orbitalPeriod": 8.99E+4,
+      "rotationPeriod": 5.49
     },
     {
       "name": "1996 TO66",
@@ -6291,7 +7232,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.51648E+9,
       "eccentricity": 0.1125,
-      "inclination": 27.39
+      "inclination": 27.39,
+      "orbitalPeriod": 1.05E+5,
+      "rotationPeriod": 7.92
     },
     {
       "name": "Chaos",
@@ -6301,7 +7244,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.89197E+9,
       "eccentricity": 0.1095,
-      "inclination": 12.01
+      "inclination": 12.01,
+      "orbitalPeriod": 1.14E+5
     },
     {
       "name": "Varuna",
@@ -6309,9 +7253,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TNO",
+      "size": 450,
       "semimajorAxis": 6.44468E+9,
       "eccentricity": 0.0547,
-      "inclination": 17.14
+      "inclination": 17.14,
+      "orbitalPeriod": 1.03E+5,
+      "rotationPeriod": 6.3436
     },
     {
       "name": "1995 SM55",
@@ -6321,7 +7268,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.30405E+9,
       "eccentricity": 0.1111,
-      "inclination": 27.00
+      "inclination": 27.00,
+      "orbitalPeriod": 9.99E+4,
+      "rotationPeriod": 8.08
     },
     {
       "name": "1996 GQ21",
@@ -6331,7 +7280,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.37735E+10,
       "eccentricity": 0.5853,
-      "inclination": 13.37
+      "inclination": 13.37,
+      "orbitalPeriod": 3.23E+5
     },
     {
       "name": "1999 DE9",
@@ -6341,7 +7291,9 @@
       "minorType": "TNO",
       "semimajorAxis": 8.26229E+9,
       "eccentricity": 0.4181,
-      "inclination": 7.62
+      "inclination": 7.62,
+      "orbitalPeriod": 1.5E+5,
+      "rotationPeriod": 24
     },
     {
       "name": "Ixion",
@@ -6351,7 +7303,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.89565E+9,
       "eccentricity": 0.2457,
-      "inclination": 19.68
+      "inclination": 19.68,
+      "orbitalPeriod": 9.04E+4
     },
     {
       "name": "Rhadamanthus",
@@ -6361,7 +7314,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.80739E+9,
       "eccentricity": 0.1573,
-      "inclination": 12.78
+      "inclination": 12.78,
+      "orbitalPeriod": 8.84E+4
     },
     {
       "name": "Huya",
@@ -6371,7 +7325,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.86424E+9,
       "eccentricity": 0.2723,
-      "inclination": 15.48
+      "inclination": 15.48,
+      "orbitalPeriod": 8.96E+4,
+      "rotationPeriod": 5.28
     },
     {
       "name": "2001 UR163",
@@ -6381,7 +7337,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.76712E+9,
       "eccentricity": 0.2808,
-      "inclination": 0.75
+      "inclination": 0.75,
+      "orbitalPeriod": 1.37E+5
     },
     {
       "name": "Typhon",
@@ -6389,9 +7346,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "TNO",
+      "size": 96,
       "semimajorAxis": 5.62189E+9,
       "eccentricity": 0.5352,
-      "inclination": 2.43
+      "inclination": 2.43,
+      "orbitalPeriod": 8.42E+4,
+      "rotationPeriod": "5."
     },
     {
       "name": "Lempo",
@@ -6401,7 +7361,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.954E+9,
       "eccentricity": 0.2317,
-      "inclination": 8.40
+      "inclination": 8.40,
+      "orbitalPeriod": 9.17E+4,
+      "rotationPeriod": 6.21
     },
     {
       "name": "1995 TL8",
@@ -6411,7 +7373,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.93467E+9,
       "eccentricity": 0.2408,
-      "inclination": 0.24
+      "inclination": 0.24,
+      "orbitalPeriod": 1.41E+5
     },
     {
       "name": "Quaoar",
@@ -6421,7 +7384,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.46113E+9,
       "eccentricity": 0.0376,
-      "inclination": 7.99
+      "inclination": 7.99,
+      "orbitalPeriod": 1.04E+5,
+      "rotationPeriod": 8.84
     },
     {
       "name": "Deucalion",
@@ -6431,7 +7396,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.55687E+9,
       "eccentricity": 0.0593,
-      "inclination": 0.37
+      "inclination": 0.37,
+      "orbitalPeriod": 1.06E+5
     },
     {
       "name": "Bienor",
@@ -6439,9 +7405,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "CEN",
+      "size": 93.75,
       "semimajorAxis": 2.48033E+9,
       "eccentricity": 0.2044,
-      "inclination": 20.73
+      "inclination": 20.73,
+      "orbitalPeriod": 2.47E+4,
+      "rotationPeriod": 9.14
     },
     {
       "name": "2002 AW197",
@@ -6451,7 +7420,9 @@
       "minorType": "TNO",
       "semimajorAxis": 7.05055E+9,
       "eccentricity": 0.1261,
-      "inclination": 24.36
+      "inclination": 24.36,
+      "orbitalPeriod": 1.18E+5,
+      "rotationPeriod": 8.86
     },
     {
       "name": "Amycus",
@@ -6459,9 +7430,12 @@
       "category": "minor",
       "rank": "quaternary",
       "minorType": "CEN",
+      "size": 50.45,
       "semimajorAxis": 3.73396E+9,
       "eccentricity": 0.3915,
-      "inclination": 13.35
+      "inclination": 13.35,
+      "orbitalPeriod": 4.55E+4,
+      "rotationPeriod": 9.76
     },
     {
       "name": "2002 TX300",
@@ -6471,7 +7445,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.51948E+9,
       "eccentricity": 0.1224,
-      "inclination": 25.85
+      "inclination": 25.85,
+      "orbitalPeriod": 1.05E+5,
+      "rotationPeriod": 8.12
     },
     {
       "name": "2002 UX25",
@@ -6481,7 +7457,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.4357E+9,
       "eccentricity": 0.1458,
-      "inclination": 19.39
+      "inclination": 19.39,
+      "orbitalPeriod": 1.03E+5,
+      "rotationPeriod": 14.382
     },
     {
       "name": "Logos",
@@ -6491,7 +7469,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.74387E+9,
       "eccentricity": 0.1217,
-      "inclination": 2.90
+      "inclination": 2.90,
+      "orbitalPeriod": 1.11E+5,
+      "rotationPeriod": 1.1
     },
     {
       "name": "Ceto",
@@ -6501,7 +7481,9 @@
       "minorType": "TNO",
       "semimajorAxis": 1.49119E+10,
       "eccentricity": 0.8225,
-      "inclination": 22.31
+      "inclination": 22.31,
+      "orbitalPeriod": 3.63E+5,
+      "rotationPeriod": 4.43
     },
     {
       "name": "Borasisi",
@@ -6511,7 +7493,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.57333E+9,
       "eccentricity": 0.0860,
-      "inclination": 0.56
+      "inclination": 0.56,
+      "orbitalPeriod": 1.06E+5
     },
     {
       "name": "2002 XW93",
@@ -6521,7 +7504,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.63535E+9,
       "eccentricity": 0.2447,
-      "inclination": 14.33
+      "inclination": 14.33,
+      "orbitalPeriod": 8.44E+4
     },
     {
       "name": "Sila-Nunam",
@@ -6531,7 +7515,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.56735E+9,
       "eccentricity": 0.0110,
-      "inclination": 2.24
+      "inclination": 2.24,
+      "orbitalPeriod": 1.06E+5,
+      "rotationPeriod": 300.24
     },
     {
       "name": "2000 YW134",
@@ -6541,7 +7527,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.67967E+9,
       "eccentricity": 0.2927,
-      "inclination": 19.79
+      "inclination": 19.79,
+      "orbitalPeriod": 1.61E+5
     },
     {
       "name": "2002 TC302",
@@ -6551,7 +7538,9 @@
       "minorType": "TNO",
       "semimajorAxis": 8.35803E+9,
       "eccentricity": 0.2991,
-      "inclination": 34.97
+      "inclination": 34.97,
+      "orbitalPeriod": 1.53E+5,
+      "rotationPeriod": 56.1
     },
     {
       "name": "2003 VS2",
@@ -6561,7 +7550,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.94053E+9,
       "eccentricity": 0.0821,
-      "inclination": 14.77
+      "inclination": 14.77,
+      "orbitalPeriod": 9.14E+4,
+      "rotationPeriod": 7.42
     },
     {
       "name": "Teharonhiawako",
@@ -6571,7 +7562,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.61073E+9,
       "eccentricity": 0.0233,
-      "inclination": 2.58
+      "inclination": 2.58,
+      "orbitalPeriod": 1.07E+5
     },
     {
       "name": "Sedna",
@@ -6581,7 +7573,9 @@
       "minorType": "TNO",
       "semimajorAxis": 8.2593E+10,
       "eccentricity": 0.8618,
-      "inclination": 11.93
+      "inclination": 11.93,
+      "orbitalPeriod": 4.74E+6,
+      "rotationPeriod": 10.273
     },
     {
       "name": "Orcus",
@@ -6591,7 +7585,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.87022E+9,
       "eccentricity": 0.2247,
-      "inclination": 20.56
+      "inclination": 20.56,
+      "orbitalPeriod": 8.98E+4,
+      "rotationPeriod": 13.188
     },
     {
       "name": "2004 GV9",
@@ -6601,7 +7597,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.24422E+9,
       "eccentricity": 0.0740,
-      "inclination": 22.05
+      "inclination": 22.05,
+      "orbitalPeriod": 9.85E+4,
+      "rotationPeriod": 5.86
     },
     {
       "name": "2002 KX14",
@@ -6611,7 +7609,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.78046E+9,
       "eccentricity": 0.0462,
-      "inclination": 0.41
+      "inclination": 0.41,
+      "orbitalPeriod": 8.77E+4
     },
     {
       "name": "2002 WC19",
@@ -6621,7 +7620,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.20912E+9,
       "eccentricity": 0.2643,
-      "inclination": 9.17
+      "inclination": 9.17,
+      "orbitalPeriod": 1.22E+5
     },
     {
       "name": "2003 FY128",
@@ -6631,7 +7631,9 @@
       "minorType": "TNO",
       "semimajorAxis": 7.34825E+9,
       "eccentricity": 0.2485,
-      "inclination": 11.78
+      "inclination": 11.78,
+      "orbitalPeriod": 1.26E+5,
+      "rotationPeriod": 8.54
     },
     {
       "name": "2003 OP32",
@@ -6641,7 +7643,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.47759E+9,
       "eccentricity": 0.1033,
-      "inclination": 27.11
+      "inclination": 27.11,
+      "orbitalPeriod": 1.04E+5,
+      "rotationPeriod": 9.71
     },
     {
       "name": "Salacia",
@@ -6651,7 +7655,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.31901E+9,
       "eccentricity": 0.1014,
-      "inclination": 23.93
+      "inclination": 23.93,
+      "orbitalPeriod": 1E+5,
+      "rotationPeriod": 6.09
     },
     {
       "name": "2004 TY364",
@@ -6661,7 +7667,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.85676E+9,
       "eccentricity": 0.0667,
-      "inclination": 24.83
+      "inclination": 24.83,
+      "orbitalPeriod": 8.95E+4,
+      "rotationPeriod": 11.7
     },
     {
       "name": "2004 UX10",
@@ -6671,7 +7679,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.8777E+9,
       "eccentricity": 0.0395,
-      "inclination": 9.53
+      "inclination": 9.53,
+      "orbitalPeriod": 9E+4,
+      "rotationPeriod": 7.58
     },
     {
       "name": "2005 RM43",
@@ -6681,7 +7691,9 @@
       "minorType": "TNO",
       "semimajorAxis": 1.38363E+10,
       "eccentricity": 0.6202,
-      "inclination": 28.70
+      "inclination": 28.70,
+      "orbitalPeriod": 3.25E+5,
+      "rotationPeriod": 6.71
     },
     {
       "name": "2005 RN43",
@@ -6691,7 +7703,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.23524E+9,
       "eccentricity": 0.0269,
-      "inclination": 19.24
+      "inclination": 19.24,
+      "orbitalPeriod": 9.83E+4,
+      "rotationPeriod": 6.95
     },
     {
       "name": "2005 RR43",
@@ -6701,7 +7715,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.51648E+9,
       "eccentricity": 0.1426,
-      "inclination": 28.44
+      "inclination": 28.44,
+      "orbitalPeriod": 1.05E+5,
+      "rotationPeriod": 5.08
     },
     {
       "name": "2005 TB190",
@@ -6711,7 +7727,9 @@
       "minorType": "TNO",
       "semimajorAxis": 1.14263E+10,
       "eccentricity": 0.3948,
-      "inclination": 26.44
+      "inclination": 26.44,
+      "orbitalPeriod": 2.44E+5,
+      "rotationPeriod": 12.68
     },
     {
       "name": "Altjira",
@@ -6721,7 +7739,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.66459E+9,
       "eccentricity": 0.0580,
-      "inclination": 5.20
+      "inclination": 5.20,
+      "orbitalPeriod": 1.09E+5
     },
     {
       "name": "Varda",
@@ -6731,7 +7750,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.81717E+9,
       "eccentricity": 0.1445,
-      "inclination": 21.52
+      "inclination": 21.52,
+      "orbitalPeriod": 1.12E+5,
+      "rotationPeriod": 5.91
     },
     {
       "name": "2004 PF115",
@@ -6741,7 +7762,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.84778E+9,
       "eccentricity": 0.0641,
-      "inclination": 13.36
+      "inclination": 13.36,
+      "orbitalPeriod": 8.93E+4
     },
     {
       "name": "Mbabamwanawaresa",
@@ -6751,7 +7773,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.71246E+9,
       "eccentricity": 0.1354,
-      "inclination": 5.78
+      "inclination": 5.78,
+      "orbitalPeriod": 1.1E+5
     },
     {
       "name": "2005 UQ513",
@@ -6761,7 +7784,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.52546E+9,
       "eccentricity": 0.1429,
-      "inclination": 25.71
+      "inclination": 25.71,
+      "orbitalPeriod": 1.05E+5,
+      "rotationPeriod": 7.03
     },
     {
       "name": "2003 AZ84",
@@ -6771,7 +7796,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.9136E+9,
       "eccentricity": 0.1756,
-      "inclination": 13.54
+      "inclination": 13.54,
+      "orbitalPeriod": 9.08E+4,
+      "rotationPeriod": 13.42
     },
     {
       "name": "Gonggong",
@@ -6781,7 +7808,9 @@
       "minorType": "TNO",
       "semimajorAxis": 1.0026E+10,
       "eccentricity": 0.5007,
-      "inclination": 30.78
+      "inclination": 30.78,
+      "orbitalPeriod": 2E+5,
+      "rotationPeriod": 22.4
     },
     {
       "name": "G!kun||'homdima",
@@ -6791,7 +7820,9 @@
       "minorType": "TNO",
       "semimajorAxis": 1.11495E+10,
       "eccentricity": 0.4953,
-      "inclination": 23.35
+      "inclination": 23.35,
+      "orbitalPeriod": 2.35E+5,
+      "rotationPeriod": 11.05
     },
     {
       "name": "2004 XA192",
@@ -6801,7 +7832,9 @@
       "minorType": "TNO",
       "semimajorAxis": 7.09692E+9,
       "eccentricity": 0.2524,
-      "inclination": 38.11
+      "inclination": 38.11,
+      "orbitalPeriod": 1.19E+5,
+      "rotationPeriod": 7.88
     },
     {
       "name": "2007 JJ43",
@@ -6811,7 +7844,9 @@
       "minorType": "TNO",
       "semimajorAxis": 7.13881E+9,
       "eccentricity": 0.1554,
-      "inclination": 12.09
+      "inclination": 12.09,
+      "orbitalPeriod": 1.2E+5,
+      "rotationPeriod": 6.04
     },
     {
       "name": "2005 QU182",
@@ -6821,7 +7856,9 @@
       "minorType": "TNO",
       "semimajorAxis": 1.69345E+10,
       "eccentricity": 0.6722,
-      "inclination": 14.00
+      "inclination": 14.00,
+      "orbitalPeriod": 4.4E+5,
+      "rotationPeriod": 9.61
     },
     {
       "name": "2002 MS4",
@@ -6831,7 +7868,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.23225E+9,
       "eccentricity": 0.1484,
-      "inclination": 17.71
+      "inclination": 17.71,
+      "orbitalPeriod": 9.82E+4
     },
     {
       "name": "2004 PG115",
@@ -6841,7 +7879,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.35835E+10,
       "eccentricity": 0.5983,
-      "inclination": 16.26
+      "inclination": 16.26,
+      "orbitalPeriod": 3.16E+5
     },
     {
       "name": "2005 CB79",
@@ -6851,7 +7890,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.47609E+9,
       "eccentricity": 0.1401,
-      "inclination": 28.61
+      "inclination": 28.61,
+      "orbitalPeriod": 1.04E+5,
+      "rotationPeriod": 6.76
     },
     {
       "name": "2008 AP129",
@@ -6861,7 +7902,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.26516E+9,
       "eccentricity": 0.1423,
-      "inclination": 27.44
+      "inclination": 27.44,
+      "orbitalPeriod": 9.9E+4,
+      "rotationPeriod": 9.04
     },
     {
       "name": "Mors-Somnus",
@@ -6871,7 +7914,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.92856E+9,
       "eccentricity": 0.2717,
-      "inclination": 11.27
+      "inclination": 11.27,
+      "orbitalPeriod": 9.11E+4,
+      "rotationPeriod": 9.28
     },
     {
       "name": "Manwe",
@@ -6881,7 +7926,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.57931E+9,
       "eccentricity": 0.1166,
-      "inclination": 2.66
+      "inclination": 2.66,
+      "orbitalPeriod": 1.07E+5,
+      "rotationPeriod": 11.8819
     },
     {
       "name": "Clete",
@@ -6891,7 +7938,8 @@
       "minorType": "TNO",
       "semimajorAxis": 4.5403E+9,
       "eccentricity": 0.0565,
-      "inclination": 5.25
+      "inclination": 5.25,
+      "orbitalPeriod": 6.11E+4
     },
     {
       "name": "2009 YE7",
@@ -6901,7 +7949,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.67506E+9,
       "eccentricity": 0.1362,
-      "inclination": 29.09
+      "inclination": 29.09,
+      "orbitalPeriod": 1.09E+5,
+      "rotationPeriod": 11.3
     },
     {
       "name": "Praamzius",
@@ -6911,7 +7961,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.3968E+9,
       "eccentricity": 0.0073,
-      "inclination": 1.09
+      "inclination": 1.09,
+      "orbitalPeriod": 1.02E+5
     },
     {
       "name": "2004 NT33",
@@ -6921,7 +7972,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.51798E+9,
       "eccentricity": 0.1500,
-      "inclination": 31.21
+      "inclination": 31.21,
+      "orbitalPeriod": 1.05E+5,
+      "rotationPeriod": 7.87
     },
     {
       "name": "2003 UZ413",
@@ -6931,7 +7984,9 @@
       "minorType": "TNO",
       "semimajorAxis": 5.90612E+9,
       "eccentricity": 0.2184,
-      "inclination": 12.04
+      "inclination": 12.04,
+      "orbitalPeriod": 9.06E+4,
+      "rotationPeriod": 4.13
     },
     {
       "name": "|=Kagara",
@@ -6941,7 +7996,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.56735E+9,
       "eccentricity": 0.0871,
-      "inclination": 2.87
+      "inclination": 2.87,
+      "orbitalPeriod": 1.06E+5,
+      "rotationPeriod": 9.65
     },
     {
       "name": "2007 JH43",
@@ -6951,7 +8008,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.87471E+9,
       "eccentricity": 0.0330,
-      "inclination": 18.21
+      "inclination": 18.21,
+      "orbitalPeriod": 8.99E+4
     },
     {
       "name": "2007 XV50",
@@ -6961,7 +8019,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.92189E+9,
       "eccentricity": 0.0655,
-      "inclination": 22.81
+      "inclination": 22.81,
+      "orbitalPeriod": 1.15E+5
     },
     {
       "name": "2008 OG19",
@@ -6971,7 +8030,9 @@
       "minorType": "TNO",
       "semimajorAxis": 9.9707E+9,
       "eccentricity": 0.4206,
-      "inclination": 13.14
+      "inclination": 13.14,
+      "orbitalPeriod": 1.99E+5,
+      "rotationPeriod": 8.727
     },
     {
       "name": "Dziewanna",
@@ -6981,7 +8042,9 @@
       "minorType": "TNO",
       "semimajorAxis": 1.02744E+10,
       "eccentricity": 0.5270,
-      "inclination": 29.47
+      "inclination": 29.47,
+      "orbitalPeriod": 2.08E+5,
+      "rotationPeriod": 7.07
     },
     {
       "name": "Zhulong",
@@ -6991,7 +8054,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.22339E+9,
       "eccentricity": 0.4046,
-      "inclination": 0.81
+      "inclination": 0.81,
+      "orbitalPeriod": 1.49E+5
     },
     {
       "name": "2014 UM33",
@@ -7001,7 +8065,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.48656E+9,
       "eccentricity": 0.1552,
-      "inclination": 17.32
+      "inclination": 17.32,
+      "orbitalPeriod": 1.04E+5
     },
     {
       "name": "Alicanto",
@@ -7011,7 +8076,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.29128E+10,
       "eccentricity": 0.8661,
-      "inclination": 25.49
+      "inclination": 25.49,
+      "orbitalPeriod": 2.43E+6
     },
     {
       "name": "2013 XC26",
@@ -7021,7 +8087,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.35641E+9,
       "eccentricity": 0.2279,
-      "inclination": 18.64
+      "inclination": 18.64,
+      "orbitalPeriod": 1.01E+5
     },
     {
       "name": "2015 AM281",
@@ -7031,7 +8098,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.28174E+9,
       "eccentricity": 0.2503,
-      "inclination": 26.76
+      "inclination": 26.76,
+      "orbitalPeriod": 1.5E+5
     },
     {
       "name": "2010 OO127",
@@ -7041,7 +8109,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.32949E+9,
       "eccentricity": 0.1320,
-      "inclination": 25.85
+      "inclination": 25.85,
+      "orbitalPeriod": 1.01E+5
     },
     {
       "name": "2010 DN93",
@@ -7051,7 +8120,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.23387E+9,
       "eccentricity": 0.1860,
-      "inclination": 40.61
+      "inclination": 40.61,
+      "orbitalPeriod": 1.49E+5
     },
     {
       "name": "2010 RE64",
@@ -7061,7 +8131,8 @@
       "minorType": "TNO",
       "semimajorAxis": 9.94527E+9,
       "eccentricity": 0.4519,
-      "inclination": 13.52
+      "inclination": 13.52,
+      "orbitalPeriod": 1.98E+5
     },
     {
       "name": "2010 VK201",
@@ -7071,7 +8142,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.50751E+9,
       "eccentricity": 0.1052,
-      "inclination": 28.84
+      "inclination": 28.84,
+      "orbitalPeriod": 1.05E+5,
+      "rotationPeriod": 7.59
     },
     {
       "name": "2011 OA60",
@@ -7081,7 +8154,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.10359E+9,
       "eccentricity": 0.1391,
-      "inclination": 23.08
+      "inclination": 23.08,
+      "orbitalPeriod": 9.52E+4
     },
     {
       "name": "2013 FZ27",
@@ -7091,7 +8165,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.17023E+9,
       "eccentricity": 0.2139,
-      "inclination": 14.02
+      "inclination": 14.02,
+      "orbitalPeriod": 1.21E+5
     },
     {
       "name": "2014 BV64",
@@ -7101,7 +8176,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.83812E+9,
       "eccentricity": 0.1418,
-      "inclination": 15.41
+      "inclination": 15.41,
+      "orbitalPeriod": 1.13E+5
     },
     {
       "name": "2014 EZ51",
@@ -7111,7 +8187,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.75665E+9,
       "eccentricity": 0.2300,
-      "inclination": 10.30
+      "inclination": 10.30,
+      "orbitalPeriod": 1.36E+5
     },
     {
       "name": "2014 FT71",
@@ -7121,7 +8198,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.48357E+9,
       "eccentricity": 0.1442,
-      "inclination": 27.94
+      "inclination": 27.94,
+      "orbitalPeriod": 1.04E+5
     },
     {
       "name": "2014 TZ85",
@@ -7131,7 +8209,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.55687E+9,
       "eccentricity": 0.2506,
-      "inclination": 14.92
+      "inclination": 14.92,
+      "orbitalPeriod": 1.06E+5
     },
     {
       "name": "2014 US224",
@@ -7141,7 +8220,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.05204E+9,
       "eccentricity": 0.1178,
-      "inclination": 11.04
+      "inclination": 11.04,
+      "orbitalPeriod": 1.18E+5
     },
     {
       "name": "2014 VU37",
@@ -7151,7 +8231,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.12902E+9,
       "eccentricity": 0.0391,
-      "inclination": 28.51
+      "inclination": 28.51,
+      "orbitalPeriod": 9.58E+4
     },
     {
       "name": "2014 WK509",
@@ -7161,7 +8242,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.69083E+9,
       "eccentricity": 0.2073,
-      "inclination": 14.46
+      "inclination": 14.46,
+      "orbitalPeriod": 1.35E+5
     },
     {
       "name": "2015 RR245",
@@ -7171,7 +8253,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.24151E+10,
       "eccentricity": 0.5895,
-      "inclination": 7.52
+      "inclination": 7.52,
+      "orbitalPeriod": 2.76E+5
     },
     {
       "name": "2008 ST291",
@@ -7181,7 +8264,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.50196E+10,
       "eccentricity": 0.5743,
-      "inclination": 20.78
+      "inclination": 20.78,
+      "orbitalPeriod": 3.67E+5
     },
     {
       "name": "2013 FY27",
@@ -7191,7 +8275,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.78289E+9,
       "eccentricity": 0.3946,
-      "inclination": 33.22
+      "inclination": 33.22,
+      "orbitalPeriod": 1.64E+5
     },
     {
       "name": "Leleakuhonua",
@@ -7201,7 +8286,8 @@
       "minorType": "TNO",
       "semimajorAxis": 2.01808E+11,
       "eccentricity": 0.9518,
-      "inclination": 11.68
+      "inclination": 11.68,
+      "orbitalPeriod": 1.81E+7
     },
     {
       "name": "2014 AN55",
@@ -7211,7 +8297,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.38346E+9,
       "eccentricity": 0.3841,
-      "inclination": 9.40
+      "inclination": 9.40,
+      "orbitalPeriod": 1.53E+5
     },
     {
       "name": "2014 HZ199",
@@ -7221,7 +8308,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.42373E+9,
       "eccentricity": 0.1558,
-      "inclination": 27.96
+      "inclination": 27.96,
+      "orbitalPeriod": 1.03E+5
     },
     {
       "name": "2014 BZ57",
@@ -7231,7 +8319,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.40129E+9,
       "eccentricity": 0.1386,
-      "inclination": 26.99
+      "inclination": 26.99,
+      "orbitalPeriod": 1.02E+5
     },
     {
       "name": "2014 HA200",
@@ -7241,7 +8330,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.27575E+9,
       "eccentricity": 0.3393,
-      "inclination": 10.39
+      "inclination": 10.39,
+      "orbitalPeriod": 1.5E+5
     },
     {
       "name": "2014 JR80",
@@ -7251,7 +8341,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.88518E+9,
       "eccentricity": 0.0950,
-      "inclination": 15.40
+      "inclination": 15.40,
+      "orbitalPeriod": 9.01E+4
     },
     {
       "name": "2014 OE394",
@@ -7261,7 +8352,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.9189E+9,
       "eccentricity": 0.1148,
-      "inclination": 3.93
+      "inclination": 3.93,
+      "orbitalPeriod": 1.15E+5
     },
     {
       "name": "2015 BZ518",
@@ -7271,7 +8363,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.98472E+9,
       "eccentricity": 0.1862,
-      "inclination": 11.42
+      "inclination": 11.42,
+      "orbitalPeriod": 1.17E+5
     },
     {
       "name": "2010 JO179",
@@ -7281,7 +8374,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.16178E+10,
       "eccentricity": 0.4963,
-      "inclination": 32.05
+      "inclination": 32.05,
+      "orbitalPeriod": 2.5E+5
     },
     {
       "name": "2010 RF43",
@@ -7291,7 +8385,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.39612E+9,
       "eccentricity": 0.2427,
-      "inclination": 30.57
+      "inclination": 30.57,
+      "orbitalPeriod": 1.27E+5
     },
     {
       "name": "2002 XV93",
@@ -7301,7 +8396,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.91061E+9,
       "eccentricity": 0.1243,
-      "inclination": 13.27
+      "inclination": 13.27,
+      "orbitalPeriod": 9.07E+4
     },
     {
       "name": "2004 XR190",
@@ -7311,7 +8407,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.64526E+9,
       "eccentricity": 0.1067,
-      "inclination": 46.50
+      "inclination": 46.50,
+      "orbitalPeriod": 1.6E+5
     },
     {
       "name": "2013 AT183",
@@ -7321,7 +8418,8 @@
       "minorType": "TNO",
       "semimajorAxis": 9.31396E+9,
       "eccentricity": 0.4252,
-      "inclination": 27.99
+      "inclination": 27.99,
+      "orbitalPeriod": 1.79E+5
     },
     {
       "name": "2011 WJ157",
@@ -7331,7 +8429,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.50047E+10,
       "eccentricity": 0.6264,
-      "inclination": 27.06
+      "inclination": 27.06,
+      "orbitalPeriod": 3.67E+5
     },
     {
       "name": "2015 AJ281",
@@ -7341,7 +8440,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.45515E+9,
       "eccentricity": 0.1257,
-      "inclination": 26.83
+      "inclination": 26.83,
+      "orbitalPeriod": 1.04E+5
     },
     {
       "name": "2015 KH162",
@@ -7351,7 +8451,8 @@
       "minorType": "TNO",
       "semimajorAxis": 9.19429E+9,
       "eccentricity": 0.3328,
-      "inclination": 28.93
+      "inclination": 28.93,
+      "orbitalPeriod": 1.76E+5
     },
     {
       "name": "2017 OF69",
@@ -7361,7 +8462,8 @@
       "minorType": "TNO",
       "semimajorAxis": 5.90463E+9,
       "eccentricity": 0.2142,
-      "inclination": 13.66
+      "inclination": 13.66,
+      "orbitalPeriod": 9.06E+4
     },
     {
       "name": "2014 FC72",
@@ -7371,7 +8473,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.12049E+10,
       "eccentricity": 0.3102,
-      "inclination": 29.91
+      "inclination": 29.91,
+      "orbitalPeriod": 2.37E+5
     },
     {
       "name": "2003 UA414",
@@ -7381,7 +8484,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.23912E+10,
       "eccentricity": 0.5563,
-      "inclination": 22.30
+      "inclination": 22.30,
+      "orbitalPeriod": 2.75E+5
     },
     {
       "name": "2003 UA292",
@@ -7391,7 +8495,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.9952E+9,
       "eccentricity": 0.1495,
-      "inclination": 11.19
+      "inclination": 11.19,
+      "orbitalPeriod": 1.17E+5
     },
     {
       "name": "2006 QH181",
@@ -7401,7 +8506,8 @@
       "minorType": "TNO",
       "semimajorAxis": 9.92582E+9,
       "eccentricity": 0.4136,
-      "inclination": 19.04
+      "inclination": 19.04,
+      "orbitalPeriod": 1.97E+5
     },
     {
       "name": "2010 FX86",
@@ -7411,7 +8517,9 @@
       "minorType": "TNO",
       "semimajorAxis": 6.96378E+9,
       "eccentricity": 0.0589,
-      "inclination": 25.19
+      "inclination": 25.19,
+      "orbitalPeriod": 1.16E+5,
+      "rotationPeriod": 15.8
     },
     {
       "name": "2010 KZ39",
@@ -7421,7 +8529,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.7334E+9,
       "eccentricity": 0.0563,
-      "inclination": 26.16
+      "inclination": 26.16,
+      "orbitalPeriod": 1.1E+5
     },
     {
       "name": "2011 HP83",
@@ -7431,7 +8540,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.78807E+9,
       "eccentricity": 0.3054,
-      "inclination": 28.67
+      "inclination": 28.67,
+      "orbitalPeriod": 1.37E+5
     },
     {
       "name": "2012 VP113",
@@ -7441,7 +8551,8 @@
       "minorType": "TNO",
       "semimajorAxis": 4.08701E+10,
       "eccentricity": 0.7050,
-      "inclination": 24.00
+      "inclination": 24.00,
+      "orbitalPeriod": 1.65E+6
     },
     {
       "name": "2012 VR128",
@@ -7451,7 +8562,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.22926E+9,
       "eccentricity": 0.1413,
-      "inclination": 18.45
+      "inclination": 18.45,
+      "orbitalPeriod": 9.81E+4
     },
     {
       "name": "2013 FS28",
@@ -7461,7 +8573,8 @@
       "minorType": "TNO",
       "semimajorAxis": 2.03004E+10,
       "eccentricity": 0.7370,
-      "inclination": 13.12
+      "inclination": 13.12,
+      "orbitalPeriod": 5.77E+5
     },
     {
       "name": "2013 SF106",
@@ -7471,7 +8584,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.13605E+10,
       "eccentricity": 0.4263,
-      "inclination": 39.82
+      "inclination": 39.82,
+      "orbitalPeriod": 2.42E+5
     },
     {
       "name": "2014 FC69",
@@ -7481,7 +8595,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.0801E+10,
       "eccentricity": 0.4494,
-      "inclination": 30.20
+      "inclination": 30.20,
+      "orbitalPeriod": 2.24E+5
     },
     {
       "name": "2014 UZ224",
@@ -7491,7 +8606,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.64408E+10,
       "eccentricity": 0.6472,
-      "inclination": 26.78
+      "inclination": 26.78,
+      "orbitalPeriod": 4.21E+5
     },
     {
       "name": "2014 US277",
@@ -7501,7 +8617,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.50944E+10,
       "eccentricity": 0.4565,
-      "inclination": 36.37
+      "inclination": 36.37,
+      "orbitalPeriod": 3.7E+5
     },
     {
       "name": "2014 WP509",
@@ -7511,7 +8628,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.76631E+9,
       "eccentricity": 0.0938,
-      "inclination": 8.32
+      "inclination": 8.32,
+      "orbitalPeriod": 1.11E+5
     },
     {
       "name": "2014 YA50",
@@ -7521,7 +8639,8 @@
       "minorType": "TNO",
       "semimajorAxis": 6.92489E+9,
       "eccentricity": 0.1672,
-      "inclination": 23.92
+      "inclination": 23.92,
+      "orbitalPeriod": 1.15E+5
     },
     {
       "name": "2015 BP519",
@@ -7531,7 +8650,8 @@
       "minorType": "TNO",
       "semimajorAxis": 7.38415E+10,
       "eccentricity": 0.9284,
-      "inclination": 54.10
+      "inclination": 54.10,
+      "orbitalPeriod": 4.01E+6
     },
     {
       "name": "2017 FO161",
@@ -7541,7 +8661,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.92501E+9,
       "eccentricity": 0.4259,
-      "inclination": 54.27
+      "inclination": 54.27,
+      "orbitalPeriod": 1.68E+5
     },
     {
       "name": "2018 AG37",
@@ -7551,7 +8672,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.19933E+10,
       "eccentricity": 0.6554,
-      "inclination": 18.68
+      "inclination": 18.68,
+      "orbitalPeriod": 2.62E+5
     },
     {
       "name": "2018 VG18",
@@ -7561,7 +8683,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.227E+10,
       "eccentricity": 0.5235,
-      "inclination": 24.11
+      "inclination": 24.11,
+      "orbitalPeriod": 2.71E+5
     },
     {
       "name": "2020 FY30",
@@ -7571,7 +8694,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.05063E+10,
       "eccentricity": 0.4876,
-      "inclination": 13.85
+      "inclination": 13.85,
+      "orbitalPeriod": 2.15E+5
     },
     {
       "name": "2020 MK53",
@@ -7581,7 +8705,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.66502E+10,
       "eccentricity": 0.4363,
-      "inclination": 18.48
+      "inclination": 18.48,
+      "orbitalPeriod": 4.29E+5
     },
     {
       "name": "2021 DR15",
@@ -7591,7 +8716,8 @@
       "minorType": "TNO",
       "semimajorAxis": 1.01068E+10,
       "eccentricity": 0.4333,
-      "inclination": 30.52
+      "inclination": 30.52,
+      "orbitalPeriod": 2.03E+5
     },
     {
       "name": "2021 LL37",
@@ -7601,7 +8727,8 @@
       "minorType": "TNO",
       "semimajorAxis": 8.31615E+9,
       "eccentricity": 0.3601,
-      "inclination": 9.93
+      "inclination": 9.93,
+      "orbitalPeriod": 1.51E+5
     }
   ]
 }

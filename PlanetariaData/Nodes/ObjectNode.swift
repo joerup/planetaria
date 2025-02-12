@@ -33,7 +33,7 @@ public class ObjectNode: Node {
         case group, discovered, discoverer, namesake
         case mass, size, density, gravity, escapeVelocity, ringSize, luminosity, moons
         case semimajorAxis, eccentricity, inclination, orbitalPeriod
-        case rotationRef, rotationRate, poleRA, poleDec, axialTilt
+        case rotationRef, rotationRate, rotationPeriod, poleRA, poleDec, axialTilt
         case temperature, pressure
     }
 
@@ -61,6 +61,7 @@ public class ObjectNode: Node {
         
         let rotationRef = try? container.decode(Double.self, forKey: .rotationRef)
         let rotationRate = try? container.decode(Double.self, forKey: .rotationRate)
+        let rotationPeriod = try? container.decode(Double.self, forKey: .rotationPeriod)
         let poleRA = try? container.decode(Double.self, forKey: .poleRA)
         let poleDec = try? container.decode(Double.self, forKey: .poleDec)
         let axialTilt = try? container.decode(Double.self, forKey: .axialTilt)
@@ -73,7 +74,7 @@ public class ObjectNode: Node {
         
         try super.init(from: decoder)
         
-        self.rotation = Rotation(rotationRef: rotationRef, rotationRate: rotationRate, poleRA: poleRA, poleDec: poleDec)
+        self.rotation = Rotation(rotationRef: rotationRef, rotationRate: rotationRate, poleRA: poleRA, poleDec: poleDec) ?? Rotation(rotationPeriod: rotationPeriod)
         
         self.properties = Properties(category: category, group: group, discovered: discovered, discoverer: discoverer, namesake: namesake, moons: moons, mass: mass, radius: size, density: density, semimajorAxis: semimajorAxis, eccentricity: eccentricity, inclination: inclination, orbitalPeriod: orbitalPeriod, rotationRate: rotationRate, axialTilt: axialTilt, gravity: gravity, escapeVelocity: escapeVelocity, temperature: temperature, pressure: pressure, luminosity: luminosity)
     }

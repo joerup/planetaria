@@ -35,6 +35,14 @@ extension Node {
             self.angle = .zero
         }
         
+        init?(rotationPeriod: Double?) {
+            guard let rotationPeriod else { return nil }
+            self.angle = 0
+            
+            self.rotationRef = 0
+            self.rotationRate = 360 / rotationPeriod
+        }
+        
         func set(time: Date) {
             self.angle = (rotationRef + rotationRate * time.j2000Date) * .pi/180
         }

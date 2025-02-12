@@ -73,7 +73,6 @@ class SimulationRootEntity: Entity {
     
     // Query a tap
     func queryTap(origin: SIMD3<Float>, direction: SIMD3<Float>) -> Node? {
-        print("from \(origin) to \(direction)")
         let children = self.children.filter { $0.isEnabled && $0.component(SimulationComponent.self) != nil }
         
         // Rank points based on querying an open field
